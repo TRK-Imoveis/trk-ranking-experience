@@ -1,0 +1,763 @@
+{
+  "id": "301687289",
+  "name": "ADM - Reparos",
+  "start_form_fields": [
+    {
+      "id": "statement_2d08af47_ca7d_4731_a0d2_3b95156dc05e",
+      "internal_id": "377098483",
+      "label": "Statement-2d08af47-ca7d-4731-a0d2-3b95156dc05e",
+      "type": "statement",
+      "required": null
+    },
+    {
+      "id": "desconsiderar_o_campo_abaixo",
+      "internal_id": "354586867",
+      "label": "Texto interno de apoio",
+      "type": "long_text",
+      "required": false
+    },
+    {
+      "id": "nome_para_contato",
+      "internal_id": "326700892",
+      "label": "Nome para contato:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "telefone",
+      "internal_id": "326700850",
+      "label": "Telefone:",
+      "type": "phone",
+      "required": true
+    },
+    {
+      "id": "e_mail",
+      "internal_id": "326700849",
+      "label": "E-mail:",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "endere_o",
+      "internal_id": "326718472",
+      "label": "Endereço:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "o_que_precisamos_solucionar",
+      "internal_id": "326718571",
+      "label": "O que precisamos solucionar?",
+      "type": "radio_vertical",
+      "required": true
+    },
+    {
+      "id": "descreva",
+      "internal_id": "326718589",
+      "label": "Descreva:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "informa_es_complementares",
+      "internal_id": "326718590",
+      "label": "Informações complementares:",
+      "type": "long_text",
+      "required": false
+    },
+    {
+      "id": "disponibilidade_para_visita",
+      "internal_id": "340708060",
+      "label": "Disponibilidade para visita",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "anexe_aqui_fotos_e_v_deos",
+      "internal_id": "326718698",
+      "label": "Anexe aqui fotos e vídeos:",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "projeto",
+      "internal_id": "337720330",
+      "label": "Projeto",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "possui_or_amento",
+      "internal_id": "326701270",
+      "label": "Possui orçamento?",
+      "type": "radio_vertical",
+      "required": true
+    },
+    {
+      "id": "or_amento",
+      "internal_id": "326704194",
+      "label": "Orçamento:",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "statement_f388cda8_f67a_436b_95c3_bbfb30b337bb",
+      "internal_id": "351876660",
+      "label": "Statement-f388cda8-f67a-436b-95c3-bbfb30b337bb",
+      "type": "statement",
+      "required": null
+    }
+  ],
+  "phases": [
+    {
+      "id": "311187696",
+      "name": "Caixa de entrada",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "cancelar_card",
+          "internal_id": "351766465",
+          "label": "Cancelar card?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "id",
+          "internal_id": "330228630",
+          "label": "ID",
+          "type": "id",
+          "required": false
+        },
+        {
+          "id": "im",
+          "internal_id": "358401362",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "368516270",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "contrato",
+          "internal_id": "358401367",
+          "label": "Contrato",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "assessor_somente_com_fins_de_automa_o",
+          "internal_id": "355637152",
+          "label": "Assessor (somente com fins de automação)",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "seleciona_o_assessor",
+          "internal_id": "354512609",
+          "label": "Selecionar o assessor",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "identificar_o_assessor_do_im_vel",
+          "internal_id": "352467296",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "checklist_vertical_t_tulo",
+          "internal_id": "326718696",
+          "label": "Checklist vertical título",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "locador",
+          "internal_id": "337052920",
+          "label": "SELECIONE O LOCADOR",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "locat_rio",
+          "internal_id": "326719995",
+          "label": "SELECIONE O LOCATÁRIO",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "solicita_es_m_ltiplas",
+          "internal_id": "354586922",
+          "label": "Solicitações múltiplas?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "quando_se_tratar_de_reparos_da_rescis_o_de_loca_o_verificar_se_o_valor_do_or_amento_foi_pago_integralmente",
+          "internal_id": "353060232",
+          "label": "Quando se tratar de Reparos da Rescisão de Locação, verificar se o valor do orçamento foi pago integralmente.",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "motivo_do_cancelamento",
+          "internal_id": "351766644",
+          "label": "Motivo do cancelamento",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "reclassifica_o_do_tipo_de_chamado",
+          "internal_id": "350527461",
+          "label": "Reclassificação do tipo de chamado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "imobiliar_cheque_nas_tarefas_anexos_e_contas_a_pagar_se_houve_um_reparo_semelhante_nos_ltimos_meses",
+          "internal_id": "337725829",
+          "label": "Imobiliar: - Cheque nas tarefas, anexos e contas a pagar se houve um reparo semelhante nos últimos meses",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "agendar_retorno_garantia_1",
+          "internal_id": "337725936",
+          "label": "Agendar retorno - Garantia:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "statement_371d4b71_a09e_4f1c_a3ea_2f131827f90d",
+          "internal_id": "352164143",
+          "label": "Statement-371d4b71-a09e-4f1c-a3ea-2f131827f90d",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "tipo_de_manuten_o",
+          "internal_id": "335312812",
+          "label": "Categoria",
+          "type": "label_select",
+          "required": false
+        },
+        {
+          "id": "propriet_rio_tem_prestador_pr_prio",
+          "internal_id": "337726076",
+          "label": "Proprietário tem prestador próprio:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "prestador_restored",
+          "internal_id": "337728463",
+          "label": "Prestador (Restored)",
+          "type": "connector",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "319367715",
+      "name": "Benfeitorias",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "statement_c4f3c91c_3ce3_46cd_8db4_67e1cbe157c5",
+          "internal_id": "352158366",
+          "label": "Statement-c4f3c91c-3ce3-46cd-8db4-67e1cbe157c5",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "or_amento_2",
+          "internal_id": "352156958",
+          "label": "Orçamento e projeto",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "proposta_de_divis_o_de_custos",
+          "internal_id": "352156969",
+          "label": "Proposta de divisão de custos",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "autoriza_o",
+          "internal_id": "352157687",
+          "label": "Autorização",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "benfeitoria_aprovada",
+          "internal_id": "352157050",
+          "label": "Benfeitoria aprovada com divisão de custos?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "autoriza_o_do_locador",
+          "internal_id": "352157329",
+          "label": "Autorização/Negativa do locador",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "data_prevista_para_finalizar",
+          "internal_id": "352157913",
+          "label": "Data prevista para finalizar",
+          "type": "due_date",
+          "required": false
+        },
+        {
+          "id": "relat_rio_de_benfeitorias_executadas",
+          "internal_id": "352157126",
+          "label": "Relatório de benfeitorias executadas",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "checklist_final",
+          "internal_id": "352157280",
+          "label": "Checklist final",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311226341",
+      "name": "Orçamento | Prestador",
+      "cards_count": 10,
+      "fields": [
+        {
+          "id": "respons_vel_pelo_repaso",
+          "internal_id": "337836558",
+          "label": "Responsável pelo reparo:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "o_locat_rio_deseja_fazer_o_reparo_conosco",
+          "internal_id": "377406477",
+          "label": "O locatário deseja fazer o reparo conosco",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "observa_es_1",
+          "internal_id": "377401645",
+          "label": "Observações",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "relat_rio",
+          "internal_id": "377401634",
+          "label": "Relatório ",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "c_d_chamado_com_prestador",
+          "internal_id": "337913150",
+          "label": "Cód. chamado com prestador:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "prazo_para_visita",
+          "internal_id": "337722472",
+          "label": "Prazo para visita:",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "prazo_para_entrega_do_or_amento",
+          "internal_id": "337722499",
+          "label": "Prazo para entrega do orçamento:",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "or_amento_1",
+          "internal_id": "337722823",
+          "label": "Orçamento:",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "o_or_amento_deve_conter",
+          "internal_id": "326719397",
+          "label": "Orçamento recebido contém:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "foma_de_pagamento",
+          "internal_id": "326719402",
+          "label": "Forma de pagamento",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "statement_900b6d59_4e9f_49fc_8431_e6288c0b806b",
+          "internal_id": "354680701",
+          "label": "Statement-900b6d59-4e9f-49fc-8431-e6288c0b806b",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "an_lise_da_ia_do_card",
+          "internal_id": "428694339",
+          "label": "Análise da IA do card",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "retorno_an_lise_ia",
+          "internal_id": "428700080",
+          "label": "Retorno Análise IA",
+          "type": "label_select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311226342",
+      "name": "Autorização | Proprietário",
+      "cards_count": 4,
+      "fields": [
+        {
+          "id": "valor_do_or_amento_acrescido_10",
+          "internal_id": "337722885",
+          "label": "Valor do orçamento acrescido 10%:",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "o_valor_do_or_amento_maior_do_que_o_aluguel_mensal",
+          "internal_id": "350671132",
+          "label": "O valor do orçamento com 10% é maior do que o aluguel mensal?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "descri_o_para_o_propriet_rio_da_causa_e_or_amento_recebido",
+          "internal_id": "337722880",
+          "label": "Descrição para o proprietário da causa e orçamento recebido:",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "prazo_para_execu_o",
+          "internal_id": "337725220",
+          "label": "Prazo para execução:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "an_lise_de_restri_o_de_contato1",
+          "internal_id": "337724638",
+          "label": "Análise de restrição de contato",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "analise_de_restri_o_de_contato",
+          "internal_id": "337724385",
+          "label": "Autorização do locador:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "servi_o_autorizado_1",
+          "internal_id": "327343253",
+          "label": "Serviço autorizado?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "servi_o_autorizado_pelo_whatsapp",
+          "internal_id": "337725014",
+          "label": "Serviço autorizado pelo Whatsapp:",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "motivo_da_n_o_autoriza_o",
+          "internal_id": "327343145",
+          "label": "MOTIVO DA NÃO AUTORIZAÇÃO: (será enviado ao locatário)",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "necess_rio_visita_de_confer_ncia_do_servi_o_ou_aditivo_na_vistoria",
+          "internal_id": "356003046",
+          "label": "Necessário visita de conferência do serviço ou aditivo na vistoria?",
+          "type": "select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311226372",
+      "name": "Agendamento | Prestador",
+      "cards_count": 4,
+      "fields": [
+        {
+          "id": "servi_o_agendado_para",
+          "internal_id": "327344214",
+          "label": "Serviço agendado para:",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "agendamento",
+          "internal_id": "327278717",
+          "label": "Envio da confirmação",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "data_da_conclus_o_do_servi_o",
+          "internal_id": "337727223",
+          "label": "Data prevista da conclusão do serviço:",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "data_de_agendamento_de_confer_ncia",
+          "internal_id": "355465075",
+          "label": "Data de agendamento de conferência",
+          "type": "date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311187589",
+      "name": "Execução | Prestador",
+      "cards_count": 16,
+      "fields": [
+        {
+          "id": "confirma_o_tratativas",
+          "internal_id": "326720703",
+          "label": "Confirmação (TRK)",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "pagamento_ou_reembolso_ser_feito_pela_trk",
+          "internal_id": "352819815",
+          "label": "Pagamento ou reembolso será feito pela TRK?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "fotos_antes",
+          "internal_id": "326843631",
+          "label": "FOTOS ANTES",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fotos_durante",
+          "internal_id": "326843635",
+          "label": "FOTOS DURANTE",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fotos_depois",
+          "internal_id": "326843710",
+          "label": "FOTOS DEPOIS",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "avalia_o_vistoriador",
+          "internal_id": "354604958",
+          "label": "Avaliação vistoriador",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "fotos_de_confer_ncia",
+          "internal_id": "354605017",
+          "label": "Fotos de conferência",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "servi_o_finalizado_em",
+          "internal_id": "326843740",
+          "label": "SERVIÇO FINALIZADO EM",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "vistoria_de_confer_ncia",
+          "internal_id": "377125205",
+          "label": "Vistoria de Conferência ",
+          "type": "connector",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "319423558",
+      "name": "Conferência",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "im_vel_desocupado_1",
+          "internal_id": "352325872",
+          "label": "Imóvel desocupado: ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "entrar_em_contato_com_solicitante_da_manuten_o_para_saber_se_o_servi_o_foi_executado",
+          "internal_id": "377123959",
+          "label": "Entrar em contato com solicitante da manutenção para saber se o serviço foi executado ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "an_lise_do_servi_o_1",
+          "internal_id": "352325877",
+          "label": "Análise do serviço:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "confirma_es",
+          "internal_id": "352325968",
+          "label": "Confirmações:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "considera_es_finais_1",
+          "internal_id": "352326075",
+          "label": "Considerações finais",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "resumo_da_manuten_o_1",
+          "internal_id": "352326238",
+          "label": "Resumo da Manutenção",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "valor_a_ser_pago_ao_prestador_10",
+          "internal_id": "404671044",
+          "label": "Valor a ser pago ao prestador + 10%",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "prestador_que_executou_o_servi_o",
+          "internal_id": "404947585",
+          "label": "Prestador que executou o serviço ",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "dados_para_emiss_o_da_nota_trk",
+          "internal_id": "421285702",
+          "label": "DADOS PARA EMISSÃO DA NOTA (TRK)",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "nota_fiscal_boleto_ou_recibo",
+          "internal_id": "421285688",
+          "label": "NOTA FISCAL / BOLETO ou RECIBO",
+          "type": "attachment",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311226343",
+      "name": "Pagamento | BackOffice",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_83c740ad_40ba_4a27_aebd_c3acf0670e24",
+          "internal_id": "404943515",
+          "label": "Statement-83c740ad-40ba-4a27-aebd-c3acf0670e24",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "an_lise_da_nf_recebida",
+          "internal_id": "337837831",
+          "label": "Análise da NF Recebida",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "lan_amento",
+          "internal_id": "326720786",
+          "label": "Pagamento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "imobiliar_1",
+          "internal_id": "326720933",
+          "label": "Imobiliar:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "320123699",
+      "name": "Pós-venda",
+      "cards_count": 13,
+      "fields": [
+        {
+          "id": "statement_f152a10b_ce37_4ba5_a765_b6158185fe2d",
+          "internal_id": "354588782",
+          "label": "Statement-f152a10b-ce37-4ba5-a765-b6158185fe2d",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "respons_vel",
+          "internal_id": "354591560",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": false
+        },
+        {
+          "id": "data_de_vencimento",
+          "internal_id": "354588789",
+          "label": "Data de vencimento",
+          "type": "due_date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311187590",
+      "name": "CONCLUÍDO",
+      "cards_count": 2548,
+      "fields": []
+    }
+  ]
+}

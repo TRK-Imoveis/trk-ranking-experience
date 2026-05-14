@@ -1,0 +1,602 @@
+{
+  "id": "301708395",
+  "name": "ADM - Locação COM ADM",
+  "start_form_fields": [
+    {
+      "id": "cadastro_n",
+      "internal_id": "332327973",
+      "label": "Cadastro nº",
+      "type": "id",
+      "required": false
+    },
+    {
+      "id": "ims_agrupados_1",
+      "internal_id": "332328539",
+      "label": "IMs agrupados:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "valor_do_aluguel",
+      "internal_id": "332330445",
+      "label": "Valor do aluguel:",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "link_do_drive",
+      "internal_id": "332328714",
+      "label": "Link do Drive:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "corretor_da_loca_o",
+      "internal_id": "332328887",
+      "label": "Corretor da locação:",
+      "type": "connector",
+      "required": true
+    },
+    {
+      "id": "garantia_1",
+      "internal_id": "335634421",
+      "label": "Garantia",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "obs_quanto_a_negocia_o_comercial",
+      "internal_id": "349286575",
+      "label": "OBS Quanto a negociação comercial:",
+      "type": "long_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "311327093",
+      "name": "Recebendo Cadastro",
+      "cards_count": 21,
+      "fields": [
+        {
+          "id": "contrato_de_loca_o",
+          "internal_id": "336023640",
+          "label": "Contrato de locação:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358510095",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "inativar",
+          "internal_id": "336024853",
+          "label": "Inativar",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "pretendente",
+          "internal_id": "336023939",
+          "label": "Pretendente:",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "propriet_rio",
+          "internal_id": "336024281",
+          "label": "Proprietário",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "respons_vel",
+          "internal_id": "336024213",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "contrato_possui_im_veis",
+          "internal_id": "374789376",
+          "label": "Contrato possui Imóveis agrupados? (Teste)",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "checklist_inicial",
+          "internal_id": "332328811",
+          "label": "Checklist inicial:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "checklist_im_veis_agrupados",
+          "internal_id": "374813360",
+          "label": "Checklist - Imóveis Agrupados ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "teste",
+          "internal_id": "375027063",
+          "label": "teste",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "312969053",
+      "name": "Analise do cadastro",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "garantia",
+          "internal_id": "359872947",
+          "label": "Garantia",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "statement_4c7b26b4_8b92_4f00_9839_72269c68fdce",
+          "internal_id": "361863135",
+          "label": "Statement-4c7b26b4-8b92-4f00-9839-72269c68fdce",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "seguro_fian_a",
+          "internal_id": "359872998",
+          "label": "Seguro fiança",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "t_tulo_de_capitaza_o_ou_fiador",
+          "internal_id": "359873262",
+          "label": "Título de capitazação ou fiador",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "situa_o_do_cadastro_1",
+          "internal_id": "332444147",
+          "label": "Situação do cadastro:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "cadastro_aprovado_1",
+          "internal_id": "332444148",
+          "label": "Cadastro Aprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "cadastro_reprovado_1",
+          "internal_id": "332444174",
+          "label": "Cadastro reprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "t_tulo_capitaliza_o",
+          "internal_id": "332444175",
+          "label": "Título capitalização:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "agendamento_da_vistoria",
+          "internal_id": "332444176",
+          "label": "Vistoria agendada para:",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "id": "em_teste_data_de_agendamento_da_vistoria",
+          "internal_id": "345272764",
+          "label": "Data de Agendamento da Vistoria",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "em_teste_solicita_o_de_vistoria_de_entrada_loca_o_com_administra_o",
+          "internal_id": "345272670",
+          "label": "Solicitação de Vistoria de Entrada | Locação com Administração",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311327094",
+      "name": "Confecção do contrato de locação",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im_vel_com_contrato_de_adm_assinado",
+          "internal_id": "332331618",
+          "label": "Imóvel com contrato de ADM assinado?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "tipo_de_contrato",
+          "internal_id": "371589315",
+          "label": "Tipo de Contrato",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "checklist",
+          "internal_id": "332331718",
+          "label": "Checklist ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "copy_of_checklist",
+          "internal_id": "374816843",
+          "label": "Contrato ADM não assinado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "gerar_boleto_garatia_t_tulo_cau_o",
+          "internal_id": "374822999",
+          "label": "Gerar Boleto Garatia Título/Caução",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "negociado_pagamento_antecipado",
+          "internal_id": "332331761",
+          "label": "Negociado pagamento antecipado:",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "pagamento_antecipado",
+          "internal_id": "332331813",
+          "label": "Pagamento antecipado:",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "nido",
+          "internal_id": "332331898",
+          "label": "Nido:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "368895548",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931966",
+      "name": "Desistência da locação",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "checklist_1",
+          "internal_id": "332331989",
+          "label": "Checklist:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931981",
+      "name": "Conferência do contrato",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "cofer_ncio",
+          "internal_id": "335635203",
+          "label": "Conferência:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931991",
+      "name": "Aguardando assinatura",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "contrato_enviado_1",
+          "internal_id": "360025065",
+          "label": "Contrato enviado ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "contrato_assinado_1",
+          "internal_id": "360025113",
+          "label": "Contrato assinado ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "assessor_do_contrato",
+          "internal_id": "345304755",
+          "label": "Assessor do contrato",
+          "type": "assignee_select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931992",
+      "name": "Gerar 1º Boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "contrato_de_loca_o_assinado",
+          "internal_id": "374406664",
+          "label": "Contrato de locação Assinado ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "atendente_comercial_da_loca_o",
+          "internal_id": "362575278",
+          "label": "Atendente comercial da locação",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "garantia_credpago",
+          "internal_id": "359355916",
+          "label": "Garantia CredPago:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "lan_amentos_1_boleto",
+          "internal_id": "336022957",
+          "label": "Lançamentos 1º boleto:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "copy_of_lan_amentos_1_boleto",
+          "internal_id": "374825127",
+          "label": "Lançamentos 1º boleto imóveis agrupados :",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aguardar_ciclos_para_transfer_ncia",
+          "internal_id": "368808395",
+          "label": "Aguardar  ciclos para transferência TITULARIDADE NEOENERGIA/CAESB",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "neoenergia_caesb",
+          "internal_id": "368808170",
+          "label": "NEOENERGIA/CAESB",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_solicita_o",
+          "internal_id": "368808313",
+          "label": "Protocolo Solicitação NEOENERGIA",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_solicita_o_caesb",
+          "internal_id": "368808336",
+          "label": "Protocolo solicitação CAESB",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931993",
+      "name": "Conferência boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia_de_taxas",
+          "internal_id": "336023003",
+          "label": "Conferência de taxas (Financeiro > Contas a receber > Consulta boletos): ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "calcular_e_exportar_o_boleto",
+          "internal_id": "359884378",
+          "label": "Calcular e exportar o boleto",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "316495459",
+      "name": "Fechamento NIDO",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im_vel_possui_placa_instalada",
+          "internal_id": "347667715",
+          "label": "Imóvel possui placa instalada ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "remo_o_de_placa",
+          "internal_id": "347667799",
+          "label": "Remoção de placa ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "fechamento_da_proposta",
+          "internal_id": "342694402",
+          "label": "Fechamento da proposta:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_recebimento",
+          "internal_id": "342694407",
+          "label": "Aba Recebimento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_distribui_o",
+          "internal_id": "342694445",
+          "label": "Aba distribuição:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_altera",
+          "internal_id": "342694481",
+          "label": "Aba Altera:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314246920",
+      "name": "Assinatura da Vistoria",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "acompanhamento",
+          "internal_id": "336023016",
+          "label": "Acompanhamento",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "assessor",
+          "internal_id": "345304763",
+          "label": "Assessor",
+          "type": "assignee_select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312931999",
+      "name": "Contrato assinado - Finalizar procedimento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "levantamento_1",
+          "internal_id": "337096225",
+          "label": "Levantamento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "finalizar_procedimento",
+          "internal_id": "336023337",
+          "label": "Finalizar procedimento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_energia_1",
+          "internal_id": "336395052",
+          "label": "Protocolo Energia:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_gua_1",
+          "internal_id": "336395131",
+          "label": "Conferência água",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "altera_o_de_titularidade_da_gua_1",
+          "internal_id": "336395138",
+          "label": "Alteração de titularidade da água: ",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_gua_ou_contato_que_teve_com_o_condom_nio",
+          "internal_id": "336395192",
+          "label": "Protocolo Água ou contato que teve com o condomínio",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324405994",
+      "name": "Pendência NEOENERGIA/CAESB",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "protocolo_transfer_ncia_neoenergia",
+          "internal_id": "368551607",
+          "label": "Protocolo transferência  NEOENERGIA",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_transfer_ncia_caesb",
+          "internal_id": "368551611",
+          "label": "Protocolo transferência CAESB",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "notifica_o_inquilino",
+          "internal_id": "368813529",
+          "label": "Notificação Inquilino",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "solicita_o_de_desligamento",
+          "internal_id": "368813868",
+          "label": "Solicitação de desligamento ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_58131837_5f36_41c1_a388_01efba23e7b6",
+          "internal_id": "369090454",
+          "label": "Statement-58131837-5f36-41c1-a388-01efba23e7b6",
+          "type": "statement",
+          "required": null
+        }
+      ]
+    },
+    {
+      "id": "311327095",
+      "name": "Concluído",
+      "cards_count": 628,
+      "fields": []
+    }
+  ]
+}

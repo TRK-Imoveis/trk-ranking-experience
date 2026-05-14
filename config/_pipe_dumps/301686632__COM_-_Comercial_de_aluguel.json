@@ -1,0 +1,881 @@
+{
+  "id": "301686632",
+  "name": "COM - Comercial de aluguel",
+  "start_form_fields": [
+    {
+      "id": "im_endere_o",
+      "internal_id": "326703284",
+      "label": "IM - ENDEREÇO",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "locador",
+      "internal_id": "326703285",
+      "label": "Locador",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "valor_de_anuncio",
+      "internal_id": "326703307",
+      "label": "Valor de anuncio:",
+      "type": "currency",
+      "required": false
+    },
+    {
+      "id": "c_digo_nido_2",
+      "internal_id": "326748183",
+      "label": "Código NIDO:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "observa_o",
+      "internal_id": "326703417",
+      "label": "Observação:",
+      "type": "long_text",
+      "required": false
+    },
+    {
+      "id": "pend_ncia_de_vistoria",
+      "internal_id": "376622700",
+      "label": "Pendências de rescisão de vistoria ",
+      "type": "long_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "311183185",
+      "name": "Caixa de entrada",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "profissional_respons_vel",
+          "internal_id": "330641234",
+          "label": "Profissional responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "im_vel_j_anunciado_no_nido",
+          "internal_id": "326746249",
+          "label": "Imóvel está ATIVO no NIDO (Mesmo que para venda)",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "c_digo_nido_1",
+          "internal_id": "326746269",
+          "label": "Código NIDO:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358511407",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "corretor_promotor",
+          "internal_id": "326747364",
+          "label": "Corretor promotor",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311183186",
+      "name": "Cadastro / Reativação no NIDO",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im_vel_j_possui_cadastro_no_nido",
+          "internal_id": "326747451",
+          "label": "Imóvel já possui cadastro no NIDO?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "vk_im_vel",
+          "internal_id": "412960975",
+          "label": "VK Imóvel",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "reativa_o_nido",
+          "internal_id": "364989063",
+          "label": "Reativação NIDO",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "cadastro_nido",
+          "internal_id": "326703473",
+          "label": "Cadastro NIDO",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "anexos_nido",
+          "internal_id": "326703502",
+          "label": "Anexos NIDO:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314373417",
+      "name": "Aguardando Chaves",
+      "cards_count": 3,
+      "fields": [
+        {
+          "id": "assessor_do_im_vel",
+          "internal_id": "348879405",
+          "label": "Assessor do Imóvel",
+          "type": "select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "317247082",
+      "name": "Avaliação Técnica",
+      "cards_count": 3,
+      "fields": [
+        {
+          "id": "o_im_vel_est_apto_para_loca_o",
+          "internal_id": "345281247",
+          "label": "O Imóvel está apto para locação?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "em_teste_assessor_do_im_vel",
+          "internal_id": "345416225",
+          "label": "Assessor do Imóvel",
+          "type": "assignee_select",
+          "required": false
+        },
+        {
+          "id": "em_teste_buscar_vistoria",
+          "internal_id": "345278551",
+          "label": "Buscar vistoria",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "vistoria_t_cnica",
+          "internal_id": "422045243",
+          "label": "Vistoria técnica",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "em_teste_atua_o_no_im_vel",
+          "internal_id": "345282720",
+          "label": "Atuação no imóvel",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "em_teste_resposta_do_propriet_rio",
+          "internal_id": "345282804",
+          "label": "Resposta do proprietário",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "em_teste_solicitar_or_amento_de_reparos",
+          "internal_id": "345282550",
+          "label": "Solicitar orçamento de reparos",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "em_teste_data_de_vencimento_do_card",
+          "internal_id": "345286701",
+          "label": "Data de Vencimento do Card",
+          "type": "due_date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "314221889",
+      "name": "Agendamento de Fotos/Placas",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "fotos_agendadas_para",
+          "internal_id": "335562519",
+          "label": "Fotos agendadas para:",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "fot_grafo",
+          "internal_id": "335562523",
+          "label": "Fotógrafo",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "envio_do_link_para_instala_o_de_placa_1",
+          "internal_id": "412960729",
+          "label": "Envio do link para instalação de placa",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "energia_1",
+          "internal_id": "412960788",
+          "label": "Energia",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "gua",
+          "internal_id": "412960793",
+          "label": "Água ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "situa_o_do_im_vel_1",
+          "internal_id": "412960797",
+          "label": "Situação do imóvel",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "confirma_o_com_o_condom_nio_se_im_vel_possui_vaga_de_garagem_1",
+          "internal_id": "412960823",
+          "label": "Confirmação com o condomínio se imóvel possui vaga de garagem:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "placa_no_im_vel_2",
+          "internal_id": "412960880",
+          "label": "Placa no imóvel:",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "placa_na_porta",
+          "internal_id": "412960900",
+          "label": "Placa na Porta",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "placa_na_janela_1",
+          "internal_id": "412960902",
+          "label": "Placa na Janela",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "placa_na_fachada_1",
+          "internal_id": "412960903",
+          "label": "Placa na Fachada",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fotos_gerais_do_im_vel_1",
+          "internal_id": "412960906",
+          "label": "Fotos Gerais do Imóvel",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fotos_da_vaga_de_garagem",
+          "internal_id": "412960916",
+          "label": "Fotos da Vaga de garagem",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311227754",
+      "name": "Liberação NIDO",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "valor_avaliado",
+          "internal_id": "335565867",
+          "label": "Valor avaliado:",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "anexos_no_nido",
+          "internal_id": "329825907",
+          "label": "Anexos no Nido",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "checagem",
+          "internal_id": "326703809",
+          "label": "Checagem:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "retornar_o_respons_vel_do_carda_da_fase_anterior",
+          "internal_id": "330744426",
+          "label": "Retornar o responsável do card da da fase anterior",
+          "type": "assignee_select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314221963",
+      "name": "Aguardando fotos",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "link_fotos_drive",
+          "internal_id": "340351967",
+          "label": "Link Fotos DRIVE",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "tipo_do_im_vel",
+          "internal_id": "340545751",
+          "label": "Negócio",
+          "type": "radio_vertical",
+          "required": false
+        },
+        {
+          "id": "criar_conex_o_pipe_sec_comercial_consultoria",
+          "internal_id": "366497140",
+          "label": "CRIAR CONEXÃO PIPE SEC | Comercial Consultoria",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "315799672",
+      "name": "Solicitação MKT",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "conex_o_de_pipe",
+          "internal_id": "366483232",
+          "label": "CRIAR CARD DE ANÚNCIO MKT",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311227744",
+      "name": "Instalação de placa e visita ao imóvel",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "envio_do_link_para_instala_o_de_placa",
+          "internal_id": "326703658",
+          "label": "Envio do link para instalação de placa",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "data_publica_o_an_ncio",
+          "internal_id": "420822386",
+          "label": "Data publicação Anúncio",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "alerta_15_dias_desocupado",
+          "internal_id": "420822505",
+          "label": "Alerta 15 dias desocupado",
+          "type": "due_date",
+          "required": false
+        },
+        {
+          "id": "energia",
+          "internal_id": "326703665",
+          "label": "Energia",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "copy_of_energia",
+          "internal_id": "326703666",
+          "label": "Água",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "situa_o_do_im_vel",
+          "internal_id": "326703669",
+          "label": "Situação do imóvel",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "confirma_o_com_o_condom_nio_se_im_vel_possui_vaga_de_garagem",
+          "internal_id": "327609266",
+          "label": "Confirmação com o condomínio se imóvel possui vaga de garagem:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "placa_no_im_vel_1",
+          "internal_id": "327074228",
+          "label": "Placa no imóvel:",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "placa_no_im_vel",
+          "internal_id": "326703661",
+          "label": "Placa na porta",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "placa_na_janela",
+          "internal_id": "326703662",
+          "label": "Placa na janela",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "placa_na_fachada",
+          "internal_id": "326703663",
+          "label": "Placa na fachada",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fotos_gerais_do_im_vel",
+          "internal_id": "327234096",
+          "label": "Fotos gerais do imóvel:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "foto_da_vaga_de_garagem",
+          "internal_id": "327609133",
+          "label": "Foto da vaga de garagem",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311227752",
+      "name": "Analise da limpeza (Contato com o proprietário)",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "an_lise_da_vistoria_de_sa_da",
+          "internal_id": "326703532",
+          "label": "Análise da vistoria de saída:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "an_lise_dos_reparos",
+          "internal_id": "326703587",
+          "label": "Análise dos reparos:",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "observa_es",
+          "internal_id": "326703586",
+          "label": "Observações do setor de reparos:",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "finalizado_limpeza_reparos",
+          "internal_id": "326703740",
+          "label": "Finalizado Limpeza/Reparos",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "342229371",
+      "name": "Agendamento Plantas / Memorial do Imóvel",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "a_planta_do_im_vel_est_dispon_vel",
+          "internal_id": "425995116",
+          "label": "A Planta Baixa do imóvel está disponível?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "planta_do_im_vel",
+          "internal_id": "425995122",
+          "label": "Planta Baixa do Imóvel",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "copy_of_a_planta_baixa_do_im_vel_est_dispon_vel",
+          "internal_id": "425995256",
+          "label": "O Memorial Descritivo do imóvel está disponível?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "copy_of_planta_baixa_do_im_vel",
+          "internal_id": "425995267",
+          "label": "Memorial Descritivo do Imóvel",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "produtos_a_serem_entregues",
+          "internal_id": "426120848",
+          "label": "Documento a ser solicitado a produção",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "agendar_visita_de_arquiteto_a_para_produ_o_da_planta_baixa",
+          "internal_id": "425995221",
+          "label": "Agendar visita de Desenhista CAD para produção da Planta Baixa e/ou Memorial Descritivo",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "id": "arquiteto_a",
+          "internal_id": "425995249",
+          "label": "Desenhista CAD",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "statement_0ec217a4_090e_4f9c_bc1d_2d462e56a557",
+          "internal_id": "426041111",
+          "label": "Statement-0ec217a4-090e-4f9c-bc1d-2d462e56a557",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "statement_8f1ab878_1c69_4709_9725_0c6c500a337a",
+          "internal_id": "426759624",
+          "label": "Statement-8f1ab878-1c69-4709-9725-0c6c500a337a",
+          "type": "statement",
+          "required": null
+        }
+      ]
+    },
+    {
+      "id": "342229438",
+      "name": "Planta e Memorial Descritivo",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "link_das_plantas_e_memorial_descritivo",
+          "internal_id": "425995352",
+          "label": "Link das Plantas e Memorial Descritivo",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "checklist_vertical_5",
+          "internal_id": "428046894",
+          "label": "Inserir Documentos nos Sistemas",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_ada5e4f1_e498_4852_ab9b_33b8d092367c",
+          "internal_id": "426042375",
+          "label": "Statement-ada5e4f1-e498-4852-ab9b-33b8d092367c",
+          "type": "statement",
+          "required": null
+        }
+      ]
+    },
+    {
+      "id": "314373442",
+      "name": "Aguardando Marketing",
+      "cards_count": 0,
+      "fields": []
+    },
+    {
+      "id": "314143739",
+      "name": "Conferência Final",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia",
+          "internal_id": "335564239",
+          "label": "Conferência:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "link_df_im_veis",
+          "internal_id": "335564286",
+          "label": "Link DF Imóveis:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "link_wim_veis",
+          "internal_id": "335564301",
+          "label": "Link Wimóveis:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "site_empresa",
+          "internal_id": "335564320",
+          "label": "Site Empresa",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "cadastro_de_placa_no_nido",
+          "internal_id": "350055723",
+          "label": "Cadastro de placa no NIDO",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "c_digo_do_cadastro_da_placa_nido",
+          "internal_id": "351406057",
+          "label": "Código do cadastro da placa NIDO",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "340770907",
+      "name": "15 dias desocupado",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "statement_9a210fc4_2f23_42fa_8c10_75bc19fbeeef",
+          "internal_id": "421029870",
+          "label": "Statement-9a210fc4-2f23-42fa-8c10-75bc19fbeeef",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "manual_do_im_vel",
+          "internal_id": "425299252",
+          "label": "Manual do Imóvel",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "checklist_vertical",
+          "internal_id": "420819210",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "total_de_clientes_retornada_na_pesquisa",
+          "internal_id": "421029827",
+          "label": "Total de clientes retornados na pesquisa",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "total_de_visitadas_agendadas",
+          "internal_id": "421029829",
+          "label": "Total de Visitas agendadas",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "total_de_propostas_feitas",
+          "internal_id": "421029831",
+          "label": "Total de propostas feitas",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "descri_o",
+          "internal_id": "421029826",
+          "label": "Descrição ",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "gerar_em_pf_e_anexar_no_nido",
+          "internal_id": "421029864",
+          "label": "Gerar em PDF e anexar no NIDO",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "340770980",
+      "name": "30 Dias desocupado",
+      "cards_count": 17,
+      "fields": [
+        {
+          "id": "checklist_vertical_1",
+          "internal_id": "420819320",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "retorno_an_lise_limpeza_placa",
+          "internal_id": "421033048",
+          "label": "Retorno Análise limpeza/Placa",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "visualiza_o_nos_portais",
+          "internal_id": "421034419",
+          "label": "Visualização nos portais",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "resumo_dos_feedbacks_das_visitas_realizadas",
+          "internal_id": "421034886",
+          "label": "Resumo dos Feedbacks das visitas realizadas",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "an_lise_pre_o_an_nciado_comparado_aos_im_veis_dispon_veis_no_mercado",
+          "internal_id": "421034892",
+          "label": "Análise preço anúnciado comparado aos imóveis disponíveis no mercado.",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "relat_rio_detalhado",
+          "internal_id": "421033019",
+          "label": "Relatório detalhado",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "gerar_em_pf_e_anexar_no_nido_1",
+          "internal_id": "421038016",
+          "label": "Gerar em PDF e anexar no NIDO",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "340770982",
+      "name": "60 Dias desocupado",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "checklist_vertical_2",
+          "internal_id": "420819338",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "retorno_an_lise_limpeza_placa_1",
+          "internal_id": "421038020",
+          "label": "Retorno Análise limpeza/Placa",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "plano_de_a_o",
+          "internal_id": "420819346",
+          "label": "Plano de Ação ",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "anexar_pdf_nido",
+          "internal_id": "421038193",
+          "label": "Anexar PDF NIDO",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "340770983",
+      "name": "90 Dias desocupado",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_vertical_3",
+          "internal_id": "420819368",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "resultado_do_plano_de_a_o",
+          "internal_id": "421038270",
+          "label": "Resultado do plano de ação",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "detalhamento_da_busca_ativa_feita",
+          "internal_id": "421038310",
+          "label": "Detalhamento da busca ativa feita",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "anexar_relat_rio_nido",
+          "internal_id": "421038441",
+          "label": "Anexar relatório NIDO",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "340771023",
+      "name": "180 Dias desocupado",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "checklist_vertical_4",
+          "internal_id": "420819459",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311183187",
+      "name": "Concluído",
+      "cards_count": 1377,
+      "fields": []
+    }
+  ]
+}

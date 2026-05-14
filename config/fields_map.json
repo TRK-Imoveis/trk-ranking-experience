@@ -1,0 +1,439 @@
+{
+  "comercial_locacao": {
+    "pipe_id": "301686632",
+    "pipe_name": "COM - Comercial de aluguel",
+    "fields": {
+      "IM": {
+        "id": "im",
+        "internal_id": "358511407",
+        "label": "IM",
+        "type": "number"
+      },
+      "Data publicação Anúncio": {
+        "id": "data_publica_o_an_ncio",
+        "internal_id": "420822386",
+        "label": "Data publicação Anúncio",
+        "type": "datetime"
+      },
+      "Profissional responsável": {
+        "id": "profissional_respons_vel",
+        "internal_id": "330641234",
+        "label": "Profissional responsável",
+        "type": "assignee_select"
+      }
+    },
+    "phases": {
+      "Avaliação Técnica": {
+        "id": "317247082",
+        "name": "Avaliação Técnica",
+        "cards_count": 3
+      },
+      "Cadastro / Reativação no NIDO": {
+        "id": "311183186",
+        "name": "Cadastro / Reativação no NIDO",
+        "cards_count": 0
+      },
+      "Conferência Final": {
+        "id": "314143739",
+        "name": "Conferência Final",
+        "cards_count": 0
+      },
+      "15 dias desocupado": {
+        "id": "340770907",
+        "name": "15 dias desocupado",
+        "cards_count": 5
+      },
+      "30 Dias desocupado": {
+        "id": "340770980",
+        "name": "30 Dias desocupado",
+        "cards_count": 17
+      },
+      "60 Dias desocupado": {
+        "id": "340770982",
+        "name": "60 Dias desocupado",
+        "cards_count": 5
+      },
+      "90 Dias desocupado": {
+        "id": "340770983",
+        "name": "90 Dias desocupado",
+        "cards_count": 0
+      },
+      "180 Dias desocupado": {
+        "id": "340771023",
+        "name": "180 Dias desocupado",
+        "cards_count": 1
+      },
+      "Concluído": {
+        "id": "311183187",
+        "name": "Concluído",
+        "cards_count": 1377
+      }
+    }
+  },
+  "cont_locacao": {
+    "pipe_id": "304021288",
+    "pipe_name": "ADM - Locação COM ADM - NOVO",
+    "fields": {
+      "Imóvel": {
+        "id": "im_vel",
+        "internal_id": "369442086",
+        "label": "Imóvel ",
+        "type": "connector"
+      }
+    },
+    "phases": {
+      "Confecção do contrato de locação": {
+        "id": "324421312",
+        "name": "Confecção do contrato de locação",
+        "cards_count": 0
+      },
+      "1º Boleto": {
+        "id": "325065821",
+        "name": "1º Boleto",
+        "cards_count": 0
+      },
+      "Fechamento NIDO": {
+        "id": "325066154",
+        "name": "Fechamento NIDO",
+        "cards_count": 0
+      },
+      "Concluído": {
+        "id": "324421313",
+        "name": "Concluído",
+        "cards_count": 262
+      }
+    }
+  },
+  "cont_adm": {
+    "pipe_id": "301689857",
+    "pipe_name": "ADM - Cont. de ADMINISTRAÇÃO",
+    "fields": {
+      "Assessor (lista)": {
+        "id": "assessor_lista",
+        "internal_id": "362575592",
+        "label": "Assessor (lista)",
+        "type": "select"
+      },
+      "Criar Card de Vistoria Técnica": {
+        "id": "criar_card_de_vistoria_t_cninca",
+        "internal_id": "421964285",
+        "label": "Criar card de vistoria técnica",
+        "type": "connector"
+      }
+    },
+    "phases": {
+      "Contrato assinado - Conferir Nido": {
+        "id": "311204759",
+        "name": "Contrato assinado - Conferir Nido",
+        "cards_count": 0
+      },
+      "Confecção do contrato": {
+        "id": "311204699",
+        "name": "Confecção do contrato",
+        "cards_count": 0
+      },
+      "Conferência do contrato": {
+        "id": "311204712",
+        "name": "Conferência do contrato",
+        "cards_count": 0
+      },
+      "Concluído": {
+        "id": "311204509",
+        "name": "Concluído",
+        "cards_count": 351
+      }
+    }
+  },
+  "rescisao_adm": {
+    "pipe_id": "301688015",
+    "pipe_name": "ADM - Resc. de ADMINISTRAÇÃO",
+    "fields": {
+      "Termo de Distrato assinado": {
+        "id": "termo_de_distrato_assinado",
+        "internal_id": "422904557",
+        "label": "Termo de Distrato assinado ",
+        "type": "radio_horizontal"
+      },
+      "Assessor (lista)": {
+        "id": "assessor_lista",
+        "internal_id": "362575711",
+        "label": "Assessor (lista)",
+        "type": "select"
+      }
+    },
+    "phases": {
+      "Encerramento": {
+        "id": "325158622",
+        "name": "Encerramento",
+        "cards_count": 0
+      },
+      "Repasse final / Distrato (FINANCEIRO)": {
+        "id": "325159187",
+        "name": "Repasse final / Distrato (FINANCEIRO)",
+        "cards_count": 0
+      },
+      "Concluído": {
+        "id": "311192390",
+        "name": "Concluído",
+        "cards_count": 273
+      }
+    }
+  },
+  "rescisao_loc": {
+    "pipe_id": "301686638",
+    "pipe_name": "ADM - Rescisão de LOCAÇÃO",
+    "fields": {
+      "Data do recebimento das chaves:": {
+        "id": "data_do_recebimento_das_chaves",
+        "internal_id": "326613851",
+        "label": "Data do recebimento das chaves:",
+        "type": "due_date"
+      },
+      "Imóvel": {
+        "id": "im_vel",
+        "internal_id": "368581412",
+        "label": "Imóvel",
+        "type": "connector"
+      },
+      "Assessor (lista)": {
+        "id": "assessor_1",
+        "internal_id": "362575195",
+        "label": "Assessor (lista)",
+        "type": "select"
+      }
+    },
+    "phases": {
+      "Vistoria recebida": {
+        "id": "311193691",
+        "name": "Vistoria recebida",
+        "cards_count": 1
+      },
+      "Levant. Taxas Proporcionais": {
+        "id": "340291000",
+        "name": "Levant. Taxas Proporcionais",
+        "cards_count": 0
+      },
+      "Agendamento de vistoria": {
+        "id": "311183223",
+        "name": "Agendamento de vistoria",
+        "cards_count": 1
+      },
+      "Envio do boleto final": {
+        "id": "311203788",
+        "name": "Envio do boleto final",
+        "cards_count": 0
+      },
+      "Levantamento de taxas": {
+        "id": "311202330",
+        "name": "Levantamento de taxas",
+        "cards_count": 0
+      }
+    }
+  },
+  "reparos": {
+    "pipe_id": "301687289",
+    "pipe_name": "ADM - Reparos",
+    "fields": {
+      "Selecionar o assessor": {
+        "id": "seleciona_o_assessor",
+        "internal_id": "354512609",
+        "label": "Selecionar o assessor",
+        "type": "select"
+      }
+    },
+    "phases": {
+      "Orçamento | Prestador": {
+        "id": "311226341",
+        "name": "Orçamento | Prestador",
+        "cards_count": 10
+      },
+      "Pós-venda": {
+        "id": "320123699",
+        "name": "Pós-venda",
+        "cards_count": 13
+      }
+    }
+  },
+  "renovacao": {
+    "pipe_id": "301683424",
+    "pipe_name": "ADM - Renovações de contratos",
+    "fields": {
+      "Assessor (lista)": {
+        "id": "assessor_lista",
+        "internal_id": "362575446",
+        "label": "Assessor (lista)",
+        "type": "select"
+      },
+      "Data de vencimento": {
+        "id": "data_de_vencimento",
+        "internal_id": "346910945",
+        "label": "Data de vencimento",
+        "type": "due_date"
+      }
+    },
+    "phases": {
+      "Avaliação de mercado": {
+        "id": "324837150",
+        "name": "Avaliação de mercado",
+        "cards_count": 9
+      },
+      "Contato com proprietário": {
+        "id": "314738846",
+        "name": "Contato com proprietário",
+        "cards_count": 5
+      },
+      "Contrato assinado / Finalizar": {
+        "id": "311162934",
+        "name": "Contrato assinado / Finalizar",
+        "cards_count": 0
+      },
+      "Processo concluído": {
+        "id": "311177399",
+        "name": "Processo concluído",
+        "cards_count": 895
+      },
+      "Confecção do contrato": {
+        "id": "311175893",
+        "name": "Confecção do contrato",
+        "cards_count": 0
+      }
+    }
+  },
+  "inadimplencia": {
+    "pipe_id": "302601622",
+    "pipe_name": "ADM - Inadimplência",
+    "fields": {
+      "Vencimento 1º Boleto:": {
+        "id": "vencimento_1_boleto",
+        "internal_id": "342029981",
+        "label": "Vencimento 1º Boleto:",
+        "type": "date"
+      }
+    },
+    "phases": {
+      "Cobrança (inicial)": {
+        "id": "317714026",
+        "name": "Cobrança inicial",
+        "cards_count": 8
+      },
+      "CredPago: Acionar": {
+        "id": "316754812",
+        "name": "CredPago: Acionar",
+        "cards_count": 5
+      },
+      "Negativação (No 8º dia de atraso)": {
+        "id": "316295201",
+        "name": "Negativação (No 8º dia de atraso)",
+        "cards_count": 3
+      }
+    }
+  },
+  "backoffice": {
+    "pipe_id": "305733753",
+    "pipe_name": "ADM - Solicitações BackOffice",
+    "fields": {
+      "Responsável": {
+        "id": "respons_vel",
+        "internal_id": "398959922",
+        "label": "Responsável",
+        "type": "assignee_select"
+      }
+    },
+    "phases": {
+      "↪️ Troca de Titularidade": {
+        "id": "335857276",
+        "name": "↪️ Troca de Titularidade",
+        "cards_count": 2
+      },
+      "🚩 Pendência Assessor": {
+        "id": "340399420",
+        "name": "🚩 Pendência Assessor",
+        "cards_count": 6
+      },
+      "Concluído": {
+        "id": "334231126",
+        "name": "Concluído",
+        "cards_count": 717
+      }
+    }
+  },
+  "dirf_darf": {
+    "pipe_id": "302274599",
+    "pipe_name": "ADM - DARFs / DIRFs",
+    "fields": {
+      "Ano:": {
+        "id": "ano",
+        "internal_id": "347992767",
+        "label": "Ano:",
+        "type": "short_text"
+      },
+      "Responsável": {
+        "id": "respons_vel",
+        "internal_id": "347991078",
+        "label": "Responsável",
+        "type": "assignee_select"
+      }
+    },
+    "phases": {
+      "Concluído": {
+        "id": "314462023",
+        "name": "Concluído",
+        "cards_count": 229
+      }
+    }
+  },
+  "vistorias": {
+    "pipe_id": "302750891",
+    "pipe_name": "ADM - Vistorias",
+    "fields": {
+      "Área útil M²": {
+        "id": "rea_til_m",
+        "internal_id": "427700917",
+        "label": "Área útil M²",
+        "type": "number"
+      },
+      "IM": {
+        "id": "im",
+        "internal_id": "358511363",
+        "label": "IM",
+        "type": "number"
+      },
+      "vistoria iniciada em": {
+        "id": "data_e_hora_do_in_cio_da_vistoria",
+        "internal_id": "427700463",
+        "label": "vistoria iniciada em ",
+        "type": "datetime"
+      },
+      "Vistoria finalizada em": {
+        "id": "vistoria_finalizada_em",
+        "internal_id": "427700527",
+        "label": "Vistoria finalizada em",
+        "type": "datetime"
+      }
+    },
+    "phases": {
+      "Em produção": {
+        "id": "317126148",
+        "name": "Em produção",
+        "cards_count": 0
+      },
+      "Concluído": {
+        "id": "317126137",
+        "name": "Concluído",
+        "cards_count": 688
+      }
+    }
+  },
+  "contestacoes": {
+    "pipe_id": "301722113",
+    "pipe_name": "ADM - Contestação de vistoria",
+    "fields": {},
+    "phases": {
+      "Concluído": {
+        "id": "311416149",
+        "name": "Concluído",
+        "cards_count": 378
+      }
+    }
+  }
+}

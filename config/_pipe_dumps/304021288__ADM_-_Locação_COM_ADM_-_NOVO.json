@@ -1,0 +1,1450 @@
+{
+  "id": "304021288",
+  "name": "ADM - Locação COM ADM - NOVO",
+  "start_form_fields": [
+    {
+      "id": "cadastro_n",
+      "internal_id": "368601259",
+      "label": "#938268424",
+      "type": "id",
+      "required": false
+    },
+    {
+      "id": "vig_ncia_inicial_do_contrato_1",
+      "internal_id": "375529930",
+      "label": "Vigência Inicial do contrato ",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "valor_da_loca_o_2",
+      "internal_id": "376035218",
+      "label": "Valor da Locação ",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "observa_es_do_contrato",
+      "internal_id": "376035433",
+      "label": "Observações do contrato",
+      "type": "long_text",
+      "required": true
+    },
+    {
+      "id": "corretor_da_loca_o",
+      "internal_id": "370641305",
+      "label": "Corretor da Locação ",
+      "type": "connector",
+      "required": true
+    },
+    {
+      "id": "link_do_drive",
+      "internal_id": "368601269",
+      "label": "Link do DRIVE",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "im_s_agrupados_1",
+      "internal_id": "370954783",
+      "label": "IM's agrupados",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "qual_garantia_ir_utilizar",
+      "internal_id": "368601277",
+      "label": "Qual garantia irá utilizar?",
+      "type": "radio_horizontal",
+      "required": true
+    },
+    {
+      "id": "statement_5543065c_24f9_4dc1_96e5_8047385fb5d0",
+      "internal_id": "368601288",
+      "label": "Statement-5543065c-24f9-4dc1-96e5-8047385fb5d0",
+      "type": "statement",
+      "required": null
+    },
+    {
+      "id": "endere_o_do_im_vel_pretendido_1",
+      "internal_id": "368601296",
+      "label": "Endereço do imóvel pretendido",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "nome_completo_do_pretendente_locat_rio",
+      "internal_id": "368601304",
+      "label": "Nome completo do pretendente Locatário",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "pessoa_f_sica_ou_jur_dica",
+      "internal_id": "368601308",
+      "label": "Pessoa física ou jurídica?",
+      "type": "radio_horizontal",
+      "required": true
+    },
+    {
+      "id": "cpf_do_pretendente",
+      "internal_id": "368601312",
+      "label": "CPF do pretendente",
+      "type": "cpf",
+      "required": true
+    },
+    {
+      "id": "cnpj_do_pretendente",
+      "internal_id": "368601313",
+      "label": "CNPJ do pretendente",
+      "type": "cnpj",
+      "required": true
+    },
+    {
+      "id": "raz_o_social",
+      "internal_id": "368601314",
+      "label": "Razão social",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "profiss_o",
+      "internal_id": "368601316",
+      "label": "Profissão",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "ramo_de_atua_o",
+      "internal_id": "368601317",
+      "label": "Descrição do negócio (Marca, atividades e/ou produtos)",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "estado_civil",
+      "internal_id": "368601319",
+      "label": "Estado Civil",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "informe_seu_telefone",
+      "internal_id": "368601321",
+      "label": "Informe seu telefone ",
+      "type": "phone",
+      "required": true
+    },
+    {
+      "id": "e_mail",
+      "internal_id": "368601327",
+      "label": "E-mail ",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "renda_mensal",
+      "internal_id": "368601331",
+      "label": "Renda Mensal",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "faturamento_mensal",
+      "internal_id": "368601332",
+      "label": "Faturamento mensal",
+      "type": "currency",
+      "required": false
+    },
+    {
+      "id": "nome_completo_1_fiador",
+      "internal_id": "368601333",
+      "label": "Nome completo 1º FIADOR",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "cpf_1_fiador",
+      "internal_id": "368601334",
+      "label": "CPF 1º FIADOR",
+      "type": "cpf",
+      "required": true
+    },
+    {
+      "id": "telefone_1_fiador",
+      "internal_id": "368601335",
+      "label": "Telefone 1º FIADOR",
+      "type": "phone",
+      "required": true
+    },
+    {
+      "id": "e_mail_1_fiador",
+      "internal_id": "368601336",
+      "label": "E-mail 1º FIADOR",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "renda_mensal_1_fiador",
+      "internal_id": "368601338",
+      "label": "Renda mensal 1º FIADOR",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "profiss_o_1_fiador",
+      "internal_id": "368601340",
+      "label": "Profissão 1º FIADOR",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "estado_civil_1_fiador",
+      "internal_id": "368601343",
+      "label": "Estado Civil 1º FIADOR",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "cpf_do_c_njuge_1_fiador",
+      "internal_id": "368601345",
+      "label": "CPF do Cônjuge 1º FIADOR",
+      "type": "cpf",
+      "required": false
+    },
+    {
+      "id": "e_mail_conjuge_1_fiador",
+      "internal_id": "368601346",
+      "label": "E-mail CONJUGE 1º FIADOR",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "nome_completo_2_fiador",
+      "internal_id": "368601348",
+      "label": "Nome completo 2º FIADOR",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "cpf_2_fiador",
+      "internal_id": "368601349",
+      "label": "CPF 2º FIADOR",
+      "type": "cpf",
+      "required": false
+    },
+    {
+      "id": "telefone_2_fiador",
+      "internal_id": "368601351",
+      "label": "Telefone 2º FIADOR",
+      "type": "phone",
+      "required": false
+    },
+    {
+      "id": "e_mail_2_fiador",
+      "internal_id": "368601354",
+      "label": "E-mail 2º FIADOR",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "profiss_o_2_fiador",
+      "internal_id": "368601356",
+      "label": "Profissão 2º  FIADOR",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "renda_mensal_2_fiador",
+      "internal_id": "368601357",
+      "label": "Renda mensal 2º FIADOR",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "estado_civil_2_fiador",
+      "internal_id": "368601359",
+      "label": "Estado Civil 2º FIADOR",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "cpf_do_c_njuge_2_fiador",
+      "internal_id": "368601362",
+      "label": "CPF do Cônjuge 2º FIADOR",
+      "type": "cpf",
+      "required": false
+    },
+    {
+      "id": "e_mail_conjuge_2_fiador",
+      "internal_id": "368601365",
+      "label": "E-mail CONJUGE 2º FIADOR",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "envie_aqui_seu_documento_de_identidade",
+      "internal_id": "368601366",
+      "label": "Envie aqui seu documento de identidade",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "envie_aqui_um_comprovante_de_resid_ncia",
+      "internal_id": "368601368",
+      "label": "Envie aqui um comprovante de residência ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "documenta_o_do_conjuge_fiador",
+      "internal_id": "375006969",
+      "label": "Documentação do CONJUGE (FIADOR)",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "comprovante_de_estado_civil_1",
+      "internal_id": "375534275",
+      "label": "Comprovante de Estado Civil ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "certid_o_de_nus",
+      "internal_id": "424322118",
+      "label": "Certidão de Ônus",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "rg_ou_cnh_conjug",
+      "internal_id": "375534292",
+      "label": "RG ou CNH conjugê ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "tr_s_ltimos_contracheques_extrato_banc_rio_pessoa_f_sica_dos_ltimos_tr_s_meses",
+      "internal_id": "375534374",
+      "label": "Três últimos contracheques/Extrato bancário pessoa Física dos últimos três meses  ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "contrato_social_e_altera_es_da_empresa_ou_contrato_social_consolidado",
+      "internal_id": "378860134",
+      "label": "Contrato Social e alterações da empresa ou contrato social consolidado",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "conselho_de_administra_o_ou_procura_o",
+      "internal_id": "378860170",
+      "label": "Conselho de Administração  ou Procuração",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "certid_o_simplificada_da_junta_comercial_1",
+      "internal_id": "378860275",
+      "label": "Certidão simplificada da Junta Comercial",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "balan_o_patrimonial",
+      "internal_id": "378860277",
+      "label": "Balanço patrimonial",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "rg_ou_cnh_s_cios",
+      "internal_id": "378860300",
+      "label": "RG ou CNH Sócios ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "comprovante_de_resid_ncia_dos_s_cios",
+      "internal_id": "378860403",
+      "label": "Comprovante de residência dos Sócios ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "ir_completo_dos_s_cios",
+      "internal_id": "378860448",
+      "label": "IR completo dos sócios ",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "aten_o",
+      "internal_id": "368601371",
+      "label": "Atenção",
+      "type": "checklist_vertical",
+      "required": true
+    },
+    {
+      "id": "statement_96ec29d5_65f1_4d47_aabb_63bc07b72c69",
+      "internal_id": "368601372",
+      "label": "Statement-96ec29d5-65f1-4d47-aabb-63bc07b72c69",
+      "type": "statement",
+      "required": null
+    }
+  ],
+  "phases": [
+    {
+      "id": "324421320",
+      "name": "Caixa de entrada / Pagamento da análise",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_89929fdf_e332_43c9_b293_f56b77af450c",
+          "internal_id": "368601260",
+          "label": "Statement-89929fdf-e332-43c9-b293-f56b77af450c",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "copy_of_statement_89929fdf_e332_43c9_b293_f56b77af450c",
+          "internal_id": "368601278",
+          "label": "Copy of Statement-89929fdf-e332-43c9-b293-f56b77af450c",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "copy_of_copy_of_statement_89929fdf_e332_43c9_b293_f56b77af450c",
+          "internal_id": "368601289",
+          "label": "Copy of Copy of Statement-89929fdf-e332-43c9-b293-f56b77af450c",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "copy_of_copy_of_copy_of_statement_89929fdf_e332_43c9_b293_f56b77af450c",
+          "internal_id": "368601297",
+          "label": "Copy of Copy of Copy of Statement-89929fdf-e332-43c9-b293-f56b77af450c",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "tipo_garantia",
+          "internal_id": "368601305",
+          "label": "Tipo garantia",
+          "type": "label_select",
+          "required": false
+        },
+        {
+          "id": "falta_assinatura_trk",
+          "internal_id": "375612957",
+          "label": "Falta assinatura TRK",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421311",
+      "name": "Recebendo Cadastro",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "inativar",
+          "internal_id": "370976619",
+          "label": "INATIVAR",
+          "type": "radio_horizontal",
+          "required": false
+        },
+        {
+          "id": "propriet_rio_1",
+          "internal_id": "369442022",
+          "label": "Proprietário ",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "pretendente",
+          "internal_id": "368601247",
+          "label": "Pretendente",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "im_s_agrupados",
+          "internal_id": "370954247",
+          "label": "IM's agrupados ",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "369442086",
+          "label": "Imóvel ",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "respons_vel",
+          "internal_id": "368601272",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "h_corretor_envolvido_na_loca_o",
+          "internal_id": "382115254",
+          "label": "Há corretor envolvido na locação ?",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "corretor_da_loca_o_1",
+          "internal_id": "370954408",
+          "label": "Corretor da Locação ",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "endere_o_do_im_vel_pretendido",
+          "internal_id": "368601273",
+          "label": "Endereço do imóvel pretendido",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "valor_da_loca_o",
+          "internal_id": "368601274",
+          "label": "Valor da Locação",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "checklist_inicial",
+          "internal_id": "368601252",
+          "label": "Checklist inicial:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "tipo_de_garantia",
+          "internal_id": "368601290",
+          "label": "Tipo de garantia ",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421318",
+      "name": "Análise do cadastro",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "situa_o_do_cadastro",
+          "internal_id": "368601248",
+          "label": "Situação do cadastro:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "teste",
+          "internal_id": "375622038",
+          "label": "Cadastro",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "statement_6fd5c786_cb90_4c22_97d5_c4ce01e277bd",
+          "internal_id": "369443463",
+          "label": "Statement-6fd5c786-cb90-4c22-97d5-c4ce01e277bd",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "follow_up_nido",
+          "internal_id": "368601250",
+          "label": "Follow-Up Nido: ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "an_lise_cadastral",
+          "internal_id": "368601251",
+          "label": "Análise cadastral ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "seguro_fian_a",
+          "internal_id": "370976786",
+          "label": "Seguro Fiança e Credpago",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "an_lise_fc_t_tulo_de_captaliza_o_e_fiador",
+          "internal_id": "370642259",
+          "label": "Análise FC Título de Captalização e Fiador ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "cadastro_aprovado_fc_an_lise",
+          "internal_id": "368601253",
+          "label": "Cadastro Aprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "documento_comprobat_rio_aprova_o_reprova_o",
+          "internal_id": "368601268",
+          "label": "Autorização Comercial Proprietário (aprovação/reprovação)",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "cadastro_reprovado",
+          "internal_id": "368601291",
+          "label": "Cadastro reprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "agendar_vistoria",
+          "internal_id": "369444486",
+          "label": "Agendar vistoria na agenda do Google e criar card no pipe do vistoriador",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "vistoria_agendada_para",
+          "internal_id": "369444394",
+          "label": "Vistoria agendada para ",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "aprovado_fc_an_lise_pr_ximos_passos",
+          "internal_id": "368601257",
+          "label": "Aprovado - Próximos passos ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "vig_ncia_inicial_do_contrato",
+          "internal_id": "375529877",
+          "label": "Vigência Inicial do contrato ",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "link_do_drive_1",
+          "internal_id": "375621802",
+          "label": "Link do drive",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324421321",
+      "name": "Documentação complementar",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_64aa2fd0_1c83_4c28_afbc_5128251f5361",
+          "internal_id": "368601261",
+          "label": "Statement-64aa2fd0-1c83-4c28-afbc-5128251f5361",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "documento_de_identidade",
+          "internal_id": "368601279",
+          "label": "Documento de identidade: ",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "copy_of_documento_de_identidade",
+          "internal_id": "415036610",
+          "label": "Documento de identidade Conjugê: ",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_renda",
+          "internal_id": "368601292",
+          "label": "Comprovante de renda",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_resid_ncia",
+          "internal_id": "368601298",
+          "label": "Comprovante de residência",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_estado_civil",
+          "internal_id": "368601306",
+          "label": "Comprovante de estado civil",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "comprovante_de_estado_civil_2",
+          "internal_id": "377088564",
+          "label": "Comprovante de estado Civil",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "statement_690146f1_a48f_486a_98a6_80bfe012bbd4",
+          "internal_id": "368601310",
+          "label": "Statement-690146f1-a48f-486a-98a6-80bfe012bbd4",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "documento_de_identidade_1_fiador",
+          "internal_id": "368601315",
+          "label": "Documento de identidade - 1º fiador:",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "copy_of_documento_de_identidade_1_fiador",
+          "internal_id": "375017626",
+          "label": "Documento de identidade do CONJUGE - 1º fiador:",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "comprovante_de_renda_1_fiador",
+          "internal_id": "368601318",
+          "label": "Comprovante de renda - 1º fiador:",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "comprovante_de_resid_ncia_1_fiador",
+          "internal_id": "368601320",
+          "label": "Comprovante de residência - 1º fiador",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "comprovante_de_estado_civil_1_fiador",
+          "internal_id": "368601323",
+          "label": "Comprovante de estado civil - 1º fiador",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "statement_a9ac228f_a231_445a_8f71_738e06693510",
+          "internal_id": "368601324",
+          "label": "Statement-a9ac228f-a231-445a-8f71-738e06693510",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "documento_de_identidade_2_fiador",
+          "internal_id": "368601326",
+          "label": "Documento de identidade - 2º fiador:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "copy_of_documento_de_identidade_2_fiador",
+          "internal_id": "375017630",
+          "label": "Documento de identidade do CONJUGE - 2º fiador:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_renda_2_fiador",
+          "internal_id": "368601328",
+          "label": "Comprovante de renda - 2º fiador:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_resid_ncia_2_fiador",
+          "internal_id": "368601329",
+          "label": "Comprovante de residência - 2º fiador",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_estado_civil_2_fiador",
+          "internal_id": "368601330",
+          "label": "Comprovante de estado civil - 2º fiador",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "comprovante_de_propriedade_im_vel_nus_escritura_p_blica_contrato_de_compra_e_venda_ou_cess_o_de_direitos",
+          "internal_id": "368601337",
+          "label": "Certidão de Onûs",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "certid_o_simplificada_da_junta_comercial",
+          "internal_id": "368601342",
+          "label": "CERTIDÃO SIMPLIFICADA DA JUNTA COMERCIAL",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "cnh_ou_cpf_rg_dos_s_cios",
+          "internal_id": "368601344",
+          "label": "CNH ou CPF + RG dos sócios ",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "imposto_de_renda_na_ntegra_do_empres_rio_s_cios_ou_acionistas",
+          "internal_id": "368601347",
+          "label": "IMPOSTO DE RENDA NA ÍNTEGRA, DO EMPRESÁRIO, SÓCIOS OU ACIONISTAS ",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "contrato_social_e_ltima_altera_o_contratual_para_ltda_ou_ata_de_constitui_o_e_ata_da_ltima_elei_o_de_diretoria_para_s_a",
+          "internal_id": "368601350",
+          "label": "CONTRATO SOCIAL E ÚLTIMA ALTERAÇÃO CONTRATUAL (PARA LTDA) OU ATA DE CONSTITUIÇÃO E ATA DA ÚLTIMA ELEIÇÃO DE DIRETORIA (PARA S/A)",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "dipj_declara_o_de_imposto_de_renda_da_pessoa_jur_dica_na_ntegra_com_p_gina_de_protocolo_dos_02_ltimos_anos",
+          "internal_id": "368601353",
+          "label": "DIPJ (DECLARAÇÃO DE IMPOSTO DE RENDA DA PESSOA JURÍDICA) NA ÍNTEGRA COM PÁGINA DE PROTOCOLO, DOS 02 ÚLTIMOS ANOS*",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "balancete_completo_do_exerc_cio_vigente_com_ativo_passivo_e_dre_demonstra_o_do_resultado_do_exerc_cio_acumulado_e_conciliado",
+          "internal_id": "368601358",
+          "label": "BALANÇO PATRIMONIAL",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "rg_ou_cnh_conjug_1",
+          "internal_id": "375535361",
+          "label": "RG ou CNH conjugê",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "statement_052fc79c_c4af_4dd5_8958_c2792aafd88b",
+          "internal_id": "368601363",
+          "label": "Statement-052fc79c-c4af-4dd5-8958-c2792aafd88b",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "podemos_enviar_o_contrato_para_ser_assinado_pelo_e_mail_informado_acima",
+          "internal_id": "368601367",
+          "label": " Podemos enviar o contrato para ser assinado pelo e-mail informado acima?",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "e_mail_para_receber_o_contrato_para_ser_assinado_pelo_locat_rio",
+          "internal_id": "368601369",
+          "label": "E-mail para receber o contrato para ser assinado pelo locatário. ",
+          "type": "email",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "326635671",
+      "name": "Conferência de Anexos Drive",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia_de_documentos_anexados",
+          "internal_id": "375703964",
+          "label": "Conferência dos documentos anexados",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_de_documentos_anexados_dos_fiadores",
+          "internal_id": "375729946",
+          "label": "Conferência dos documentos anexados - Fiadores ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "valor_da_loca_o_3",
+          "internal_id": "376032779",
+          "label": "Valor da Locação ",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "confec_o_planilha_desmembramento_comiss_o",
+          "internal_id": "382114744",
+          "label": "Confecção Planilha Desmembramento Comissão ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "obs_informa_es_do_contrato",
+          "internal_id": "375978036",
+          "label": "OBS informações do contrato ",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "conferencia_se_gua_e_luz_do_im_vel_est_o_ligadas_1",
+          "internal_id": "402687566",
+          "label": "Conferencia se água e luz do imóvel estão ligadas",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "inserir_o_protocolo_da_neoenergia",
+          "internal_id": "402687726",
+          "label": "inserir o protocolo da neoenergia",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "327087357",
+      "name": "Análise Cadastro BackOffice",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "avalia_o_locat_rio",
+          "internal_id": "377372706",
+          "label": "Avaliação Locatário ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "fiador",
+          "internal_id": "377372762",
+          "label": "Fiador ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "corretor",
+          "internal_id": "385904197",
+          "label": "Corretor",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421312",
+      "name": "Confecção do contrato de locação",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im_vel_com_contrato_de_adm_assinado",
+          "internal_id": "369445222",
+          "label": "Imóvel com contrato de ADM assinado ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "statement_606a81ea_092c_4604_96c4_c19bfa7afb13",
+          "internal_id": "370643222",
+          "label": "Statement-606a81ea-092c-4604-96c4-c19bfa7afb13",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "cadastrar_inquilino_imobiliar",
+          "internal_id": "371607053",
+          "label": "Cadastrar Inquilino Imobiliar ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "checklist_1",
+          "internal_id": "368601280",
+          "label": "Checklist",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "negociado_pagamento_antecipado",
+          "internal_id": "370644959",
+          "label": "Negociado pagamento antecipado ",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "pagamento_antecipado",
+          "internal_id": "370645074",
+          "label": "Pagamento Antecipado ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "nido",
+          "internal_id": "368601311",
+          "label": "Nido:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325065577",
+      "name": "Desistência do Contrato de locação",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_vertical_1",
+          "internal_id": "370645256",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324421315",
+      "name": "Conferência do contrato",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_a8e55898_5288_4094_a764_bb29bfa8219e",
+          "internal_id": "368601262",
+          "label": "Statement-a8e55898-5288-4094-a764-bb29bfa8219e",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "confer_ncia",
+          "internal_id": "368601281",
+          "label": "Conferência:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "planilha_desmembramento_de_comiss_o",
+          "internal_id": "382115565",
+          "label": "Planilha desmembramento de comissão",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "dados_certos",
+          "internal_id": "368601283",
+          "label": "Dados certos",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "obs",
+          "internal_id": "368601286",
+          "label": "OBS: ",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421316",
+      "name": "Assinatura do contrato",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "tipo_de_assinatura_do_contrato",
+          "internal_id": "368601249",
+          "label": "Tipo de assinatura do contrato ",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "envio_do_contrato_para_assinatura_on_line",
+          "internal_id": "368601255",
+          "label": "Envio do contrato para assinatura on-line",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "assinatura_contrato_presencial",
+          "internal_id": "368601282",
+          "label": "Assinatura contrato presencial",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_de_pagamento_garantia",
+          "internal_id": "368601287",
+          "label": "Conferência de pagamento garantia ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "contrato_assinado",
+          "internal_id": "368601300",
+          "label": "Contrato assinado ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324421322",
+      "name": "Entrega de Chaves",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor_do_contrato",
+          "internal_id": "370649055",
+          "label": "Assessor do contrato",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "entrega_de_chaves",
+          "internal_id": "368601265",
+          "label": "Entrega de chaves ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325065821",
+      "name": "1º Boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "atendente_comercial_da_loca_o",
+          "internal_id": "370645928",
+          "label": "Atendente comercial da locação",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "garantia_credpago",
+          "internal_id": "370645951",
+          "label": "Garantia CredPago ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_veis_agrupados",
+          "internal_id": "378062043",
+          "label": "Imóveis Agrupados ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "lan_amentos_1_boleto",
+          "internal_id": "370646505",
+          "label": "Lançamentos 1º boleto:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "taxa_de_intermedia_o_0",
+          "internal_id": "426874973",
+          "label": "Taxa de Intermediação é 0%",
+          "type": "radio_horizontal",
+          "required": false
+        },
+        {
+          "id": "taxa_de_intermedia_o_0_1",
+          "internal_id": "426876117",
+          "label": "Taxa de intermediação 0%",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "lan_amento_comiss_o_corretores",
+          "internal_id": "382121476",
+          "label": "Lançamento comissão corretores ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "taxa_de_intermedia_o_menor_do_que_100",
+          "internal_id": "378990529",
+          "label": "Taxa de intermediação é menor do que 100%?",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "preencher_campo_taxa_de_intermedia_o_no_contrato_de_loca_o_imobiliar",
+          "internal_id": "378990723",
+          "label": "Preencher campo taxa de intermediação no contrato de locação Imobiliar ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "copy_of_preencher_campo_taxa_de_intermedia_o_no_contrato_de_loca_o_imobiliar",
+          "internal_id": "385903166",
+          "label": "Preencher campo taxa de intermediação no contrato de locação Imobiliar  : Corretores",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "taxa_de_intermedia_o_campo_taxa_de_intermida_o_no_contrato_de_loca_o",
+          "internal_id": "378991507",
+          "label": "Taxa de intermediação  campo \"Taxa de intermidação\" no contrato de locação ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "neoenergia_caesb",
+          "internal_id": "370646757",
+          "label": "NEOENERGIA/CAESB",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_solicita_o_neoenergia",
+          "internal_id": "370646823",
+          "label": "Protocolo Solicitação NEOENERGIA",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "data_solicita_o_tr_nsfer_ncia_neoenergia",
+          "internal_id": "419941477",
+          "label": "Data solicitação trânsferência NEOENERGIA",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "protocolo_solicita_o_caesb",
+          "internal_id": "370647128",
+          "label": "Protocolo solicitação CAESB",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "data_solicita_o_tr_nsfer_ncia_caesb",
+          "internal_id": "419941745",
+          "label": "Data solicitação trânsferência CAESB",
+          "type": "date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "325066090",
+      "name": "Conferência Boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia_de_taxas_financeiro_contas_a_receber_consulta_boletos",
+          "internal_id": "370647169",
+          "label": "Conferência de taxas (Financeiro > Contas a receber > Consulta boletos): ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "calcular_e_exportar_o_boleto",
+          "internal_id": "370647177",
+          "label": "Calcular e exportar o boleto",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325066154",
+      "name": "Fechamento NIDO",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "troca_de_titularidade_ou_religa_o_feita",
+          "internal_id": "402683658",
+          "label": "Troca de titularidade ou religação feita?",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_vel_possui_placa_instalada",
+          "internal_id": "370647202",
+          "label": "Imóvel possui placa instalada ?",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "se_a_placa_for_grande_solicitar_secretaria_a_remo_o_da_placa_por_meio_do_link_a_baixo_se_n_o_for_solicitar_ao_motodoy",
+          "internal_id": "370647303",
+          "label": "Se a placa for grande , solicitar à secretaria a remoção da placa por meio do link a baixo , se não for , solicitar ao motodoy .",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "fechamento_da_proposta",
+          "internal_id": "370647427",
+          "label": "Fechamento da proposta:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_recebimento",
+          "internal_id": "370647473",
+          "label": "Aba Recebimento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_distribui_o",
+          "internal_id": "370647480",
+          "label": "Aba distribuição:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "aba_altera",
+          "internal_id": "370647484",
+          "label": "Aba Alterar:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324421319",
+      "name": "Assinatura da Vistoria",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "acompanhamento",
+          "internal_id": "368601264",
+          "label": "Acompanhamento",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "324421317",
+      "name": "Contrato assinado - Finalizar procedimento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "levantamento",
+          "internal_id": "370649145",
+          "label": "Levantamento: ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "finalizar_procedimento",
+          "internal_id": "370649490",
+          "label": "Finalizar procedimento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_gua",
+          "internal_id": "370649591",
+          "label": "Conferência água",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "neoenergia_caesb_em_nome_do_inquilino",
+          "internal_id": "370649856",
+          "label": "NEOENERGIA/CAESB em nome do inquilino",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "o_im_vel_uma_unidade_do_pr_dio_crs_510",
+          "internal_id": "423311239",
+          "label": "O Imóvel é uma unidade do prédio CRS 510 ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "vincular_n_mero_da_unidade_de_telefone_de_contato_do_inquilino",
+          "internal_id": "423311375",
+          "label": "Vincular número da unidade de telefone de contato do inquilino.",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325066279",
+      "name": "Pendência NEOENERGIA/CAESB",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "notifica_o_inquilino",
+          "internal_id": "370648076",
+          "label": "Notificação Inquilino",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "solicita_o_de_desligamento",
+          "internal_id": "370648082",
+          "label": "Solicitação de desligamento",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_78359837_e62d_4a9f_96b9_5f833191a5b2",
+          "internal_id": "370648108",
+          "label": "Statement-78359837-e62d-4a9f-96b9-5f833191a5b2",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "pend_ncia",
+          "internal_id": "370650465",
+          "label": "Pendência",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421313",
+      "name": "Concluído",
+      "cards_count": 262,
+      "fields": [
+        {
+          "id": "data_de_envio_da_pesquisa_de_30_dias",
+          "internal_id": "382934102",
+          "label": "Data de envio da pesquisa de 30 dias",
+          "type": "due_date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324421314",
+      "name": "Locações não concluídas",
+      "cards_count": 310,
+      "fields": [
+        {
+          "id": "checklist",
+          "internal_id": "368601267",
+          "label": "Checklist:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

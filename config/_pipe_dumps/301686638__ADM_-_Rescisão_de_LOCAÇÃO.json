@@ -1,0 +1,915 @@
+{
+  "id": "301686638",
+  "name": "ADM - Rescisão de LOCAÇÃO",
+  "start_form_fields": [
+    {
+      "id": "o_que_voc_precisa_saber_para_rescindir_seu_contrato_de_loca_o",
+      "internal_id": "326545820",
+      "label": "O que você precisa saber, para rescindir seu contrato de locação? 📝",
+      "type": "radio_vertical",
+      "required": false
+    },
+    {
+      "id": "qual_o_endere_o_do_im_vel_locado",
+      "internal_id": "326545687",
+      "label": "Qual o endereço do imóvel locado?",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "qual_a_data_prevista_para_entrega_do_im_vel",
+      "internal_id": "326545688",
+      "label": "Qual a data prevista para entrega do imóvel?",
+      "type": "date",
+      "required": false
+    },
+    {
+      "id": "qual_o_motivo_da_rescis_o_do_contrato",
+      "internal_id": "326545689",
+      "label": "Qual o motivo da rescisão do contrato",
+      "type": "select",
+      "required": false
+    },
+    {
+      "id": "descreva_aqui_o_motivo",
+      "internal_id": "326545691",
+      "label": "Descreva aqui o motivo:",
+      "type": "long_text",
+      "required": false
+    },
+    {
+      "id": "anexar_ltima_conta_de_energia",
+      "internal_id": "367726273",
+      "label": "Anexar última conta de energia",
+      "type": "attachment",
+      "required": true
+    },
+    {
+      "id": "anexar_ltima_conta_de_gua",
+      "internal_id": "367726251",
+      "label": "Anexar última conta de água",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "nome",
+      "internal_id": "326545758",
+      "label": "Nome",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "telefone_de_contato",
+      "internal_id": "326545759",
+      "label": "Telefone de contato",
+      "type": "phone",
+      "required": false
+    },
+    {
+      "id": "e_mail",
+      "internal_id": "326545760",
+      "label": "E-mail",
+      "type": "email",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "311183222",
+      "name": "Caixa de entrada",
+      "cards_count": 7,
+      "fields": [
+        {
+          "id": "statement_57ed6f3a_bea3_48d6_914b_6427e37be3db",
+          "internal_id": "362159028",
+          "label": "Statement-57ed6f3a-bea3-48d6-914b-6427e37be3db",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "assessor",
+          "internal_id": "354025762",
+          "label": "Assessor:",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "assessor_1",
+          "internal_id": "362575195",
+          "label": "Assessor (lista)",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "renomear_card",
+          "internal_id": "348950983",
+          "label": "Renomear card",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358511107",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "368581412",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "contrato",
+          "internal_id": "358511121",
+          "label": "Contrato",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "locador",
+          "internal_id": "326579530",
+          "label": "Locador",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "locat_rio",
+          "internal_id": "326579532",
+          "label": "Locatário",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "recebido_o_comunicado_do_locat_rio_em",
+          "internal_id": "327469527",
+          "label": "Recebido o comunicado do locatário em:",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "contato_com_o_locat_rio_para_reverter",
+          "internal_id": "345073290",
+          "label": "Contato com o locatário para reverter:",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "procedimentos_iniciais",
+          "internal_id": "326580287",
+          "label": "Procedimentos iniciais",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "garantia",
+          "internal_id": "326582532",
+          "label": "Garantia:",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "garantia_t_tulo_de_capitaliza_o",
+          "internal_id": "364579313",
+          "label": "Garantia Título de Capitalização",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "desist_ncia_da_desocupa_o",
+          "internal_id": "395218594",
+          "label": "Desistência da Desocupação",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "card_duplicado",
+          "internal_id": "367838740",
+          "label": "Card duplicado?",
+          "type": "select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311183223",
+      "name": "Agendamento de vistoria",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "agendamento_de_vistoria",
+          "internal_id": "326582975",
+          "label": "Agendamento de vistoria",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "nome_e_n_de_titularidade_energia_e_gua",
+          "internal_id": "368098543",
+          "label": "Nome e Nº de Titularidade (Energia e Água)",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "nome_e_n_de_titularidade_gua_e_energia",
+          "internal_id": "368098631",
+          "label": "Nome e Nº de Titularidade (Água e Energia)",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "vistoriador",
+          "internal_id": "397066472",
+          "label": "Vistoriador",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "agendar_vistorias_no_painel_da_rede_vistorias",
+          "internal_id": "397066700",
+          "label": "Agendar Vistorias no Painel da Rede Vistorias ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "vistoria_agendada_para",
+          "internal_id": "326582976",
+          "label": "Vistoria agendada para:",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "em_teste_agendar_vistoria",
+          "internal_id": "345250987",
+          "label": "Agendar vistoria",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "h_reparos_sendo_executado",
+          "internal_id": "360679215",
+          "label": "Há reparos sendo executado:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "sobre_reparos",
+          "internal_id": "360679401",
+          "label": "Sobre reparos:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "solicitar_vistoria_de_sa_da_rescis_o",
+          "internal_id": "345241715",
+          "label": "Solicitar Vistoria de Saída | Rescisão",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "em_caso_de_t_tulo_de_captaliza_o_enviar_e_mail_seguradora_para_entender_qual_a_situa_o_do_t_tulo",
+          "internal_id": "413880902",
+          "label": "Em caso de Título de Captalização , enviar e-mail à seguradora para entender qual é a situação do Título. ",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311193691",
+      "name": "Vistoria recebida",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "teste_vistoria_conex_o",
+          "internal_id": "345252388",
+          "label": "Vistoria | Conexão",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "vistoria_recebida_em",
+          "internal_id": "337158362",
+          "label": "Vistoria recebida em:",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "vistoria_com_pend_ncia",
+          "internal_id": "326697940",
+          "label": "Laudo de vistoria com pendência? ",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "statement_ef96c52d_5901_4478_974a_d0a1ad1c432a",
+          "internal_id": "337157933",
+          "label": "Statement-ef96c52d-5901-4478-974a-d0a1ad1c432a",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "ap_s_an_lise_h_pontos_de_ajustes_a_serem_executados_no_im_vel",
+          "internal_id": "337157979",
+          "label": "Após análise há pontos de ajustes a serem executados no imóvel?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "informar_os_itens_analisados_para_serem_reparados",
+          "internal_id": "345836193",
+          "label": "Informar os itens analisados para serem reparados:",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "envio_do_laudo_de_vistoria",
+          "internal_id": "337158038",
+          "label": "Envio do laudo de vistoria",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "chaves_recebidas_na_vistoria",
+          "internal_id": "377107332",
+          "label": "Chaves Recebidas na Vistoria ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "atualizar_pipe_com_comercial_de_aluguel_1",
+          "internal_id": "377107478",
+          "label": "Atualizar Pipe: COM - Comercial de aluguel",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "data_recebimento_das_chaves",
+          "internal_id": "377107636",
+          "label": "Data recebimento das Chaves ",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "comunicado_ao_propriet_rio_1",
+          "internal_id": "377107704",
+          "label": "Comunicado ao proprietário:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "pendencias_da_vistoria_1",
+          "internal_id": "377107709",
+          "label": "Pendencias da vistoria",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "formaliza_o_da_entrega_de_chaves_1",
+          "internal_id": "377107731",
+          "label": "Formalização da entrega de chaves",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "excluir_card_do_processo_de_renova_o_1",
+          "internal_id": "377107737",
+          "label": "Excluir card do processo de renovação",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "340291000",
+      "name": "Levant. Taxas Proporcionais",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "tipo_de_cobran_a_do_aluguel_1",
+          "internal_id": "419134330",
+          "label": "Tipo de cobrança do aluguel",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "possui_im_veis_agrupados_no_contrato_1",
+          "internal_id": "419134420",
+          "label": "POSSUI IMÓVEIS AGRUPADOS NO CONTRATO? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "gerar_boletos",
+          "internal_id": "419134589",
+          "label": "GERAR BOLETOS:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "anexar_documentos_imobiliar_1",
+          "internal_id": "419134717",
+          "label": "ANEXAR DOCUMENTOS IMOBILIAR ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "o_im_vel_uma_unidade_do_pr_dio_da_crs_510",
+          "internal_id": "423322968",
+          "label": "O imóvel é uma unidade do prédio da CRS 510 ? ",
+          "type": "radio_horizontal",
+          "required": false
+        },
+        {
+          "id": "desvincular_interfone_e_c_meras_do_locat_rio",
+          "internal_id": "423323110",
+          "label": "Desvincular Interfone e câmeras do locatário ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "comunica_o_loft",
+          "internal_id": "424017680",
+          "label": "Comunicação à Loft ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "327066476",
+      "name": "Contato com Locatário ",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "confer_ncia_do_boleto_com_os_valores_proporcionais",
+          "internal_id": "419135467",
+          "label": "Conferência do boleto com os valores proporcionais ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "liga_o_para_o_a_locat_rio_a_1",
+          "internal_id": "377103908",
+          "label": "  Ligação para o(a) locatário(a)",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "vistoria_de_confer_ncia_agendada_1",
+          "internal_id": "377104712",
+          "label": "Vistoria de conferência agendada",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "id": "solicitar_vistoria_de_confer_ncia_rescis_o_1",
+          "internal_id": "377104786",
+          "label": "Solicitar vistoria de Conferência | Rescisão",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "avisar_ao_locat_rio_sobre_a_conta_de_consumo_final",
+          "internal_id": "413880741",
+          "label": "Avisar ao locatário sobre a conta de consumo final e  solicitar nada consta das contas de consumo",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "nada_consta_neoenergia",
+          "internal_id": "418849471",
+          "label": "Nada consta NEOENERGIA",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "nada_consta_caesb",
+          "internal_id": "418849472",
+          "label": "Nada consta CAESB",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "314031858",
+      "name": "Orçamento",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "statement_56db2093_abc4_4cc1_bbaa_dd9e5aaebd0d",
+          "internal_id": "334994764",
+          "label": "Statement-56db2093-abc4-4cc1-bbaa-dd9e5aaebd0d",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "or_amento",
+          "internal_id": "334994785",
+          "label": "Orçamento",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "anexar_or_amento_recebido",
+          "internal_id": "345839839",
+          "label": "Anexar orçamento recebido:",
+          "type": "attachment",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311427341",
+      "name": "Aguardando chaves",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "ao_receber_as_chaves",
+          "internal_id": "354905961",
+          "label": "Ao receber as chaves:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311202145",
+      "name": "CHAVES RECEBIDAS",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "atualizar_pipe_com_comercial_de_aluguel",
+          "internal_id": "337593353",
+          "label": "Atualizar Pipe: COM - Comercial de aluguel",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "negociando_pend_ncias",
+          "internal_id": "326613661",
+          "label": "Negociando pendências?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "sobre_a_negocia_o_das_pend_ncias",
+          "internal_id": "326613929",
+          "label": "Sobre a negociação das pendências:",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "data_do_recebimento_das_chaves",
+          "internal_id": "326613851",
+          "label": "Data do recebimento das chaves:",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "comunicado_ao_propriet_rio",
+          "internal_id": "326614602",
+          "label": "Comunicado ao proprietário:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "pendencias_da_vistoria",
+          "internal_id": "326657924",
+          "label": "Pendencias da vistoria",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "formaliza_o_da_entrega_de_chaves",
+          "internal_id": "348944555",
+          "label": "Formalização da entrega de chaves",
+          "type": "radio_vertical",
+          "required": false
+        },
+        {
+          "id": "excluir_card_do_processo_de_renova_o",
+          "internal_id": "352509851",
+          "label": "Excluir card do processo de renovação",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311202330",
+      "name": "Levantamento de taxas",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_46086361_263d_4d78_9464_6799a4e0bab2",
+          "internal_id": "384002457",
+          "label": "Statement-46086361-263d-4d78-9464-6799a4e0bab2",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "tipo_de_cobran_a_do_aluguel",
+          "internal_id": "326617028",
+          "label": "Tipo de cobrança do aluguel",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "conven_o_de_condom_nio",
+          "internal_id": "335562770",
+          "label": "Convenção de condomínio: ",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "possui_im_veis_agrupados_no_contrato",
+          "internal_id": "374807371",
+          "label": "POSSUI IMÓVEIS AGRUPADOS NO CONTRATO?",
+          "type": "radio_vertical",
+          "required": false
+        },
+        {
+          "id": "levantamento_de_taxas",
+          "internal_id": "326616957",
+          "label": "GERAR BOLETOS:",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "anexar_documentos_imobiliar",
+          "internal_id": "383295948",
+          "label": "ANEXAR DOCUMENTOS IMOBILIAR ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "conven_o_recebida",
+          "internal_id": "335562795",
+          "label": "Convenção recebida: ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_transfer_ncia_da_energia_para_o_nome_da_trk_1",
+          "internal_id": "337093856",
+          "label": "Protocolo de Transferência/Religação da ENERGIA para o nome da TRK",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_transfer_ncia_da_agua_para_o_nome_da_trk",
+          "internal_id": "337093908",
+          "label": "Protocolo de transferência/Religação da AGUA para o nome da TRK",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "lan_amento_de_contas_de_energia_e_gua_no_contas_a_pagar_1",
+          "internal_id": "337094041",
+          "label": "Lançamento de contas de energia e água no contas a pagar:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "o_lan_amento_dos_reparos_foi_feito_no_boleto_final",
+          "internal_id": "399577296",
+          "label": "O lançamento dos Reparos foi feito no boleto Final? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "calcular_boleto_extra_com_o_valor_dos_reparos",
+          "internal_id": "399577329",
+          "label": "Calcular boleto extra com o valor dos reparos",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311203240",
+      "name": "Gerar boleto",
+      "cards_count": 0,
+      "fields": []
+    },
+    {
+      "id": "311203412",
+      "name": "Conferencia do boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor_respons_vel",
+          "internal_id": "346846954",
+          "label": "Assessor responsável:",
+          "type": "assignee_select",
+          "required": false
+        },
+        {
+          "id": "cobran_a_do_aluguel",
+          "internal_id": "326877174",
+          "label": "Cobrança do aluguel:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "confer_ncia",
+          "internal_id": "326618576",
+          "label": "Conferência final ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_da_inadimpl_ncia",
+          "internal_id": "326618578",
+          "label": "CONFERÊNCIA DA INADIMPLÊNCIA",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_do_lan_amento_de_contas_de_gua_e_luz_no_contas_a_pagar",
+          "internal_id": "337094656",
+          "label": "Conferência do lançamento de contas de água e luz no contas a pagar",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "observa_es",
+          "internal_id": "326622513",
+          "label": "Observações:",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311203788",
+      "name": "Envio do boleto final",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "garantia_cau_o",
+          "internal_id": "326619978",
+          "label": "Garantia Caução?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "autoriza_o_para_uso_da_cau_o",
+          "internal_id": "326620507",
+          "label": "Autorização para uso da caução:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "data_de_vencimento_do_boleto_de_rescis_o",
+          "internal_id": "345837416",
+          "label": "Data de vencimento do boleto de rescisão:",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "envio_do_boleto",
+          "internal_id": "326620997",
+          "label": "Envio do boleto",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "boleto_final_possui_valor_de_reparos",
+          "internal_id": "364049017",
+          "label": "Boleto PROPORCIONAL possui valor de reparos?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "ser_preciso_um_boleto_extra_com_valor_de_reparos",
+          "internal_id": "402386942",
+          "label": "Será preciso um boleto extra com valor de reparos?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "valor_do_boleto_extra_de_reparos",
+          "internal_id": "402386989",
+          "label": "Valor calculado do boleto extra de reparos",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "criar_card_de_reparos_de_rescis_o",
+          "internal_id": "376074668",
+          "label": "Criar card de Reparos de Rescisão",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "caso_o_cliente_n_o_esteja_concordando_com_o_or_amento_de_reparos_ou_com_os_apontamentos_de_vistoria",
+          "internal_id": "364049086",
+          "label": "Caso o cliente não esteja concordando com o orçamento de reparos ou com os apontamentos de vistoria:",
+          "type": "radio_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311203817",
+      "name": "Negociação/Parcelamento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "haver_negocia_o_do_valor",
+          "internal_id": "326854580",
+          "label": "Haverá negociação do valor?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "negocia_o",
+          "internal_id": "326621259",
+          "label": "Negociação:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "valor_total_do_boleto_final",
+          "internal_id": "345837732",
+          "label": "Valor total do boleto final:",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "parcelamento_solicitado",
+          "internal_id": "345837740",
+          "label": "Parcelamento solicitado:",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "enviar_card_para_inadimpl_ncia",
+          "internal_id": "419132348",
+          "label": "Enviar card para inadimplência ",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311203824",
+      "name": "Finalizar procedimento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "data_de_vencimento_do_boleto_final",
+          "internal_id": "367020501",
+          "label": "Data de vencimento do boleto final",
+          "type": "due_date",
+          "required": false
+        },
+        {
+          "id": "acompanhamento_de_pagamento_dos_reparos",
+          "internal_id": "349267339",
+          "label": "Acompanhamento de pagamento dos reparos",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "finalizar_processo",
+          "internal_id": "326621500",
+          "label": "Finalizar processo",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "pend_ncia_de_taxas",
+          "internal_id": "356337614",
+          "label": "Pendência de taxas",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "termo_de_rescis_o_contrato_de_loca_o",
+          "internal_id": "420667356",
+          "label": "Termo de Rescisão contrato de locação ",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "324578005",
+      "name": "Pendência de Troca de Titularidade",
+      "cards_count": 0,
+      "fields": []
+    },
+    {
+      "id": "311183224",
+      "name": "Concluído",
+      "cards_count": 944,
+      "fields": []
+    }
+  ]
+}

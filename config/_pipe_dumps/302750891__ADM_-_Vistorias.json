@@ -1,0 +1,314 @@
+{
+  "id": "302750891",
+  "name": "ADM - Vistorias",
+  "start_form_fields": [
+    {
+      "id": "em_teste_email_remetende",
+      "internal_id": "345273728",
+      "label": "Email para receber a atualização da vistoria finalizada",
+      "type": "email",
+      "required": false
+    },
+    {
+      "id": "endere_o_do_im_vel",
+      "internal_id": "344921897",
+      "label": "Endereço do imóvel:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "rea_til_m",
+      "internal_id": "427700917",
+      "label": "Área útil M²",
+      "type": "number",
+      "required": true
+    },
+    {
+      "id": "im",
+      "internal_id": "358511363",
+      "label": "IM",
+      "type": "number",
+      "required": false
+    },
+    {
+      "id": "contrato",
+      "internal_id": "358511367",
+      "label": "Contrato",
+      "type": "number",
+      "required": false
+    },
+    {
+      "id": "propriet_rio",
+      "internal_id": "344922099",
+      "label": "Proprietário:",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "locat_rio",
+      "internal_id": "344922103",
+      "label": "Locatário",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "data_da_vistoria",
+      "internal_id": "345235977",
+      "label": "Data da Vistoria",
+      "type": "datetime",
+      "required": true
+    },
+    {
+      "id": "data_para_confirmar_o_agendamento",
+      "internal_id": "345236761",
+      "label": "Data para confirmar o Agendamento",
+      "type": "due_date",
+      "required": true
+    },
+    {
+      "id": "tipo_de_vistoria_1",
+      "internal_id": "345235734",
+      "label": "Tipo de vistoria",
+      "type": "label_select",
+      "required": true
+    },
+    {
+      "id": "vistoria_de_entrada",
+      "internal_id": "345236266",
+      "label": "Vistoria de Entrada",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "recomenda_o_recebimento_das_chaves_mesmo_que_haja_pend_ncias_de_vistoria",
+      "internal_id": "363703304",
+      "label": "Recomenda o recebimento das chaves mesmo que haja pendências de vistoria?",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "outras_observa_es",
+      "internal_id": "345235914",
+      "label": "Outras observações",
+      "type": "long_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "317126135",
+      "name": "Caixa de entrada",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "cancelar_vistoria",
+          "internal_id": "422778188",
+          "label": "Cancelar Vistoria ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "checklist_inicial",
+          "internal_id": "345256550",
+          "label": "Checklist Inicial",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "375502854",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "assessor_do_im_vel",
+          "internal_id": "345415754",
+          "label": "Assessor do Imóvel",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "observa_es",
+          "internal_id": "345368721",
+          "label": "Observações",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "fornecedor_vistoria_de_entrada",
+          "internal_id": "345251052",
+          "label": "Fornecedor Vistoria de Entrada",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "vistoria_de_entrada_possui_contesta_o",
+          "internal_id": "345234342",
+          "label": "Vistoria de entrada possui contestação?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "check_list",
+          "internal_id": "345234891",
+          "label": "Check-list",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confirma_o",
+          "internal_id": "345236898",
+          "label": "Confirmação",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "nova_data_de_vistoria_1",
+          "internal_id": "345237051",
+          "label": "Nova data de vistoria",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "nova_data_de_vistoria",
+          "internal_id": "345236939",
+          "label": "Nova data de confirmação",
+          "type": "due_date",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "317126136",
+      "name": "Vistoria Confirmada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "data_da_visita_confirmada",
+          "internal_id": "345255230",
+          "label": "Data da Visita Confirmada",
+          "type": "due_date",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "326610208",
+      "name": "Conferência",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia",
+          "internal_id": "375623255",
+          "label": "Conferência ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "317126148",
+      "name": "Em produção",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "a_vistoria_apresenta_pend_ncias_do_inquilino",
+          "internal_id": "345238623",
+          "label": "A vistoria apresenta pendências do Inquilino",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "pend_ncias_do_inquilino",
+          "internal_id": "345237294",
+          "label": "Pendências do Inquilino",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "benfeitorias",
+          "internal_id": "366130234",
+          "label": "Benfeitorias",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "o_im_vel_apresenta_necessidades_de_atua_o_pelo_propriet_rio",
+          "internal_id": "345238671",
+          "label": "O imóvel apresenta necessidades de atuação pelo proprietário?",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "desconformidades_no_im_vel_responsabilidade_propriet_rio",
+          "internal_id": "345237300",
+          "label": "Desconformidades no Imóvel (Responsabilidade proprietário)",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "observa_es_adicionais",
+          "internal_id": "345256953",
+          "label": "Observações adicionais",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "anexos_adicionais",
+          "internal_id": "345240317",
+          "label": "Anexos adicionais",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "checklist_final",
+          "internal_id": "345273283",
+          "label": "Checklist final",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "chaves_devolvidas",
+          "internal_id": "377108180",
+          "label": "Chaves devolvidas ? ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "taxa_da_cobran_a_do_retorno_da_vistoria",
+          "internal_id": "379031978",
+          "label": "Cobrança do retorno da vistoria",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "data_e_hora_do_in_cio_da_vistoria",
+          "internal_id": "427700463",
+          "label": "vistoria iniciada em ",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "id": "vistoria_finalizada_em",
+          "internal_id": "427700527",
+          "label": "Vistoria finalizada em",
+          "type": "datetime",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "323768966",
+      "name": "Imóveis com pendências",
+      "cards_count": 3,
+      "fields": []
+    },
+    {
+      "id": "317126137",
+      "name": "Concluído",
+      "cards_count": 688,
+      "fields": []
+    }
+  ]
+}

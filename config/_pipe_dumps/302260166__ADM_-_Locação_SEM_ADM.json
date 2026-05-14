@@ -1,0 +1,343 @@
+{
+  "id": "302260166",
+  "name": "ADM - Locação SEM ADM",
+  "start_form_fields": [
+    {
+      "id": "cadastro_n",
+      "internal_id": "336024702",
+      "label": "Cadastro nº",
+      "type": "id",
+      "required": false
+    },
+    {
+      "id": "valor_do_aluguel",
+      "internal_id": "336024714",
+      "label": "Valor do aluguel:",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "tipo_do_im_vel",
+      "internal_id": "350832062",
+      "label": "Tipo do imóvel ",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "im_vel_mobiliado",
+      "internal_id": "350832174",
+      "label": "Imóvel mobiliado ",
+      "type": "radio_vertical",
+      "required": true
+    },
+    {
+      "id": "link_do_drive",
+      "internal_id": "336024716",
+      "label": "Link do Drive:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "corretor_da_loca_o",
+      "internal_id": "336024718",
+      "label": "Corretor da locação:",
+      "type": "connector",
+      "required": true
+    },
+    {
+      "id": "garantia",
+      "internal_id": "336024731",
+      "label": "Garantia",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "obs_quanto_a_negocia_o_comercial",
+      "internal_id": "349286542",
+      "label": "OBS Quanto a negociação comercial:",
+      "type": "long_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "314379395",
+      "name": "Recebendo Cadastro",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "pretendente",
+          "internal_id": "336024713",
+          "label": "Pretendente:",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "propriet_rio",
+          "internal_id": "336024715",
+          "label": "Proprietário",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "respons_vel",
+          "internal_id": "336024717",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "checklist_inicial",
+          "internal_id": "336024719",
+          "label": "Checklist inicial:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "link_da_pasta_do_google_drive",
+          "internal_id": "355195870",
+          "label": "Link da pasta do Google DRIVE ",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "tipo_de_garantia",
+          "internal_id": "350832704",
+          "label": "Tipo de garantia ",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "314379406",
+      "name": "Analise do cadastro",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "situa_o_do_cadastro",
+          "internal_id": "336024699",
+          "label": "Situação do cadastro:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "follow_up_nido",
+          "internal_id": "336024700",
+          "label": "Follow-Up Nido: ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "t_tulo_capitaliza_o",
+          "internal_id": "336024726",
+          "label": "Título capitalização:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "cadastro_aprovado",
+          "internal_id": "336024701",
+          "label": "Cadastro Aprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "cadastro",
+          "internal_id": "350832225",
+          "label": "Cadastro",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "cadastro_reprovado",
+          "internal_id": "336024723",
+          "label": "Cadastro reprovado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "vistoria_agendada_para",
+          "internal_id": "336024729",
+          "label": "Vistoria agendada para:",
+          "type": "datetime",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379396",
+      "name": "Confecção do contrato de locação",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_1",
+          "internal_id": "336024720",
+          "label": "Checklist",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "nido",
+          "internal_id": "336024732",
+          "label": "Nido:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379398",
+      "name": "Desistência da locação",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist",
+          "internal_id": "336024705",
+          "label": "Checklist:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379399",
+      "name": "Conferência do contrato",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "confer_ncia",
+          "internal_id": "336024721",
+          "label": "Conferência:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379400",
+      "name": "Assinatura do contrato",
+      "cards_count": 3,
+      "fields": [
+        {
+          "id": "tipo_de_assinatura_do_contrato",
+          "internal_id": "346626322",
+          "label": "Tipo de assinatura do contrato ",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "envio_do_contrato_para_assinatura",
+          "internal_id": "346625189",
+          "label": "Envio do contrato para assinatura on-line",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "boleto_de_seguro_inc_ndio",
+          "internal_id": "350455275",
+          "label": "Boleto de seguro Incêndio ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "assinatura_contrato_presencial",
+          "internal_id": "346626308",
+          "label": "Assinatura contrato presencial",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "confer_ncia_de_pagamento_garantia",
+          "internal_id": "346628832",
+          "label": "Conferência de pagamento garantia ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "contrato_assinado",
+          "internal_id": "336035205",
+          "label": "Contrato assinado",
+          "type": "radio_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379407",
+      "name": "Assinatura da Vistoria",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "acompanhamento",
+          "internal_id": "336024708",
+          "label": "Acompanhamento",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379404",
+      "name": "Contrato assinado - Finalizar procedimento",
+      "cards_count": 4,
+      "fields": [
+        {
+          "id": "enviar_informa_es_ao_cliente",
+          "internal_id": "353289300",
+          "label": "Enviar informações ao cliente",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "finalizar_procedimento",
+          "internal_id": "336024710",
+          "label": "Finalizar procedimento:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "fechamento_nido",
+          "internal_id": "346627739",
+          "label": "Fechamento NIDO",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "conex_o_de_pipe",
+          "internal_id": "346627964",
+          "label": "Conexão de pipe",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "c_d_de_fechamento_nido",
+          "internal_id": "338008023",
+          "label": "VK Fechamento | Nome proprietário | Endereço do imóvel ",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314383491",
+      "name": "Envio da apólice do seguro",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "pagamento_do_seguro_inc_ndio",
+          "internal_id": "336036038",
+          "label": "Seguro incêndio:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314379397",
+      "name": "Concluído",
+      "cards_count": 37,
+      "fields": []
+    }
+  ]
+}

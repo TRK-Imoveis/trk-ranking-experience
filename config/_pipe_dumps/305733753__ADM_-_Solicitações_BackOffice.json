@@ -1,0 +1,160 @@
+{
+  "id": "305733753",
+  "name": "ADM - Solicitações BackOffice",
+  "start_form_fields": [
+    {
+      "id": "solicitante",
+      "internal_id": "398976053",
+      "label": "Solicitante",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "im",
+      "internal_id": "398959395",
+      "label": "IM",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "contrato",
+      "internal_id": "398959404",
+      "label": "Contrato",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "autorizsa_o",
+      "internal_id": "398959417",
+      "label": "Autorização",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "descri_o",
+      "internal_id": "398959426",
+      "label": "Descrição",
+      "type": "long_text",
+      "required": true
+    },
+    {
+      "id": "respons_vel",
+      "internal_id": "398959922",
+      "label": "Responsável",
+      "type": "assignee_select",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "334231124",
+      "name": "Demandas BackOffice",
+      "cards_count": 0,
+      "fields": []
+    },
+    {
+      "id": "340399420",
+      "name": "🚩 Pendência Assessor",
+      "cards_count": 6,
+      "fields": [
+        {
+          "id": "obs",
+          "internal_id": "419504429",
+          "label": "OBS",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "documenta_o_solicitada",
+          "internal_id": "419504444",
+          "label": "Documentação solicitada",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "335857276",
+      "name": "↪️ Troca de Titularidade",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "protocolo_de_transfer_ncia_religa_o_da_energia_para_o_nome_da_trk",
+          "internal_id": "404299870",
+          "label": "Protocolo de Transferência/Religação da ENERGIA para o nome da TRK",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "protocolo_de_transfer_ncia_religa_o_da_agua_para_o_nome_da_trk",
+          "internal_id": "404299875",
+          "label": "Protocolo de transferência/Religação da AGUA para o nome da TRK",
+          "type": "short_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "338662300",
+      "name": "📴 Desligamento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "protocolo_de_transfer_ncia_religa_o_da_energia_para_o_nome_da_trk_1",
+          "internal_id": "413488491",
+          "label": "Protocolo de Transferência/Religação da ENERGIA para o nome da TRK",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_transfer_ncia_religa_o_da_agua_para_o_nome_da_trk_1",
+          "internal_id": "413488835",
+          "label": "Protocolo de transferência/Religação da AGUA para o nome da TRK",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "334231125",
+      "name": "🛃Fazendo",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "verificar_se_a_troca_foi_conclu_da",
+          "internal_id": "404364287",
+          "label": "Verificar se a troca foi concluída ",
+          "type": "checklist_horizontal",
+          "required": true
+        },
+        {
+          "id": "cod_cliente_trk_1",
+          "internal_id": "404334218",
+          "label": "COD CLIENTE TRK ENERGIA",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "copy_of_cod_cliente_trk_energia",
+          "internal_id": "404363754",
+          "label": "COD CLIENTE TRK ÁGUA",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "lan_amento_de_contas_de_energia_e_gua_no_contas_a_pagar_1",
+          "internal_id": "404334666",
+          "label": "Lançamento de contas de energia e água no contas a pagar:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "334231126",
+      "name": "Concluído",
+      "cards_count": 717,
+      "fields": []
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+[
+  {
+    "id": "301683424",
+    "name": "ADM - Renovações de contratos",
+    "uuid": "2931e406-f3bb-4b6f-aaa0-b7ca12324d83",
+    "public": false
+  },
+  {
+    "id": "301686632",
+    "name": "COM - Comercial de aluguel",
+    "uuid": "e7e7318e-7ef6-4b90-985d-e5afa162a4c8",
+    "public": false
+  },
+  {
+    "id": "301686638",
+    "name": "ADM - Rescisão de LOCAÇÃO",
+    "uuid": "336daf60-ac16-4b94-9d26-22f1d7bfae04",
+    "public": false
+  },
+  {
+    "id": "301687289",
+    "name": "ADM - Reparos",
+    "uuid": "ad7fcb80-9750-4ed9-9383-8cc529177cc4",
+    "public": false
+  },
+  {
+    "id": "301688015",
+    "name": "ADM - Resc. de ADMINISTRAÇÃO",
+    "uuid": "6193d141-eeee-45e5-a6be-f361bc4b476a",
+    "public": false
+  },
+  {
+    "id": "301689857",
+    "name": "ADM - Cont. de ADMINISTRAÇÃO",
+    "uuid": "00a1f723-010c-4fcd-b05b-94b0a5590f24",
+    "public": false
+  },
+  {
+    "id": "302601622",
+    "name": "ADM - Inadimplência",
+    "uuid": "12e0e1a7-2422-4534-8c0b-4fb41f1ca1c2",
+    "public": false
+  },
+  {
+    "id": "303806762",
+    "name": "MKT - DB FORNECEDORES",
+    "uuid": "b02a4784-bc35-4c4c-9efb-62e3da7c47f1",
+    "public": true
+  },
+  {
+    "id": "303597885",
+    "name": "GES - Avaliações de clientes",
+    "uuid": "d5eabd2d-3710-40ae-b553-72eae79b2f81",
+    "public": true
+  },
+  {
+    "id": "301755154",
+    "name": "SEC | Termo de Visita Digital",
+    "uuid": "d56c4304-03bc-4973-9317-b1a7b828c665",
+    "public": true
+  },
+  {
+    "id": "304504267",
+    "name": "Integração de APIs com Pipes",
+    "uuid": "161666d1-0ec0-46a1-b91a-0b5b8a2d51a3",
+    "public": true
+  },
+  {
+    "id": "303803419",
+    "name": "MKT - Criação",
+    "uuid": "723cdeb8-886f-4e0a-99cc-ef8992137ffe",
+    "public": true
+  },
+  {
+    "id": "306524239",
+    "name": "SEC | MANUTENÇÃO DE PLACAS",
+    "uuid": "f7af2cf4-cf08-4e79-8d35-797a8c22ab93",
+    "public": true
+  },
+  {
+    "id": "304504285",
+    "name": "Integração de APIs com BI",
+    "uuid": "86963a6c-1995-4666-8e53-00ef8269faf3",
+    "public": true
+  },
+  {
+    "id": "304965195",
+    "name": "MKT - Projetos",
+    "uuid": "707f07eb-c7d6-41a3-b4b6-5ad1d2d7bf23",
+    "public": true
+  },
+  {
+    "id": "301699165",
+    "name": "ADM - Cálculos de boletos",
+    "uuid": "2d54f8c9-1c5a-4dd3-bc0c-74a335704b0f",
+    "public": true
+  },
+  {
+    "id": "303317097",
+    "name": "FIN | Serviços terceirizados",
+    "uuid": "544bf4ee-ded8-475a-ba2d-b82ec8082943",
+    "public": true
+  },
+  {
+    "id": "306859515",
+    "name": "ADM | Manutenções Preventivas",
+    "uuid": "0689b382-51ec-42d1-8b63-2bce84e25355",
+    "public": true
+  },
+  {
+    "id": "307140675",
+    "name": "CONTAS A PAGAR GARDEN - MARKETING ",
+    "uuid": "54967264-23f0-4a96-bcc3-c9a37b500e4b",
+    "public": true
+  },
+  {
+    "id": "306639467",
+    "name": "Envio de E-mail",
+    "uuid": "7a4c2c3e-5b2b-497b-8c2b-f89c56f1ce7c",
+    "public": true
+  },
+  {
+    "id": "306631317",
+    "name": "PROPOSTA |VILA RAIÔ",
+    "uuid": "be0c57f5-b064-4482-ba0b-8fa8e8c4cbde",
+    "public": true
+  },
+  {
+    "id": "301931988",
+    "name": "*** Comercial - Entrada do imóvel",
+    "uuid": "97e572a5-4e9e-437b-9d4e-7bf7bd3eea4d",
+    "public": true
+  },
+  {
+    "id": "306675323",
+    "name": "FIN|REPAROS",
+    "uuid": "8708fec7-6f3e-40ae-bc2b-f8c732f5502d",
+    "public": true
+  },
+  {
+    "id": "301849258",
+    "name": "COM - Termo de Visita Digital",
+    "uuid": "71779b96-5429-434c-b9aa-f88206135e36",
+    "public": true
+  },
+  {
+    "id": "302985893",
+    "name": "ADM - Demandas jurídicas",
+    "uuid": "dc76d014-554e-45b6-9660-fd5e816c42fc",
+    "public": true
+  },
+  {
+    "id": "301695448",
+    "name": "ADM - Negociações",
+    "uuid": "93bd71f6-5048-4e11-b890-71d7fac1336d",
+    "public": true
+  },
+  {
+    "id": "302274599",
+    "name": "ADM - DARFs / DIRFs",
+    "uuid": "32b591ff-1ca0-4dea-b0d2-d7a478ba0f0b",
+    "public": true
+  },
+  {
+    "id": "302750891",
+    "name": "ADM - Vistorias",
+    "uuid": "10c029a4-a1f8-447d-b1d9-63c1ee593732",
+    "public": true
+  },
+  {
+    "id": "303532973",
+    "name": "SEC | Locação ONZE (em produção)",
+    "uuid": "51f5425f-b150-40cd-9d95-5afc508f2ee9",
+    "public": true
+  },
+  {
+    "id": "307008364",
+    "name": "ADM - Monitoramento de Puxadinhos",
+    "uuid": "7c679c9e-e204-4985-9779-c14db7753bf1",
+    "public": true
+  },
+  {
+    "id": "306757829",
+    "name": "ADM - IMÓVEIS DESOCUPADOS",
+    "uuid": "c12f329d-1ed2-47e6-83f8-5bb444ba66bf",
+    "public": true
+  },
+  {
+    "id": "301708395",
+    "name": "ADM - Locação COM ADM",
+    "uuid": "e1d4862b-024c-4195-bc2b-b97cb34acd68",
+    "public": true
+  },
+  {
+    "id": "304032056",
+    "name": "DP - PLANO DE SAÚDE",
+    "uuid": "91f2e8b0-173c-4467-a6ff-ab324f45ee24",
+    "public": true
+  },
+  {
+    "id": "302420005",
+    "name": "FIN | Aprovação comercial",
+    "uuid": "64afa746-1c35-4dfd-a828-7eeaf9e2d71a",
+    "public": true
+  },
+  {
+    "id": "302260166",
+    "name": "ADM - Locação SEM ADM",
+    "uuid": "861ec734-7d97-409e-9080-28ba36f58efe",
+    "public": true
+  },
+  {
+    "id": "304604605",
+    "name": "FIN | Rotinas Aluguel",
+    "uuid": "f0874b47-cad7-47ce-87c0-b6dd33bf9a09",
+    "public": true
+  },
+  {
+    "id": "303019826",
+    "name": "COM | Jurídico",
+    "uuid": "726f2ba1-8e12-4b33-8678-99233065f07e",
+    "public": true
+  },
+  {
+    "id": "305733753",
+    "name": "ADM - Solicitações BackOffice",
+    "uuid": "5c034297-d623-4547-918c-695878726066",
+    "public": true
+  },
+  {
+    "id": "304785294",
+    "name": "ADM | TRK + IMOBILIAR",
+    "uuid": "0fc63c5b-ce0d-4af9-a302-2407a1f7a770",
+    "public": true
+  },
+  {
+    "id": "304582848",
+    "name": "ADM - Imóveis Administrados Vendidos",
+    "uuid": "b254ae8c-7fdc-492f-9172-1c3b7b27b13f",
+    "public": true
+  },
+  {
+    "id": "306814421",
+    "name": "ADM - Vistoria técnica",
+    "uuid": "9c59b59a-5d4d-41b6-ab7e-76c3cadca7d8",
+    "public": true
+  },
+  {
+    "id": "306997150",
+    "name": "SEC | SOLICITAÇÃO DE AVALIAÇÃO DE IMÓVEL",
+    "uuid": "01ce3cbd-4043-4180-8805-704307942e59",
+    "public": true
+  },
+  {
+    "id": "306997146",
+    "name": "Solicitação de Avaliação de Imóveis",
+    "uuid": "316b8818-6a99-4171-ab28-117f838cf5b4",
+    "public": true
+  },
+  {
+    "id": "304593286",
+    "name": "FIN | BPO FINANCEIRO",
+    "uuid": "c6158abc-2942-487e-835f-c96f5888156a",
+    "public": true
+  },
+  {
+    "id": "307154564",
+    "name": "Leads",
+    "uuid": "1f9e77ba-6b34-4319-b75a-79e816525dc1",
+    "public": true
+  },
+  {
+    "id": "303790027",
+    "name": "MKT - DB OBSERVAÇÕES",
+    "uuid": "2d5a5c03-a26a-4092-9053-747d0246be4c",
+    "public": true
+  },
+  {
+    "id": "306812967",
+    "name": "FIN | Repasses",
+    "uuid": "0b0ec595-a18c-400d-a4e9-c260ffbd5e94",
+    "public": true
+  },
+  {
+    "id": "303773790",
+    "name": "MKT - Operações",
+    "uuid": "365f303a-4793-44f1-a946-a331bd042eac",
+    "public": true
+  },
+  {
+    "id": "303791163",
+    "name": "MKT - Publicação Mídia Kit",
+    "uuid": "1f98dee6-9dd4-4708-b611-5e84f5ea753e",
+    "public": true
+  },
+  {
+    "id": "303806823",
+    "name": "MKT - DB ORÇAMENTOS",
+    "uuid": "9c00e282-8a7a-4a3e-ac03-e934087c6371",
+    "public": true
+  },
+  {
+    "id": "304279611",
+    "name": "MKT - Campanhas",
+    "uuid": "1c7762a0-45bb-4473-a4f0-4423acbd4676",
+    "public": true
+  },
+  {
+    "id": "301743246",
+    "name": "SEC | Contratação de Corretores",
+    "uuid": "6e4ea06a-7c2b-415a-ad10-541560f22539",
+    "public": true
+  },
+  {
+    "id": "301722113",
+    "name": "ADM - Contestação de vistoria",
+    "uuid": "78c9a657-ff17-4d36-bd09-fdf615408b08",
+    "public": true
+  },
+  {
+    "id": "306429524",
+    "name": "FIN | Rotinas Financeiro",
+    "uuid": "fc794355-c321-44fc-8d65-66b2cb922d33",
+    "public": true
+  },
+  {
+    "id": "303072250",
+    "name": "SEC | Pós Venda",
+    "uuid": "7ab4232e-a094-497c-af68-7c07f59e06df",
+    "public": true
+  },
+  {
+    "id": "303673275",
+    "name": "Processo de Compras ",
+    "uuid": "825f4c4e-e210-4eae-b5fb-027bfe8a3f13",
+    "public": true
+  },
+  {
+    "id": "304295666",
+    "name": "Migração de carteira",
+    "uuid": "f7d96fde-7c6d-4b84-ad23-6fb6951abd47",
+    "public": true
+  },
+  {
+    "id": "301928114",
+    "name": "SEC | Certidões de venda",
+    "uuid": "df2b76e2-431d-498b-ad02-19ab7d3a000a",
+    "public": true
+  },
+  {
+    "id": "307087109",
+    "name": "FIN | Gestão de Contratos",
+    "uuid": "c98691cd-8af3-4834-8cf2-da8c855aad01",
+    "public": true
+  },
+  {
+    "id": "305581998",
+    "name": "ADM - IPTU",
+    "uuid": "546d8c39-5dcf-45a7-afdf-3067d8fce431",
+    "public": true
+  },
+  {
+    "id": "307121273",
+    "name": "TRK SERVIÇOS | MANUTENÇÕES PREVENTIVAS",
+    "uuid": "4accce6f-cd3c-434a-8a69-ef0769e8fc2e",
+    "public": true
+  },
+  {
+    "id": "306847286",
+    "name": "ADM | Serviços sob demanda",
+    "uuid": "4f1b8935-0f1d-4b1e-99cc-2a5b0615c1c8",
+    "public": true
+  }
+]

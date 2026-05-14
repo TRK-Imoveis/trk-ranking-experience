@@ -1,0 +1,50 @@
+{
+  "comercial_locacao": {
+    "id": "301686632",
+    "name": "COM - Comercial de aluguel"
+  },
+  "cont_locacao": {
+    "id": "304021288",
+    "name": "ADM - Locação COM ADM - NOVO"
+  },
+  "cont_adm": {
+    "id": "301689857",
+    "name": "ADM - Cont. de ADMINISTRAÇÃO"
+  },
+  "rescisao_adm": {
+    "id": "301688015",
+    "name": "ADM - Resc. de ADMINISTRAÇÃO"
+  },
+  "rescisao_loc": {
+    "id": "301686638",
+    "name": "ADM - Rescisão de LOCAÇÃO"
+  },
+  "reparos": {
+    "id": "301687289",
+    "name": "ADM - Reparos"
+  },
+  "renovacao": {
+    "id": "301683424",
+    "name": "ADM - Renovações de contratos"
+  },
+  "inadimplencia": {
+    "id": "302601622",
+    "name": "ADM - Inadimplência"
+  },
+  "backoffice": {
+    "id": "305733753",
+    "name": "ADM - Solicitações BackOffice"
+  },
+  "dirf_darf": {
+    "id": "302274599",
+    "name": "ADM - DARFs / DIRFs"
+  },
+  "vistorias": {
+    "id": "302750891",
+    "name": "ADM - Vistorias"
+  },
+  "contestacoes": {
+    "id": "301722113",
+    "name": "ADM - Contestação de vistoria"
+  }
+}

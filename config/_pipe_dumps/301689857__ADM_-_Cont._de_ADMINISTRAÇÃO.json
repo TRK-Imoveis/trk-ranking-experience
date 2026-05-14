@@ -1,0 +1,720 @@
+{
+  "id": "301689857",
+  "name": "ADM - Cont. de ADMINISTRAÇÃO",
+  "start_form_fields": [
+    {
+      "id": "c_digo_do_nido",
+      "internal_id": "326622853",
+      "label": "Código do NIDO:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "endere_o_do_im_vel",
+      "internal_id": "422448433",
+      "label": "Endereço do imóvel",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "nome_do_condominio",
+      "internal_id": "326622857",
+      "label": "Nome do condominio",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "vaga_de_garagem",
+      "internal_id": "326622878",
+      "label": "Vaga de garagem:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "nome_do_propriet_rio",
+      "internal_id": "326622883",
+      "label": "Nome do proprietário:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "telefone_do_propriet_rio",
+      "internal_id": "326622922",
+      "label": "Telefone do proprietário:",
+      "type": "phone",
+      "required": true
+    },
+    {
+      "id": "e_mail_do_propriet_rio",
+      "internal_id": "326622924",
+      "label": "E-mail do proprietário:",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "valor_do_aluguel",
+      "internal_id": "326622935",
+      "label": "Valor do aluguel:",
+      "type": "currency",
+      "required": true
+    },
+    {
+      "id": "im_vel_encontra_se_alugado",
+      "internal_id": "326622978",
+      "label": "Imóvel encontra-se alugado?",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "anexe_aqui_os_documentos_que_j_possui_do_im_vel",
+      "internal_id": "326622983",
+      "label": "Anexe aqui os documentos que já possui do imóvel",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "corretor_da_administra_o",
+      "internal_id": "326623014",
+      "label": "Corretor da administração:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "outras_informa_es_importantes",
+      "internal_id": "326622980",
+      "label": "Outras informações importantes:",
+      "type": "long_text",
+      "required": false
+    },
+    {
+      "id": "link_drive",
+      "internal_id": "326682013",
+      "label": "Link Drive:",
+      "type": "short_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "311204507",
+      "name": "Caixa de entrada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "tipo_de_contrato",
+          "internal_id": "326689744",
+          "label": "Tipo de contrato",
+          "type": "label_select",
+          "required": false
+        },
+        {
+          "id": "checar_se_im_vel_j_tem_cadastro_inativo_no_imobiliar",
+          "internal_id": "345415033",
+          "label": "Checar se imóvel já tem cadastro inativo no imobiliar",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "statement_f9899a3e_831d_41e2_acfe_a058403d4d92",
+          "internal_id": "356461470",
+          "label": "Statement-f9899a3e-831d-41e2-acfe-a058403d4d92",
+          "type": "statement",
+          "required": null
+        }
+      ]
+    },
+    {
+      "id": "311204508",
+      "name": "Ônus solicitada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "nus_solicitada_restored",
+          "internal_id": "326623669",
+          "label": "Ônus solicitada",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "loja_na_asa_sul_ou_asa_norte",
+          "internal_id": "371589284",
+          "label": "Loja na Asa Sul ou Asa Norte",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "caso_se_trate_de_loja_na_asa_sul_ou_asa_norte_verificar_se_possui_puxadinho_caso_afirmativo_verificar_se_possui_o_n_do_processo_de_regulariza_o",
+          "internal_id": "371589282",
+          "label": "Caso se trate de loja na Asa Sul ou Asa Norte, verificar se possui puxadinho. Caso afirmativo, verificar se possui o nº do processo de regularização",
+          "type": "long_text",
+          "required": true
+        },
+        {
+          "id": "puxadinho",
+          "internal_id": "424089177",
+          "label": "Puxadinho",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "locador",
+          "internal_id": "326679094",
+          "label": "Locador",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "assessor_1",
+          "internal_id": "352329633",
+          "label": "Assessor",
+          "type": "assignee_select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "338412758",
+      "name": "SCLN 201",
+      "cards_count": 0,
+      "fields": []
+    },
+    {
+      "id": "311220497",
+      "name": "Formulário do locador",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "assessor_de_relacionamentos",
+          "internal_id": "354762533",
+          "label": "Assessor de relacionamento:",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "assessor_lista",
+          "internal_id": "362575592",
+          "label": "Assessor (lista)",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "nome_propriet_rio",
+          "internal_id": "326679350",
+          "label": "Nome Proprietário:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "profiss_o",
+          "internal_id": "326679311",
+          "label": "Profissão",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "endere_o_propriet_rio",
+          "internal_id": "326679353",
+          "label": "Endereço Proprietário",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "telefone",
+          "internal_id": "326679417",
+          "label": "Telefone",
+          "type": "phone",
+          "required": false
+        },
+        {
+          "id": "email_t_tulo",
+          "internal_id": "326680901",
+          "label": "Email",
+          "type": "email",
+          "required": false
+        },
+        {
+          "id": "cart_rio_em_que_tem_firma",
+          "internal_id": "326680359",
+          "label": "Cartório em que tem firma:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "vagas_de_garagem",
+          "internal_id": "326680368",
+          "label": "Vagas de garagem",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "benefici_rio_dos_alugu_is",
+          "internal_id": "326680380",
+          "label": "Beneficiário dos aluguéis:",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "agencia",
+          "internal_id": "326680763",
+          "label": "Agencia",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "conta_e_tipo_da_conta_corrente_ou_poupan_a",
+          "internal_id": "326680551",
+          "label": "Conta e Tipo da Conta (corrente ou poupança)",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "banco",
+          "internal_id": "326680724",
+          "label": "Banco:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "cpf_cnpj",
+          "internal_id": "326680836",
+          "label": "CPF / CNPJ",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "informa_es_gerais",
+          "internal_id": "326680373",
+          "label": "Informações gerais",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "anexar_documento_do_propriet_rio",
+          "internal_id": "326680846",
+          "label": "Anexar documento do Proprietário: ",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "anexar_documento_do_im_vel",
+          "internal_id": "326680851",
+          "label": "Boleto recente do condomínio do imóvel ",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "anexar_documento_do_im_vel_1",
+          "internal_id": "326680854",
+          "label": "Boleto recente do IPTU do imóvel",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "fatura_recente_da_conta_de_gua_e_esgoto",
+          "internal_id": "326680876",
+          "label": "Fatura recente da conta de água e energia",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "planta_do_im_vel",
+          "internal_id": "331300694",
+          "label": "Planta do imóvel:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "quais_os_prestadores_que_o_im_vel_possui",
+          "internal_id": "331300765",
+          "label": "Quais os prestadores de serviço que o imóvel possui:",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "anexe_aqui_os_comprovantes_das_ultimas_manuten_es_feitas_no_im_vel",
+          "internal_id": "331300887",
+          "label": "Anexe aqui os comprovantes das ultimas manutenções feitas no imóvel:",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "informa_es_sobre_as_manuten_es_peri_dicas_do_im_vel",
+          "internal_id": "331300937",
+          "label": "Informações sobre as manutenções periódicas do imóvel:",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311204699",
+      "name": "Confecção do contrato",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "documentos_entregues_pelo_propriet_rio",
+          "internal_id": "326682062",
+          "label": "Documentos entregues pelo proprietário",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "cadastro_imobiliar",
+          "internal_id": "326682063",
+          "label": "Cadastro Imobiliar:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358509276",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311204712",
+      "name": "Conferência do contrato",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor",
+          "internal_id": "352329914",
+          "label": "Assessor:",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "statement_3360699f_dcbf_4eec_8a9e_74986e4a637c",
+          "internal_id": "365254493",
+          "label": "Statement-3360699f-dcbf-4eec-8a9e-74986e4a637c",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "confer_ncia",
+          "internal_id": "326689236",
+          "label": "Conferência:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311204713",
+      "name": "Contrato para assinatura",
+      "cards_count": 4,
+      "fields": [
+        {
+          "id": "statement_9c8c524e_0fa8_4bb5_9f90_c4adfc941990",
+          "internal_id": "365255239",
+          "label": "Statement-9c8c524e-0fa8-4bb5-9f90-c4adfc941990",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "statement_4e89d326_105d_4769_97eb_d708aa4be98b",
+          "internal_id": "365255241",
+          "label": "Statement-4e89d326-105d-4769-97eb-d708aa4be98b",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "statement_89650a0e_b709_49a2_948f_84530e2a0878",
+          "internal_id": "365255329",
+          "label": "Statement-89650a0e-b709-49a2-948f-84530e2a0878",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "statement_bf01b89d_3c7e_4e00_945e_0dfb73a59acc",
+          "internal_id": "365255337",
+          "label": "Statement-bf01b89d-3c7e-4e00-945e-0dfb73a59acc",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "statement_3f82f82a_6632_43e7_922a_114ec371429f",
+          "internal_id": "365255339",
+          "label": "Statement-3f82f82a-6632-43e7-922a-114ec371429f",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "ap_s_assinado_enviar_mensagem_de_boas_vindas",
+          "internal_id": "365255180",
+          "label": "Após assinado, enviar mensagem de boas vindas:",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "solicitar_vistoria_propriet_rio",
+          "internal_id": "421220894",
+          "label": "Solicitar vistoria Proprietário ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "criar_card_de_vistoria_t_cninca",
+          "internal_id": "421964285",
+          "label": "Criar card de vistoria técnica",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "criar_card",
+          "internal_id": "421220950",
+          "label": "Criar card pipe de vistorias",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "card_pipe_de_reparos",
+          "internal_id": "421221093",
+          "label": "Card Pipe de Reparos",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "conex_o_de_pipe",
+          "internal_id": "421221095",
+          "label": "Conexão de pipe",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311204759",
+      "name": "Contrato assinado - Conferir Nido",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "anuncio_comercial",
+          "internal_id": "326693689",
+          "label": "Anuncio comercial:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "c_digo_no_nido",
+          "internal_id": "326693644",
+          "label": "Código no NIDO:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "nido",
+          "internal_id": "327354577",
+          "label": "NIDO:",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311204730",
+      "name": "Contrato assinado - Levantamento de taxas",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im_vel",
+          "internal_id": "368883636",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "levantamento_de_taxas",
+          "internal_id": "326690577",
+          "label": "Levantamento de taxas",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "troca_de_propriet_rio",
+          "internal_id": "327328935",
+          "label": "Troca de proprietário:",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311688405",
+      "name": "Troca de proprietário",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "ltimo_repasse_propriet_rio_atual_feito",
+          "internal_id": "369875013",
+          "label": "Último repasse proprietário atual feito ",
+          "type": "radio_horizontal",
+          "required": false
+        },
+        {
+          "id": "statement_9153263a_e132_41bc_9870_1471a3334448",
+          "internal_id": "369875345",
+          "label": "Statement-9153263a-e132-41bc-9870-1471a3334448",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "data_repasse",
+          "internal_id": "369876056",
+          "label": "Data repasse ",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "checklist_vertical",
+          "internal_id": "369875295",
+          "label": "ANÁLISE",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "contas_a_pagar",
+          "internal_id": "379613547",
+          "label": "CONTAS A PAGAR",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "troca_de_titularidade_do_propriet_rio",
+          "internal_id": "379614182",
+          "label": "TROCA DE TITULARIDADE DO PROPRIETÁRIO",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "enviar_termo_aditivo_para_locat_rio_assinar",
+          "internal_id": "395651490",
+          "label": "Enviar Termo Aditivo para locatário assinar ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311224478",
+      "name": "Alteração Água e Luz (Imóvel desocupado)",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "cadastro_do_im_vel_no_scaza",
+          "internal_id": "363530912",
+          "label": "Cadastro do imóvel no Scaza",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_desligamento_de_luz",
+          "internal_id": "326693525",
+          "label": "Protocolo de transferência de Luz para a TRK:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_desligamento_de_gua",
+          "internal_id": "326693532",
+          "label": "Protocolo transferência de água para a TRK:",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_desligamento_do_g_s",
+          "internal_id": "326693611",
+          "label": "Protocolo de desligamento do Gás:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "confirma_o_do_desligamento",
+          "internal_id": "326693606",
+          "label": "Confirmações",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311204768",
+      "name": "Imóvel entrou alugado",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "contrato_de_loca_o_vigente",
+          "internal_id": "326693732",
+          "label": "Contrato de locação vigente?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "renova_o_do_contrato",
+          "internal_id": "326693752",
+          "label": "Renovação do contrato",
+          "type": "connector",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311204769",
+      "name": "Finalizar procedimento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "statement_4e0765a5_0f2f_46b2_8314_d30bed8cf77f",
+          "internal_id": "365255662",
+          "label": "Statement-4e0765a5-0f2f-46b2-8314-d30bed8cf77f",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "assessor_enviar_mensagem_para_agendar_encontro_de_explica_o_do_demonstrativo_de_repasse",
+          "internal_id": "365255665",
+          "label": "Assessor: enviar mensagem para agendar encontro de explicação do demonstrativo de repasse",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "finalizar_procedimento",
+          "internal_id": "326694027",
+          "label": "BackOffice: Finalizar procedimento",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "solicitar_altera_o_de_titularidade_do_iptu_no_gdf",
+          "internal_id": "371587637",
+          "label": "Caso tenha sido feito a troca de proprietário, solicitar alteração de titularidade do IPTU no GDF",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "protocolo_de_altera_o",
+          "internal_id": "371587658",
+          "label": "Protocolo de alteração",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "ficha_do_iptu_ajustado",
+          "internal_id": "371587647",
+          "label": "Ficha do IPTU ajustado",
+          "type": "attachment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311204509",
+      "name": "Concluído",
+      "cards_count": 351,
+      "fields": []
+    }
+  ]
+}

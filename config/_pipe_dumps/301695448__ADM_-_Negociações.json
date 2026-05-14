@@ -1,0 +1,301 @@
+{
+  "id": "301695448",
+  "name": "ADM - Negociações",
+  "start_form_fields": [
+    {
+      "id": "qual_o_endere_o_do_im_vel_alugado",
+      "internal_id": "326749846",
+      "label": "Qual o endereço do imóvel alugado?",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "qual_o_nome_do_locat_rio_que_consta_no_contrato_de_loca_o",
+      "internal_id": "326749849",
+      "label": "Qual o nome do Locatário que consta no contrato de locação?",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "e_mail",
+      "internal_id": "326749886",
+      "label": "E-mail:",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "qual_a_garantia_do_seu_contrato_de_loca_o",
+      "internal_id": "326749890",
+      "label": "Qual a garantia do seu contrato de locação?",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "qual_o_ramo_de_atividade_da_sua_empresa_ou_ind_stria",
+      "internal_id": "326749915",
+      "label": "Qual o ramo de atividade da sua empresa ou indústria?",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "tipo_da_negocia_o",
+      "internal_id": "326749916",
+      "label": "Tipo da Negociação",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "a_seguir_pedimos_que_descreva_detalhadamente_sua_proposta_de_negocia_o",
+      "internal_id": "326749921",
+      "label": "A seguir, pedimos que descreva detalhadamente sua proposta de negociação.",
+      "type": "long_text",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "311241411",
+      "name": "Caixa de entrada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor_a",
+          "internal_id": "343520261",
+          "label": "Assessor(a)",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "contrato",
+          "internal_id": "358510834",
+          "label": "Contrato",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "contrato_vigente",
+          "internal_id": "360430278",
+          "label": "Contrato vigente?",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "iniciar_processo_de_renova_o",
+          "internal_id": "360430298",
+          "label": "Iniciar processo de renovação:",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "ajustes_do_card",
+          "internal_id": "326751364",
+          "label": "Ajustes do card:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358510581",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "locador",
+          "internal_id": "327033756",
+          "label": "Locador",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "locat_rio",
+          "internal_id": "327033761",
+          "label": "Locatário",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "proposta_do_locat_rio_resumida_esse_texto_ser_enviado_ao_locador",
+          "internal_id": "327034258",
+          "label": "Proposta do locatário resumida (ESSE TEXTO SERÁ ENVIADO AO LOCADOR)",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311323791",
+      "name": "AGUARDANDO LOCADOR",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "ndice_igpm_ultimo_m_s",
+          "internal_id": "327035178",
+          "label": "Índice IGPM Ultimo mês:",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "an_lise_do_propriet_rio",
+          "internal_id": "327036319",
+          "label": "Análise do proprietário:",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "valor_anterior",
+          "internal_id": "327037426",
+          "label": "Valor anterior",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "copy_of_valor_anterior",
+          "internal_id": "327037427",
+          "label": "Valor após reajuste",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "checklist",
+          "internal_id": "327035048",
+          "label": "Checklist",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "contra_proposta_do_locador",
+          "internal_id": "327037833",
+          "label": "Contra proposta do locador:",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311324707",
+      "name": "AGUARDANDO LOCATARIO",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_1",
+          "internal_id": "327038039",
+          "label": "Checklist:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "negocia_o_conclu_da",
+          "internal_id": "327038099",
+          "label": "Negociação concluída",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "valor_negociado",
+          "internal_id": "327388821",
+          "label": "Valor negociado",
+          "type": "currency",
+          "required": false
+        },
+        {
+          "id": "obs_sobre_o_acordo",
+          "internal_id": "327458480",
+          "label": "OBS sobre o acordo",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "negocia_o_finalizada",
+          "internal_id": "327392382",
+          "label": "Negociação finalizada",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311241834",
+      "name": "Gerar boleto de acordo",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "imobiliar2",
+          "internal_id": "329526405",
+          "label": "Imobiliar:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "garantia",
+          "internal_id": "328610136",
+          "label": "Garantia:",
+          "type": "select",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311241841",
+      "name": "Conferência de Boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor",
+          "internal_id": "343139330",
+          "label": "Assessor",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "envio",
+          "internal_id": "328609313",
+          "label": "Conferência",
+          "type": "radio_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "312192522",
+      "name": "Envio do boleto",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "envio_do_boleto_por_e_mail",
+          "internal_id": "329930526",
+          "label": "Envio do boleto por e-mail",
+          "type": "radio_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311484900",
+      "name": "CredPago: Atualização do Valor",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "m_s_de_renova_o_com_a_credpago",
+          "internal_id": "327588328",
+          "label": "Mês de renovação com a CredPago",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "credpago",
+          "internal_id": "327588376",
+          "label": "CredPago",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311241413",
+      "name": "Concluído",
+      "cards_count": 361,
+      "fields": []
+    }
+  ]
+}

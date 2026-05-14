@@ -15,6 +15,7 @@ __pycache__/
 # Dados temporários
 dados/raw/
 dados/cache/
+dados/csv/
 *.log
 
 # Sistema operacional

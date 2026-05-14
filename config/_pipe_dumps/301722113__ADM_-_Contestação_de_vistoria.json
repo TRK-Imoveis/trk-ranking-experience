@@ -1,0 +1,98 @@
+{
+  "id": "301722113",
+  "name": "ADM - Contestação de vistoria",
+  "start_form_fields": [
+    {
+      "id": "locat_rio",
+      "internal_id": "327347851",
+      "label": "Locatário:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "endere_o",
+      "internal_id": "327347673",
+      "label": "Endereço:",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "e_mail",
+      "internal_id": "327347677",
+      "label": "E-mail",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "informe_aqui_sua_contesta_o",
+      "internal_id": "327347896",
+      "label": "Informe aqui sua contestação:",
+      "type": "long_text",
+      "required": true
+    },
+    {
+      "id": "fotos",
+      "internal_id": "327347900",
+      "label": "Fotos",
+      "type": "attachment",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "311416147",
+      "name": "Caixa de entrada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im",
+          "internal_id": "358509669",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "n_do_contrato",
+          "internal_id": "358509720",
+          "label": "Nº do contrato",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "368770879",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "311416148",
+      "name": "Fazendo",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "contesta_o_aprovada",
+          "internal_id": "427329073",
+          "label": "Contestação aprovada ? ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "contesta_es_aprovadas",
+          "internal_id": "427329243",
+          "label": "Contestações aprovadas",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311416149",
+      "name": "Concluído",
+      "cards_count": 378,
+      "fields": []
+    }
+  ]
+}

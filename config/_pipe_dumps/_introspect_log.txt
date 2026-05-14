@@ -1,0 +1,970 @@
+
+======================================================================
+Pipe 301686632  [Comercial]
+======================================================================
+name = 'COM - Comercial de aluguel'
+
+--- start_form_fields (6) ---
+  im_endere_o                               internal_id=326703284                       label='IM - ENDEREÇO'  type=short_text
+  locador                                   internal_id=326703285                       label='Locador'  type=connector
+  valor_de_anuncio                          internal_id=326703307                       label='Valor de anuncio:'  type=currency
+  c_digo_nido_2                             internal_id=326748183                       label='Código NIDO:'  type=short_text
+  observa_o                                 internal_id=326703417                       label='Observação:'  type=long_text
+  pend_ncia_de_vistoria                     internal_id=376622700                       label='Pendências de rescisão de vistoria '  type=long_text
+
+--- phases (20) ---
+  [311183185] Caixa de entrada                                   cards=5  campos=5
+  [311183186] Cadastro / Reativação no NIDO                      cards=0  campos=5
+  [314373417] Aguardando Chaves                                  cards=3  campos=1
+  [317247082] Avaliação Técnica                                  cards=3  campos=8
+  [314221889] Agendamento de Fotos/Placas                        cards=0  campos=13
+  [311227754] Liberação NIDO                                     cards=0  campos=4
+  [314221963] Aguardando fotos                                   cards=0  campos=3
+  [315799672] Solicitação MKT                                    cards=0  campos=1
+  [311227744] Instalação de placa e visita ao imóvel             cards=2  campos=13
+  [311227752] Analise da limpeza (Contato com o proprietário)    cards=0  campos=4
+  [342229371] Agendamento Plantas / Memorial do Imóvel           cards=0  campos=9
+  [342229438] Planta e Memorial Descritivo                       cards=0  campos=3
+  [314373442] Aguardando Marketing                               cards=0  campos=0
+  [314143739] Conferência Final                                  cards=0  campos=6
+  [340770907] 15 dias desocupado                                 cards=5  campos=8
+  [340770980] 30 Dias desocupado                                 cards=17  campos=7
+  [340770982] 60 Dias desocupado                                 cards=5  campos=4
+  [340770983] 90 Dias desocupado                                 cards=0  campos=4
+  [340771023] 180 Dias desocupado                                cards=1  campos=1
+  [311183187] Concluído                                          cards=1377  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    profissional_respons_vel                  label='Profissional responsável'  type=assignee_select
+    im_vel_j_anunciado_no_nido                label='Imóvel está ATIVO no NIDO (Mesmo que para venda)'  type=select
+    c_digo_nido_1                             label='Código NIDO:'  type=short_text
+    im                                        label='IM'  type=number
+    corretor_promotor                         label='Corretor promotor'  type=short_text
+  fase [Cadastro / Reativação no NIDO]:
+    im_vel_j_possui_cadastro_no_nido          label='Imóvel já possui cadastro no NIDO?'  type=select
+    vk_im_vel                                 label='VK Imóvel'  type=short_text
+    reativa_o_nido                            label='Reativação NIDO'  type=checklist_vertical
+    cadastro_nido                             label='Cadastro NIDO'  type=checklist_vertical
+    anexos_nido                               label='Anexos NIDO:'  type=checklist_vertical
+  fase [Aguardando Chaves]:
+    assessor_do_im_vel                        label='Assessor do Imóvel'  type=select
+  fase [Avaliação Técnica]:
+    o_im_vel_est_apto_para_loca_o             label='O Imóvel está apto para locação?'  type=select
+    em_teste_assessor_do_im_vel               label='Assessor do Imóvel'  type=assignee_select
+    em_teste_buscar_vistoria                  label='Buscar vistoria'  type=connector
+    vistoria_t_cnica                          label='Vistoria técnica'  type=connector
+    em_teste_atua_o_no_im_vel                 label='Atuação no imóvel'  type=checklist_vertical
+    em_teste_resposta_do_propriet_rio         label='Resposta do proprietário'  type=long_text
+    em_teste_solicitar_or_amento_de_reparos   label='Solicitar orçamento de reparos'  type=connector
+    em_teste_data_de_vencimento_do_card       label='Data de Vencimento do Card'  type=due_date
+  fase [Agendamento de Fotos/Placas]:
+    fotos_agendadas_para                      label='Fotos agendadas para:'  type=datetime
+    fot_grafo                                 label='Fotógrafo'  type=label_select
+    envio_do_link_para_instala_o_de_placa_1   label='Envio do link para instalação de placa'  type=radio_vertical
+    energia_1                                 label='Energia'  type=checklist_vertical
+    gua                                       label='Água '  type=checklist_vertical
+    situa_o_do_im_vel_1                       label='Situação do imóvel'  type=select
+    confirma_o_com_o_condom_nio_se_im_vel_possui_vaga_de_garagem_1  label='Confirmação com o condomínio se imóvel possui vaga de garagem:'  type=short_text
+    placa_no_im_vel_2                         label='Placa no imóvel:'  type=select
+    placa_na_porta                            label='Placa na Porta'  type=attachment
+    placa_na_janela_1                         label='Placa na Janela'  type=attachment
+    placa_na_fachada_1                        label='Placa na Fachada'  type=attachment
+    fotos_gerais_do_im_vel_1                  label='Fotos Gerais do Imóvel'  type=attachment
+    fotos_da_vaga_de_garagem                  label='Fotos da Vaga de garagem'  type=attachment
+  fase [Liberação NIDO]:
+    valor_avaliado                            label='Valor avaliado:'  type=currency
+    anexos_no_nido                            label='Anexos no Nido'  type=checklist_vertical
+    checagem                                  label='Checagem:'  type=checklist_vertical
+    retornar_o_respons_vel_do_carda_da_fase_anterior  label='Retornar o responsável do card da da fase anterior'  type=assignee_select
+  fase [Aguardando fotos]:
+    link_fotos_drive                          label='Link Fotos DRIVE'  type=short_text
+    tipo_do_im_vel                            label='Negócio'  type=radio_vertical
+    criar_conex_o_pipe_sec_comercial_consultoria  label='CRIAR CONEXÃO PIPE SEC | Comercial Consultoria'  type=connector
+  fase [Solicitação MKT]:
+    conex_o_de_pipe                           label='CRIAR CARD DE ANÚNCIO MKT'  type=connector
+  fase [Instalação de placa e visita ao imóvel]:
+    envio_do_link_para_instala_o_de_placa     label='Envio do link para instalação de placa'  type=radio_vertical
+    data_publica_o_an_ncio                    label='Data publicação Anúncio'  type=datetime
+    alerta_15_dias_desocupado                 label='Alerta 15 dias desocupado'  type=due_date
+    energia                                   label='Energia'  type=checklist_vertical
+    copy_of_energia                           label='Água'  type=checklist_vertical
+    situa_o_do_im_vel                         label='Situação do imóvel'  type=select
+    confirma_o_com_o_condom_nio_se_im_vel_possui_vaga_de_garagem  label='Confirmação com o condomínio se imóvel possui vaga de garagem:'  type=short_text
+    placa_no_im_vel_1                         label='Placa no imóvel:'  type=select
+    placa_no_im_vel                           label='Placa na porta'  type=attachment
+    placa_na_janela                           label='Placa na janela'  type=attachment
+    placa_na_fachada                          label='Placa na fachada'  type=attachment
+    fotos_gerais_do_im_vel                    label='Fotos gerais do imóvel:'  type=attachment
+    foto_da_vaga_de_garagem                   label='Foto da vaga de garagem'  type=attachment
+  fase [Analise da limpeza (Contato com o proprietário)]:
+    an_lise_da_vistoria_de_sa_da              label='Análise da vistoria de saída:'  type=select
+    an_lise_dos_reparos                       label='Análise dos reparos:'  type=assignee_select
+    observa_es                                label='Observações do setor de reparos:'  type=long_text
+    finalizado_limpeza_reparos                label='Finalizado Limpeza/Reparos'  type=checklist_vertical
+  fase [Agendamento Plantas / Memorial do Imóvel]:
+    a_planta_do_im_vel_est_dispon_vel         label='A Planta Baixa do imóvel está disponível?'  type=select
+    planta_do_im_vel                          label='Planta Baixa do Imóvel'  type=attachment
+    copy_of_a_planta_baixa_do_im_vel_est_dispon_vel  label='O Memorial Descritivo do imóvel está disponível?'  type=select
+    copy_of_planta_baixa_do_im_vel            label='Memorial Descritivo do Imóvel'  type=attachment
+    produtos_a_serem_entregues                label='Documento a ser solicitado a produção'  type=checklist_vertical
+    agendar_visita_de_arquiteto_a_para_produ_o_da_planta_baixa  label='Agendar visita de Desenhista CAD para produção da Planta Baixa e/ou Memorial Descritivo'  type=datetime
+    arquiteto_a                               label='Desenhista CAD'  type=connector
+    statement_0ec217a4_090e_4f9c_bc1d_2d462e56a557  label='Statement-0ec217a4-090e-4f9c-bc1d-2d462e56a557'  type=statement
+    statement_8f1ab878_1c69_4709_9725_0c6c500a337a  label='Statement-8f1ab878-1c69-4709-9725-0c6c500a337a'  type=statement
+  fase [Planta e Memorial Descritivo]:
+    link_das_plantas_e_memorial_descritivo    label='Link das Plantas e Memorial Descritivo'  type=short_text
+    checklist_vertical_5                      label='Inserir Documentos nos Sistemas'  type=checklist_vertical
+    statement_ada5e4f1_e498_4852_ab9b_33b8d092367c  label='Statement-ada5e4f1-e498-4852-ab9b-33b8d092367c'  type=statement
+  fase [Conferência Final]:
+    confer_ncia                               label='Conferência:'  type=checklist_vertical
+    link_df_im_veis                           label='Link DF Imóveis:'  type=short_text
+    link_wim_veis                             label='Link Wimóveis:'  type=short_text
+    site_empresa                              label='Site Empresa'  type=short_text
+    cadastro_de_placa_no_nido                 label='Cadastro de placa no NIDO'  type=checklist_vertical
+    c_digo_do_cadastro_da_placa_nido          label='Código do cadastro da placa NIDO'  type=short_text
+  fase [15 dias desocupado]:
+    statement_9a210fc4_2f23_42fa_8c10_75bc19fbeeef  label='Statement-9a210fc4-2f23-42fa-8c10-75bc19fbeeef'  type=statement
+    manual_do_im_vel                          label='Manual do Imóvel'  type=attachment
+    checklist_vertical                        label='Checklist vertical'  type=checklist_vertical
+    total_de_clientes_retornada_na_pesquisa   label='Total de clientes retornados na pesquisa'  type=number
+    total_de_visitadas_agendadas              label='Total de Visitas agendadas'  type=number
+    total_de_propostas_feitas                 label='Total de propostas feitas'  type=number
+    descri_o                                  label='Descrição '  type=long_text
+    gerar_em_pf_e_anexar_no_nido              label='Gerar em PDF e anexar no NIDO'  type=checklist_vertical
+  fase [30 Dias desocupado]:
+    checklist_vertical_1                      label='Checklist vertical'  type=checklist_vertical
+    retorno_an_lise_limpeza_placa             label='Retorno Análise limpeza/Placa'  type=short_text
+    visualiza_o_nos_portais                   label='Visualização nos portais'  type=short_text
+    resumo_dos_feedbacks_das_visitas_realizadas  label='Resumo dos Feedbacks das visitas realizadas'  type=long_text
+    an_lise_pre_o_an_nciado_comparado_aos_im_veis_dispon_veis_no_mercado  label='Análise preço anúnciado comparado aos imóveis disponíveis no mercado.'  type=short_text
+    relat_rio_detalhado                       label='Relatório detalhado'  type=long_text
+    gerar_em_pf_e_anexar_no_nido_1            label='Gerar em PDF e anexar no NIDO'  type=checklist_vertical
+  fase [60 Dias desocupado]:
+    checklist_vertical_2                      label='Checklist vertical'  type=checklist_vertical
+    retorno_an_lise_limpeza_placa_1           label='Retorno Análise limpeza/Placa'  type=short_text
+    plano_de_a_o                              label='Plano de Ação '  type=long_text
+    anexar_pdf_nido                           label='Anexar PDF NIDO'  type=checklist_vertical
+  fase [90 Dias desocupado]:
+    checklist_vertical_3                      label='Checklist vertical'  type=checklist_vertical
+    resultado_do_plano_de_a_o                 label='Resultado do plano de ação'  type=long_text
+    detalhamento_da_busca_ativa_feita         label='Detalhamento da busca ativa feita'  type=long_text
+    anexar_relat_rio_nido                     label='Anexar relatório NIDO'  type=checklist_vertical
+  fase [180 Dias desocupado]:
+    checklist_vertical_4                      label='Checklist vertical'  type=checklist_vertical
+
+  → dump salvo em config\_pipe_dumps\301686632__COM_-_Comercial_de_aluguel.json
+
+======================================================================
+Pipe 301689857  [ContADM]
+======================================================================
+name = 'ADM - Cont. de ADMINISTRAÇÃO'
+
+--- start_form_fields (13) ---
+  c_digo_do_nido                            internal_id=326622853                       label='Código do NIDO:'  type=short_text
+  endere_o_do_im_vel                        internal_id=422448433                       label='Endereço do imóvel'  type=short_text
+  nome_do_condominio                        internal_id=326622857                       label='Nome do condominio'  type=short_text
+  vaga_de_garagem                           internal_id=326622878                       label='Vaga de garagem:'  type=short_text
+  nome_do_propriet_rio                      internal_id=326622883                       label='Nome do proprietário:'  type=short_text
+  telefone_do_propriet_rio                  internal_id=326622922                       label='Telefone do proprietário:'  type=phone
+  e_mail_do_propriet_rio                    internal_id=326622924                       label='E-mail do proprietário:'  type=email
+  valor_do_aluguel                          internal_id=326622935                       label='Valor do aluguel:'  type=currency
+  im_vel_encontra_se_alugado                internal_id=326622978                       label='Imóvel encontra-se alugado?'  type=select
+  anexe_aqui_os_documentos_que_j_possui_do_im_vel  internal_id=326622983                       label='Anexe aqui os documentos que já possui do imóvel'  type=attachment
+  corretor_da_administra_o                  internal_id=326623014                       label='Corretor da administração:'  type=short_text
+  outras_informa_es_importantes             internal_id=326622980                       label='Outras informações importantes:'  type=long_text
+  link_drive                                internal_id=326682013                       label='Link Drive:'  type=short_text
+
+--- phases (14) ---
+  [311204507] Caixa de entrada                                   cards=0  campos=3
+  [311204508] Ônus solicitada                                    cards=0  campos=6
+  [338412758] SCLN 201                                           cards=0  campos=0
+  [311220497] Formulário do locador                              cards=1  campos=23
+  [311204699] Confecção do contrato                              cards=0  campos=3
+  [311204712] Conferência do contrato                            cards=0  campos=3
+  [311204713] Contrato para assinatura                           cards=4  campos=11
+  [311204759] Contrato assinado - Conferir Nido                  cards=0  campos=3
+  [311204730] Contrato assinado - Levantamento de taxas          cards=0  campos=3
+  [311688405] Troca de proprietário                              cards=0  campos=7
+  [311224478] Alteração Água e Luz (Imóvel desocupado)           cards=0  campos=5
+  [311204768] Imóvel entrou alugado                              cards=0  campos=2
+  [311204769] Finalizar procedimento                             cards=0  campos=6
+  [311204509] Concluído                                          cards=351  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    tipo_de_contrato                          label='Tipo de contrato'  type=label_select
+    checar_se_im_vel_j_tem_cadastro_inativo_no_imobiliar  label='Checar se imóvel já tem cadastro inativo no imobiliar'  type=select
+    statement_f9899a3e_831d_41e2_acfe_a058403d4d92  label='Statement-f9899a3e-831d-41e2-acfe-a058403d4d92'  type=statement
+  fase [Ônus solicitada]:
+    nus_solicitada_restored                   label='Ônus solicitada'  type=checklist_vertical
+    loja_na_asa_sul_ou_asa_norte              label='Loja na Asa Sul ou Asa Norte'  type=select
+    caso_se_trate_de_loja_na_asa_sul_ou_asa_norte_verificar_se_possui_puxadinho_caso_afirmativo_verificar_se_possui_o_n_do_processo_de_regulariza_o  label='Caso se trate de loja na Asa Sul ou Asa Norte, verificar se possui puxadinho. Caso afirmativo, verificar se possui o nº do processo de regularização'  type=long_text
+    puxadinho                                 label='Puxadinho'  type=checklist_vertical
+    locador                                   label='Locador'  type=connector
+    assessor_1                                label='Assessor'  type=assignee_select
+  fase [Formulário do locador]:
+    assessor_de_relacionamentos               label='Assessor de relacionamento:'  type=assignee_select
+    assessor_lista                            label='Assessor (lista)'  type=select
+    nome_propriet_rio                         label='Nome Proprietário:'  type=short_text
+    profiss_o                                 label='Profissão'  type=select
+    endere_o_propriet_rio                     label='Endereço Proprietário'  type=short_text
+    telefone                                  label='Telefone'  type=phone
+    email_t_tulo                              label='Email'  type=email
+    cart_rio_em_que_tem_firma                 label='Cartório em que tem firma:'  type=short_text
+    vagas_de_garagem                          label='Vagas de garagem'  type=select
+    benefici_rio_dos_alugu_is                 label='Beneficiário dos aluguéis:'  type=select
+    agencia                                   label='Agencia'  type=number
+    conta_e_tipo_da_conta_corrente_ou_poupan_a  label='Conta e Tipo da Conta (corrente ou poupança)'  type=short_text
+    banco                                     label='Banco:'  type=short_text
+    cpf_cnpj                                  label='CPF / CNPJ'  type=number
+    informa_es_gerais                         label='Informações gerais'  type=checklist_vertical
+    anexar_documento_do_propriet_rio          label='Anexar documento do Proprietário: '  type=attachment
+    anexar_documento_do_im_vel                label='Boleto recente do condomínio do imóvel '  type=attachment
+    anexar_documento_do_im_vel_1              label='Boleto recente do IPTU do imóvel'  type=attachment
+    fatura_recente_da_conta_de_gua_e_esgoto   label='Fatura recente da conta de água e energia'  type=attachment
+    planta_do_im_vel                          label='Planta do imóvel:'  type=attachment
+    quais_os_prestadores_que_o_im_vel_possui  label='Quais os prestadores de serviço que o imóvel possui:'  type=long_text
+    anexe_aqui_os_comprovantes_das_ultimas_manuten_es_feitas_no_im_vel  label='Anexe aqui os comprovantes das ultimas manutenções feitas no imóvel:'  type=attachment
+    informa_es_sobre_as_manuten_es_peri_dicas_do_im_vel  label='Informações sobre as manutenções periódicas do imóvel:'  type=long_text
+  fase [Confecção do contrato]:
+    documentos_entregues_pelo_propriet_rio    label='Documentos entregues pelo proprietário'  type=checklist_vertical
+    cadastro_imobiliar                        label='Cadastro Imobiliar:'  type=checklist_vertical
+    im                                        label='IM'  type=number
+  fase [Conferência do contrato]:
+    assessor                                  label='Assessor:'  type=assignee_select
+    statement_3360699f_dcbf_4eec_8a9e_74986e4a637c  label='Statement-3360699f-dcbf-4eec-8a9e-74986e4a637c'  type=statement
+    confer_ncia                               label='Conferência:'  type=checklist_vertical
+  fase [Contrato para assinatura]:
+    statement_9c8c524e_0fa8_4bb5_9f90_c4adfc941990  label='Statement-9c8c524e-0fa8-4bb5-9f90-c4adfc941990'  type=statement
+    statement_4e89d326_105d_4769_97eb_d708aa4be98b  label='Statement-4e89d326-105d-4769-97eb-d708aa4be98b'  type=statement
+    statement_89650a0e_b709_49a2_948f_84530e2a0878  label='Statement-89650a0e-b709-49a2-948f-84530e2a0878'  type=statement
+    statement_bf01b89d_3c7e_4e00_945e_0dfb73a59acc  label='Statement-bf01b89d-3c7e-4e00-945e-0dfb73a59acc'  type=statement
+    statement_3f82f82a_6632_43e7_922a_114ec371429f  label='Statement-3f82f82a-6632-43e7-922a-114ec371429f'  type=statement
+    ap_s_assinado_enviar_mensagem_de_boas_vindas  label='Após assinado, enviar mensagem de boas vindas:'  type=radio_vertical
+    solicitar_vistoria_propriet_rio           label='Solicitar vistoria Proprietário '  type=checklist_vertical
+    criar_card_de_vistoria_t_cninca           label='Criar card de vistoria técnica'  type=connector
+    criar_card                                label='Criar card pipe de vistorias'  type=connector
+    card_pipe_de_reparos                      label='Card Pipe de Reparos'  type=checklist_vertical
+    conex_o_de_pipe                           label='Conexão de pipe'  type=connector
+  fase [Contrato assinado - Conferir Nido]:
+    anuncio_comercial                         label='Anuncio comercial:'  type=select
+    c_digo_no_nido                            label='Código no NIDO:'  type=short_text
+    nido                                      label='NIDO:'  type=checklist_vertical
+  fase [Contrato assinado - Levantamento de taxas]:
+    im_vel                                    label='Imóvel'  type=connector
+    levantamento_de_taxas                     label='Levantamento de taxas'  type=checklist_vertical
+    troca_de_propriet_rio                     label='Troca de proprietário:'  type=checklist_vertical
+  fase [Troca de proprietário]:
+    ltimo_repasse_propriet_rio_atual_feito    label='Último repasse proprietário atual feito '  type=radio_horizontal
+    statement_9153263a_e132_41bc_9870_1471a3334448  label='Statement-9153263a-e132-41bc-9870-1471a3334448'  type=statement
+    data_repasse                              label='Data repasse '  type=due_date
+    checklist_vertical                        label='ANÁLISE'  type=checklist_vertical
+    contas_a_pagar                            label='CONTAS A PAGAR'  type=checklist_vertical
+    troca_de_titularidade_do_propriet_rio     label='TROCA DE TITULARIDADE DO PROPRIETÁRIO'  type=checklist_vertical
+    enviar_termo_aditivo_para_locat_rio_assinar  label='Enviar Termo Aditivo para locatário assinar '  type=checklist_vertical
+  fase [Alteração Água e Luz (Imóvel desocupado)]:
+    cadastro_do_im_vel_no_scaza               label='Cadastro do imóvel no Scaza'  type=checklist_vertical
+    protocolo_de_desligamento_de_luz          label='Protocolo de transferência de Luz para a TRK:'  type=short_text
+    protocolo_de_desligamento_de_gua          label='Protocolo transferência de água para a TRK:'  type=short_text
+    protocolo_de_desligamento_do_g_s          label='Protocolo de desligamento do Gás:'  type=short_text
+    confirma_o_do_desligamento                label='Confirmações'  type=checklist_vertical
+  fase [Imóvel entrou alugado]:
+    contrato_de_loca_o_vigente                label='Contrato de locação vigente?'  type=select
+    renova_o_do_contrato                      label='Renovação do contrato'  type=connector
+  fase [Finalizar procedimento]:
+    statement_4e0765a5_0f2f_46b2_8314_d30bed8cf77f  label='Statement-4e0765a5-0f2f-46b2-8314-d30bed8cf77f'  type=statement
+    assessor_enviar_mensagem_para_agendar_encontro_de_explica_o_do_demonstrativo_de_repasse  label='Assessor: enviar mensagem para agendar encontro de explicação do demonstrativo de repasse'  type=radio_vertical
+    finalizar_procedimento                    label='BackOffice: Finalizar procedimento'  type=checklist_vertical
+    solicitar_altera_o_de_titularidade_do_iptu_no_gdf  label='Caso tenha sido feito a troca de proprietário, solicitar alteração de titularidade do IPTU no GDF'  type=checklist_vertical
+    protocolo_de_altera_o                     label='Protocolo de alteração'  type=short_text
+    ficha_do_iptu_ajustado                    label='Ficha do IPTU ajustado'  type=attachment
+
+  → dump salvo em config\_pipe_dumps\301689857__ADM_-_Cont._de_ADMINISTRAÇÃO.json
+
+======================================================================
+Pipe 301688015  [RescADM]
+======================================================================
+name = 'ADM - Resc. de ADMINISTRAÇÃO'
+
+--- start_form_fields (4) ---
+  endere_o_do_im_vel                        internal_id=327038805                       label='Endereço do imóvel - (IM - ENDEREÇO)'  type=short_text
+  ims_agrupados                             internal_id=332050581                       label='IMs agrupados:'  type=short_text
+  im_vel_poder_permanecer_anunciado_sem_exclusividade  internal_id=331476136                       label='Imóvel poderá permanecer anunciado sem exclusividade?'  type=select
+  qual_o_motivo_da_rescis_o_do_contrato     internal_id=331475993                       label='Qual o motivo da rescisão do contrato?'  type=long_text
+
+--- phases (10) ---
+  [311192388] Caixa de entrada                                   cards=5  campos=31
+  [325158065] Alinhamento com o proprietário                     cards=1  campos=15
+  [325158622] Encerramento                                       cards=0  campos=11
+  [325234781] Pendência financeira                               cards=1  campos=0
+  [325159187] Repasse final / Distrato (FINANCEIRO)              cards=0  campos=9
+  [339404621] Repasse Negativo                                   cards=1  campos=4
+  [325159353] Formalização                                       cards=0  campos=3
+  [329316371] Finalizar procedimento                             cards=1  campos=2
+  [325232708] Desistência da Rescisão                            cards=0  campos=1
+  [311192390] Concluído                                          cards=273  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    assessor_lista                            label='Assessor (lista)'  type=select
+    assessor                                  label='Assessor'  type=assignee_select
+    im                                        label='IM'  type=number
+    locador_1                                 label='Locador'  type=connector
+    im_vel                                    label='Imóvel'  type=connector
+    status_do_im_vel                          label='Status do imóvel'  type=label_select
+    contrato_se_ocupado                       label='Contrato (Se ocupado)'  type=number
+    valor_do_aluguel                          label='Valor do aluguel'  type=currency
+    contrato_prev_multa                       label='Contrato prevê multa para contrato vigente?'  type=select
+    caso_o_contrato_de_administra_o_possua_multa_calcular_multa  label='Caso o contrato de administração possua multa, calcular multa:'  type=currency
+    liga_o_para_o_propriet_rio_motivo_da_rescis_o  label='Ligação para o proprietário, motivo da rescisão:'  type=short_text
+    tentativa_de_reverter_rescis_o            label='Tentativa de Reverter Rescisão '  type=radio_vertical
+    statement_7389da58_62e3_4bda_a6e4_2dbe4edde8f9  label='Statement-7389da58-62e3-4bda-a6e4-2dbe4edde8f9'  type=statement
+    avisos                                    label='Avisos:'  type=checklist_vertical
+    im_vel_est_anunciado                      label='Imóvel está anunciado?'  type=select
+    o_im_vel_est_com_uma_proposta_de_loca_o_ativa  label='O imóvel está com uma proposta de locação ativa?'  type=select
+    statement_abef053c_0779_4b6d_98eb_989cf4fb7a94  label='Statement-abef053c-0779-4b6d-98eb-989cf4fb7a94'  type=statement
+    pr_xima_data_de_encerramento_de_ciclo     label='Próxima data de encerramento de ciclo'  type=date
+    nada_consta_junto_ao_condom_nio           label='Nada consta junto ao condomínio'  type=checklist_vertical
+    nada_consta_de_puxadinho_lojas_asa_sul_e_asa_norte  label='Nada consta de Puxadinho (Lojas Asa Sul e Asa Norte)'  type=checklist_vertical
+    verificar_d_bito_de_iptu_em_exerc_cios_anteriores  label='Verificar débito de IPTU em exercícios anteriores'  type=long_text
+    d_bitos_de_iptu_ou_nada_consta            label='Débitos de IPTU ou Nada Consta'  type=attachment
+    titularidade_de_energia                   label='Titularidade de Energia'  type=select
+    copy_of_titularidade_de_energia           label='Titularidade de Água'  type=select
+    copy_of_titularidade_de_gua               label='Titularidade de Gás'  type=select
+    o_propriet_rio_possui_outros_im_veis_administrados_1  label='O proprietário possui outros imóveis administrados'  type=select
+    qual_a_garantia_do_contrato_de_loca_o     label='Qual a garantia do contrato de locação?'  type=select
+    defini_o_do_ltimo_boleto_cobrado_pela_trk  label='Definição do último boleto cobrado pela TRK'  type=short_text
+    o_im_vel_ainda_possui_boletos_em_aberto   label='O imóvel ainda possui boletos em aberto?'  type=select
+    nova_administra_o_da_loca_o               label='Nova administração da locação'  type=select
+    statement_46d0c6ca_912c_451f_a667_c1688cbe3426  label='Statement-46d0c6ca-912c-451f-a667-c1688cbe3426'  type=statement
+  fase [Alinhamento com o proprietário]:
+    statement_3486a8be_dbd4_462e_b963_ac0c89da5225  label='Statement-3486a8be-dbd4-462e-b963-ac0c89da5225'  type=statement
+    quem_ser_o_respons_vel_pela_administra_o_do_im_vel  label='Quem será o responsável pela administração do imóvel?'  type=select
+    alinhamento_com_o_propriet_rio_sobre_a_garantia  label='Alinhamento com o proprietário sobre a garantia (caso imóvel esteja ocupado):'  type=long_text
+    alinhamento_com_o_propriet_rio_sobre_o_seguro_inc_ndio  label='Alinhamento com o proprietário sobre o seguro incêndio (caso imóvel esteja ocupado):'  type=long_text
+    alinhamento_com_o_propriet_rio_sobre_o_iptu_em_aberto_de_exerc_cios_anteriores  label='Alinhamento com o proprietário sobre o IPTU em aberto de exercícios anteriores'  type=long_text
+    alinhamento_com_o_propriet_rio_sobre_d_bitos_de_puxadinhos  label='Alinhamento com o proprietário sobre débitos de puxadinhos'  type=long_text
+    statement_31fb82a8_ee35_463f_ba3a_96be261d41ec  label='Statement-31fb82a8-ee35-463f-ba3a-96be261d41ec'  type=statement
+    contato_do_respons_vel_por_receber_os_documentos_e_informa_es_do_im_vel  label='Contato do responsável por receber os documentos e informações do imóvel'  type=long_text
+    em_caso_de_saldo_financeiro_positivo_ou_negativo_prefere_que_o_repasse_do_saldo_seja_feito_com_os_demais_im_veis  label='Em caso de saldo financeiro positivo ou negativo, prefere que o repasse do saldo seja feito com os demais imóveis?'  type=select
+    statement_9d258737_6245_4024_9485_940ca549c11e  label='Statement-9d258737-6245-4024-9485-940ca549c11e'  type=statement
+    defini_o_sobre_a_titularidade_da_energia  label='Definição sobre a titularidade da Energia'  type=select
+    copy_of_defini_o_sobre_a_titularidade_da_energia  label='Definição sobre a titularidade da Água'  type=select
+    copy_of_defini_o_sobre_a_titularidade_da_gua  label='Definição sobre a titularidade do Gás'  type=select
+    alinhamento_sobre_todos_os_encargos_do_im_vel_serem_pagos_pela_trk_at_a_data_de_encerramento_de_ciclo  label='Alinhamento sobre todos os encargos do imóvel serem pagos pela TRK até a data de encerramento de ciclo'  type=long_text
+    enviar_email_formalizando_a_tratativa_junto_ao_propriet_rio  label='Enviar email formalizando a tratativa junto ao proprietário'  type=radio_vertical
+  fase [Encerramento]:
+    checklist_inicial                         label='Checklist inicial'  type=checklist_vertical
+    checklist_im_vel_desocupado               label='Checklist imóvel desocupado'  type=checklist_vertical
+    checklist_im_vel_ocupado                  label='Checklist imóvel ocupado'  type=checklist_vertical
+    statement_7bc8885a_8bfe_4f8e_a3c5_405856449526  label='Statement-7bc8885a-8bfe-4f8e-a3c5-405856449526'  type=statement
+    statement_a9156ffc_0952_44a2_aff9_64a481e1d681  label='Statement-a9156ffc-0952-44a2-aff9-64a481e1d681'  type=statement
+    rescis_o_da_loca_o                        label='Rescisão da Locação'  type=checklist_vertical
+    copy_of_statement_a9156ffc_0952_44a2_aff9_64a481e1d681  label='Copy of Statement-a9156ffc-0952-44a2-aff9-64a481e1d681'  type=statement
+    levantamento_financeiro                   label='Levantamento financeiro'  type=checklist_vertical
+    desligar_ou_transferir_a_titularidade_de_energia  label='Desligar ou transferir a titularidade de Energia'  type=long_text
+    copy_of_desligar_ou_transferir_a_titularidade_de_energia  label='Desligar ou transferir a titularidade de Água'  type=long_text
+    copy_of_desligar_ou_transferir_a_titularidade_de_gua  label='Desligar ou transferir a titularidade de Gás'  type=long_text
+  fase [Repasse final / Distrato (FINANCEIRO)]:
+    data_de_repasse_ao_propriet_rio           label='Data do último repasse ao proprietário'  type=due_date
+    checklist_final_financeiro                label=' Checklist final Financeiro'  type=checklist_vertical
+    saldo_do_propriet_rio                     label='Saldo do proprietário '  type=radio_horizontal
+    propriet_rio_negativo                     label='Proprietário Negativo - Gerar Boleto'  type=checklist_vertical
+    propriet_rio_positivo_gerar_repasse       label='Proprietário Positivo - Gerar Repasse '  type=checklist_vertical
+    inativar_im_vel_no_imobiliar_com_a_data_do_ltimo_repasse  label='Inativar Imóvel no imobiliar com a data do último Repasse '  type=radio_vertical
+    excluir_im_vel_do_scaza                   label='Excluir Imóvel do Scaza '  type=radio_vertical
+    incluir_extrato_de_conta_corrente_zerado  label='Incluir Extrato de Conta Corrente '  type=attachment
+    incluir_boleto_negativo_demonstrativo_de_repasse_negativo  label='Incluir Boleto  OU Demonstrativo de Repasse se positivo'  type=attachment
+  fase [Repasse Negativo]:
+    valor_repasse                             label='Valor do Boleto '  type=short_text
+    data_do_vencimento_do_boleto              label='Data do vencimento do boleto '  type=date
+    acompanhar_quita_o_do_boleto              label='Acompanhar Quitação do boleto '  type=checklist_vertical
+    extrato_cc_propriet_rio_com_a_quita_o_do_d_bito  label='Extrato CC Proprietário com a quitação do Débito '  type=attachment
+  fase [Formalização]:
+    anexar_informa_es_do_locat_rio_cadastro_e_contrato_de_loca_o_1  label='Anexar informações do locatário (Cadastro e Contrato de Locação)'  type=attachment
+    distrato_1                                label='Distrato'  type=checklist_vertical
+    im_vel_inativo_no_sistema                 label='Imóvel Inativo no sistema? '  type=radio_horizontal
+  fase [Finalizar procedimento]:
+    checklist_vertical                        label='Checklist vertical'  type=checklist_vertical
+    termo_de_distrato_assinado                label='Termo de Distrato assinado '  type=radio_horizontal
+  fase [Desistência da Rescisão]:
+    verificar_os_passos_feitos_e_desfazer_se_necess_rio  label='Verificar os passos feitos e desfazer, se necessário'  type=long_text
+
+  → dump salvo em config\_pipe_dumps\301688015__ADM_-_Resc._de_ADMINISTRAÇÃO.json
+
+======================================================================
+Pipe 301686638  [RescLoc]
+======================================================================
+name = 'ADM - Rescisão de LOCAÇÃO'
+
+--- start_form_fields (10) ---
+  o_que_voc_precisa_saber_para_rescindir_seu_contrato_de_loca_o  internal_id=326545820                       label='O que você precisa saber, para rescindir seu contrato de locação? 📝'  type=radio_vertical
+  qual_o_endere_o_do_im_vel_locado          internal_id=326545687                       label='Qual o endereço do imóvel locado?'  type=short_text
+  qual_a_data_prevista_para_entrega_do_im_vel  internal_id=326545688                       label='Qual a data prevista para entrega do imóvel?'  type=date
+  qual_o_motivo_da_rescis_o_do_contrato     internal_id=326545689                       label='Qual o motivo da rescisão do contrato'  type=select
+  descreva_aqui_o_motivo                    internal_id=326545691                       label='Descreva aqui o motivo:'  type=long_text
+  anexar_ltima_conta_de_energia             internal_id=367726273                       label='Anexar última conta de energia'  type=attachment
+  anexar_ltima_conta_de_gua                 internal_id=367726251                       label='Anexar última conta de água'  type=attachment
+  nome                                      internal_id=326545758                       label='Nome'  type=short_text
+  telefone_de_contato                       internal_id=326545759                       label='Telefone de contato'  type=phone
+  e_mail                                    internal_id=326545760                       label='E-mail'  type=email
+
+--- phases (16) ---
+  [311183222] Caixa de entrada                                   cards=7  campos=16
+  [311183223] Agendamento de vistoria                            cards=1  campos=11
+  [311193691] Vistoria recebida                                  cards=1  campos=14
+  [340291000] Levant. Taxas Proporcionais                        cards=0  campos=7
+  [327066476] Contato com Locatário                              cards=2  campos=7
+  [314031858] Orçamento                                          cards=2  campos=3
+  [311427341] Aguardando chaves                                  cards=0  campos=1
+  [311202145] CHAVES RECEBIDAS                                   cards=1  campos=8
+  [311202330] Levantamento de taxas                              cards=0  campos=12
+  [311203240] Gerar boleto                                       cards=0  campos=0
+  [311203412] Conferencia do boleto                              cards=0  campos=6
+  [311203788] Envio do boleto final                              cards=0  campos=9
+  [311203817] Negociação/Parcelamento                            cards=0  campos=5
+  [311203824] Finalizar procedimento                             cards=0  campos=5
+  [324578005] Pendência de Troca de Titularidade                 cards=0  campos=0
+  [311183224] Concluído                                          cards=944  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    statement_57ed6f3a_bea3_48d6_914b_6427e37be3db  label='Statement-57ed6f3a-bea3-48d6-914b-6427e37be3db'  type=statement
+    assessor                                  label='Assessor:'  type=assignee_select
+    assessor_1                                label='Assessor (lista)'  type=select
+    renomear_card                             label='Renomear card'  type=radio_vertical
+    im                                        label='IM'  type=number
+    im_vel                                    label='Imóvel'  type=connector
+    contrato                                  label='Contrato'  type=number
+    locador                                   label='Locador'  type=connector
+    locat_rio                                 label='Locatário'  type=connector
+    recebido_o_comunicado_do_locat_rio_em     label='Recebido o comunicado do locatário em:'  type=date
+    contato_com_o_locat_rio_para_reverter     label='Contato com o locatário para reverter:'  type=long_text
+    procedimentos_iniciais                    label='Procedimentos iniciais'  type=checklist_vertical
+    garantia                                  label='Garantia:'  type=label_select
+    garantia_t_tulo_de_capitaliza_o           label='Garantia Título de Capitalização'  type=checklist_vertical
+    desist_ncia_da_desocupa_o                 label='Desistência da Desocupação'  type=checklist_vertical
+    card_duplicado                            label='Card duplicado?'  type=select
+  fase [Agendamento de vistoria]:
+    agendamento_de_vistoria                   label='Agendamento de vistoria'  type=checklist_vertical
+    nome_e_n_de_titularidade_energia_e_gua    label='Nome e Nº de Titularidade (Energia e Água)'  type=radio_vertical
+    nome_e_n_de_titularidade_gua_e_energia    label='Nome e Nº de Titularidade (Água e Energia)'  type=long_text
+    vistoriador                               label='Vistoriador'  type=radio_horizontal
+    agendar_vistorias_no_painel_da_rede_vistorias  label='Agendar Vistorias no Painel da Rede Vistorias '  type=checklist_vertical
+    vistoria_agendada_para                    label='Vistoria agendada para:'  type=datetime
+    em_teste_agendar_vistoria                 label='Agendar vistoria'  type=checklist_vertical
+    h_reparos_sendo_executado                 label='Há reparos sendo executado:'  type=select
+    sobre_reparos                             label='Sobre reparos:'  type=checklist_vertical
+    solicitar_vistoria_de_sa_da_rescis_o      label='Solicitar Vistoria de Saída | Rescisão'  type=connector
+    em_caso_de_t_tulo_de_captaliza_o_enviar_e_mail_seguradora_para_entender_qual_a_situa_o_do_t_tulo  label='Em caso de Título de Captalização , enviar e-mail à seguradora para entender qual é a situação do Título. '  type=checklist_vertical
+  fase [Vistoria recebida]:
+    teste_vistoria_conex_o                    label='Vistoria | Conexão'  type=connector
+    vistoria_recebida_em                      label='Vistoria recebida em:'  type=date
+    vistoria_com_pend_ncia                    label='Laudo de vistoria com pendência? '  type=select
+    statement_ef96c52d_5901_4478_974a_d0a1ad1c432a  label='Statement-ef96c52d-5901-4478-974a-d0a1ad1c432a'  type=statement
+    ap_s_an_lise_h_pontos_de_ajustes_a_serem_executados_no_im_vel  label='Após análise há pontos de ajustes a serem executados no imóvel?'  type=select
+    informar_os_itens_analisados_para_serem_reparados  label='Informar os itens analisados para serem reparados:'  type=long_text
+    envio_do_laudo_de_vistoria                label='Envio do laudo de vistoria'  type=select
+    chaves_recebidas_na_vistoria              label='Chaves Recebidas na Vistoria ? '  type=radio_horizontal
+    atualizar_pipe_com_comercial_de_aluguel_1  label='Atualizar Pipe: COM - Comercial de aluguel'  type=checklist_vertical
+    data_recebimento_das_chaves               label='Data recebimento das Chaves '  type=datetime
+    comunicado_ao_propriet_rio_1              label='Comunicado ao proprietário:'  type=checklist_vertical
+    pendencias_da_vistoria_1                  label='Pendencias da vistoria'  type=label_select
+    formaliza_o_da_entrega_de_chaves_1        label='Formalização da entrega de chaves'  type=checklist_vertical
+    excluir_card_do_processo_de_renova_o_1    label='Excluir card do processo de renovação'  type=checklist_vertical
+  fase [Levant. Taxas Proporcionais]:
+    tipo_de_cobran_a_do_aluguel_1             label='Tipo de cobrança do aluguel'  type=checklist_vertical
+    possui_im_veis_agrupados_no_contrato_1    label='POSSUI IMÓVEIS AGRUPADOS NO CONTRATO? '  type=radio_horizontal
+    gerar_boletos                             label='GERAR BOLETOS:'  type=checklist_vertical
+    anexar_documentos_imobiliar_1             label='ANEXAR DOCUMENTOS IMOBILIAR '  type=checklist_vertical
+    o_im_vel_uma_unidade_do_pr_dio_da_crs_510  label='O imóvel é uma unidade do prédio da CRS 510 ? '  type=radio_horizontal
+    desvincular_interfone_e_c_meras_do_locat_rio  label='Desvincular Interfone e câmeras do locatário '  type=checklist_vertical
+    comunica_o_loft                           label='Comunicação à Loft '  type=checklist_vertical
+  fase [Contato com Locatário ]:
+    confer_ncia_do_boleto_com_os_valores_proporcionais  label='Conferência do boleto com os valores proporcionais '  type=checklist_vertical
+    liga_o_para_o_a_locat_rio_a_1             label='  Ligação para o(a) locatário(a)'  type=checklist_vertical
+    vistoria_de_confer_ncia_agendada_1        label='Vistoria de conferência agendada'  type=datetime
+    solicitar_vistoria_de_confer_ncia_rescis_o_1  label='Solicitar vistoria de Conferência | Rescisão'  type=connector
+    avisar_ao_locat_rio_sobre_a_conta_de_consumo_final  label='Avisar ao locatário sobre a conta de consumo final e  solicitar nada consta das contas de consumo'  type=radio_vertical
+    nada_consta_neoenergia                    label='Nada consta NEOENERGIA'  type=attachment
+    nada_consta_caesb                         label='Nada consta CAESB'  type=attachment
+  fase [Orçamento]:
+    statement_56db2093_abc4_4cc1_bbaa_dd9e5aaebd0d  label='Statement-56db2093-abc4-4cc1-bbaa-dd9e5aaebd0d'  type=statement
+    or_amento                                 label='Orçamento'  type=checklist_vertical
+    anexar_or_amento_recebido                 label='Anexar orçamento recebido:'  type=attachment
+  fase [Aguardando chaves]:
+    ao_receber_as_chaves                      label='Ao receber as chaves:'  type=checklist_vertical
+  fase [CHAVES RECEBIDAS]:
+    atualizar_pipe_com_comercial_de_aluguel   label='Atualizar Pipe: COM - Comercial de aluguel'  type=checklist_vertical
+    negociando_pend_ncias                     label='Negociando pendências?'  type=select
+    sobre_a_negocia_o_das_pend_ncias          label='Sobre a negociação das pendências:'  type=long_text
+    data_do_recebimento_das_chaves            label='Data do recebimento das chaves:'  type=due_date
+    comunicado_ao_propriet_rio                label='Comunicado ao proprietário:'  type=checklist_vertical
+    pendencias_da_vistoria                    label='Pendencias da vistoria'  type=label_select
+    formaliza_o_da_entrega_de_chaves          label='Formalização da entrega de chaves'  type=radio_vertical
+    excluir_card_do_processo_de_renova_o      label='Excluir card do processo de renovação'  type=checklist_vertical
+  fase [Levantamento de taxas]:
+    statement_46086361_263d_4d78_9464_6799a4e0bab2  label='Statement-46086361-263d-4d78-9464-6799a4e0bab2'  type=statement
+    tipo_de_cobran_a_do_aluguel               label='Tipo de cobrança do aluguel'  type=select
+    conven_o_de_condom_nio                    label='Convenção de condomínio: '  type=select
+    possui_im_veis_agrupados_no_contrato      label='POSSUI IMÓVEIS AGRUPADOS NO CONTRATO?'  type=radio_vertical
+    levantamento_de_taxas                     label='GERAR BOLETOS:'  type=checklist_vertical
+    anexar_documentos_imobiliar               label='ANEXAR DOCUMENTOS IMOBILIAR '  type=checklist_vertical
+    conven_o_recebida                         label='Convenção recebida: '  type=radio_vertical
+    protocolo_de_transfer_ncia_da_energia_para_o_nome_da_trk_1  label='Protocolo de Transferência/Religação da ENERGIA para o nome da TRK'  type=short_text
+    protocolo_de_transfer_ncia_da_agua_para_o_nome_da_trk  label='Protocolo de transferência/Religação da AGUA para o nome da TRK'  type=short_text
+    lan_amento_de_contas_de_energia_e_gua_no_contas_a_pagar_1  label='Lançamento de contas de energia e água no contas a pagar:'  type=checklist_vertical
+    o_lan_amento_dos_reparos_foi_feito_no_boleto_final  label='O lançamento dos Reparos foi feito no boleto Final? '  type=radio_horizontal
+    calcular_boleto_extra_com_o_valor_dos_reparos  label='Calcular boleto extra com o valor dos reparos'  type=checklist_vertical
+  fase [Conferencia do boleto]:
+    assessor_respons_vel                      label='Assessor responsável:'  type=assignee_select
+    cobran_a_do_aluguel                       label='Cobrança do aluguel:'  type=select
+    confer_ncia                               label='Conferência final '  type=checklist_vertical
+    confer_ncia_da_inadimpl_ncia              label='CONFERÊNCIA DA INADIMPLÊNCIA'  type=select
+    confer_ncia_do_lan_amento_de_contas_de_gua_e_luz_no_contas_a_pagar  label='Conferência do lançamento de contas de água e luz no contas a pagar'  type=radio_vertical
+    observa_es                                label='Observações:'  type=long_text
+  fase [Envio do boleto final]:
+    garantia_cau_o                            label='Garantia Caução?'  type=select
+    autoriza_o_para_uso_da_cau_o              label='Autorização para uso da caução:'  type=checklist_vertical
+    data_de_vencimento_do_boleto_de_rescis_o  label='Data de vencimento do boleto de rescisão:'  type=date
+    envio_do_boleto                           label='Envio do boleto'  type=checklist_vertical
+    boleto_final_possui_valor_de_reparos      label='Boleto PROPORCIONAL possui valor de reparos?'  type=select
+    ser_preciso_um_boleto_extra_com_valor_de_reparos  label='Será preciso um boleto extra com valor de reparos?'  type=select
+    valor_do_boleto_extra_de_reparos          label='Valor calculado do boleto extra de reparos'  type=number
+    criar_card_de_reparos_de_rescis_o         label='Criar card de Reparos de Rescisão'  type=connector
+    caso_o_cliente_n_o_esteja_concordando_com_o_or_amento_de_reparos_ou_com_os_apontamentos_de_vistoria  label='Caso o cliente não esteja concordando com o orçamento de reparos ou com os apontamentos de vistoria:'  type=radio_vertical
+  fase [Negociação/Parcelamento]:
+    haver_negocia_o_do_valor                  label='Haverá negociação do valor?'  type=select
+    negocia_o                                 label='Negociação:'  type=checklist_vertical
+    valor_total_do_boleto_final               label='Valor total do boleto final:'  type=currency
+    parcelamento_solicitado                   label='Parcelamento solicitado:'  type=long_text
+    enviar_card_para_inadimpl_ncia            label='Enviar card para inadimplência '  type=connector
+  fase [Finalizar procedimento]:
+    data_de_vencimento_do_boleto_final        label='Data de vencimento do boleto final'  type=due_date
+    acompanhamento_de_pagamento_dos_reparos   label='Acompanhamento de pagamento dos reparos'  type=connector
+    finalizar_processo                        label='Finalizar processo'  type=checklist_vertical
+    pend_ncia_de_taxas                        label='Pendência de taxas'  type=checklist_vertical
+    termo_de_rescis_o_contrato_de_loca_o      label='Termo de Rescisão contrato de locação '  type=checklist_vertical
+
+  → dump salvo em config\_pipe_dumps\301686638__ADM_-_Rescisão_de_LOCAÇÃO.json
+
+======================================================================
+Pipe 301687289  [Reparos]
+======================================================================
+name = 'ADM - Reparos'
+
+--- start_form_fields (15) ---
+  statement_2d08af47_ca7d_4731_a0d2_3b95156dc05e  internal_id=377098483                       label='Statement-2d08af47-ca7d-4731-a0d2-3b95156dc05e'  type=statement
+  desconsiderar_o_campo_abaixo              internal_id=354586867                       label='Texto interno de apoio'  type=long_text
+  nome_para_contato                         internal_id=326700892                       label='Nome para contato:'  type=short_text
+  telefone                                  internal_id=326700850                       label='Telefone:'  type=phone
+  e_mail                                    internal_id=326700849                       label='E-mail:'  type=email
+  endere_o                                  internal_id=326718472                       label='Endereço:'  type=short_text
+  o_que_precisamos_solucionar               internal_id=326718571                       label='O que precisamos solucionar?'  type=radio_vertical
+  descreva                                  internal_id=326718589                       label='Descreva:'  type=short_text
+  informa_es_complementares                 internal_id=326718590                       label='Informações complementares:'  type=long_text
+  disponibilidade_para_visita               internal_id=340708060                       label='Disponibilidade para visita'  type=short_text
+  anexe_aqui_fotos_e_v_deos                 internal_id=326718698                       label='Anexe aqui fotos e vídeos:'  type=attachment
+  projeto                                   internal_id=337720330                       label='Projeto'  type=attachment
+  possui_or_amento                          internal_id=326701270                       label='Possui orçamento?'  type=radio_vertical
+  or_amento                                 internal_id=326704194                       label='Orçamento:'  type=attachment
+  statement_f388cda8_f67a_436b_95c3_bbfb30b337bb  internal_id=351876660                       label='Statement-f388cda8-f67a-436b-95c3-bbfb30b337bb'  type=statement
+
+--- phases (10) ---
+  [311187696] Caixa de entrada                                   cards=1  campos=21
+  [319367715] Benfeitorias                                       cards=1  campos=9
+  [311226341] Orçamento | Prestador                              cards=10  campos=13
+  [311226342] Autorização | Proprietário                         cards=4  campos=10
+  [311226372] Agendamento | Prestador                            cards=4  campos=4
+  [311187589] Execução | Prestador                               cards=16  campos=9
+  [319423558] Conferência                                        cards=1  campos=10
+  [311226343] Pagamento | BackOffice                             cards=0  campos=4
+  [320123699] Pós-venda                                          cards=13  campos=3
+  [311187590] CONCLUÍDO                                          cards=2548  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    cancelar_card                             label='Cancelar card?'  type=select
+    id                                        label='ID'  type=id
+    im                                        label='IM'  type=number
+    im_vel                                    label='Imóvel'  type=connector
+    contrato                                  label='Contrato'  type=number
+    assessor_somente_com_fins_de_automa_o     label='Assessor (somente com fins de automação)'  type=short_text
+    seleciona_o_assessor                      label='Selecionar o assessor'  type=select
+    identificar_o_assessor_do_im_vel          label='Responsável'  type=assignee_select
+    checklist_vertical_t_tulo                 label='Checklist vertical título'  type=checklist_vertical
+    locador                                   label='SELECIONE O LOCADOR'  type=connector
+    locat_rio                                 label='SELECIONE O LOCATÁRIO'  type=connector
+    solicita_es_m_ltiplas                     label='Solicitações múltiplas?'  type=select
+    quando_se_tratar_de_reparos_da_rescis_o_de_loca_o_verificar_se_o_valor_do_or_amento_foi_pago_integralmente  label='Quando se tratar de Reparos da Rescisão de Locação, verificar se o valor do orçamento foi pago integralmente.'  type=select
+    motivo_do_cancelamento                    label='Motivo do cancelamento'  type=long_text
+    reclassifica_o_do_tipo_de_chamado         label='Reclassificação do tipo de chamado'  type=checklist_vertical
+    imobiliar_cheque_nas_tarefas_anexos_e_contas_a_pagar_se_houve_um_reparo_semelhante_nos_ltimos_meses  label='Imobiliar: - Cheque nas tarefas, anexos e contas a pagar se houve um reparo semelhante nos últimos meses'  type=select
+    agendar_retorno_garantia_1                label='Agendar retorno - Garantia:'  type=checklist_vertical
+    statement_371d4b71_a09e_4f1c_a3ea_2f131827f90d  label='Statement-371d4b71-a09e-4f1c-a3ea-2f131827f90d'  type=statement
+    tipo_de_manuten_o                         label='Categoria'  type=label_select
+    propriet_rio_tem_prestador_pr_prio        label='Proprietário tem prestador próprio:'  type=select
+    prestador_restored                        label='Prestador (Restored)'  type=connector
+  fase [Benfeitorias]:
+    statement_c4f3c91c_3ce3_46cd_8db4_67e1cbe157c5  label='Statement-c4f3c91c-3ce3-46cd-8db4-67e1cbe157c5'  type=statement
+    or_amento_2                               label='Orçamento e projeto'  type=attachment
+    proposta_de_divis_o_de_custos             label='Proposta de divisão de custos'  type=long_text
+    autoriza_o                                label='Autorização'  type=checklist_vertical
+    benfeitoria_aprovada                      label='Benfeitoria aprovada com divisão de custos?'  type=select
+    autoriza_o_do_locador                     label='Autorização/Negativa do locador'  type=attachment
+    data_prevista_para_finalizar              label='Data prevista para finalizar'  type=due_date
+    relat_rio_de_benfeitorias_executadas      label='Relatório de benfeitorias executadas'  type=attachment
+    checklist_final                           label='Checklist final'  type=checklist_vertical
+  fase [Orçamento | Prestador]:
+    respons_vel_pelo_repaso                   label='Responsável pelo reparo:'  type=select
+    o_locat_rio_deseja_fazer_o_reparo_conosco  label='O locatário deseja fazer o reparo conosco'  type=radio_vertical
+    observa_es_1                              label='Observações'  type=long_text
+    relat_rio                                 label='Relatório '  type=attachment
+    c_d_chamado_com_prestador                 label='Cód. chamado com prestador:'  type=short_text
+    prazo_para_visita                         label='Prazo para visita:'  type=datetime
+    prazo_para_entrega_do_or_amento           label='Prazo para entrega do orçamento:'  type=datetime
+    or_amento_1                               label='Orçamento:'  type=attachment
+    o_or_amento_deve_conter                   label='Orçamento recebido contém:'  type=checklist_vertical
+    foma_de_pagamento                         label='Forma de pagamento'  type=select
+    statement_900b6d59_4e9f_49fc_8431_e6288c0b806b  label='Statement-900b6d59-4e9f-49fc-8431-e6288c0b806b'  type=statement
+    an_lise_da_ia_do_card                     label='Análise da IA do card'  type=long_text
+    retorno_an_lise_ia                        label='Retorno Análise IA'  type=label_select
+  fase [Autorização | Proprietário]:
+    valor_do_or_amento_acrescido_10           label='Valor do orçamento acrescido 10%:'  type=currency
+    o_valor_do_or_amento_maior_do_que_o_aluguel_mensal  label='O valor do orçamento com 10% é maior do que o aluguel mensal?'  type=select
+    descri_o_para_o_propriet_rio_da_causa_e_or_amento_recebido  label='Descrição para o proprietário da causa e orçamento recebido:'  type=long_text
+    prazo_para_execu_o                        label='Prazo para execução:'  type=short_text
+    an_lise_de_restri_o_de_contato1           label='Análise de restrição de contato'  type=select
+    analise_de_restri_o_de_contato            label='Autorização do locador:'  type=checklist_vertical
+    servi_o_autorizado_1                      label='Serviço autorizado?'  type=select
+    servi_o_autorizado_pelo_whatsapp          label='Serviço autorizado pelo Whatsapp:'  type=attachment
+    motivo_da_n_o_autoriza_o                  label='MOTIVO DA NÃO AUTORIZAÇÃO: (será enviado ao locatário)'  type=short_text
+    necess_rio_visita_de_confer_ncia_do_servi_o_ou_aditivo_na_vistoria  label='Necessário visita de conferência do serviço ou aditivo na vistoria?'  type=select
+  fase [Agendamento | Prestador]:
+    servi_o_agendado_para                     label='Serviço agendado para:'  type=datetime
+    agendamento                               label='Envio da confirmação'  type=checklist_vertical
+    data_da_conclus_o_do_servi_o              label='Data prevista da conclusão do serviço:'  type=due_date
+    data_de_agendamento_de_confer_ncia        label='Data de agendamento de conferência'  type=date
+  fase [Execução | Prestador]:
+    confirma_o_tratativas                     label='Confirmação (TRK)'  type=checklist_vertical
+    pagamento_ou_reembolso_ser_feito_pela_trk  label='Pagamento ou reembolso será feito pela TRK?'  type=select
+    fotos_antes                               label='FOTOS ANTES'  type=attachment
+    fotos_durante                             label='FOTOS DURANTE'  type=attachment
+    fotos_depois                              label='FOTOS DEPOIS'  type=attachment
+    avalia_o_vistoriador                      label='Avaliação vistoriador'  type=long_text
+    fotos_de_confer_ncia                      label='Fotos de conferência'  type=attachment
+    servi_o_finalizado_em                     label='SERVIÇO FINALIZADO EM'  type=datetime
+    vistoria_de_confer_ncia                   label='Vistoria de Conferência '  type=connector
+  fase [Conferência]:
+    im_vel_desocupado_1                       label='Imóvel desocupado: '  type=checklist_vertical
+    entrar_em_contato_com_solicitante_da_manuten_o_para_saber_se_o_servi_o_foi_executado  label='Entrar em contato com solicitante da manutenção para saber se o serviço foi executado '  type=checklist_vertical
+    an_lise_do_servi_o_1                      label='Análise do serviço:'  type=select
+    confirma_es                               label='Confirmações:'  type=checklist_vertical
+    considera_es_finais_1                     label='Considerações finais'  type=long_text
+    resumo_da_manuten_o_1                     label='Resumo da Manutenção'  type=attachment
+    valor_a_ser_pago_ao_prestador_10          label='Valor a ser pago ao prestador + 10%'  type=currency
+    prestador_que_executou_o_servi_o          label='Prestador que executou o serviço '  type=connector
+    dados_para_emiss_o_da_nota_trk            label='DADOS PARA EMISSÃO DA NOTA (TRK)'  type=short_text
+    nota_fiscal_boleto_ou_recibo              label='NOTA FISCAL / BOLETO ou RECIBO'  type=attachment
+  fase [Pagamento | BackOffice]:
+    statement_83c740ad_40ba_4a27_aebd_c3acf0670e24  label='Statement-83c740ad-40ba-4a27-aebd-c3acf0670e24'  type=statement
+    an_lise_da_nf_recebida                    label='Análise da NF Recebida'  type=select
+    lan_amento                                label='Pagamento:'  type=checklist_vertical
+    imobiliar_1                               label='Imobiliar:'  type=checklist_vertical
+  fase [Pós-venda]:
+    statement_f152a10b_ce37_4ba5_a765_b6158185fe2d  label='Statement-f152a10b-ce37-4ba5-a765-b6158185fe2d'  type=statement
+    respons_vel                               label='Responsável'  type=assignee_select
+    data_de_vencimento                        label='Data de vencimento'  type=due_date
+
+  → dump salvo em config\_pipe_dumps\301687289__ADM_-_Reparos.json
+
+======================================================================
+Pipe 301683424  [Renovacao]
+======================================================================
+name = 'ADM - Renovações de contratos'
+
+--- start_form_fields (13) ---
+  im                                        internal_id=348535997                       label='IM'  type=short_text
+  endere_o                                  internal_id=326526669                       label='Endereço'  type=short_text
+  ims_agrupados                             internal_id=331910521                       label='IMs agrupados'  type=short_text
+  locador                                   internal_id=326549956                       label='Locador'  type=connector
+  locat_rio                                 internal_id=326549958                       label='Locatário'  type=connector
+  valor_do_ultimo_aluguel                   internal_id=347071174                       label='Valor do ultimo aluguel:'  type=currency
+  valor_para_renova_o                       internal_id=326495481                       label='Valor para renovação'  type=currency
+  data_de_vencimento                        internal_id=346910945                       label='Data de vencimento'  type=due_date
+  per_odo_nova_renova_o                     internal_id=377826066                       label='Período nova renovação '  type=number
+  garantia                                  internal_id=346914536                       label='Garantia'  type=select
+  condi_es_comerciais_especiais             internal_id=377826142                       label='Condições comerciais especiais '  type=long_text
+  drive                                     internal_id=326520075                       label='Drive'  type=long_text
+  obs                                       internal_id=328240796                       label='OBS:'  type=long_text
+
+--- phases (14) ---
+  [311162923] Caixa de entrada                                   cards=2  campos=15
+  [324837150] Avaliação de mercado                               cards=9  campos=16
+  [314738846] Contato com proprietário                           cards=5  campos=4
+  [311168973] Contato com Locatário                              cards=5  campos=4
+  [311175463] Troca de garantia                                  cards=5  campos=56
+  [327090165] Análise Troca de Garantia                          cards=0  campos=3
+  [311175893] Confecção do contrato                              cards=0  campos=3
+  [320525551] Conferência do contrato                            cards=1  campos=2
+  [311176131] Cobrar assinatura                                  cards=2  campos=4
+  [311162934] Contrato assinado / Finalizar                      cards=0  campos=10
+  [324869213] Pendência de Troca de Titularidade                 cards=0  campos=0
+  [311176247] Conferência Final                                  cards=0  campos=2
+  [332675480] Conferência Final BackOffice                       cards=0  campos=4
+  [311177399] Processo concluído                                 cards=895  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Caixa de entrada]:
+    o_contrato_ser_renovado                   label='O contrato será renovado? '  type=radio_vertical
+    assessor_1                                label='Assessor'  type=assignee_select
+    assessor_lista                            label='Assessor (lista)'  type=select
+    imoveis_agrupados                         label='IMOVEIS AGRUPADOS '  type=radio_vertical
+    im_1                                      label='IM'  type=number
+    im_veis                                   label='Imóveis '  type=connector
+    n_do_contrato                             label='Nº do contrato'  type=number
+    preencher_informa_es_do_formul_rio_inicial  label='Preencher informações do formulário inicial'  type=checklist_vertical
+    consultas_spc_1                           label='Consultas SPC LOCATÁRIOS E FIADORES'  type=attachment
+    an_lise_fc_garantia_fiador                label='Análise  cadastral '  type=checklist_vertical
+    an_lises_fc_e_nus                         label='Anexar documentação avaliada'  type=attachment
+    an_lise_da_inadimpl_ncia                  label='Análise da inadimplência:'  type=long_text
+    existe_alguma_solicita_o_do_propriet_rio_para_n_o_renovar_1  label='Existe alguma solicitação do Proprietário para NÃO renovar?'  type=long_text
+    contrato_ser_renovado_1                   label='Contrato será renovado?'  type=select
+    motivo_da_n_o_renova_o                    label='Motivo da NÃO renovação'  type=long_text
+  fase [Avaliação de mercado]:
+    c_digo_nido                               label='Código NIDO'  type=short_text
+    statement_97c43e9a_bebf_4533_a6f5_45d3d18b25db  label='Statement-97c43e9a-bebf-4533-a6f5-45d3d18b25db'  type=statement
+    endere_o_1                                label='Endereço'  type=short_text
+    valor_atual                               label='Valor atual'  type=currency
+    hist_rico_de_reajustes_e_negocia_es_de_aluguel  label='Vigência, valor inicial e Histórico de reajustes de aluguel'  type=long_text
+    tipo_de_im_vel                            label='Tipo de Imóvel'  type=select
+    bairro                                    label='Bairro'  type=select
+    metragem                                  label='Metragem'  type=short_text
+    n_mero_de_quartos                         label='Nº de quartos'  type=number
+    n_de_su_tes                               label='Nº de suítes'  type=number
+    n_de_vagas                                label='Nº de vagas'  type=number
+    padr_o_do_im_vel                          label='Padrão do imóvel'  type=select
+    link_de_fotos_vistoria                    label='Link de fotos / Vistoria'  type=long_text
+    avalia_o_dil                              label='Avaliação DIL'  type=attachment
+    an_ncios_similares                        label='Anúncios similares'  type=long_text
+    informa_es_formul_rio_inicial_est_o_preenchidas  label='Informações formulário inicial estão preenchidas ?'  type=radio_horizontal
+  fase [Contato com proprietário]:
+    tratativas_iniciais                       label='Tratativas Iniciais '  type=checklist_vertical
+    enviar_e_mail_para_propriet_rio           label='Enviar e-mail para Proprietário '  type=radio_vertical
+    contato_inicial                           label='Contato inicial:'  type=checklist_vertical
+    autoriza_o_recebida_frcl12                label='Autorização recebida FRCL12:'  type=attachment
+  fase [Contato com Locatário]:
+    checklist_vertical_t_tulo                 label='Contatos iniciais'  type=checklist_vertical
+    aprova_o_condi_es_comerciais_locat_rio    label='Aprovação condições comerciais locatário '  type=attachment
+    garantia_fiador_necess_rio_fazer_avalia_o_cadastral_dos_fiadores  label='Garantia Fiador - Necessário fazer avaliação cadastral dos fiadores'  type=select
+    an_lise_cadastral_dos_fiadores            label='Análise cadastral dos fiadores'  type=checklist_vertical
+  fase [Troca de garantia]:
+    assessor_respons_vel                      label='Assessor Responsável '  type=assignee_select
+    necess_rio_troca_da_garantia_e_ou_locat_rio  label='Necessário troca da garantia e/ou locatário?'  type=select
+    nova_garantia                             label='Nova garantia'  type=select
+    quem_ser_substitu_do                      label='Quem será substituído?'  type=select
+    checklist_vertical                        label='Checklist vertical'  type=checklist_vertical
+    statement_b4bf9075_631c_4737_a9cc_6f83d0f44c04  label='Statement-b4bf9075-631c-4737-a9cc-6f83d0f44c04'  type=statement
+    nome_completo                             label='Nome Completo '  type=short_text
+    pessoa_f_sica_ou_jur_dica                 label='Pessoa física ou jurídica? '  type=radio_horizontal
+    cpf                                       label='CPF'  type=cpf
+    cnpj                                      label='CNPJ'  type=cnpj
+    raz_o_social                              label='Razão Social '  type=short_text
+    profiss_o                                 label='Profissão '  type=short_text
+    ramo_de_atua_o                            label='Ramo de atuação '  type=short_text
+    estado_civil                              label='Estado Civil '  type=select
+    informe_seu_telefone                      label='Informe seu telefone '  type=phone
+    informe_seu_e_mail                        label='Informe seu e-mail '  type=email
+    renda_mensal                              label='Renda mensal '  type=currency
+    faturamento_mensal                        label='Faturamento mensal '  type=currency
+    envie_aqui_seu_documento_de_identidade    label='Envie aqui seu documento de identidade '  type=attachment
+    envie_aqui_um_comprovante_de_resid_ncia   label='Envie aqui um comprovante de residência '  type=attachment
+    comprovante_de_estado_civil               label='Comprovante de Estado Civil '  type=attachment
+    rg_ou_cnh_conjug                          label='RG ou CNH cônjuge'  type=attachment
+    tr_s_ltimos_contracheques_extrato_banc_rio_pessoa_f_sica_dos_ltimos_tr_s_meses  label='Três últimos contracheques/Extrato bancário pessoa Física dos últimos três meses  '  type=attachment
+    contrato_social_e_altera_es_da_empresa_ou_contrato_social_consolidado  label='Contrato Social e alterações da empresa ou contrato social consolidado'  type=attachment
+    rg_cpf_comprovante_de_resid_ncia_e_ir_completo_dos_s_cios_respons_veis  label='RG, CPF, Comprovante de residência e IR completo dos sócios responsáveis'  type=attachment
+    balan_o_patrimonial                       label='Balanço Patrimonial'  type=attachment
+    certid_o_simplificada_da_junta_comercial  label='Certidão simplificada da Junta Comercial'  type=attachment
+    statement_4433713d_e510_42a1_8cb4_d7285e1139f0  label='Statement-4433713d-e510-42a1-8cb4-d7285e1139f0'  type=statement
+    nome_completo_1_fiador                    label='Nome completo 1º FIADOR'  type=short_text
+    cpf_1_fiador                              label='CPF 1º FIADOR'  type=cpf
+    telefone_1_fiador                         label='Telefone 1º FIADOR '  type=phone
+    e_mail_1_fiador                           label='E-mail 1º FIADOR'  type=email
+    renda_mensal_1_fiador                     label='Renda mensal 1º FIADOR'  type=currency
+    profiss_o_1_fiador                        label='Profissão 1º FIADOR '  type=short_text
+    estado_civil_1_fiador                     label='Estado Civil 1º FIADOR'  type=select
+    cpf_do_c_njuge_1_fiador                   label='CPF do Cônjuge 1º FIADOR'  type=cpf
+    e_mail_conjuge_1_fiador                   label='E-mail do Cônjuge 1º FIADOR'  type=email
+    documento_de_identidade_1_fiador          label='Documento de identidade - 1º fiador:'  type=attachment
+    certid_o_de_nus                           label='Certidão de Ônus'  type=attachment
+    comprovante_de_resid_ncia_1_fiador        label='Comprovante de residência - 1º fiador'  type=attachment
+    comprovante_de_estado_civil_1_fiador      label='Comprovante de estado civil - 1º fiador'  type=attachment
+    documento_de_identidade_do_conjuge_1_fiador  label='Documento de identidade do CONJUGE - 1º fiador:'  type=attachment
+    nome_completo_2_fiador                    label='Nome completo 2º FIADOR'  type=short_text
+    cpf_2_fiador                              label='CPF 2º FIADOR'  type=cpf
+    telefone_2_fiador                         label='Telefone 2º FIADOR'  type=phone
+    e_mail_2_fiador                           label='E-mail 2º FIADOR'  type=email
+    profiss_o_2_fiador                        label='Profissão 2º  FIADOR'  type=short_text
+    renda_mensal_2_fiador                     label='Renda mensal 2º FIADOR'  type=currency
+    estado_civil_2_fiador                     label='Estado Civil 2º FIADOR'  type=select
+    cpf_do_c_njuge_2_fiador                   label='CPF do Cônjuge 2º FIADOR'  type=cpf
+    e_mail_conjuge_2_fiador                   label='E-mail CONJUGE 2º FIADOR'  type=email
+    documento_de_identidade_2_fiador          label='Documento de identidade - 2º fiador:'  type=attachment
+    comprovante_de_resid_ncia_2_fiador        label='Comprovante de residência - 2º fiador'  type=attachment
+    comprovante_de_renda_2_fiador             label='Comprovante de renda - 2º fiador:'  type=attachment
+    comprovante_de_estado_civil_2_fiador      label='Comprovante de estado civil - 2º fiador'  type=attachment
+    documento_de_identidade_conjuge_2_fiador  label='Documento de identidade cônjuge - 2º fiador:'  type=attachment
+  fase [Análise Troca de Garantia]:
+    troca_de_locat_rio_garantia_1             label='Troca de locatário/Garantia Título de captalização '  type=checklist_vertical
+    troca_de_garantia_fiador                  label='Troca de garantia Fiador '  type=checklist_vertical
+    troca_garantia_credpago                   label='Troca Garantia CREDPAGO/Seguro fiança '  type=checklist_vertical
+  fase [Confecção do contrato]:
+    checar_garantia                           label='Checar garantia '  type=radio_vertical
+    backoffice                                label='BackOffice: Confecção do novo contrato de locação'  type=checklist_vertical
+    assessor_2                                label='Assessor:'  type=assignee_select
+  fase [Conferência do contrato]:
+    confer_ncia                               label='Conferência'  type=checklist_vertical
+    envio_para_assinatura                     label='Envio para Assinatura '  type=checklist_vertical
+  fase [Cobrar assinatura]:
+    check_list                                label='Check List'  type=checklist_vertical
+    verificar_se_demorou_mais_de_7_dias_entre_a_data_do_contrato_e_a_finaliza_o_da_assinatura  label='Verificar se demorou mais de 7 dias entre a data do contrato e a finalização da assinatura'  type=radio_vertical
+    solicitar_ao_inquilino_contas_de_energia_e_gua_para_checagem_de_titulariade  label='Solicitar ao inquilino contas de energia e água para checagem de titulariade  e anexar no card'  type=attachment
+    data_assinatura_do_contrato               label='Data assinatura do contrato'  type=date
+  fase [Contrato assinado / Finalizar]:
+    troca_de_titulariade_locat_rio            label='Troca de titulariade Locatário'  type=radio_horizontal
+    altera_o_locat_rio                        label='ALTERAÇÃO LOCATÁRIO'  type=checklist_vertical
+    copy_of_altera_o_locat_rio_1              label='SEM ALTERAÇÃO DE LOCATÁRIO'  type=checklist_vertical
+    copy_of_sem_altera_o_de_propiet_rio       label='SEM ALTERAÇÃO DE LOCATÁRIO IM AGRUPADOS'  type=checklist_vertical
+    copy_of_altera_o_locat_rio                label=' ALTERAÇÃO LOCATÁRIO IM AGRUPADOS '  type=checklist_vertical
+    contrato_de_administra_o_do_im_vel_consta_cobran_a_de_renova_o  label='Contrato de Administração do imóvel consta cobrança de renovação?'  type=radio_horizontal
+    renova_o                                  label='Renovação '  type=checklist_vertical
+    pacote_renova_o                           label='Pacote Renovação '  type=checklist_vertical
+    anexar_contrato_renovado_na_plataforma_da_credpago  label='Anexar contrato Renovado na plataforma da CREDPAGO'  type=checklist_vertical
+    colocar_assessor_como_respons_vel_pela_confer_ncia_e_passar_pela_pr_xima_fase  label='Colocar assessor como responsável pela conferência e passar para a conferência final ->'  type=assignee_select
+  fase [Conferência Final]:
+    confer_ncia_1                             label='Conferência'  type=checklist_vertical
+    ap_s_conferir_voltar_card_para_o_backoffice  label='Após conferir, passar card para conferência BackOffice'  type=assignee_select
+  fase [Conferência Final BackOffice]:
+    confer_ncia_energia                       label='Conferência energia'  type=checklist_vertical
+    altera_o_de_titularidade_da_energia_1     label='Alteração de titularidade da energia:'  type=short_text
+    confer_ncia_gua                           label='Conferência água'  type=checklist_vertical
+    altera_o_de_titularidade_da_gua_1         label='Alteração de titularidade da água:'  type=short_text
+
+  → dump salvo em config\_pipe_dumps\301683424__ADM_-_Renovações_de_contratos.json
+
+======================================================================
+Pipe 302601622  [Inadimplencia]
+======================================================================
+name = 'ADM - Inadimplência'
+
+--- start_form_fields (10) ---
+  im_vel                                    internal_id=342029974                       label='Imóvel/Contrato'  type=short_text
+  endere_o                                  internal_id=342030766                       label='Endereço'  type=short_text
+  locador                                   internal_id=346741420                       label='Locador'  type=connector
+  locat_rio                                 internal_id=346741358                       label='Locatário:'  type=connector
+  vencimento_1_boleto                       internal_id=342029981                       label='Vencimento 1º Boleto:'  type=date
+  valor_do_d_bito                           internal_id=342029982                       label='Valor Corrigido'  type=currency
+  garantia                                  internal_id=342029983                       label='Garantia'  type=select
+  link_drive                                internal_id=342029985                       label='Link drive:'  type=short_text
+  or_amento                                 internal_id=352510060                       label='Orçamento'  type=attachment
+  obs                                       internal_id=342029987                       label='OBS:'  type=long_text
+
+--- phases (18) ---
+  [316295202] Novas inadimplências                               cards=0  campos=6
+  [342586798] 🚩 Prescrito: cancelar cobrança                     cards=0  campos=1
+  [318342506] PROPRIETÁRIOS                                      cards=7  campos=6
+  [318363285] Rescisão: Reparos                                  cards=0  campos=1
+  [342506265] Taxa Loft                                          cards=0  campos=4
+  [317714026] Cobrança inicial                                   cards=8  campos=4
+  [316295201] Negativação (No 8º dia de atraso)                  cards=3  campos=7
+  [316838144] Acionar Jurídico (Exoneração e 2 meses)            cards=17  campos=5
+  [316754812] CredPago: Acionar                                  cards=5  campos=7
+  [316754834] CredPago: Boleto para pagamento                    cards=2  campos=3
+  [317592696] CredPago Exonerada                                 cards=0  campos=2
+  [316295198] Sinistro: Seguradora                               cards=1  campos=3
+  [316295203] Titulo Capitalização à receber                     cards=0  campos=2
+  [316295194] Acordo                                             cards=0  campos=4
+  [316295192] Apenas negativados                                 cards=17  campos=2
+  [316564356] ⚠️Baixa negativação ⚠️                             cards=0  campos=1
+  [318621027] Prescritos                                         cards=6  campos=0
+  [326951365] Concluído                                          cards=850  campos=0
+
+--- campos das fases (label  ←  id) ---
+  fase [Novas inadimplências]:
+    assessor                                  label='Assessor de relacionamento:'  type=assignee_select
+    im                                        label='IM'  type=number
+    contrato                                  label='Contrato'  type=number
+    prazo_para_negativa_o                     label='Prazo para negativação'  type=due_date
+    preencher                                 label='Preencher'  type=checklist_vertical
+    sele_o_de_etiqueta                        label='Seleção de etiqueta'  type=label_select
+  fase [🚩 Prescrito: cancelar cobrança]:
+    checklist_vertical_1                      label='Checklist vertical'  type=checklist_vertical
+  fase [PROPRIETÁRIOS]:
+    im_vel_1                                  label='Imóvel'  type=connector
+    assessor_1                                label='Assessor'  type=assignee_select
+    boleto_do_propriet_rio                    label='Boleto do proprietário'  type=attachment
+    vencimento_do_boleto_1                    label='Vencimento do boleto:'  type=date
+    envio_do_e_mail_com_boleto                label='Envio do e-mail com boleto'  type=checklist_vertical
+    vencimento_do_boleto                      label='Conferencia do pagamento em:'  type=due_date
+  fase [Rescisão: Reparos]:
+    reparos_recebidos_no_boleto_criar_card_para_execu_o  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Taxa Loft]:
+    enviar_cobran_a                           label='Enviar cobrança '  type=checklist_vertical
+    statement_f89e81be_62eb_4d1f_b276_65bee04e189f  label='Statement-f89e81be-62eb-4d1f-b276-65bee04e189f'  type=statement
+    formaliza_o_enviada                       label='Formalização enviada '  type=radio_horizontal
+    migrar_contrato_para_o_pvi                label='Migrar contrato para o PVI'  type=checklist_vertical
+  fase [Cobrança inicial]:
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_1  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+    1_dia_ap_s_vencimento                     label='01 Dia após vencimento '  type=checklist_vertical
+    acionamento_credpago                      label='Acionamento CredPago '  type=checklist_vertical
+    atrasos_no_pagamento_superiores_a_8_dias  label='Atrasos no pagamento superiores a 8 dias '  type=checklist_vertical
+  fase [Negativação (No 8º dia de atraso)]:
+    prazo_para_acionar_credpago               label='Prazo para acionar CredPago'  type=due_date
+    prazo_para_enviar_ao_jur_dico             label='Prazo para enviar ao jurídico'  type=due_date
+    antes_da_negativa_o                       label='Antes da Negativação'  type=checklist_vertical
+    serasa                                    label='Serasa'  type=checklist_vertical
+    incluir_etiqueta_de_negativa_o            label='Incluir etiqueta de negativação'  type=label_select
+    lan_ar_no_contas_a_pagar                  label='Lançar no contas a pagar do Imobiliar'  type=checklist_vertical
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_2  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Acionar Jurídico (Exoneração e 2 meses)]:
+    tiro_de_a_o                               label='Tipo de ação'  type=select
+    criar_card_no_jur_dico                    label='Criar card no jurídico '  type=connector
+    credpago                                  label='CredPago:'  type=checklist_vertical
+    jur_dico_acionado                         label='Jurídico acionado'  type=checklist_vertical
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_3  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [CredPago: Acionar]:
+    statement_eddf119e_55be_4af6_82a2_94f68410b633  label='Statement-eddf119e-55be-4af6-82a2-94f68410b633'  type=statement
+    previs_o_de_pagamento_credpago            label='Prazo para análise CredPago:'  type=due_date
+    statement_839a6c52_6e70_4d56_b0e8_ba1ccc65da26  label='Statement-839a6c52-6e70-4d56-b0e8-ba1ccc65da26'  type=statement
+    checklist_vertical                        label='Checklist:'  type=checklist_vertical
+    rela_o_documentos_credpago                label='Relação documentos CredPago Rescisão Locação:'  type=checklist_vertical
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_4  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+    boleto_de_rescis_o_com_reparos            label='Boleto de Rescisão com Reparos '  type=checklist_vertical
+  fase [CredPago: Boleto para pagamento]:
+    data_prevista_para_pagamento              label='Data prevista para pagamento'  type=due_date
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_5  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+    cancelamento_credpago                     label='Cancelamento CredPago'  type=checklist_vertical
+  fase [CredPago Exonerada]:
+    checklist_1                               label='Checklist'  type=checklist_vertical
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_6  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Sinistro: Seguradora]:
+    checklist                                 label='Checklist'  type=checklist_vertical
+    data_programada_para_pagamento            label='Data programada para pagamento:'  type=due_date
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_7  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Titulo Capitalização à receber]:
+    data_programada_para_dep_sito             label='Data programada para depósito:'  type=due_date
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_8  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Acordo]:
+    assinatura_do_acordo                      label='Assinatura do acordo'  type=radio_vertical
+    desist_ncia_do_acordo                     label='Desistência do acordo:'  type=connector
+    prazo_para_finaliza_o_do_acordo           label='Prazo para finalização do acordo'  type=due_date
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_9  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [Apenas negativados]:
+    rever                                     label='Rever semanalmente a inadimplência'  type=due_date
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_10  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+  fase [⚠️Baixa negativação ⚠️]:
+    reparos_recebidos_no_boleto_criar_card_para_execu_o_11  label='Reparos recebidos no boleto, criar card para execução:'  type=connector
+
+  → dump salvo em config\_pipe_dumps\302601622__ADM_-_Inadimplência.json

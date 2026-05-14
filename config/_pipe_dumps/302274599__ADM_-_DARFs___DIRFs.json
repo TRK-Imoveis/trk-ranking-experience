@@ -1,0 +1,152 @@
+{
+  "id": "302274599",
+  "name": "ADM - DARFs / DIRFs",
+  "start_form_fields": [
+    {
+      "id": "im_contrato",
+      "internal_id": "396662744",
+      "label": "IM/CONTRATO",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "ano",
+      "internal_id": "347992767",
+      "label": "Ano:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "locat_rio_1",
+      "internal_id": "396662708",
+      "label": "Locatário .",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "locador_1",
+      "internal_id": "396662725",
+      "label": "Locador.",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "e_mail_locat_rio",
+      "internal_id": "396662813",
+      "label": "E-mail locatário ",
+      "type": "email",
+      "required": false
+    },
+    {
+      "id": "locat_rio",
+      "internal_id": "336275161",
+      "label": "Locatário",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "locador",
+      "internal_id": "336275164",
+      "label": "Locador",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "irrf",
+      "internal_id": "347991075",
+      "label": "IRRF",
+      "type": "currency",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "314462021",
+      "name": "Caixa de entrada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "im",
+          "internal_id": "362167901",
+          "label": "IM",
+          "type": "short_text",
+          "required": true
+        },
+        {
+          "id": "respons_vel",
+          "internal_id": "347991078",
+          "label": "Responsável",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "extrato_irrf",
+          "internal_id": "347991084",
+          "label": "Extrato IRRF",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "preencher",
+          "internal_id": "347994502",
+          "label": "Preencher locatário e locador no formulário",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "endere_o",
+          "internal_id": "428448088",
+          "label": "Endereço",
+          "type": "short_text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314462022",
+      "name": "Solicitação de comprovantes",
+      "cards_count": 17,
+      "fields": [
+        {
+          "id": "enviar_template_de_e_mail_solicitando",
+          "internal_id": "347998108",
+          "label": "Enviar template de e-mail solicitando",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314462197",
+      "name": "Conferência",
+      "cards_count": 5,
+      "fields": []
+    },
+    {
+      "id": "314462195",
+      "name": "Necessário notificação",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "enviar_notifica_o",
+          "internal_id": "347998129",
+          "label": "Enviar notificação",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "314462198",
+      "name": "Comprovantes com Pendências (locatários)",
+      "cards_count": 5,
+      "fields": []
+    },
+    {
+      "id": "314462023",
+      "name": "Concluído",
+      "cards_count": 229,
+      "fields": []
+    }
+  ]
+}

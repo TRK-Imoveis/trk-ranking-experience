@@ -1,0 +1,636 @@
+{
+  "id": "301688015",
+  "name": "ADM - Resc. de ADMINISTRAÇÃO",
+  "start_form_fields": [
+    {
+      "id": "endere_o_do_im_vel",
+      "internal_id": "327038805",
+      "label": "Endereço do imóvel - (IM - ENDEREÇO)",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "ims_agrupados",
+      "internal_id": "332050581",
+      "label": "IMs agrupados:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "im_vel_poder_permanecer_anunciado_sem_exclusividade",
+      "internal_id": "331476136",
+      "label": "Imóvel poderá permanecer anunciado sem exclusividade?",
+      "type": "select",
+      "required": true
+    },
+    {
+      "id": "qual_o_motivo_da_rescis_o_do_contrato",
+      "internal_id": "331475993",
+      "label": "Qual o motivo da rescisão do contrato?",
+      "type": "long_text",
+      "required": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "311192388",
+      "name": "Caixa de entrada",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "assessor_lista",
+          "internal_id": "362575711",
+          "label": "Assessor (lista)",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "assessor",
+          "internal_id": "354025631",
+          "label": "Assessor",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358510879",
+          "label": "IM",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "locador_1",
+          "internal_id": "331479507",
+          "label": "Locador",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "im_vel",
+          "internal_id": "368581404",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "status_do_im_vel",
+          "internal_id": "327038850",
+          "label": "Status do imóvel",
+          "type": "label_select",
+          "required": true
+        },
+        {
+          "id": "contrato_se_ocupado",
+          "internal_id": "358510886",
+          "label": "Contrato (Se ocupado)",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "valor_do_aluguel",
+          "internal_id": "350557757",
+          "label": "Valor do aluguel",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "id": "contrato_prev_multa",
+          "internal_id": "370575079",
+          "label": "Contrato prevê multa para contrato vigente?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "caso_o_contrato_de_administra_o_possua_multa_calcular_multa",
+          "internal_id": "370564852",
+          "label": "Caso o contrato de administração possua multa, calcular multa:",
+          "type": "currency",
+          "required": false
+        },
+        {
+          "id": "liga_o_para_o_propriet_rio_motivo_da_rescis_o",
+          "internal_id": "327038760",
+          "label": "Ligação para o proprietário, motivo da rescisão:",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "tentativa_de_reverter_rescis_o",
+          "internal_id": "427345752",
+          "label": "Tentativa de Reverter Rescisão ",
+          "type": "radio_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_7389da58_62e3_4bda_a6e4_2dbe4edde8f9",
+          "internal_id": "370934845",
+          "label": "Statement-7389da58-62e3-4bda-a6e4-2dbe4edde8f9",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "avisos",
+          "internal_id": "331624533",
+          "label": "Avisos:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_vel_est_anunciado",
+          "internal_id": "370935184",
+          "label": "Imóvel está anunciado?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "o_im_vel_est_com_uma_proposta_de_loca_o_ativa",
+          "internal_id": "370935291",
+          "label": "O imóvel está com uma proposta de locação ativa?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "statement_abef053c_0779_4b6d_98eb_989cf4fb7a94",
+          "internal_id": "370935853",
+          "label": "Statement-abef053c-0779-4b6d-98eb-989cf4fb7a94",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "pr_xima_data_de_encerramento_de_ciclo",
+          "internal_id": "370935960",
+          "label": "Próxima data de encerramento de ciclo",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "nada_consta_junto_ao_condom_nio",
+          "internal_id": "371177879",
+          "label": "Nada consta junto ao condomínio",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "nada_consta_de_puxadinho_lojas_asa_sul_e_asa_norte",
+          "internal_id": "371208035",
+          "label": "Nada consta de Puxadinho (Lojas Asa Sul e Asa Norte)",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "verificar_d_bito_de_iptu_em_exerc_cios_anteriores",
+          "internal_id": "371178410",
+          "label": "Verificar débito de IPTU em exercícios anteriores",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "d_bitos_de_iptu_ou_nada_consta",
+          "internal_id": "371545762",
+          "label": "Débitos de IPTU ou Nada Consta",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "titularidade_de_energia",
+          "internal_id": "370935971",
+          "label": "Titularidade de Energia",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "copy_of_titularidade_de_energia",
+          "internal_id": "370935972",
+          "label": "Titularidade de Água",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "copy_of_titularidade_de_gua",
+          "internal_id": "370936118",
+          "label": "Titularidade de Gás",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "o_propriet_rio_possui_outros_im_veis_administrados_1",
+          "internal_id": "370936378",
+          "label": "O proprietário possui outros imóveis administrados",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "qual_a_garantia_do_contrato_de_loca_o",
+          "internal_id": "370936385",
+          "label": "Qual a garantia do contrato de locação?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "defini_o_do_ltimo_boleto_cobrado_pela_trk",
+          "internal_id": "370573758",
+          "label": "Definição do último boleto cobrado pela TRK",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "o_im_vel_ainda_possui_boletos_em_aberto",
+          "internal_id": "370561556",
+          "label": "O imóvel ainda possui boletos em aberto?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "nova_administra_o_da_loca_o",
+          "internal_id": "370559662",
+          "label": "Nova administração da locação",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "statement_46d0c6ca_912c_451f_a667_c1688cbe3426",
+          "internal_id": "370570955",
+          "label": "Statement-46d0c6ca-912c-451f-a667-c1688cbe3426",
+          "type": "statement",
+          "required": null
+        }
+      ]
+    },
+    {
+      "id": "325158065",
+      "name": "Alinhamento com o proprietário",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "statement_3486a8be_dbd4_462e_b963_ac0c89da5225",
+          "internal_id": "370937120",
+          "label": "Statement-3486a8be-dbd4-462e-b963-ac0c89da5225",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "quem_ser_o_respons_vel_pela_administra_o_do_im_vel",
+          "internal_id": "370937362",
+          "label": "Quem será o responsável pela administração do imóvel?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "alinhamento_com_o_propriet_rio_sobre_a_garantia",
+          "internal_id": "370937211",
+          "label": "Alinhamento com o proprietário sobre a garantia (caso imóvel esteja ocupado):",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "alinhamento_com_o_propriet_rio_sobre_o_seguro_inc_ndio",
+          "internal_id": "371178427",
+          "label": "Alinhamento com o proprietário sobre o seguro incêndio (caso imóvel esteja ocupado):",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "alinhamento_com_o_propriet_rio_sobre_o_iptu_em_aberto_de_exerc_cios_anteriores",
+          "internal_id": "371178436",
+          "label": "Alinhamento com o proprietário sobre o IPTU em aberto de exercícios anteriores",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "alinhamento_com_o_propriet_rio_sobre_d_bitos_de_puxadinhos",
+          "internal_id": "371208508",
+          "label": "Alinhamento com o proprietário sobre débitos de puxadinhos",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "statement_31fb82a8_ee35_463f_ba3a_96be261d41ec",
+          "internal_id": "370938060",
+          "label": "Statement-31fb82a8-ee35-463f-ba3a-96be261d41ec",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "contato_do_respons_vel_por_receber_os_documentos_e_informa_es_do_im_vel",
+          "internal_id": "370937402",
+          "label": "Contato do responsável por receber os documentos e informações do imóvel",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "em_caso_de_saldo_financeiro_positivo_ou_negativo_prefere_que_o_repasse_do_saldo_seja_feito_com_os_demais_im_veis",
+          "internal_id": "370937578",
+          "label": "Em caso de saldo financeiro positivo ou negativo, prefere que o repasse do saldo seja feito com os demais imóveis?",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "statement_9d258737_6245_4024_9485_940ca549c11e",
+          "internal_id": "370949463",
+          "label": "Statement-9d258737-6245-4024-9485-940ca549c11e",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "defini_o_sobre_a_titularidade_da_energia",
+          "internal_id": "370937706",
+          "label": "Definição sobre a titularidade da Energia",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "copy_of_defini_o_sobre_a_titularidade_da_energia",
+          "internal_id": "370937709",
+          "label": "Definição sobre a titularidade da Água",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "copy_of_defini_o_sobre_a_titularidade_da_gua",
+          "internal_id": "370937712",
+          "label": "Definição sobre a titularidade do Gás",
+          "type": "select",
+          "required": false
+        },
+        {
+          "id": "alinhamento_sobre_todos_os_encargos_do_im_vel_serem_pagos_pela_trk_at_a_data_de_encerramento_de_ciclo",
+          "internal_id": "371185143",
+          "label": "Alinhamento sobre todos os encargos do imóvel serem pagos pela TRK até a data de encerramento de ciclo",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "enviar_email_formalizando_a_tratativa_junto_ao_propriet_rio",
+          "internal_id": "370941124",
+          "label": "Enviar email formalizando a tratativa junto ao proprietário",
+          "type": "radio_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "325158622",
+      "name": "Encerramento",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_inicial",
+          "internal_id": "370938825",
+          "label": "Checklist inicial",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "checklist_im_vel_desocupado",
+          "internal_id": "370938832",
+          "label": "Checklist imóvel desocupado",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "checklist_im_vel_ocupado",
+          "internal_id": "370938975",
+          "label": "Checklist imóvel ocupado",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_7bc8885a_8bfe_4f8e_a3c5_405856449526",
+          "internal_id": "370939314",
+          "label": "Statement-7bc8885a-8bfe-4f8e-a3c5-405856449526",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "statement_a9156ffc_0952_44a2_aff9_64a481e1d681",
+          "internal_id": "370940231",
+          "label": "Statement-a9156ffc-0952-44a2-aff9-64a481e1d681",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "rescis_o_da_loca_o",
+          "internal_id": "371177632",
+          "label": "Rescisão da Locação",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "copy_of_statement_a9156ffc_0952_44a2_aff9_64a481e1d681",
+          "internal_id": "371178171",
+          "label": "Copy of Statement-a9156ffc-0952-44a2-aff9-64a481e1d681",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "levantamento_financeiro",
+          "internal_id": "370939864",
+          "label": "Levantamento financeiro",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "desligar_ou_transferir_a_titularidade_de_energia",
+          "internal_id": "370939876",
+          "label": "Desligar ou transferir a titularidade de Energia",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "copy_of_desligar_ou_transferir_a_titularidade_de_energia",
+          "internal_id": "370939880",
+          "label": "Desligar ou transferir a titularidade de Água",
+          "type": "long_text",
+          "required": false
+        },
+        {
+          "id": "copy_of_desligar_ou_transferir_a_titularidade_de_gua",
+          "internal_id": "370939885",
+          "label": "Desligar ou transferir a titularidade de Gás",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "325234781",
+      "name": "Pendência financeira",
+      "cards_count": 1,
+      "fields": []
+    },
+    {
+      "id": "325159187",
+      "name": "Repasse final / Distrato (FINANCEIRO)",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "data_de_repasse_ao_propriet_rio",
+          "internal_id": "370940409",
+          "label": "Data do último repasse ao proprietário",
+          "type": "due_date",
+          "required": false
+        },
+        {
+          "id": "checklist_final_financeiro",
+          "internal_id": "377486169",
+          "label": " Checklist final Financeiro",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "saldo_do_propriet_rio",
+          "internal_id": "380703674",
+          "label": "Saldo do proprietário ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "propriet_rio_negativo",
+          "internal_id": "380703519",
+          "label": "Proprietário Negativo - Gerar Boleto",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "propriet_rio_positivo_gerar_repasse",
+          "internal_id": "380703336",
+          "label": "Proprietário Positivo - Gerar Repasse ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "inativar_im_vel_no_imobiliar_com_a_data_do_ltimo_repasse",
+          "internal_id": "380705341",
+          "label": "Inativar Imóvel no imobiliar com a data do último Repasse ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "excluir_im_vel_do_scaza",
+          "internal_id": "380704370",
+          "label": "Excluir Imóvel do Scaza ",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "incluir_extrato_de_conta_corrente_zerado",
+          "internal_id": "384444824",
+          "label": "Incluir Extrato de Conta Corrente ",
+          "type": "attachment",
+          "required": true
+        },
+        {
+          "id": "incluir_boleto_negativo_demonstrativo_de_repasse_negativo",
+          "internal_id": "384444867",
+          "label": "Incluir Boleto  OU Demonstrativo de Repasse se positivo",
+          "type": "attachment",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "339404621",
+      "name": "Repasse Negativo",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "valor_repasse",
+          "internal_id": "416002025",
+          "label": "Valor do Boleto ",
+          "type": "short_text",
+          "required": false
+        },
+        {
+          "id": "data_do_vencimento_do_boleto",
+          "internal_id": "416002029",
+          "label": "Data do vencimento do boleto ",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "acompanhar_quita_o_do_boleto",
+          "internal_id": "416002105",
+          "label": "Acompanhar Quitação do boleto ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "extrato_cc_propriet_rio_com_a_quita_o_do_d_bito",
+          "internal_id": "416002111",
+          "label": "Extrato CC Proprietário com a quitação do Débito ",
+          "type": "attachment",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325159353",
+      "name": "Formalização",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "anexar_informa_es_do_locat_rio_cadastro_e_contrato_de_loca_o_1",
+          "internal_id": "380704616",
+          "label": "Anexar informações do locatário (Cadastro e Contrato de Locação)",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "distrato_1",
+          "internal_id": "380704623",
+          "label": "Distrato",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "im_vel_inativo_no_sistema",
+          "internal_id": "399641923",
+          "label": "Imóvel Inativo no sistema? ",
+          "type": "radio_horizontal",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "329316371",
+      "name": "Finalizar procedimento",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "checklist_vertical",
+          "internal_id": "384703917",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "termo_de_distrato_assinado",
+          "internal_id": "422904557",
+          "label": "Termo de Distrato assinado ",
+          "type": "radio_horizontal",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "325232708",
+      "name": "Desistência da Rescisão",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "verificar_os_passos_feitos_e_desfazer_se_necess_rio",
+          "internal_id": "371393245",
+          "label": "Verificar os passos feitos e desfazer, se necessário",
+          "type": "long_text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "311192390",
+      "name": "Concluído",
+      "cards_count": 273,
+      "fields": []
+    }
+  ]
+}

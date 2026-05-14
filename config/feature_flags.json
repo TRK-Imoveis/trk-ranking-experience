@@ -1,0 +1,7 @@
+{
+  "_description": "Feature flags do pipeline TRK Experience. Lido por calculate.py.",
+  "marinho_produtividade_ativa": false,
+  "_notas": {
+    "marinho_produtividade_ativa": "Quando false, o indicador Produtividade m²/h do Marinho (peso 6) é desativado e o Laudo (normalmente peso 4) consolida o peso total = 10. Bate com baselines.json da 10ª Edição (que registra explicitamente esse indicador como ausente)."
+  }
+}

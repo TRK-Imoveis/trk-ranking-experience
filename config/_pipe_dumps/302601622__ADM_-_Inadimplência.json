@@ -1,0 +1,608 @@
+{
+  "id": "302601622",
+  "name": "ADM - Inadimplência",
+  "start_form_fields": [
+    {
+      "id": "im_vel",
+      "internal_id": "342029974",
+      "label": "Imóvel/Contrato",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "endere_o",
+      "internal_id": "342030766",
+      "label": "Endereço",
+      "type": "short_text",
+      "required": true
+    },
+    {
+      "id": "locador",
+      "internal_id": "346741420",
+      "label": "Locador",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "locat_rio",
+      "internal_id": "346741358",
+      "label": "Locatário:",
+      "type": "connector",
+      "required": false
+    },
+    {
+      "id": "vencimento_1_boleto",
+      "internal_id": "342029981",
+      "label": "Vencimento 1º Boleto:",
+      "type": "date",
+      "required": false
+    },
+    {
+      "id": "valor_do_d_bito",
+      "internal_id": "342029982",
+      "label": "Valor Corrigido",
+      "type": "currency",
+      "required": false
+    },
+    {
+      "id": "garantia",
+      "internal_id": "342029983",
+      "label": "Garantia",
+      "type": "select",
+      "required": false
+    },
+    {
+      "id": "link_drive",
+      "internal_id": "342029985",
+      "label": "Link drive:",
+      "type": "short_text",
+      "required": false
+    },
+    {
+      "id": "or_amento",
+      "internal_id": "352510060",
+      "label": "Orçamento",
+      "type": "attachment",
+      "required": false
+    },
+    {
+      "id": "obs",
+      "internal_id": "342029987",
+      "label": "OBS:",
+      "type": "long_text",
+      "required": false
+    }
+  ],
+  "phases": [
+    {
+      "id": "316295202",
+      "name": "Novas inadimplências",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assessor",
+          "internal_id": "342030803",
+          "label": "Assessor de relacionamento:",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "im",
+          "internal_id": "358509931",
+          "label": "IM",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "contrato",
+          "internal_id": "358509945",
+          "label": "Contrato",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "prazo_para_negativa_o",
+          "internal_id": "346348177",
+          "label": "Prazo para negativação",
+          "type": "due_date",
+          "required": false
+        },
+        {
+          "id": "preencher",
+          "internal_id": "346772475",
+          "label": "Preencher",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "sele_o_de_etiqueta",
+          "internal_id": "361707932",
+          "label": "Seleção de etiqueta",
+          "type": "label_select",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "342586798",
+      "name": "🚩 Prescrito: cancelar cobrança",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_vertical_1",
+          "internal_id": "427233852",
+          "label": "Checklist vertical",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "318342506",
+      "name": "PROPRIETÁRIOS",
+      "cards_count": 7,
+      "fields": [
+        {
+          "id": "im_vel_1",
+          "internal_id": "368580703",
+          "label": "Imóvel",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "assessor_1",
+          "internal_id": "348880053",
+          "label": "Assessor",
+          "type": "assignee_select",
+          "required": true
+        },
+        {
+          "id": "boleto_do_propriet_rio",
+          "internal_id": "348879631",
+          "label": "Boleto do proprietário",
+          "type": "attachment",
+          "required": false
+        },
+        {
+          "id": "vencimento_do_boleto_1",
+          "internal_id": "348884069",
+          "label": "Vencimento do boleto:",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "envio_do_e_mail_com_boleto",
+          "internal_id": "348879626",
+          "label": "Envio do e-mail com boleto",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "vencimento_do_boleto",
+          "internal_id": "348879624",
+          "label": "Conferencia do pagamento em:",
+          "type": "due_date",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "318363285",
+      "name": "Rescisão: Reparos",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o",
+          "internal_id": "349263157",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "342506265",
+      "name": "Taxa Loft",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "enviar_cobran_a",
+          "internal_id": "427324204",
+          "label": "Enviar cobrança ",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "statement_f89e81be_62eb_4d1f_b276_65bee04e189f",
+          "internal_id": "427565423",
+          "label": "Statement-f89e81be-62eb-4d1f-b276-65bee04e189f",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "formaliza_o_enviada",
+          "internal_id": "429084213",
+          "label": "Formalização enviada ",
+          "type": "radio_horizontal",
+          "required": true
+        },
+        {
+          "id": "migrar_contrato_para_o_pvi",
+          "internal_id": "427325227",
+          "label": "Migrar contrato para o PVI",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "317714026",
+      "name": "Cobrança inicial",
+      "cards_count": 8,
+      "fields": [
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_1",
+          "internal_id": "349263422",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "1_dia_ap_s_vencimento",
+          "internal_id": "377117879",
+          "label": "01 Dia após vencimento ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "acionamento_credpago",
+          "internal_id": "377121018",
+          "label": "Acionamento CredPago ",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "atrasos_no_pagamento_superiores_a_8_dias",
+          "internal_id": "377118283",
+          "label": "Atrasos no pagamento superiores a 8 dias ",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316295201",
+      "name": "Negativação (No 8º dia de atraso)",
+      "cards_count": 3,
+      "fields": [
+        {
+          "id": "prazo_para_acionar_credpago",
+          "internal_id": "346348362",
+          "label": "Prazo para acionar CredPago",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "prazo_para_enviar_ao_jur_dico",
+          "internal_id": "346348443",
+          "label": "Prazo para enviar ao jurídico",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "antes_da_negativa_o",
+          "internal_id": "384585309",
+          "label": "Antes da Negativação",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "serasa",
+          "internal_id": "343818243",
+          "label": "Serasa",
+          "type": "checklist_vertical",
+          "required": false
+        },
+        {
+          "id": "incluir_etiqueta_de_negativa_o",
+          "internal_id": "343818276",
+          "label": "Incluir etiqueta de negativação",
+          "type": "label_select",
+          "required": false
+        },
+        {
+          "id": "lan_ar_no_contas_a_pagar",
+          "internal_id": "342040162",
+          "label": "Lançar no contas a pagar do Imobiliar",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_2",
+          "internal_id": "349263338",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316838144",
+      "name": "Acionar Jurídico (Exoneração e 2 meses)",
+      "cards_count": 17,
+      "fields": [
+        {
+          "id": "tiro_de_a_o",
+          "internal_id": "346344214",
+          "label": "Tipo de ação",
+          "type": "select",
+          "required": true
+        },
+        {
+          "id": "criar_card_no_jur_dico",
+          "internal_id": "346345359",
+          "label": "Criar card no jurídico ",
+          "type": "connector",
+          "required": true
+        },
+        {
+          "id": "credpago",
+          "internal_id": "346362830",
+          "label": "CredPago:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "jur_dico_acionado",
+          "internal_id": "346349096",
+          "label": "Jurídico acionado",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_3",
+          "internal_id": "349263293",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316754812",
+      "name": "CredPago: Acionar",
+      "cards_count": 5,
+      "fields": [
+        {
+          "id": "statement_eddf119e_55be_4af6_82a2_94f68410b633",
+          "internal_id": "378865936",
+          "label": "Statement-eddf119e-55be-4af6-82a2-94f68410b633",
+          "type": "statement",
+          "required": false
+        },
+        {
+          "id": "previs_o_de_pagamento_credpago",
+          "internal_id": "346362166",
+          "label": "Prazo para análise CredPago:",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "statement_839a6c52_6e70_4d56_b0e8_ba1ccc65da26",
+          "internal_id": "343820225",
+          "label": "Statement-839a6c52-6e70-4d56-b0e8-ba1ccc65da26",
+          "type": "statement",
+          "required": null
+        },
+        {
+          "id": "checklist_vertical",
+          "internal_id": "343822337",
+          "label": "Checklist:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "rela_o_documentos_credpago",
+          "internal_id": "350045015",
+          "label": "Relação documentos CredPago Rescisão Locação:",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_4",
+          "internal_id": "349263237",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "boleto_de_rescis_o_com_reparos",
+          "internal_id": "377399693",
+          "label": "Boleto de Rescisão com Reparos ",
+          "type": "checklist_vertical",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "316754834",
+      "name": "CredPago: Boleto para pagamento",
+      "cards_count": 2,
+      "fields": [
+        {
+          "id": "data_prevista_para_pagamento",
+          "internal_id": "346362193",
+          "label": "Data prevista para pagamento",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_5",
+          "internal_id": "349263544",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "cancelamento_credpago",
+          "internal_id": "349784897",
+          "label": "Cancelamento CredPago",
+          "type": "checklist_vertical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "317592696",
+      "name": "CredPago Exonerada",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "checklist_1",
+          "internal_id": "346420128",
+          "label": "Checklist",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_6",
+          "internal_id": "349263589",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316295198",
+      "name": "Sinistro: Seguradora",
+      "cards_count": 1,
+      "fields": [
+        {
+          "id": "checklist",
+          "internal_id": "343868599",
+          "label": "Checklist",
+          "type": "checklist_vertical",
+          "required": true
+        },
+        {
+          "id": "data_programada_para_pagamento",
+          "internal_id": "346362307",
+          "label": "Data programada para pagamento:",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_7",
+          "internal_id": "349263615",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316295203",
+      "name": "Titulo Capitalização à receber",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "data_programada_para_dep_sito",
+          "internal_id": "346362309",
+          "label": "Data programada para depósito:",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_8",
+          "internal_id": "349263680",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316295194",
+      "name": "Acordo",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "assinatura_do_acordo",
+          "internal_id": "342029975",
+          "label": "Assinatura do acordo",
+          "type": "radio_vertical",
+          "required": true
+        },
+        {
+          "id": "desist_ncia_do_acordo",
+          "internal_id": "346362313",
+          "label": "Desistência do acordo:",
+          "type": "connector",
+          "required": false
+        },
+        {
+          "id": "prazo_para_finaliza_o_do_acordo",
+          "internal_id": "346781627",
+          "label": "Prazo para finalização do acordo",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_9",
+          "internal_id": "349263707",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316295192",
+      "name": "Apenas negativados",
+      "cards_count": 17,
+      "fields": [
+        {
+          "id": "rever",
+          "internal_id": "346781788",
+          "label": "Rever semanalmente a inadimplência",
+          "type": "due_date",
+          "required": true
+        },
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_10",
+          "internal_id": "349263734",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "316564356",
+      "name": "⚠️Baixa negativação ⚠️",
+      "cards_count": 0,
+      "fields": [
+        {
+          "id": "reparos_recebidos_no_boleto_criar_card_para_execu_o_11",
+          "internal_id": "349263763",
+          "label": "Reparos recebidos no boleto, criar card para execução:",
+          "type": "connector",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "318621027",
+      "name": "Prescritos",
+      "cards_count": 6,
+      "fields": []
+    },
+    {
+      "id": "326951365",
+      "name": "Concluído",
+      "cards_count": 850,
+      "fields": []
+    }
+  ]
+}
