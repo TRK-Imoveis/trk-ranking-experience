@@ -113,6 +113,7 @@
       "nota_final": 3.98,
       "bonus_total": 5,
       "bonus_proc": "Cont. ADM",
+      "_aviso_drift_modelo_rescisao_adm": "Indicador Rescisão ADM — Repasse <12h teve a regra de início alterada na 11ª Ed (decisão da gestora, 14/05/2026). 10ª Ed usava 'Criado em' como início; 11ª passa a usar 'Última vez que saiu da fase Caixa de entrada' (com fallback 'Criado em' se card pulou a fase). Justificativa: tempo na Caixa de entrada aguardando triagem NÃO é responsabilidade da assessora. Impacto esperado: notas Rescisão ADM tendem a SUBIR vs 10ª Ed (alguns casos antes ✗ agora ✓).",
       "scores_por_processo": {
         "Cont. ADM": 4.444,
         "Rescisão ADM": 0.0,
@@ -150,6 +151,7 @@
       "nota_final": 3.97,
       "bonus_total": 4,
       "bonus_proc": "Cont. ADM",
+      "_aviso_drift_modelo_rescisao_adm": "Mesma mudança aplicada à Natália — ver _aviso_drift_modelo_rescisao_adm em natalia. Indicador Rescisão ADM — Repasse <12h: 11ª Ed usa saída da Caixa de entrada como início, não Criado em.",
       "scores_por_processo": {
         "Cont. ADM": 2.857,
         "Rescisão ADM": 0.0,

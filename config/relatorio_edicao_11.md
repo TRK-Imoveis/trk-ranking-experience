@@ -191,3 +191,35 @@ Limitações conhecidas (não-bloqueantes para Fase 5):
 - 8 cards Rescisão Loc. de cada assessora sem nenhum dos campos de chaves preenchidos — usam fallback antigo.
 
 **Aprovado para iniciar Fase 5: criar `painel/index.html` (novo) consumindo `painel/dados/atual.json`, preservando `painel/index_v10_original.html` como referência.**
+
+---
+
+## STATUS FINAL
+
+- ✅ Pipeline 100% operacional
+- ✅ Painel HTML dinâmico funcionando (`painel/index.html` lê `painel/dados/atual.json`)
+- ✅ Drilldown 55 chaves + 13 paineis PROC_RICH
+- ✅ Edição 11 fechada e auditada em 14/05/2026
+
+### Entregáveis finais
+
+| Componente | Arquivo | Estado |
+|---|---|---|
+| Painel dinâmico | `painel/index.html` | ✅ operacional (455 KB) |
+| Dados consumidos | `painel/dados/atual.json` | ✅ regenerado por `python pipeline/run.py` |
+| Builder de drilldown (55 chaves) | `pipeline/imoveis_builder.py` | ✅ |
+| Builder de PROC_RICH (13 paineis) | `pipeline/procrich_builder.py` | ✅ |
+| Overrides de insights | `config/procrich_insights_overrides.json` | ✅ vazio (auto) |
+| Backup pré-correção | `painel/index_quebrado_v1.html` | ✅ preservado (auditoria) |
+| Referência 10ª Ed | `painel/index_v10_original.html` | ✅ intocado |
+
+### Notas finais 11ª Edição
+
+| Pos | Pessoa | Nota | Δ vs 10ª | Origem do delta |
+|---:|---|---:|---:|---|
+| 1 | Caio | 5,34 | -0,14 | drift natural + bônus IM1567 fora janela |
+| 2 | Vivianne | 5,01 | -0,21 | regra Inadimplência (cobrança proativa) + drift |
+| 3 | Natália ⬆ | 4,76 | +0,78 | regra Rescisão ADM (Caixa de entrada) |
+| 4 | Gardênia ⬇ | 4,38 | +0,41 | regra Rescisão ADM + fix array vazio |
+| 5 | Marinho | 3,91 | -0,85 | regra Vistorias (cards parados em "Em produção") |
+

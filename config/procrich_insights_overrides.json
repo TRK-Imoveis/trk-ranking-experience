@@ -1,0 +1,3 @@
+{
+  "_comment": "Overrides manuais para insights do PROC_RICH. Quando um processo aparece aqui (como chave), seus 3 insights substituem os automáticos (líder + gargalo + bônus/volume). Quando ausente, geração automática. Editar livremente conforme necessidade da gestão."
+}

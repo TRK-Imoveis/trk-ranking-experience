@@ -49,6 +49,8 @@ from calculate import (
 from pipeline.extract_pipefy import extract_pipe
 from pipeline.extract_octadesk import extract_octadesk
 from pipeline.extract_imobiliar import extract_imobiliar, calcular_bonus_inadimplencia
+from pipeline.imoveis_builder import gerar_imoveis
+from pipeline.procrich_builder import gerar_proc_rich, _meta_from_nome
 
 OUT_DIR = ROOT / "painel" / "dados"
 OUT_JSON = OUT_DIR / "atual.json"
@@ -203,6 +205,11 @@ def _montar_pessoa(pid: str, scores: dict, detalhes: list, bonus_n: int,
                    bonus_proc: Optional[str]) -> dict:
     nome, cargo = NOMES[pid]
     nota = nota_final(scores)
+    # Enriquece cada item de detalhes[] com o campo 'meta' (single source of truth:
+    # META_MAP definido em procrich_builder._meta_from_nome). Usado pelo drawer e
+    # pelo painel de processo no HTML.
+    for d in detalhes:
+        d["meta"] = _meta_from_nome(d["nome"])
     fort, aten = pontos_fort_aten(detalhes)
     # 13 colunas-padrão do painel (preserva chaves nulas para alinhar visualmente)
     cols_padrao = ["Cont. ADM", "Rescisão ADM", "Com. Locação", "Cont. Locação", "Rescisão Loc.",
@@ -259,10 +266,14 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
             "imobiliar_disponivel": bool(len(dfs.get("imobiliar", {}).get("boletos", pd.DataFrame()))),
         },
         "PESSOAS": pessoas,
-        "IMOVEIS": {},     # drilldown property-level — a preencher em iteração futura
-        "PROC_RICH": {},   # paineis por processo — a preencher em iteração futura
-        "BASELINE_9": {"caio": 5.54, "vivianne": 5.26, "marinho": 2.73,
-                       "natalia": 3.89, "gardenia": 3.91},
+        "IMOVEIS": gerar_imoveis(dfs, ref),
+        "PROC_RICH": gerar_proc_rich(pessoas),
+        # Baseline da edição IMEDIATAMENTE anterior (10ª Ed, ref para deltas no painel).
+        # Variável mantém o nome "BASELINE_9" por compat com HTML/JS legado da 10ª;
+        # renomeação opcional para "BASELINE_EDICAO_ANTERIOR" fica para sessão futura.
+        # Valores fonte: baselines.json["colaboradores"][i]["nota_final"].
+        "BASELINE_9": {"caio": 5.48, "vivianne": 5.22, "marinho": 4.76,
+                       "natalia": 3.98, "gardenia": 3.97},
     }
 
 

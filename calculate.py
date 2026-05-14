@@ -911,7 +911,16 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
                                 ref: Optional[datetime] = None) -> dict:
     """
     Assessora · Rescisão ADM · 2 indicadores · peso 10.
+
     Indicador 2: Repasse <12h úteis (peso 5).
+
+      REGRA DE INÍCIO (refinada na 11ª Ed — decisão da gestora 14/05/2026):
+        Início = "Última vez que saiu da fase Caixa de entrada" (≈ momento da triagem).
+        Fallback: se card não passou por essa fase, usa "Criado em" (regra antiga).
+
+        Justificativa: card fica na Caixa de entrada aguardando triagem — tempo NÃO
+        é responsabilidade da assessora. A contagem começa quando o caso é assumido.
+
     Indicador 3: Distrato assinado (peso 5) — denominador: cards concluídos.
 
     Filtro: 'Assessor (lista)' contém nome (validado contra baseline 10ª — manual diz
@@ -923,8 +932,15 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
 
     col_repasse = "Primeira vez que entrou na fase Repasse final / Distrato (FINANCEIRO)"
+    col_caixa_out = "Última vez que saiu da fase Caixa de entrada"
     sub_2 = df.dropna(subset=[col_repasse]).copy()
-    horas_2 = sub_2.apply(lambda r: horas_uteis(r["Criado em"], r[col_repasse]), axis=1)
+    # 1ª prioridade: saída da Caixa de entrada; fallback: Criado em
+    inicio_2 = sub_2.get(col_caixa_out, pd.Series(pd.NaT, index=sub_2.index))
+    inicio_2 = inicio_2.where(inicio_2.notna(), sub_2["Criado em"])
+    horas_2 = pd.Series(
+        [horas_uteis(i, f) for i, f in zip(inicio_2, sub_2[col_repasse])],
+        index=sub_2.index,
+    )
     ok_2 = int((horas_2 <= 12).sum())
     ind_2 = score_indicador(ok_2, len(sub_2), 5)
     ind_2["nome"] = "Rescisão ADM — Repasse <12h"

@@ -162,6 +162,11 @@
       }
     },
     "phases": {
+      "Caixa de entrada": {
+        "id": "311192388",
+        "name": "Caixa de entrada",
+        "cards_count": 0
+      },
       "Encerramento": {
         "id": "325158622",
         "name": "Encerramento",
