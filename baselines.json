@@ -1,0 +1,191 @@
+{
+  "_meta": {
+    "edicao": 10,
+    "data_referencia": "Maio/2026",
+    "uso": "Teste de regressão do pipeline TRK Experience. Quando o pipeline rodar contra os dados atuais do Pipefy/Octadesk, deve reproduzir estes números com tolerância de ±1 caso por indicador (a janela 180d rola diariamente, então pode haver pequenas variações de denominador).",
+    "tolerancia_nota_final": "±0.05",
+    "tolerancia_numerador_denominador": "±1 caso"
+  },
+
+  "baseline_anterior": {
+    "edicao": 9,
+    "notas": { "caio": 5.54, "vivianne": 5.26, "natalia": 3.89, "gardenia": 3.91, "marinho": 2.73 }
+  },
+
+  "notas_finais": {
+    "caio": 5.48,
+    "vivianne": 5.22,
+    "marinho": 4.76,
+    "natalia": 3.98,
+    "gardenia": 3.97
+  },
+
+  "ordem_ranking": ["caio", "vivianne", "marinho", "natalia", "gardenia"],
+
+  "colaboradores": {
+    "caio": {
+      "nome": "Caio Rodrigues Lima",
+      "cargo": "Comercial",
+      "nota_final": 5.48,
+      "bonus_total": 4,
+      "bonus_proc": "Com. Locação",
+      "scores_por_processo": {
+        "Cont. ADM": 4.0,
+        "Com. Locação": 5.85,
+        "Cont. Locação": 7.286,
+        "Renovação": 2.895,
+        "WhatsApp": 6.71,
+        "Ticket": 6.12
+      },
+      "indicadores": [
+        { "nome": "Tickets — SLA <4h úteis",                            "ok": 706,  "tot": 1686, "pct": 41.9, "peso": 4 },
+        { "nome": "Tickets — Avaliações positivas",                     "ok": 20,   "tot": 23,   "pct": 87.0, "peso": 3 },
+        { "nome": "WhatsApp — Resposta ≤5min",                          "ok": 1192, "tot": 2392, "pct": 49.8, "peso": 4 },
+        { "nome": "WhatsApp — Avaliações positivas",                    "ok": 137,  "tot": 152,  "pct": 90.1, "peso": 3 },
+        { "nome": "Comercial — Início processo <24h",                   "ok": 7,    "tot": 41,   "pct": 17.1, "peso": 2.5 },
+        { "nome": "Comercial — Anúncio publicado <72h",                 "ok": 26,   "tot": 66,   "pct": 39.4, "peso": 2.5 },
+        { "nome": "Comercial — Card na coluna correta",                 "ok": 15,   "tot": 27,   "pct": 55.6, "peso": 5 },
+        { "nome": "Comercial — Imóvel alugado antes de anunciado ★",    "ok": 4,    "tot": 4,    "pct": 100.0,"peso": 4, "bonus": true },
+        { "nome": "Cont. Locação — Ocupação <30d",                      "ok": 5,    "tot": 6,    "pct": 83.3, "peso": 6 },
+        { "nome": "Cont. Locação — Documentação <24h",                  "ok": 24,   "tot": 42,   "pct": 57.1, "peso": 4 },
+        { "nome": "Cont. ADM — Criação→NIDO <7d",                       "ok": 2,    "tot": 5,    "pct": 40.0, "peso": 10 },
+        { "nome": "Renovação — Avaliação >90d",                         "ok": 11,   "tot": 38,   "pct": 28.9, "peso": 10 }
+      ]
+    },
+
+    "vivianne": {
+      "nome": "Vivianne Fontes",
+      "cargo": "BackOffice · Inadimplência",
+      "nota_final": 5.22,
+      "bonus_total": 124,
+      "bonus_proc": "Inadimplência",
+      "scores_por_processo": {
+        "Cont. ADM": 4.074,
+        "Rescisão ADM": 4.0,
+        "Cont. Locação": 5.903,
+        "Rescisão Loc.": 5.687,
+        "Renovação": 2.731,
+        "Inadimplência": 9.902,
+        "BackOffice": 5.78,
+        "Ticket": 3.693
+      },
+      "indicadores": [
+        { "nome": "Tickets — SLA <4h úteis",                                          "ok": 106, "tot": 287, "pct": 36.9, "peso": 4 },
+        { "nome": "Cont. ADM — Confecção <2h",                                        "ok": 11,  "tot": 27,  "pct": 40.7, "peso": 10 },
+        { "nome": "Rescisão ADM — Encerramento <4h",                                  "ok": 2,   "tot": 5,   "pct": 40.0, "peso": 10 },
+        { "nome": "Cont. Locação — NIDO→Concluído <24h",                              "ok": 11,  "tot": 34,  "pct": 32.4, "peso": 5 },
+        { "nome": "Cont. Locação — Confecção <2h",                                    "ok": 36,  "tot": 42,  "pct": 85.7, "peso": 5 },
+        { "nome": "Rescisão Loc. — Levant. Taxas Prop <2h",                           "ok": 10,  "tot": 19,  "pct": 52.6, "peso": 5 },
+        { "nome": "Rescisão Loc. — Levant. Taxas Final <2h",                          "ok": 11,  "tot": 18,  "pct": 61.1, "peso": 5 },
+        { "nome": "Renovação — Confecção <4h",                                        "ok": 9,   "tot": 21,  "pct": 42.9, "peso": 5 },
+        { "nome": "Renovação — Finalização <16h",                                     "ok": 2,   "tot": 17,  "pct": 11.8, "peso": 5 },
+        { "nome": "Inadimplência — Cobrança <24h",                                    "ok": 238, "tot": 272, "pct": 87.5, "peso": 2 },
+        { "nome": "Inadimplência — CredPago ≤15d",                                    "ok": 12,  "tot": 14,  "pct": 85.7, "peso": 1 },
+        { "nome": "Inadimplência — Negativação 7-9d",                                 "ok": 2,   "tot": 15,  "pct": 13.3, "peso": 1 },
+        { "nome": "Inadimplência — Boletos em atraso recebido antes do repasse ★",    "ok": 124, "tot": 147, "pct": 84.4, "peso": 124, "bonus": true, "n_bonus": 124 },
+        { "nome": "BackOffice — Concluído <24h",                                      "ok": 101, "tot": 146, "pct": 69.2, "peso": 5 },
+        { "nome": "BackOffice — Troca Titularidade <5d",                              "ok": 13,  "tot": 28,  "pct": 46.4, "peso": 5 }
+      ]
+    },
+
+    "marinho": {
+      "nome": "Albérico Marinho",
+      "cargo": "Vistoriador",
+      "nota_final": 4.76,
+      "bonus_total": 0,
+      "scores_por_processo": {
+        "Vistorias": 7.778
+      },
+      "_aviso": "Este painel da 10ª Edição registra apenas 2 indicadores do Marinho. O manual v4 prevê 3 (Laudo + Produtividade m²/h + Contestações). O indicador de Produtividade (peso 6, meta ≥32 m²/h) está AUSENTE no baseline. Validar com o usuário antes de tratar como verdade absoluta.",
+      "indicadores": [
+        { "nome": "Laudos entregues ≤24h após vistoria", "ok": 28, "tot": 36, "pct": 77.8, "peso": 10 },
+        { "nome": "Contestações respondidas <24h",       "ok": 4,  "tot": 23, "pct": 17.4, "peso": 10 }
+      ],
+      "indicadores_faltantes": [
+        { "nome": "Vistorias — Produtividade ≥32 m²/h", "peso_previsto": 6, "fonte": "Manual v4 §4.4" }
+      ]
+    },
+
+    "natalia": {
+      "nome": "Natália Teixeira",
+      "cargo": "Assessora",
+      "nota_final": 3.98,
+      "bonus_total": 5,
+      "bonus_proc": "Cont. ADM",
+      "scores_por_processo": {
+        "Cont. ADM": 4.444,
+        "Rescisão ADM": 0.0,
+        "Rescisão Loc.": 4.686,
+        "Reparos": 4.902,
+        "Renovação": 1.59,
+        "BackOffice": 0.0,
+        "DIRF/DARF": 4.194,
+        "WhatsApp": 9.041,
+        "Ticket": 6.977
+      },
+      "indicadores": [
+        { "nome": "Tickets — SLA <4h úteis",                            "ok": 166,  "tot": 275,  "pct": 60.4, "peso": 3 },
+        { "nome": "Tickets — Avaliações positivas",                     "ok": 19,   "tot": 24,   "pct": 79.2, "peso": 3 },
+        { "nome": "WhatsApp — Resposta ≤5min",                          "ok": 1802, "tot": 2083, "pct": 86.5, "peso": 4 },
+        { "nome": "WhatsApp — Avaliações positivas",                    "ok": 131,  "tot": 137,  "pct": 95.6, "peso": 3 },
+        { "nome": "Cont. ADM — Conferência ≤2h",                        "ok": 2,    "tot": 12,   "pct": 16.7, "peso": 10 },
+        { "nome": "Cont. ADM — Vistoria de entrada realizada ★",        "ok": 5,    "tot": 5,    "pct": 100.0,"peso": 5, "bonus": true, "n_bonus": 5 },
+        { "nome": "Rescisão ADM — Repasse <12h",                        "ok": 0,    "tot": 2,    "pct": 0.0,  "peso": 5 },
+        { "nome": "Rescisão ADM — Distrato assinado",                   "ok": 0,    "tot": 2,    "pct": 0.0,  "peso": 5 },
+        { "nome": "Rescisão Loc. — Boleto prop <24h",                   "ok": 4,    "tot": 7,    "pct": 57.1, "peso": 2 },
+        { "nome": "Rescisão Loc. — Boleto final <15d",                  "ok": 2,    "tot": 5,    "pct": 40.0, "peso": 3 },
+        { "nome": "Reparos — Orçamento <4h",                            "ok": 40,   "tot": 51,   "pct": 78.4, "peso": 4 },
+        { "nome": "Reparos — Pós-venda ≤7d",                            "ok": 15,   "tot": 51,   "pct": 29.4, "peso": 6 },
+        { "nome": "Renovação — Contato >60d",                           "ok": 3,    "tot": 13,   "pct": 23.1, "peso": 4 },
+        { "nome": "Renovação — Assinado antes vencimento",              "ok": 1,    "tot": 9,    "pct": 11.1, "peso": 6 },
+        { "nome": "BackOffice — Pendência <24h",                        "ok": 0,    "tot": 3,    "pct": 0.0,  "peso": 10 },
+        { "nome": "DIRF/DARF — Concluído antes 29/05",                  "ok": 13,   "tot": 31,   "pct": 41.9, "peso": 10 }
+      ]
+    },
+
+    "gardenia": {
+      "nome": "Gardênia",
+      "cargo": "Assessora",
+      "nota_final": 3.97,
+      "bonus_total": 4,
+      "bonus_proc": "Cont. ADM",
+      "scores_por_processo": {
+        "Cont. ADM": 2.857,
+        "Rescisão ADM": 0.0,
+        "Rescisão Loc.": 7.0,
+        "Reparos": 4.871,
+        "Renovação": 4.0,
+        "BackOffice": 0.0,
+        "DIRF/DARF": 3.333,
+        "WhatsApp": 8.741,
+        "Ticket": 4.932
+      },
+      "indicadores": [
+        { "nome": "Tickets — SLA <4h úteis",                            "ok": 73,   "tot": 202,  "pct": 36.1, "peso": 3 },
+        { "nome": "Tickets — Avaliações positivas",                     "ok": 5,    "tot": 8,    "pct": 62.5, "peso": 3 },
+        { "nome": "WhatsApp — Resposta ≤5min",                          "ok": 1788, "tot": 2184, "pct": 81.9, "peso": 4 },
+        { "nome": "WhatsApp — Avaliações positivas",                    "ok": 164,  "tot": 173,  "pct": 94.8, "peso": 3 },
+        { "nome": "Cont. ADM — Conferência ≤2h",                        "ok": 0,    "tot": 13,   "pct": 0.0,  "peso": 10 },
+        { "nome": "Cont. ADM — Vistoria de entrada realizada ★",        "ok": 4,    "tot": 4,    "pct": 100.0,"peso": 4, "bonus": true, "n_bonus": 4 },
+        { "nome": "Rescisão ADM — Repasse <12h",                        "ok": 0,    "tot": 2,    "pct": 0.0,  "peso": 5 },
+        { "nome": "Rescisão ADM — Distrato assinado",                   "ok": 0,    "tot": 5,    "pct": 0.0,  "peso": 5 },
+        { "nome": "Rescisão Loc. — Boleto prop <24h",                   "ok": 7,    "tot": 12,   "pct": 58.3, "peso": 2 },
+        { "nome": "Rescisão Loc. — Boleto final <15d",                  "ok": 7,    "tot": 9,    "pct": 77.8, "peso": 3 },
+        { "nome": "Reparos — Orçamento <4h",                            "ok": 50,   "tot": 72,   "pct": 69.4, "peso": 4 },
+        { "nome": "Reparos — Pós-venda ≤7d",                            "ok": 15,   "tot": 43,   "pct": 34.9, "peso": 6 },
+        { "nome": "Renovação — Contato >60d",                           "ok": 5,    "tot": 15,   "pct": 33.3, "peso": 4 },
+        { "nome": "Renovação — Assinado antes vencimento",              "ok": 4,    "tot": 9,    "pct": 44.4, "peso": 6 },
+        { "nome": "BackOffice — Pendência <24h",                        "ok": 0,    "tot": 11,   "pct": 0.0,  "peso": 10 },
+        { "nome": "DIRF/DARF — Concluído antes 29/05",                  "ok": 2,    "tot": 6,    "pct": 33.3, "peso": 10 }
+      ]
+    }
+  },
+
+  "deltas_vs_baseline_9": {
+    "caio":     { "ant": 5.54, "atual": 5.48, "delta": -0.06 },
+    "vivianne": { "ant": 5.26, "atual": 5.22, "delta": -0.04 },
+    "marinho":  { "ant": 2.73, "atual": 4.76, "delta": +2.03, "obs": "Salto grande — verificar se metodologia mudou ou se realmente houve melhora" },
+    "natalia":  { "ant": 3.89, "atual": 3.98, "delta": +0.09 },
+    "gardenia": { "ant": 3.91, "atual": 3.97, "delta": +0.06 }
+  }
+}
