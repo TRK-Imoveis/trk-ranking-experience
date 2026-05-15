@@ -8,6 +8,7 @@
 - [x] Renomear painel/ → docs/ (compatibilidade GitHub Pages)
 - [x] Ativar GitHub Pages — URL: https://trk-imoveis.github.io/trk-ranking-experience/
 - [x] **Atualizar Manual v4 → v5** — 6 mudanças metodológicas da 11ª Ed documentadas em `manual_v5.md` (727 linhas). v4 preservado como referência histórica. Nova §8 (Infraestrutura de Persistência) + apêndice 11ª Ed em §6.
+- [x] **Criar guia de rotina diária + script PowerShell de automação** — `ROTINA_DIARIA.md` (passo-a-passo de 10 min) e `atualizar_painel.ps1` (1-comando: pipeline + add + commit + push). Gestora executa a rotina diária por conta própria a partir de hoje.
 
 ## Pendências da 11ª Edição
 
