@@ -1,23 +1,15 @@
 # CHECKLIST PENDENTE — TRK Ranking Experience
 
-Última atualização: 15/05/2026 (GitHub Pages ativado)
+Última atualização: 15/05/2026 (Manual v5 publicado)
 
 ## ✅ Concluídas em 15/05/2026
 - [x] Criar organização TRK-Imoveis no GitHub
 - [x] Transferir repositório para a organização
 - [x] Renomear painel/ → docs/ (compatibilidade GitHub Pages)
 - [x] Ativar GitHub Pages — URL: https://trk-imoveis.github.io/trk-ranking-experience/
+- [x] **Atualizar Manual v4 → v5** — 6 mudanças metodológicas da 11ª Ed documentadas em `manual_v5.md` (727 linhas). v4 preservado como referência histórica. Nova §8 (Infraestrutura de Persistência) + apêndice 11ª Ed em §6.
 
 ## Pendências da 11ª Edição
-
-### Alta prioridade
-- [ ] **Atualizar Manual v4 → v5** com as 5 mudanças metodológicas decididas em 14/05/2026:
-  1. Marinho Vistorias — cards parados em "Em produção" contam como atraso (educativo)
-  2. Vivianne Inadimplência — regra estrita R1 (multa ≤15%) + R2 (card.criado ≤ data_pag) + R3 (data_pag < data_repasse). N=124 → N=61 INTENCIONAL.
-  3. Caio Comercial — bônus N=3 (continuação 10ª: IM39, IM123, IM135). 15 candidatos novos descartados pela gestora (11 com publicação anterior, 4 entrada direta em ADM).
-  4. Gardênia Cont.ADM — fix de array vazio '[]' em "Criar Card de Vistoria Técnica"
-  5. Rescisão ADM (Assessoras) — início = "Última vez que saiu da fase Caixa de entrada" (não mais "Criado em")
-  + Rescisão Loc. — campo "Data do recebimento das chaves:" como prioridade 1 (refinamento documentado)
 
 ### Média prioridade
 - [ ] **Configurar routines automáticas** na nuvem Anthropic (~30 min):
