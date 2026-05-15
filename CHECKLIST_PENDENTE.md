@@ -1,6 +1,12 @@
 # CHECKLIST PENDENTE — TRK Ranking Experience
 
-Última atualização: 14/05/2026 (após Fase 5 completa)
+Última atualização: 15/05/2026 (GitHub Pages ativado)
+
+## ✅ Concluídas em 15/05/2026
+- [x] Criar organização TRK-Imoveis no GitHub
+- [x] Transferir repositório para a organização
+- [x] Renomear painel/ → docs/ (compatibilidade GitHub Pages)
+- [x] Ativar GitHub Pages — URL: https://trk-imoveis.github.io/trk-ranking-experience/
 
 ## Pendências da 11ª Edição
 
@@ -14,7 +20,6 @@
   + Rescisão Loc. — campo "Data do recebimento das chaves:" como prioridade 1 (refinamento documentado)
 
 ### Média prioridade
-- [x] **Ativar GitHub Pages** — CONCLUÍDO em 15/05/2026. Pasta renomeada painel/ → docs/ via `git mv`. Repo migrado para org TRK-Imoveis. Pendente apenas: ativar manualmente em Settings → Pages → Folder: /docs.
 - [ ] **Configurar routines automáticas** na nuvem Anthropic (~30 min):
   - Snapshot diário 02h
   - Resumo semanal segunda 08h
