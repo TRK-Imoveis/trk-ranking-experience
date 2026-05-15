@@ -683,7 +683,20 @@ Comparativo histórico: 9ª/10ª/11ª Eds têm relatórios detalhados em
 
 ---
 
+## 7. CHANGELOG
+
+| Versão | Data | Alterações |
+|---|---|---|
+| 1.0 | 17/04/2026 | Versão inicial |
+| 2.0 | 28/04/2026 | 30 correções após validação indicador-por-indicador. Reescrita completa. |
+| **3.0** | **29/04/2026** | **7 correções: WhatsApp usa "Tempo de espera após atribuição"; Caio Documentação usa ENTRADA Confecção; Vivi Rescisão ADM = Encerramento <4h (não Repasse); Vivi Cont.Loc voltou 2 indicadores (NIDO+Confecção); Reparos usa Pós-venda (não Concluído); Renovação assessoras usa Saída Contato com proprietário; Resultados de referência atualizados.** |
+| **5.0** | **15/05/2026** | **6 mudanças (9ª–11ª Ed): Marinho cards parados em "Em produção" contam como atraso; Vivianne Inadimplência R1+R2+R3 estritos; Caio bônus persistido em config/bonus_caio.json; Gardênia fix array vazio '[]'; Rescisão ADM início = saída Caixa de entrada; Rescisão Loc. nova prioridade CHAVES RECEBIDAS. Resultados 11ª Ed adicionados em §6. Nova §8 de Infraestrutura de Persistência.** |
+
+---
+
 ## 8. INFRAESTRUTURA DE PERSISTÊNCIA (11ª Ed)
+
+Esta seção documenta os arquivos de configuração e estado introduzidos na 11ª Ed.
 
 Decisões metodológicas persistidas em arquivos JSON versionados no repositório.
 Esta seção documenta cada arquivo, seu propósito e a interface esperada pelo pipeline.
@@ -714,14 +727,3 @@ aparecem ao lado dos automáticos no `procrich_builder.py`.
 Notas de cada edição preservadas com avisos de drift documentados (chaves
 `_aviso_drift_modelo`, `_aviso_drift_modelo_rescisao_adm` etc.). Usado para
 deltas e identificação de mudanças metodológicas.
-
----
-
-## 7. CHANGELOG
-
-| Versão | Data | Alterações |
-|---|---|---|
-| 1.0 | 17/04/2026 | Versão inicial |
-| 2.0 | 28/04/2026 | 30 correções após validação indicador-por-indicador. Reescrita completa. |
-| **3.0** | **29/04/2026** | **7 correções: WhatsApp usa "Tempo de espera após atribuição"; Caio Documentação usa ENTRADA Confecção; Vivi Rescisão ADM = Encerramento <4h (não Repasse); Vivi Cont.Loc voltou 2 indicadores (NIDO+Confecção); Reparos usa Pós-venda (não Concluído); Renovação assessoras usa Saída Contato com proprietário; Resultados de referência atualizados.** |
-| **5.0** | **15/05/2026** | **6 mudanças (9ª–11ª Ed): Marinho cards parados em "Em produção" contam como atraso; Vivianne Inadimplência R1+R2+R3 estritos; Caio bônus persistido em config/bonus_caio.json; Gardênia fix array vazio '[]'; Rescisão ADM início = saída Caixa de entrada; Rescisão Loc. nova prioridade CHAVES RECEBIDAS. Resultados 11ª Ed adicionados em §6. Nova §8 de Infraestrutura de Persistência.** |
