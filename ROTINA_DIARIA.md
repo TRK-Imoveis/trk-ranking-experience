@@ -28,10 +28,20 @@ cd C:\Users\trkim\Documents\trk-ranking-experience
 .\atualizar_painel.ps1
 ```
 
-OU, se preferir comandos manuais:
+O script faz tudo automaticamente em 5 etapas:
+1. **Sincroniza com o GitHub** (puxa mudanças remotas — ex: validação semanal de sexta)
+2. Roda o pipeline
+3. Adiciona arquivos novos
+4. Faz commit
+5. Envia para o GitHub
+
+Ao final mostra: ranking top 5 com deltas vs última atualização + link do painel.
+
+OU, se preferir comandos manuais (mesmo efeito):
 
 ```powershell
 cd C:\Users\trkim\Documents\trk-ranking-experience
+git pull --no-edit --ff-only          # sincronizar antes
 python pipeline/run.py
 git add docs/dados/atual.json
 git commit -m "Atualizar dados $(Get-Date -Format yyyy-MM-dd)"

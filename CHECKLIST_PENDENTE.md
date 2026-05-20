@@ -27,6 +27,7 @@
 
 ## Pendências técnicas de qualidade
 
+- [ ] **Atenção ao editar `atualizar_painel.ps1`**: o arquivo precisa estar salvo com UTF-8 BOM (Byte Order Mark). PowerShell 5.1 lê arquivos sem BOM como Windows-1252 e quebra caracteres acentuados. Ferramentas que strip BOM podem quebrar o script. Se houver erro de parsing, recriar o arquivo com `Set-Content -Encoding UTF8`.
 - [ ] **🔴 ALTA — Corrigir 3 indicadores de horas ÚTEIS com bug latente de duration cumulativo.** Mesmo padrão `(lastTimeOut − firstTimeIn)` corrigido em 19/05/2026 para horas corridas (Rescisão ADM + BackOffice). Para horas úteis, migrar para `duration` muda a semântica (Pipefy reporta tempo corrido). Solução pendente: somar `duration` apenas dos trechos em horário comercial (8h–18h, seg-sex). Funções afetadas:
   - `calc_vivianne_contrato_adm` — Confecção do contrato <2h úteis (`calculate.py`)
   - `calc_assessora_contrato_adm` — Conferência do contrato úteis (`calculate.py`)
