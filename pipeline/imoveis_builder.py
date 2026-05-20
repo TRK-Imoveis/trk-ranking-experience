@@ -395,15 +395,13 @@ def vivi_cadm(df_cont_adm: pd.DataFrame, ref: pd.Timestamp) -> dict:
 
 
 def vivi_resc_adm(df_resc_adm: pd.DataFrame, ref: pd.Timestamp) -> dict:
-    """Vivianne · Rescisão ADM · Encerramento <4h CORRIDO."""
+    """Vivianne · Rescisão ADM · Encerramento <4h CORRIDO (duration cumulativo, espelha calc_vivianne_rescisao_adm)."""
     df = excluir_rascunhos(df_resc_adm)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
-    return _gen_indicador_horas(
+    return _gen_indicador_tempo_col(
         df,
-        "Primeira vez que entrou na fase Encerramento",
-        "Última vez que saiu da fase Encerramento",
+        "Tempo total na fase Encerramento (dias)",
         4, "Vivianne — Resc. ADM: Encerramento <4h ({ok}/{tot})",
-        modo="corrido",
     )
 
 
@@ -886,9 +884,10 @@ def assessora_bo(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict
     df = df[df["Responsáveis"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
     col_in = "Primeira vez que entrou na fase 🚩 Pendência Assessor"
     col_out = "Última vez que saiu da fase 🚩 Pendência Assessor"
-    sub = df.dropna(subset=[col_in, col_out]).copy()
-    horas = (sub[col_out] - sub[col_in]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
+    col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
+    # Usa duration cumulativo (espelha calc_assessora_backoffice — evita inflação por reabertura).
+    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
+    horas = sub[col_dur].astype(float) * 24
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])

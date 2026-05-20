@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-05-20T00:19:56.390380Z",
-    "ref": "2026-05-20T00:18:47.245764+00:00",
+    "geradoEm": "2026-05-20T01:01:35.791077Z",
+    "ref": "2026-05-20T01:00:28.116640+00:00",
     "octadesk_disponivel": true,
     "imobiliar_disponivel": true
   },
@@ -149,14 +149,14 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 4.99,
+      "nota": 5.24,
       "bonus": 62,
       "bonus_proc": "Inadimplência",
       "inds": 14,
       "pts": 68,
       "scores": {
         "Cont. ADM": 3.846,
-        "Rescisão ADM": 2.0,
+        "Rescisão ADM": 4.0,
         "Com. Locação": null,
         "Cont. Locação": 6.094,
         "Rescisão Loc.": 5.75,
@@ -180,11 +180,11 @@
           "meta": "≤2h úteis"
         },
         {
-          "ok": 1,
+          "ok": 2,
           "tot": 5,
-          "pct": 20.0,
+          "pct": 40.0,
           "peso": 10,
-          "score": 2.0,
+          "score": 4.0,
           "nome": "Rescisão ADM — Encerramento <4h",
           "meta": "≤4h corrido"
         },
@@ -306,8 +306,8 @@
       "pontosAten": [
         "Inad: 6.2%",
         "Renov: 11.8%",
-        "RescADM: 20.0%",
-        "Cont.Loc: 34.4%"
+        "Cont.Loc: 34.4%",
+        "Tkts: 34.8%"
       ],
       "pos": 2
     },
@@ -2317,7 +2317,7 @@
       ]
     },
     "vivi_resc_adm": {
-      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (1/5)",
+      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (2/5)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2326,21 +2326,15 @@
       ],
       "rows": [
         [
-          "IM737",
-          "IM737 - QD 201 LT 05 APTO 704 VG 62",
-          "462.9h",
-          "✗"
-        ],
-        [
           "IM1823",
           "IM1823 - SHIS QL 08 CONJ 03 CASA 04",
-          "258.0h",
+          "239.4h",
           "✗"
         ],
         [
-          "IM1353",
-          "IM1353 - CCSW 02 LT 5 BL A APTO 104",
-          "40.4h",
+          "IM737",
+          "IM737 - QD 201 LT 05 APTO 704 VG 62",
+          "30.2h",
           "✗"
         ],
         [
@@ -2353,6 +2347,12 @@
           "IM1827",
           "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
           "1.5h",
+          "✓"
+        ],
+        [
+          "IM1353",
+          "IM1353 - CCSW 02 LT 5 BL A APTO 104",
+          "0.1h",
           "✓"
         ]
       ]
@@ -9213,25 +9213,25 @@
         [
           "IM1824",
           "IM1824 - VK5308  - CLS 108 BLOCO A LOJAS 01, 02 E 03",
-          "837.8h",
+          "821.9h",
           "✗"
         ],
         [
           "IM135",
           "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
-          "793.5h",
-          "✗"
-        ],
-        [
-          "IM1782",
-          "IM1782 - VK5302 - CLN 201 BLOCO C UNIDADE 107",
-          "542.7h",
+          "606.7h",
           "✗"
         ],
         [
           "IM#1325815870",
           "1826",
           "425.6h",
+          "✗"
+        ],
+        [
+          "IM1782",
+          "IM1782 - VK5302 - CLN 201 BLOCO C UNIDADE 107",
+          "351.0h",
           "✗"
         ],
         [
@@ -9427,7 +9427,7 @@
           "cls": "bad"
         },
         {
-          "v": "20.0%",
+          "v": "40.0%",
           "l": "Vivianne Encerramento <4h",
           "cls": "bad"
         },
@@ -9443,14 +9443,14 @@
           "titulo": "Indicadores · Rescisão ADM",
           "full": true,
           "labels": [
-            "Vivianne Encerramento <4h (1/5)",
+            "Vivianne Encerramento <4h (2/5)",
             "Natália Repasse <12h (2/2)",
             "Natália Distrato assinado (1/3)",
             "Gardênia Repasse <12h (1/2)",
             "Gardênia Distrato assinado (0/5)"
           ],
           "data": [
-            20.0,
+            40.0,
             100.0,
             33.3,
             50.0,
@@ -9469,13 +9469,13 @@
           "titulo": "Notas",
           "labels": [
             "Natália",
-            "Gardênia",
-            "Vivianne"
+            "Vivianne",
+            "Gardênia"
           ],
           "data": [
             6.667,
-            2.5,
-            2.0
+            4.0,
+            2.5
           ],
           "colors": [
             "#000",
@@ -9489,9 +9489,9 @@
           "nome": "Encerramento <4h",
           "resp": "Vivianne",
           "meta": "≤4h corrido",
-          "ok": 1,
+          "ok": 2,
           "tot": 5,
-          "pct": 20.0
+          "pct": 40.0
         },
         {
           "nome": "Repasse <12h",

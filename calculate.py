@@ -654,13 +654,15 @@ def calc_vivianne_contrato_adm(df_cont_adm: pd.DataFrame,
 def calc_vivianne_rescisao_adm(df_resc_adm: pd.DataFrame,
                                ref: Optional[datetime] = None) -> dict:
     """Vivianne · Rescisão ADM · Encerramento <4h corrido (peso 10)."""
+    # Usa duration cumulativo (Pipefy phases_history.duration). lastTimeOut-firstTimeIn
+    # inflaria o tempo quando o card sai e volta para Encerramento (pendência financeira etc.).
     df = excluir_rascunhos(df_resc_adm)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_in = "Primeira vez que entrou na fase Encerramento"
     col_out = "Última vez que saiu da fase Encerramento"
-    sub = df.dropna(subset=[col_in, col_out]).copy()
-    horas = (sub[col_out] - sub[col_in]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
+    col_dur = "Tempo total na fase Encerramento (dias)"
+    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
+    horas = sub[col_dur].astype(float) * 24
     ok = int((horas <= 4).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Rescisão ADM — Encerramento <4h"
@@ -1104,9 +1106,11 @@ def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
 
     col_in = "Primeira vez que entrou na fase 🚩 Pendência Assessor"
     col_out = "Última vez que saiu da fase 🚩 Pendência Assessor"
-    sub = df.dropna(subset=[col_in, col_out]).copy()
-    horas = (sub[col_out] - sub[col_in]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
+    col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
+    # Usa duration cumulativo (Pipefy phases_history.duration). lastTimeOut-firstTimeIn
+    # inflaria o tempo quando o card sai e volta para a fase (reaberturas).
+    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
+    horas = sub[col_dur].astype(float) * 24
     ok = int((horas <= 24).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "BackOffice — Pendência <24h"

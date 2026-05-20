@@ -27,6 +27,11 @@
 
 ## Pendências técnicas de qualidade
 
+- [ ] **🔴 ALTA — Corrigir 3 indicadores de horas ÚTEIS com bug latente de duration cumulativo.** Mesmo padrão `(lastTimeOut − firstTimeIn)` corrigido em 19/05/2026 para horas corridas (Rescisão ADM + BackOffice). Para horas úteis, migrar para `duration` muda a semântica (Pipefy reporta tempo corrido). Solução pendente: somar `duration` apenas dos trechos em horário comercial (8h–18h, seg-sex). Funções afetadas:
+  - `calc_vivianne_contrato_adm` — Confecção do contrato <2h úteis (`calculate.py`)
+  - `calc_assessora_contrato_adm` — Conferência do contrato úteis (`calculate.py`)
+  - `assessora_cadm` (drilldown) — Conferência do contrato úteis (`pipeline/imoveis_builder.py`)
+  - Ver detalhes em `config/relatorio_edicao_11.md` → "Correções pós-fechamento — 19/05/2026".
 - [ ] **Investigar 7 boletos "passaram batido"** na Vivianne (cobrados antes do repasse, sem card aberto). Informação operacional útil — pode ser oportunidade perdida ou cliente que paga sem cobrança.
 - [ ] **Reativar Produtividade m²/h do Marinho** quando metas forem recalibradas em conjunto com ele.
 

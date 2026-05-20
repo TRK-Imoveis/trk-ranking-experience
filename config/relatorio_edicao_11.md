@@ -223,3 +223,61 @@ Limitações conhecidas (não-bloqueantes para Fase 5):
 | 4 | Gardênia ⬇ | 4,38 | +0,41 | regra Rescisão ADM + fix array vazio |
 | 5 | Marinho | 3,91 | -0,85 | regra Vistorias (cards parados em "Em produção") |
 
+---
+
+## Correções pós-fechamento — 19/05/2026
+
+### Problema reportado
+O drilldown mostrava tempos absurdos no indicador **Rescisão ADM — Encerramento <4h** da Vivianne: IM737 com 462,9h (19 dias), IM1823 com 258h, IM1353 com 40h. Gestora confirmou que esses números não correspondem à realidade operacional.
+
+### Causa-raiz
+O cálculo usava `lastTimeOut − firstTimeIn` (campos `phases_history` do Pipefy). Quando um card **entra, sai e volta** para a mesma fase (cenário comum em Encerramento e Pendência Assessor), essa diferença engloba TODO o intervalo, incluindo o tempo em que o card estava em **outra** fase. O campo `phases_history.duration` (cumulativo, somente dentro da fase) já estava sendo extraído pelo pipeline mas não era usado por esses indicadores.
+
+Marcador inequívoco: quando `firstTimeIn ≠ lastTimeIn`, o card passou pela fase mais de uma vez → diff superestima o tempo.
+
+### Indicadores corrigidos (horas CORRIDAS)
+
+| Função | Arquivo | Antes | Depois |
+|---|---|---|---|
+| `calc_vivianne_rescisao_adm` | `calculate.py` | `(col_out − col_in)` | `"Tempo total na fase Encerramento (dias)" × 24` |
+| `vivi_resc_adm` (drilldown) | `pipeline/imoveis_builder.py` | `_gen_indicador_horas` | `_gen_indicador_tempo_col` |
+| `calc_assessora_backoffice` | `calculate.py` | `(col_out − col_in)` | `"Tempo total na fase 🚩 Pendência Assessor (dias)" × 24` |
+| `assessora_bo` (drilldown) | `pipeline/imoveis_builder.py` | diff inline | duration inline |
+
+### Indicadores PAUSADOS (horas ÚTEIS — decisão técnica futura)
+
+Mesmo padrão de risco, mas migrar para `duration` muda a semântica (Pipefy reporta tempo corrido, não útil). Precisam de tratamento: somar `duration` apenas dos trechos em horário útil (8h–18h, seg-sex).
+
+- `calc_vivianne_contrato_adm` — Confecção do contrato <2h úteis
+- `calc_assessora_contrato_adm` / `assessora_cadm` (drilldown) — Conferência do contrato úteis
+
+### Impacto nas notas finais (snapshot 19/05/2026)
+
+| Pessoa | Antes | Depois | Δ |
+|---|---:|---:|---:|
+| Caio | 5,38 | 5,38 | — |
+| Vivianne | **4,99** | **5,24** | **+0,25** |
+| Natália | 4,75 | 4,75 | — |
+| Gardênia | 4,44 | 4,44 | — |
+| Marinho | 3,82 | 3,82 | — |
+
+Natália e Gardênia não tiveram alteração de nota: mesmo com o cálculo correto, todos os cards delas ainda passam de 24h na fase Pendência Assessor (problema operacional real, não bug de medição).
+
+### Impacto por IM — Rescisão ADM Vivianne
+
+| IM | Antes | Depois | Status antes | Status depois |
+|---|---:|---:|:---:|:---:|
+| IM737  | 462,9h | **30,2h** | ✗ | ✗ |
+| IM1823 | 258,0h | **239,4h** | ✗ | ✗ |
+| IM1353 | 40,4h  | **0,08h** | ✗ | **✓** (era falso-negativo) |
+| IM1206 | 5,2h   | 5,2h     | ✗ | ✗ (sem reabertura) |
+| IM1827 | 1,5h   | 1,5h     | ✓ | ✓ (sem reabertura) |
+
+### Impacto por IM — BackOffice Pendência Assessor (cards onde houve reabertura)
+
+| Pessoa | IM | Antes | Depois |
+|---|---|---:|---:|
+| Gardênia | IM1824 | 837,8h | **821,9h** |
+| Gardênia | IM135  | 793,5h | **606,7h** |
+| Gardênia | IM1782 | 542,7h | **351,0h** |
+
