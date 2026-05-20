@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-05-20T00:04:52.820115Z",
-    "ref": "2026-05-20T00:03:32.492540+00:00",
+    "geradoEm": "2026-05-20T00:19:56.390380Z",
+    "ref": "2026-05-20T00:18:47.245764+00:00",
     "octadesk_disponivel": true,
     "imobiliar_disponivel": true
   },
@@ -27,8 +27,8 @@
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 6.716,
-        "Ticket": 6.19
+        "WhatsApp": 6.694,
+        "Ticket": 6.243
       },
       "detalhes": [
         {
@@ -95,45 +95,45 @@
           "meta": ">90d antes do venc"
         },
         {
-          "ok": 1194,
-          "tot": 2396,
-          "pct": 49.8,
+          "ok": 1190,
+          "tot": 2415,
+          "pct": 49.3,
           "peso": 4,
-          "score": 1.993,
+          "score": 1.971,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 139,
-          "tot": 154,
-          "pct": 90.3,
+          "ok": 143,
+          "tot": 158,
+          "pct": 90.5,
           "peso": 3,
-          "score": 2.708,
+          "score": 2.715,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
         {
-          "ok": 749,
-          "tot": 1738,
-          "pct": 43.1,
+          "ok": 790,
+          "tot": 1776,
+          "pct": 44.5,
           "peso": 4,
-          "score": 1.724,
+          "score": 1.779,
           "nome": "Tickets — SLA <4h úteis",
           "meta": "≤4h úteis"
         },
         {
-          "ok": 20,
-          "tot": 23,
-          "pct": 87.0,
+          "ok": 19,
+          "tot": 22,
+          "pct": 86.4,
           "peso": 3,
-          "score": 2.609,
+          "score": 2.591,
           "nome": "Tickets — Avaliações positivas",
           "meta": "% positivas"
         }
       ],
       "pontosFort": [
-        "WA: 90.3%",
-        "Tkts: 87.0%",
+        "WA: 90.5%",
+        "Tkts: 86.4%",
         "Cont.Loc: 83.3%",
         "Cont.Loc: 60.0%"
       ],
@@ -149,8 +149,8 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 5.02,
-      "bonus": 61,
+      "nota": 4.99,
+      "bonus": 62,
       "bonus_proc": "Inadimplência",
       "inds": 14,
       "pts": 68,
@@ -162,12 +162,12 @@
         "Rescisão Loc.": 5.75,
         "Reparos": null,
         "Renovação": 3.088,
-        "Inadimplência": 9.794,
+        "Inadimplência": 9.798,
         "Vistorias": null,
         "BackOffice": 5.903,
         "DIRF/DARF": null,
         "WhatsApp": null,
-        "Ticket": 3.68
+        "Ticket": 3.478
       },
       "detalhes": [
         {
@@ -288,11 +288,11 @@
           "meta": "≤5d úteis"
         },
         {
-          "ok": 106,
-          "tot": 288,
-          "pct": 36.8,
+          "ok": 97,
+          "tot": 279,
+          "pct": 34.8,
           "peso": 4,
-          "score": 1.472,
+          "score": 1.391,
           "nome": "Tickets — SLA <4h úteis",
           "meta": "≤4h úteis"
         }
@@ -315,7 +315,7 @@
       "id": "natalia",
       "nome": "Natália Teixeira",
       "cargo": "Assessora",
-      "nota": 4.74,
+      "nota": 4.75,
       "bonus": 5,
       "bonus_proc": "Cont. ADM",
       "inds": 15,
@@ -332,8 +332,8 @@
         "Vistorias": null,
         "BackOffice": 0.0,
         "DIRF/DARF": 4.516,
-        "WhatsApp": 9.01,
-        "Ticket": 6.965
+        "WhatsApp": 9.03,
+        "Ticket": 7.023
       },
       "detalhes": [
         {
@@ -436,47 +436,47 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1805,
-          "tot": 2091,
-          "pct": 86.3,
+          "ok": 1812,
+          "tot": 2095,
+          "pct": 86.5,
           "peso": 4,
-          "score": 3.453,
+          "score": 3.46,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 137,
-          "tot": 144,
-          "pct": 95.1,
+          "ok": 144,
+          "tot": 151,
+          "pct": 95.4,
           "peso": 3,
-          "score": 2.854,
+          "score": 2.861,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
         {
-          "ok": 169,
-          "tot": 281,
-          "pct": 60.1,
+          "ok": 179,
+          "tot": 296,
+          "pct": 60.5,
           "peso": 3,
-          "score": 1.804,
+          "score": 1.814,
           "nome": "Tickets — SLA <4h úteis",
           "meta": "≤4h úteis"
         },
         {
-          "ok": 19,
-          "tot": 24,
-          "pct": 79.2,
+          "ok": 20,
+          "tot": 25,
+          "pct": 80.0,
           "peso": 3,
-          "score": 2.375,
+          "score": 2.4,
           "nome": "Tickets — Avaliações positivas",
           "meta": "% positivas"
         }
       ],
       "pontosFort": [
         "RescADM: 100.0%",
-        "WA: 95.1%",
-        "WA: 86.3%",
-        "Tkts: 79.2%"
+        "WA: 95.4%",
+        "WA: 86.5%",
+        "Tkts: 80.0%"
       ],
       "pontosAten": [
         "BO: 0.0%",
@@ -490,7 +490,7 @@
       "id": "gardenia",
       "nome": "Gardênia",
       "cargo": "Assessora",
-      "nota": 4.37,
+      "nota": 4.44,
       "bonus": 5,
       "bonus_proc": "Cont. ADM",
       "inds": 15,
@@ -507,8 +507,8 @@
         "Vistorias": null,
         "BackOffice": 0.0,
         "DIRF/DARF": 3.333,
-        "WhatsApp": 8.741,
-        "Ticket": 4.932
+        "WhatsApp": 8.769,
+        "Ticket": 5.478
       },
       "detalhes": [
         {
@@ -611,47 +611,47 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1791,
-          "tot": 2190,
-          "pct": 81.8,
+          "ok": 1801,
+          "tot": 2193,
+          "pct": 82.1,
           "peso": 4,
-          "score": 3.271,
+          "score": 3.285,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 169,
-          "tot": 178,
-          "pct": 94.9,
+          "ok": 175,
+          "tot": 184,
+          "pct": 95.1,
           "peso": 3,
-          "score": 2.848,
+          "score": 2.853,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
         {
-          "ok": 73,
+          "ok": 77,
           "tot": 202,
-          "pct": 36.1,
+          "pct": 38.1,
           "peso": 3,
-          "score": 1.084,
+          "score": 1.144,
           "nome": "Tickets — SLA <4h úteis",
           "meta": "≤4h úteis"
         },
         {
           "ok": 5,
-          "tot": 8,
-          "pct": 62.5,
+          "tot": 7,
+          "pct": 71.4,
           "peso": 3,
-          "score": 1.875,
+          "score": 2.143,
           "nome": "Tickets — Avaliações positivas",
           "meta": "% positivas"
         }
       ],
       "pontosFort": [
-        "WA: 94.9%",
+        "WA: 95.1%",
         "RescLoc: 88.9%",
-        "WA: 81.8%",
-        "Reparos: 69.1%"
+        "WA: 82.1%",
+        "Tkts: 71.4%"
       ],
       "pontosAten": [
         "Cont.ADM: 0.0%",
@@ -6241,7 +6241,7 @@
       ]
     },
     "vivi_bonus_inadim": {
-      "titulo": "Vivianne — Inadim.: Boletos cobrados antes do repasse ★ (N=61 de 138)",
+      "titulo": "Vivianne — Inadim.: Boletos cobrados antes do repasse ★ (N=62 de 141)",
       "cols": [
         "Categoria",
         "Quantidade",
@@ -6250,7 +6250,7 @@
       "rows": [
         [
           "✓ Cobrados antes do repasse com card (entram em N)",
-          "61",
+          "62",
           "✓"
         ],
         [
@@ -6265,7 +6265,7 @@
         ],
         [
           "✗ Cobrados após o repasse",
-          "15",
+          "17",
           "✗"
         ]
       ]
@@ -6704,13 +6704,13 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1194/2396",
-          "49.8%"
+          "1190/2415",
+          "49.3%"
         ],
         [
           "Avaliações positivas",
-          "139/154",
-          "90.3%"
+          "143/158",
+          "90.5%"
         ]
       ]
     },
@@ -6724,13 +6724,13 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "749/1738",
-          "43.1%"
+          "790/1776",
+          "44.5%"
         ],
         [
           "Avaliações positivas",
-          "20/23",
-          "87.0%"
+          "19/22",
+          "86.4%"
         ]
       ]
     },
@@ -6744,13 +6744,13 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1805/2091",
-          "86.3%"
+          "1812/2095",
+          "86.5%"
         ],
         [
           "Avaliações positivas",
-          "137/144",
-          "95.1%"
+          "144/151",
+          "95.4%"
         ]
       ]
     },
@@ -6764,13 +6764,13 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "169/281",
-          "60.1%"
+          "179/296",
+          "60.5%"
         ],
         [
           "Avaliações positivas",
-          "19/24",
-          "79.2%"
+          "20/25",
+          "80.0%"
         ]
       ]
     },
@@ -6784,13 +6784,13 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1791/2190",
-          "81.8%"
+          "1801/2193",
+          "82.1%"
         ],
         [
           "Avaliações positivas",
-          "169/178",
-          "94.9%"
+          "175/184",
+          "95.1%"
         ]
       ]
     },
@@ -6804,13 +6804,13 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "73/202",
-          "36.1%"
+          "77/202",
+          "38.1%"
         ],
         [
           "Avaliações positivas",
-          "5/8",
-          "62.5%"
+          "5/7",
+          "71.4%"
         ]
       ]
     },
@@ -6824,8 +6824,8 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "106/288",
-          "36.8%"
+          "97/279",
+          "34.8%"
         ]
       ]
     },
@@ -10186,7 +10186,7 @@
           "cls": "bad"
         },
         {
-          "v": "★ 61",
+          "v": "★ 62",
           "l": "Boletos antes repasse",
           "cls": ""
         }
@@ -10219,7 +10219,7 @@
             "Vivianne"
           ],
           "data": [
-            9.794
+            9.798
           ],
           "colors": [
             "#000"
@@ -10263,7 +10263,7 @@
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 61 boletos cobrados antes do repasse."
+          "txt": "★ Bônus: 62 boletos cobrados antes do repasse."
         }
       ]
     },
@@ -10573,22 +10573,22 @@
       "titulo": "Tickets (Octadesk)",
       "kpis": [
         {
-          "v": "43.1%",
+          "v": "44.5%",
           "l": "Caio SLA <4h úteis",
           "cls": "bad"
         },
         {
-          "v": "79.2%",
+          "v": "80.0%",
           "l": "Natália Avaliações positivas",
           "cls": "ok"
         },
         {
-          "v": "36.8%",
+          "v": "34.8%",
           "l": "Vivianne SLA <4h úteis",
           "cls": "bad"
         },
         {
-          "v": "62.5%",
+          "v": "71.4%",
           "l": "Gardênia Avaliações positivas",
           "cls": "ok"
         }
@@ -10599,22 +10599,22 @@
           "titulo": "Indicadores · Ticket",
           "full": true,
           "labels": [
-            "Caio SLA <4h úteis (749/1738)",
-            "Caio Avaliações positivas (20/23)",
-            "Vivianne SLA <4h úteis (106/288)",
-            "Natália SLA <4h úteis (169/281)",
-            "Natália Avaliações positivas (19/24)",
-            "Gardênia SLA <4h úteis (73/202)",
-            "Gardênia Avaliações positivas (5/8)"
+            "Caio SLA <4h úteis (790/1776)",
+            "Caio Avaliações positivas (19/22)",
+            "Vivianne SLA <4h úteis (97/279)",
+            "Natália SLA <4h úteis (179/296)",
+            "Natália Avaliações positivas (20/25)",
+            "Gardênia SLA <4h úteis (77/202)",
+            "Gardênia Avaliações positivas (5/7)"
           ],
           "data": [
-            43.1,
-            87.0,
-            36.8,
-            60.1,
-            79.2,
-            36.1,
-            62.5
+            44.5,
+            86.4,
+            34.8,
+            60.5,
+            80.0,
+            38.1,
+            71.4
           ],
           "metas": [
             100,
@@ -10636,10 +10636,10 @@
             "Vivianne"
           ],
           "data": [
-            6.965,
-            6.19,
-            4.932,
-            3.68
+            7.023,
+            6.243,
+            5.478,
+            3.478
           ],
           "colors": [
             "#000",
@@ -10654,71 +10654,71 @@
           "nome": "SLA <4h úteis",
           "resp": "Caio",
           "meta": "≤4h úteis",
-          "ok": 749,
-          "tot": 1738,
-          "pct": 43.1
+          "ok": 790,
+          "tot": 1776,
+          "pct": 44.5
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Caio",
           "meta": "% positivas",
-          "ok": 20,
-          "tot": 23,
-          "pct": 87.0
+          "ok": 19,
+          "tot": 22,
+          "pct": 86.4
         },
         {
           "nome": "SLA <4h úteis",
           "resp": "Vivianne",
           "meta": "≤4h úteis",
-          "ok": 106,
-          "tot": 288,
-          "pct": 36.8
+          "ok": 97,
+          "tot": 279,
+          "pct": 34.8
         },
         {
           "nome": "SLA <4h úteis",
           "resp": "Natália",
           "meta": "≤4h úteis",
-          "ok": 169,
-          "tot": 281,
-          "pct": 60.1
+          "ok": 179,
+          "tot": 296,
+          "pct": 60.5
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Natália",
           "meta": "% positivas",
-          "ok": 19,
-          "tot": 24,
-          "pct": 79.2
+          "ok": 20,
+          "tot": 25,
+          "pct": 80.0
         },
         {
           "nome": "SLA <4h úteis",
           "resp": "Gardênia",
           "meta": "≤4h úteis",
-          "ok": 73,
+          "ok": 77,
           "tot": 202,
-          "pct": 36.1
+          "pct": 38.1
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Gardênia",
           "meta": "% positivas",
           "ok": 5,
-          "tot": 8,
-          "pct": 62.5
+          "tot": 7,
+          "pct": 71.4
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Caio lidera Avaliações positivas: 87.0%."
+          "txt": "Caio lidera Avaliações positivas: 86.4%."
         },
         {
           "tipo": "neg",
-          "txt": "Gardênia SLA <4h úteis: 36.1% — gargalo do processo."
+          "txt": "Vivianne SLA <4h úteis: 34.8% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 2564 cards no período."
+          "txt": "Volume de 2607 cards no período."
         }
       ]
     },
@@ -10727,17 +10727,17 @@
       "titulo": "WhatsApp (Octadesk)",
       "kpis": [
         {
-          "v": "49.8%",
+          "v": "49.3%",
           "l": "Caio Resposta ≤5min",
           "cls": "bad"
         },
         {
-          "v": "86.3%",
+          "v": "86.5%",
           "l": "Natália Resposta ≤5min",
           "cls": "ok"
         },
         {
-          "v": "81.8%",
+          "v": "82.1%",
           "l": "Gardênia Resposta ≤5min",
           "cls": "ok"
         },
@@ -10753,20 +10753,20 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Caio Resposta ≤5min (1194/2396)",
-            "Caio Avaliações positivas (139/154)",
-            "Natália Resposta ≤5min (1805/2091)",
-            "Natália Avaliações positivas (137/144)",
-            "Gardênia Resposta ≤5min (1791/2190)",
-            "Gardênia Avaliações positivas (169/178)"
+            "Caio Resposta ≤5min (1190/2415)",
+            "Caio Avaliações positivas (143/158)",
+            "Natália Resposta ≤5min (1812/2095)",
+            "Natália Avaliações positivas (144/151)",
+            "Gardênia Resposta ≤5min (1801/2193)",
+            "Gardênia Avaliações positivas (175/184)"
           ],
           "data": [
-            49.8,
-            90.3,
-            86.3,
-            95.1,
-            81.8,
-            94.9
+            49.3,
+            90.5,
+            86.5,
+            95.4,
+            82.1,
+            95.1
           ],
           "metas": [
             100,
@@ -10786,9 +10786,9 @@
             "Caio"
           ],
           "data": [
-            9.01,
-            8.741,
-            6.716
+            9.03,
+            8.769,
+            6.694
           ],
           "colors": [
             "#000",
@@ -10802,63 +10802,63 @@
           "nome": "Resposta ≤5min",
           "resp": "Caio",
           "meta": "≤5min",
-          "ok": 1194,
-          "tot": 2396,
-          "pct": 49.8
+          "ok": 1190,
+          "tot": 2415,
+          "pct": 49.3
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Caio",
           "meta": "% positivas",
-          "ok": 139,
-          "tot": 154,
-          "pct": 90.3
+          "ok": 143,
+          "tot": 158,
+          "pct": 90.5
         },
         {
           "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
-          "ok": 1805,
-          "tot": 2091,
-          "pct": 86.3
+          "ok": 1812,
+          "tot": 2095,
+          "pct": 86.5
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Natália",
           "meta": "% positivas",
-          "ok": 137,
-          "tot": 144,
+          "ok": 144,
+          "tot": 151,
+          "pct": 95.4
+        },
+        {
+          "nome": "Resposta ≤5min",
+          "resp": "Gardênia",
+          "meta": "≤5min",
+          "ok": 1801,
+          "tot": 2193,
+          "pct": 82.1
+        },
+        {
+          "nome": "Avaliações positivas",
+          "resp": "Gardênia",
+          "meta": "% positivas",
+          "ok": 175,
+          "tot": 184,
           "pct": 95.1
-        },
-        {
-          "nome": "Resposta ≤5min",
-          "resp": "Gardênia",
-          "meta": "≤5min",
-          "ok": 1791,
-          "tot": 2190,
-          "pct": 81.8
-        },
-        {
-          "nome": "Avaliações positivas",
-          "resp": "Gardênia",
-          "meta": "% positivas",
-          "ok": 169,
-          "tot": 178,
-          "pct": 94.9
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Avaliações positivas: 95.1%."
+          "txt": "Natália lidera Avaliações positivas: 95.4%."
         },
         {
           "tipo": "neg",
-          "txt": "Caio Resposta ≤5min: 49.8% — gargalo do processo."
+          "txt": "Caio Resposta ≤5min: 49.3% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 7153 cards no período."
+          "txt": "Volume de 7196 cards no período."
         }
       ]
     }
