@@ -49,6 +49,26 @@
 - [ ] **Validar candidatos a bônus Caio** (se houver novos IMs na lista pendente)
 - [ ] **Commit + push** com mensagem da edição
 
+## ⚠️ Armadilhas técnicas conhecidas
+
+Aprendizados consolidados — reler antes de mexer em regras de cálculo ou auditar IMs.
+
+### Armadilha 1 — Duplicação `calculate.py` / `pipeline/imoveis_builder.py`
+A lógica do teste de aprovação (✓/✗) está **duplicada em 2 lugares**:
+- `calculate.py` → usado para a **PONTUAÇÃO** (nota do indicador).
+- `pipeline/imoveis_builder.py` → usado para o **DRILLDOWN** (lista de cards no painel).
+
+Mudar uma SEM mudar a outra gera inconsistência drilldown↔pontuação (um card aparece ✗ na lista mas conta como ✓ na nota, ou vice-versa).
+
+**Procedimento:** sempre que alterar uma regra de aprovação (meta, tolerância, janela, filtro), verificar e atualizar os DOIS arquivos. Descoberto em 27/05/2026 ao aplicar a margem de tolerância (era a causa-raiz da contradição do IM1598).
+
+### Armadilha 2 — Cards homônimos no Pipefy (mesmo IM, vários cards)
+Imóveis recorrentes podem ter **múltiplos cards com o mesmo IM no título** ao longo do tempo (rescisões repetidas, troca de proprietário, recadastros etc.). Apenas o card da edição vigente entra no cálculo, mas os antigos poluem a auditoria.
+
+Exemplo (27/05/2026): **IM1598** tinha 3 cards no pipe Rescisão de Locação — 2 de 2024 (Luiz Gustavo) + 1 de 2026 (Natália). Só o de 2026 entra no cálculo.
+
+**Procedimento:** ao investigar um IM específico, SEMPRE conferir se há múltiplos cards no pipe (filtrar por título + olhar `Criado em` e `Assessor`) antes de assumir qual é o relevante.
+
 ---
 
 **Como retomar:** abrir Claude Code com `claude --resume afc237db-430c-43c3-9826-f7e7ba90eac1` ou começar nova sessão e ler este arquivo.
