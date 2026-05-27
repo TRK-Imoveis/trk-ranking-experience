@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 from calculate import (
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
-    horas_uteis, CUTOFF_CONT_ADM_CAIO_FIXO,
+    horas_uteis, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
 )
@@ -129,9 +129,9 @@ def caio_inicio(df_comercial: pd.DataFrame, ref: pd.Timestamp) -> dict:
             _im_label(r),
             r["Título"],
             _fmt_horas(h),
-            "✓" if h <= 24 else "✗",
+            "✓" if h <= _meta_tol(24) else "✗",
         ])
-    ok = int((horas <= 24).sum())
+    ok = int((horas <= _meta_tol(24)).sum())
     return {
         "titulo": f"Caio — Comercial: Início processo <24h ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
@@ -160,9 +160,9 @@ def caio_anuncio(df_comercial: pd.DataFrame, ref: pd.Timestamp) -> dict:
             _im_label(r),
             r["Título"],
             _fmt_horas(h) if pd.notna(h) else "—",
-            "✓" if (pd.notna(h) and h <= 72) else "✗",
+            "✓" if (pd.notna(h) and h <= _meta_tol(72)) else "✗",
         ])
-    ok = int((horas <= 72).sum())
+    ok = int((horas <= _meta_tol(72)).sum())
     return {
         "titulo": f"Caio — Comercial: Anúncio publicado <72h ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
@@ -283,7 +283,7 @@ def caio_docs(df_cont_loc: pd.DataFrame, ref: pd.Timestamp) -> dict:
         h = horas_uteis(r["Criado em"], r[col_conf_in])
         rows.append([
             _im_label(r), r["Título"],
-            _fmt_horas(h), "✓" if h <= 24 else "✗",
+            _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗",
         ])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
@@ -355,7 +355,7 @@ def _gen_indicador_horas(df: pd.DataFrame, col_in: str, col_out: str,
         horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= meta_h else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(meta_h) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": titulo.format(ok=ok, tot=len(sub)),
@@ -372,7 +372,7 @@ def _gen_indicador_tempo_col(df: pd.DataFrame, col_tempo_dias: str, meta_h: floa
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         end_col = _endereco_from_row(r) if cols_endereco else r["Título"]
-        rows.append([_im_label(r), end_col, _fmt_horas(h), "✓" if h <= meta_h else "✗"])
+        rows.append([_im_label(r), end_col, _fmt_horas(h), "✓" if h <= _meta_tol(meta_h) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": titulo.format(ok=ok, tot=len(sub)),
@@ -473,7 +473,7 @@ def vivi_ren_final(df_renov: pd.DataFrame, ref: pd.Timestamp) -> dict:
     horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= 16 else "✗"])
+        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= _meta_tol(16) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"Vivianne — Renovação: Finalização <16h ({ok}/{len(sub)})",
@@ -492,7 +492,7 @@ def vivi_cob(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"Vivianne — Inadim.: Cobrança <24h ({ok}/{len(sub)})",
@@ -554,7 +554,7 @@ def vivi_bo_concl(df_bo: pd.DataFrame, ref: pd.Timestamp) -> dict:
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"Vivianne — BackOffice: Concluído <24h ({ok}/{len(sub)})",
@@ -640,7 +640,7 @@ def assessora_cadm(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp)
     horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 2 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(2) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — Cont. ADM: Conferência ≤2h ({ok}/{len(sub)})",
@@ -691,7 +691,7 @@ def assessora_resc_adm_rep(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Ti
     rows = []
     for (_, r), ini in zip(sub.iterrows(), inicio):
         h = horas_uteis(ini, r[col_rep])
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 12 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(12) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Repasse <12h ({ok}/{len(sub)})",
@@ -759,7 +759,7 @@ def assessora_rl_prop(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timesta
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — Resc. Loc.: Boleto prop <24h ({ok}/{len(sub)})",
@@ -802,7 +802,7 @@ def assessora_rep_orc(df_rep: pd.DataFrame, assessora: str, ref: pd.Timestamp) -
     horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_orc]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 4 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(4) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — Reparos: Orçamento <4h ({ok}/{len(sub)})",
@@ -890,7 +890,7 @@ def assessora_bo(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict
     horas = sub[col_dur].astype(float) * 24
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — BackOffice: Pendência <24h ({ok}/{len(sub)})",
@@ -943,7 +943,7 @@ def mar_laudo(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
     horas = sub.apply(lambda r: horas_uteis(r[col_vfim], r[col_prod_out]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"Marinho — Vistorias: Laudo <24h ({ok}/{len(sub)})",
@@ -962,7 +962,7 @@ def mar_cont(df_cont: pd.DataFrame, ref: pd.Timestamp) -> dict:
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= 24 else "✗"])
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"Marinho — Contestações: <24h ({ok}/{len(sub)})",

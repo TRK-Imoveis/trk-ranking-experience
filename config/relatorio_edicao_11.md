@@ -281,3 +281,75 @@ Natália e Gardênia não tiveram alteração de nota: mesmo com o cálculo corr
 | Gardênia | IM135  | 793,5h | **606,7h** |
 | Gardênia | IM1782 | 542,7h | **351,0h** |
 
+---
+
+## Correção pós-fechamento — 27/05/2026 — Margem de Tolerância em Indicadores de HORAS
+
+### Justificativa
+O caso **IM1598** (Natália · Rescisão Loc. · Boleto prop <24h) levou **24h02min (24,05h)** — estourou a meta de 24h por ~3 minutos, mas era penalizado exatamente igual a um caso de 30h. A gestora aprovou (27/05/2026) uma **margem de tolerância de ~2% da meta** para absorver ruído operacional de poucos minutos, sem afrouxar metas de forma material.
+
+### Regra aprovada
+Tolerância somada à meta, **na mesma unidade** do tempo medido (corrida se a meta é corrida, útil se a meta é útil):
+
+| Meta | Tolerância | Passa se tempo ≤ |
+|---|---|---|
+| 2h  | +5 min  | 2h05 |
+| 4h  | +10 min | 4h10 |
+| 12h | +14 min | 12h14 |
+| 16h | +19 min | 16h19 |
+| 24h | +30 min | 24h30 |
+| 72h | +86 min | 73h26 |
+
+Centralizada na constante `TOLERANCIAS` no topo de `calculate.py`; aplicada via helper `_meta_tol(meta)`.
+
+### Aplicação
+- **21 indicadores de horas** (corridas e úteis) em `calculate.py`.
+- **17 drilldowns** correspondentes em `pipeline/imoveis_builder.py` — para que o ✓/✗ do drilldown bata com a pontuação (mesma origem do problema do IM1598).
+
+### Exceções (tolerância NÃO aplicada)
+- Indicadores em **dias** (ex.: Boleto final <15d, Pós-venda ≤7d, Ocupação <30d, CredPago ≤15d…).
+- **BackOffice — Troca Titularidade <5d** (calculado em horas úteis, mas conceitualmente em dias).
+- **WhatsApp — Resposta ≤5min** (minutos).
+- **Vistorias — Produtividade ≥32 m²/h** (razão).
+- Indicadores em **%** (avaliações WhatsApp/Tickets).
+
+### Impacto nas notas finais (snapshot 27/05/2026, ref fixa = baseline)
+
+| Pessoa | Antes | Depois | Δ |
+|---|---:|---:|---:|
+| Caio | 5,40 | **5,43** | +0,03 |
+| Vivianne | 5,38 | **5,42** | +0,04 |
+| Natália | 4,88 | **4,93** | +0,05 |
+| Gardênia | 4,53 | **4,53** | +0,00 |
+| Marinho | 3,84 | **3,94** | +0,10 |
+
+Ranking inalterado. **BASELINE_9 (10ª Ed) NÃO foi alterado** — esta é uma correção pós-fechamento.
+
+### Cards que mudaram de ✗ para ✓ (22 no total)
+
+Cards de imóvel (5):
+
+| Pessoa | Indicador | IM | Tempo real |
+|---|---|---|---:|
+| Caio | Comercial — Início <24h | IM357 | 24,12h |
+| Caio | Cont. Loc. — Documentação <24h | IM391 | 24,25h |
+| Vivianne | Rescisão Loc. — Levant. Taxas Prop <2h | IM1783 | 2,004h |
+| Natália | Rescisão Loc. — Boleto prop <24h | **IM1598** | 24,05h |
+| Marinho | Laudos ≤24h | IM1801 | 24,35h |
+
+Tickets SLA <4h úteis (17 tickets): Caio +10, Vivianne +3, Natália +2, Gardênia +2.
+
+### Indicador a indicador (ok/tot)
+
+| Pessoa | Indicador | Antes | Depois |
+|---|---|---:|---:|
+| Caio | Comercial — Início <24h | 7/41 | 8/41 |
+| Caio | Cont. Loc. — Documentação <24h | 25/41 | 26/41 |
+| Caio | Tickets — SLA <4h | 803/1811 | 813/1811 |
+| Vivianne | Rescisão Loc. — Levant. Prop <2h | 12/22 | 13/22 |
+| Vivianne | Tickets — SLA <4h | 104/287 | 107/287 |
+| Natália | Rescisão Loc. — Boleto prop <24h | 5/8 | 6/8 |
+| Natália | Tickets — SLA <4h | 186/304 | 188/304 |
+| Gardênia | Tickets — SLA <4h | 74/197 | 76/197 |
+| Marinho | Laudos ≤24h | 29/49 | 30/49 |
+

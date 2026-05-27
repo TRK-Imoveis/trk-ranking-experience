@@ -1,6 +1,10 @@
 # CHECKLIST PENDENTE — TRK Ranking Experience
 
-Última atualização: 15/05/2026 (Manual v5 publicado)
+Última atualização: 27/05/2026 (margem de tolerância em indicadores de horas)
+
+## ✅ Concluídas em 27/05/2026
+- [x] Investigar IM1598 (Rescisão Loc Natália) — diagnóstico: estouro de 3 min vs meta de 24h.
+- [x] Aplicar margem de tolerância (~2%) em indicadores de horas (21 funções + 17 drilldowns).
 
 ## ✅ Concluídas em 15/05/2026
 - [x] Criar organização TRK-Imoveis no GitHub

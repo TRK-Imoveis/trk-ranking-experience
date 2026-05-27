@@ -143,6 +143,23 @@ Antes de calcular qualquer indicador de Ticket, aplicar TODAS estas exclusões:
 | Gardênia | `Gardênia` | `Gardênia` (ou contains 'Gard') |
 | Vivianne | **EXCLUÍDA do WhatsApp** | `Vivianne Fontes` ou `VIVIANNE FONTES` |
 
+### 3.12 Margem de tolerância em indicadores de HORAS
+- Aprovada pela gestora em **27/05/2026** (correção pós-fechamento da 11ª Ed; motivada pelo IM1598, que estourou a meta de 24h por ~3 min).
+- Aplica-se SOMENTE a indicadores cuja meta é em **horas** (corridas OU úteis). Um card que estoura a meta por poucos minutos não deve pontuar igual a um atraso grande.
+- A margem é somada à meta, **na mesma unidade** do tempo medido (corrida com corrida, útil com útil):
+
+| Meta | Margem | Passa se tempo ≤ |
+|---|---|---|
+| 2h  | +5 min  | 2h05 |
+| 4h  | +10 min | 4h10 |
+| 12h | +14 min | 12h14 |
+| 16h | +19 min | 16h19 |
+| 24h | +30 min | 24h30 |
+| 72h | +86 min | 73h26 |
+
+- Implementação: constante `TOLERANCIAS` + helper `_meta_tol(meta)` no topo de `calculate.py`; replicada nos drilldowns de `pipeline/imoveis_builder.py`.
+- **NÃO se aplica a:** metas em dias (<7d, <15d, <30d…), em % (avaliações), em minutos (WhatsApp ≤5min), em razão (Produtividade m²/h), nem ao indicador **BackOffice Troca Titularidade <5d** (medido em horas úteis, mas conceitualmente em dias).
+
 ---
 
 ## 4. INDICADORES POR COLABORADOR

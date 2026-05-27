@@ -53,6 +53,37 @@ CUTOFF_CONT_ADM_CAIO_FIXO = datetime(2026, 3, 1)
 DIRF_DARF_CUTOFF = datetime(2026, 5, 29)  # prorrogação oficial 2026
 DIRF_DARF_ANO_BASE = 2025
 
+# ─────────────────────────────────────────────────────────────────────
+# MARGEM DE TOLERÂNCIA EM INDICADORES DE HORAS
+# (correção pós-fechamento 11ª Ed — aprovada pela gestora em 27/05/2026)
+#
+# Motivação: um card que estoura a meta por poucos minutos (ex.: IM1598 com
+# 24,05h na meta de 24h — atraso de ~3 min) era penalizado igual a um caso de
+# 30h. A tolerância (~2% da meta) absorve ruído operacional de minutos.
+#
+# Regra: aplica-se SOMENTE a indicadores cuja meta é em HORAS (corridas OU úteis).
+# A tolerância está na MESMA unidade do tempo medido (se h é útil, a margem é útil).
+# NÃO se aplica a metas em dias, %, minutos ou razão (m²/h) — ver _meta_tol.
+# Chave do dict = meta em horas; valor = margem em horas.
+TOLERANCIAS = {
+    2:  5 / 60,    # +5 min
+    4:  10 / 60,   # +10 min
+    12: 14 / 60,   # +14 min
+    16: 19 / 60,   # +19 min
+    24: 30 / 60,   # +30 min
+    72: 86 / 60,   # +86 min
+}
+
+
+def _meta_tol(meta_h: float) -> float:
+    """Retorna a meta de horas acrescida da margem de tolerância aprovada.
+
+    Usar nos testes do tipo `h <= meta` → `h <= _meta_tol(meta)`, onde `h` é o
+    tempo medido em horas (mesma unidade — corrida ou útil — da meta).
+    Metas sem entrada em TOLERANCIAS retornam a própria meta (margem 0).
+    """
+    return meta_h + TOLERANCIAS.get(meta_h, 0.0)
+
 NOMES_AGENTE = {
     "caio":      {"whatsapp": "Caio Rodrigues",   "ticket": "Caio Rodrigues"},
     "natalia":   {"whatsapp": "Natália Teixeira", "ticket": "Natália Teixeira"},
@@ -322,7 +353,7 @@ def calc_caio_comercial_locacao(df_comercial: pd.DataFrame, bonus_n: int = 0,
     df1 = df.dropna(subset=[col_avt_in])  # denominator = cards que entraram em Aval.Téc
     delta_h = (df1[col_avt_in] - df1["Criado em"]).dt.total_seconds() / 3600
     delta_h = delta_h.clip(lower=0)       # negativos = 0 (✓)
-    ind1 = score_indicador(int((delta_h <= 24).sum()), len(df1), 2.5)
+    ind1 = score_indicador(int((delta_h <= _meta_tol(24)).sum()), len(df1), 2.5)
     ind1["nome"] = "Comercial — Início processo <24h"
 
     # ─── Indicador 2: Anúncio <72h corrido (saída Aval.Téc OU NIDO → Publicação) ───
@@ -339,7 +370,7 @@ def calc_caio_comercial_locacao(df_comercial: pd.DataFrame, bonus_n: int = 0,
     # Numerador: (publicação - liberação) ≤ 72h corrido. Se liberação ou publicação ausente → falha.
     delta_h2 = (pub2 - lib2).dt.total_seconds() / 3600
     delta_h2 = delta_h2.clip(lower=0)
-    ok2 = int((delta_h2 <= 72).sum())
+    ok2 = int((delta_h2 <= _meta_tol(72)).sum())
     ind2 = score_indicador(ok2, len(df2), 2.5)
     ind2["nome"] = "Comercial — Anúncio publicado <72h"
 
@@ -422,7 +453,7 @@ def calc_caio_contrato_locacao(df_comercial: pd.DataFrame, df_cont_loc: pd.DataF
     col_conf_in = "Primeira vez que entrou na fase Confecção do contrato de locação"
     cl5 = cl.dropna(subset=[col_conf_in])
     horas = cl5.apply(lambda r: horas_uteis(r["Criado em"], r[col_conf_in]), axis=1)
-    ok5 = int((horas <= 24).sum())
+    ok5 = int((horas <= _meta_tol(24)).sum())
     ind5 = score_indicador(ok5, len(cl5), 4)
     ind5["nome"] = "Cont. Locação — Documentação <24h"
 
@@ -581,7 +612,7 @@ def _ticket_sla_ind(df_filtrado: pd.DataFrame, peso: int) -> dict:
     else:
         sub = df_filtrado.dropna(subset=[COL_TKT_IN, COL_TKT_RESP_T]).copy()
         h = sub.apply(lambda r: horas_uteis(r[COL_TKT_IN], r[COL_TKT_RESP_T]), axis=1) if len(sub) else pd.Series(dtype=float)
-        ok = int((h <= 4).sum()) if len(sub) else 0
+        ok = int((h <= _meta_tol(4)).sum()) if len(sub) else 0
         ind = score_indicador(ok, len(sub), peso)
     ind["nome"] = "Tickets — SLA <4h úteis"
     return ind
@@ -645,7 +676,7 @@ def calc_vivianne_contrato_adm(df_cont_adm: pd.DataFrame,
     col_out = "Última vez que saiu da fase Confecção do contrato"
     sub = df.dropna(subset=[col_in, col_out]).copy()
     horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
-    ok = int((horas <= 2).sum())
+    ok = int((horas <= _meta_tol(2)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Cont. ADM — Confecção <2h"
     return {"nota": nota_processo([ind]), "indicadores": [ind]}
@@ -663,7 +694,7 @@ def calc_vivianne_rescisao_adm(df_resc_adm: pd.DataFrame,
     col_dur = "Tempo total na fase Encerramento (dias)"
     sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
     horas = sub[col_dur].astype(float) * 24
-    ok = int((horas <= 4).sum())
+    ok = int((horas <= _meta_tol(4)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Rescisão ADM — Encerramento <4h"
     return {"nota": nota_processo([ind]), "indicadores": [ind]}
@@ -685,7 +716,7 @@ def calc_vivianne_contrato_locacao(df_cont_loc: pd.DataFrame,
     sub_a = df.dropna(subset=[col_nido, col_concl]).copy()
     horas_a = (sub_a[col_concl] - sub_a[col_nido]).dt.total_seconds() / 3600
     horas_a = horas_a.clip(lower=0)
-    ok_a = int((horas_a <= 24).sum())
+    ok_a = int((horas_a <= _meta_tol(24)).sum())
     ind_a = score_indicador(ok_a, len(sub_a), 5)
     ind_a["nome"] = "Cont. Locação — NIDO→Concluído <24h"
 
@@ -693,7 +724,7 @@ def calc_vivianne_contrato_locacao(df_cont_loc: pd.DataFrame,
     col_tempo_conf = "Tempo total na fase Confecção do contrato de locação (dias)"
     sub_b = df.dropna(subset=[col_tempo_conf]).copy()
     horas_b = sub_b[col_tempo_conf].astype(float) * 24
-    ok_b = int((horas_b <= 2).sum())
+    ok_b = int((horas_b <= _meta_tol(2)).sum())
     ind_b = score_indicador(ok_b, len(sub_b), 5)
     ind_b["nome"] = "Cont. Locação — Confecção <2h"
 
@@ -716,13 +747,13 @@ def calc_vivianne_rescisao_locacao(df_resc_loc: pd.DataFrame,
 
     sub_a = df.dropna(subset=[col_prop]).copy()
     horas_a = sub_a[col_prop].astype(float) * 24
-    ok_a = int((horas_a <= 2).sum())
+    ok_a = int((horas_a <= _meta_tol(2)).sum())
     ind_a = score_indicador(ok_a, len(sub_a), 5)
     ind_a["nome"] = "Rescisão Loc. — Levant. Taxas Prop <2h"
 
     sub_b = df.dropna(subset=[col_final]).copy()
     horas_b = sub_b[col_final].astype(float) * 24
-    ok_b = int((horas_b <= 2).sum())
+    ok_b = int((horas_b <= _meta_tol(2)).sum())
     ind_b = score_indicador(ok_b, len(sub_b), 5)
     ind_b["nome"] = "Rescisão Loc. — Levant. Taxas Final <2h"
 
@@ -743,7 +774,7 @@ def calc_vivianne_renovacao(df_renov: pd.DataFrame,
     col_tempo_conf = "Tempo total na fase Confecção do contrato (dias)"
     sub_5 = df.dropna(subset=[col_tempo_conf]).copy()
     horas_5 = sub_5[col_tempo_conf].astype(float) * 24
-    ok_5 = int((horas_5 <= 4).sum())
+    ok_5 = int((horas_5 <= _meta_tol(4)).sum())
     ind_5 = score_indicador(ok_5, len(sub_5), 5)
     ind_5["nome"] = "Renovação — Confecção <4h"
 
@@ -751,7 +782,7 @@ def calc_vivianne_renovacao(df_renov: pd.DataFrame,
     col_proc_concl = "Primeira vez que entrou na fase Processo concluído"
     sub_6 = df.dropna(subset=[col_fin_in, col_proc_concl]).copy()
     horas_6 = sub_6.apply(lambda r: horas_uteis(r[col_fin_in], r[col_proc_concl]), axis=1)
-    ok_6 = int((horas_6 <= 16).sum())
+    ok_6 = int((horas_6 <= _meta_tol(16)).sum())
     ind_6 = score_indicador(ok_6, len(sub_6), 5)
     ind_6["nome"] = "Renovação — Finalização <16h"
 
@@ -777,7 +808,7 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     sub_7 = df.dropna(subset=[col_cob]).copy()
     horas_7 = (sub_7[col_cob] - sub_7["Criado em"]).dt.total_seconds() / 3600
     horas_7 = horas_7.clip(lower=0)
-    ok_7 = int((horas_7 <= 24).sum())
+    ok_7 = int((horas_7 <= _meta_tol(24)).sum())
     ind_7 = score_indicador(ok_7, len(sub_7), 2)
     ind_7["nome"] = "Inadimplência — Cobrança <24h"
 
@@ -824,7 +855,7 @@ def calc_vivianne_backoffice(df_bo: pd.DataFrame,
     sub_10 = sem_troca.dropna(subset=[col_concl]).copy()
     horas_10 = (sub_10[col_concl] - sub_10["Criado em"]).dt.total_seconds() / 3600
     horas_10 = horas_10.clip(lower=0)
-    ok_10 = int((horas_10 <= 24).sum())
+    ok_10 = int((horas_10 <= _meta_tol(24)).sum())
     ind_10 = score_indicador(ok_10, len(sub_10), 5)
     ind_10["nome"] = "BackOffice — Concluído <24h"
 
@@ -902,7 +933,7 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
     col_out = "Última vez que saiu da fase Conferência do contrato"
     sub = df_assess.dropna(subset=[col_in, col_out]).copy()
     horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
-    ok = int((horas <= 2).sum())
+    ok = int((horas <= _meta_tol(2)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Cont. ADM — Conferência ≤2h"
 
@@ -943,7 +974,7 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
         [horas_uteis(i, f) for i, f in zip(inicio_2, sub_2[col_repasse])],
         index=sub_2.index,
     )
-    ok_2 = int((horas_2 <= 12).sum())
+    ok_2 = int((horas_2 <= _meta_tol(12)).sum())
     ind_2 = score_indicador(ok_2, len(sub_2), 5)
     ind_2["nome"] = "Rescisão ADM — Repasse <12h"
 
@@ -1010,7 +1041,7 @@ def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
     sub_4 = df[mask_4].copy()
     horas_4 = (df.loc[mask_4, col_lev_prop] - inicio_prop[mask_4]).dt.total_seconds() / 3600
     horas_4 = horas_4.clip(lower=0)
-    ok_4 = int((horas_4 <= 24).sum())
+    ok_4 = int((horas_4 <= _meta_tol(24)).sum())
     ind_4 = score_indicador(ok_4, len(sub_4), 2)
     ind_4["nome"] = "Rescisão Loc. — Boleto prop <24h"
 
@@ -1043,7 +1074,7 @@ def calc_assessora_reparos(df_rep: pd.DataFrame, assessora: str,
     col_orc = "Primeira vez que entrou na fase Orçamento | Prestador"
     sub_6 = df.dropna(subset=[col_orc]).copy()
     horas_6 = sub_6.apply(lambda r: horas_uteis(r["Criado em"], r[col_orc]), axis=1)
-    ok_6 = int((horas_6 <= 4).sum())
+    ok_6 = int((horas_6 <= _meta_tol(4)).sum())
     ind_6 = score_indicador(ok_6, len(sub_6), 4)
     ind_6["nome"] = "Reparos — Orçamento <4h"
 
@@ -1111,7 +1142,7 @@ def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
     # inflaria o tempo quando o card sai e volta para a fase (reaberturas).
     sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
     horas = sub[col_dur].astype(float) * 24
-    ok = int((horas <= 24).sum())
+    ok = int((horas <= _meta_tol(24)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "BackOffice — Pendência <24h"
 
@@ -1208,7 +1239,7 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
     col_prod_out = "Última vez que saiu da fase Em produção"
     sub_l = df.dropna(subset=[col_vfim, col_prod_out]).copy()
     horas_l = sub_l.apply(lambda r: horas_uteis(r[col_vfim], r[col_prod_out]), axis=1)
-    ok_l = int((horas_l <= 24).sum())
+    ok_l = int((horas_l <= _meta_tol(24)).sum())
     ind_l = score_indicador(ok_l, len(sub_l), peso_laudo)
     ind_l["nome"] = "Laudos entregues ≤24h após vistoria"
     indicadores.append(ind_l)
@@ -1242,7 +1273,7 @@ def calc_marinho_contestacoes(df_cont: pd.DataFrame, ref: Optional[datetime] = N
     sub = df.dropna(subset=[col_concl]).copy()
     horas = (sub[col_concl] - sub["Criado em"]).dt.total_seconds() / 3600
     horas = horas.clip(lower=0)
-    ok = int((horas <= 24).sum())
+    ok = int((horas <= _meta_tol(24)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Contestações respondidas <24h"
     return {"nota": nota_processo([ind]), "indicadores": [ind]}
