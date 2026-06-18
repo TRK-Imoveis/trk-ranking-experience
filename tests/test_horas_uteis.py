@@ -1,4 +1,4 @@
-"""Testes unitários para calculate.horas_uteis."""
+"""Testes unitários para calculate.horas_uteis e horas_uteis_fase."""
 from __future__ import annotations
 
 import sys
@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from calculate import horas_uteis
+from calculate import horas_uteis, horas_uteis_fase
 
 BSB = zoneinfo.ZoneInfo("America/Sao_Paulo")
 
@@ -72,6 +72,35 @@ def main() -> None:
     # ----- 1 semana útil completa -----
     # Mon 08:00 -> Mon (próximo) 08:00 = 5 dias úteis × 10h = 50h
     cases.append(("semana inteira", horas_uteis(t(2026, 5, 11, 8), t(2026, 5, 18, 8)), 50.0))
+
+    # ===== horas_uteis_fase (robusto a reabertura) =====
+    H = 1 / 24.0  # 1h corrido em dias
+
+    # Visita única (last_in == first_in): idêntico a horas_uteis(in, out).
+    cases.append(("fase 1 visita = horas_uteis",
+                  horas_uteis_fase(t(2026, 5, 11, 9), t(2026, 5, 11, 9), t(2026, 5, 11, 11), 2 * H),
+                  2.0))
+    # last_in ausente → tratado como visita única.
+    cases.append(("fase last_in None = horas_uteis",
+                  horas_uteis_fase(t(2026, 5, 11, 9), pd.NaT, t(2026, 5, 11, 11), 2 * H),
+                  2.0))
+    # dur ausente → fallback p/ janela simples.
+    cases.append(("fase sem dur = horas_uteis",
+                  horas_uteis_fase(t(2026, 5, 11, 9), t(2026, 5, 12, 9), t(2026, 5, 11, 11), None),
+                  horas_uteis(t(2026, 5, 11, 9), t(2026, 5, 11, 11))))
+    # Reaberto 2 visitas: 1ª Mon 09-10 (1h útil) + última Tue 09-10 (1h útil), dur=2h corrido.
+    # Janela ingênua Mon09->Tue10 daria 11h; reconstrução correta = 2h.
+    cases.append(("fase reaberto 2 visitas",
+                  horas_uteis_fase(t(2026, 5, 11, 9), t(2026, 5, 12, 9), t(2026, 5, 12, 10), 2 * H),
+                  2.0))
+    # Reaberto com última visita longe (sexta), dur pequeno: nunca explode p/ a semana toda.
+    cases.append(("fase reaberto nunca > duration útil",
+                  horas_uteis_fase(t(2026, 5, 11, 9), t(2026, 5, 15, 16), t(2026, 5, 15, 17), 2 * H),
+                  2.0))
+    # Propriedade: horas_uteis_fase <= horas_uteis(in,out) sempre.
+    hf = horas_uteis_fase(t(2026, 5, 11, 9), t(2026, 5, 12, 9), t(2026, 5, 12, 10), 2 * H)
+    hu = horas_uteis(t(2026, 5, 11, 9), t(2026, 5, 12, 10))
+    cases.append(("fase <= janela simples", 1.0 if hf <= hu + 1e-9 else 0.0, 1.0))
 
     fail = 0
     for name, got, expected in cases:

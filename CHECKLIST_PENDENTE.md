@@ -1,6 +1,12 @@
 # CHECKLIST PENDENTE — TRK Ranking Experience
 
-Última atualização: 27/05/2026 (margem de tolerância em indicadores de horas)
+Última atualização: 18/06/2026 (fechamento da 12ª Edição)
+
+## ✅ Concluídas em 18/06/2026 (12ª Edição)
+- [x] **Corrigir bug de horas ÚTEIS em cards reabertos** (era 🔴 ALTA, "latente" desde a 11ª — na verdade 73/265 cards reabertos na Confecção, 59/253 na Conferência). Novo helper `calculate.horas_uteis_fase`, aplicado em pontuação E drilldown (Armadilha 1). Impacto: Vivianne Confecção 11/27→20/29. Detalhe em `config/relatorio_edicao_12.md`.
+- [x] **Cache do Pipefy estava congelado em 27/05** (daily rodava sem `--no-cache`). `atualizar_painel.ps1` corrigido para re-extrair o Pipefy a cada rodada.
+- [x] **12ª Edição fechada e auditada** — relatório em `config/relatorio_edicao_12.md`. Baseline (BASELINE_9) atualizada para notas da 11ª; chaves `edicao_12` em configs.
+- [x] **Bônus Caio · override IM143** validado pela gestora (alugado antes de publicação real).
 
 ## ✅ Concluídas em 27/05/2026
 - [x] Investigar IM1598 (Rescisão Loc Natália) — diagnóstico: estouro de 3 min vs meta de 24h.
@@ -24,29 +30,29 @@
   - Recalcular sob demanda (API)
   - Validação semanal sexta
 
+### Média prioridade
+- [ ] **🟡 Comunicar Caio** sobre cards parados nas colunas "dias desocupado" (Comercial). Na 12ª, 18/24 cards estavam exatamente um balde atrás (ex.: "60 Dias desocupado" devendo estar em "90") → indicador "Card na coluna correta" caiu de 15/27 para 1/24, principal motor da queda do Caio (−0,72). Espelha a regra do Marinho. Eventual tolerância de 1 balde fica como discussão futura.
+
 ### Baixa prioridade
-- [ ] **Comunicar Marinho** sobre regra de cards parados em "Em produção" antes da 12ª Edição (não-técnico)
+- [ ] **Comunicar Marinho** sobre regra de cards parados em "Em produção" (não-técnico)
 - [ ] **Refazer aba "Resumo Executivo"** com análises melhores quando quiser (escondida na 11ª)
 - [ ] **Renomear BASELINE_9 → BASELINE_EDICAO_ANTERIOR** no código (cosmético, sem urgência)
 
 ## Pendências técnicas de qualidade
 
 - [ ] **Atenção ao editar `atualizar_painel.ps1`**: o arquivo precisa estar salvo com UTF-8 BOM (Byte Order Mark). PowerShell 5.1 lê arquivos sem BOM como Windows-1252 e quebra caracteres acentuados. Ferramentas que strip BOM podem quebrar o script. Se houver erro de parsing, recriar o arquivo com `Set-Content -Encoding UTF8`.
-- [ ] **🔴 ALTA — Corrigir 3 indicadores de horas ÚTEIS com bug latente de duration cumulativo.** Mesmo padrão `(lastTimeOut − firstTimeIn)` corrigido em 19/05/2026 para horas corridas (Rescisão ADM + BackOffice). Para horas úteis, migrar para `duration` muda a semântica (Pipefy reporta tempo corrido). Solução pendente: somar `duration` apenas dos trechos em horário comercial (8h–18h, seg-sex). Funções afetadas:
-  - `calc_vivianne_contrato_adm` — Confecção do contrato <2h úteis (`calculate.py`)
-  - `calc_assessora_contrato_adm` — Conferência do contrato úteis (`calculate.py`)
-  - `assessora_cadm` (drilldown) — Conferência do contrato úteis (`pipeline/imoveis_builder.py`)
-  - Ver detalhes em `config/relatorio_edicao_11.md` → "Correções pós-fechamento — 19/05/2026".
+- [x] ~~🔴 ALTA — Corrigir 3 indicadores de horas ÚTEIS com bug de duration cumulativo.~~ **RESOLVIDO na 12ª** via `calculate.horas_uteis_fase` (reconstrução por visita: exata p/ ≤2 visitas, aprox. documentada p/ 3+). Aplicado em `calc_vivianne_contrato_adm`, `calc_assessora_contrato_adm` e nos drilldowns `vivi_cadm`/`assessora_cadm`. A solução do CHECKLIST anterior ("somar duration dos trechos úteis") era inviável: o Pipefy reporta histórico AGREGADO por fase, sem os trechos individuais.
 - [ ] **Investigar 7 boletos "passaram batido"** na Vivianne (cobrados antes do repasse, sem card aberto). Informação operacional útil — pode ser oportunidade perdida ou cliente que paga sem cobrança.
 - [ ] **Reativar Produtividade m²/h do Marinho** quando metas forem recalibradas em conjunto com ele.
 
-## Para a próxima edição (12ª)
+## Para a próxima edição (13ª)
 
 - [ ] **Atualizar pasta dados/octadesk/** com XLSX recentes (Conversas, Tickets, Avaliações)
 - [ ] **Atualizar pasta dados/csv/** com 3 CSVs recentes do Imobiliar (Boletos, Proprietários, Imóveis)
-- [ ] **Rodar python pipeline/run.py** (apenas comando)
+- [ ] **Rodar python pipeline/run.py --no-cache** (re-extrai Pipefy — NÃO esquecer o --no-cache)
 - [ ] **Validar painel localmente** antes de commit
 - [ ] **Validar candidatos a bônus Caio** (se houver novos IMs na lista pendente)
+- [ ] **Atualizar baseline (BASELINE_9 em run.py) para as notas da 12ª** e renomear chaves edicao_12→edicao_13
 - [ ] **Commit + push** com mensagem da edição
 
 ## ⚠️ Armadilhas técnicas conhecidas

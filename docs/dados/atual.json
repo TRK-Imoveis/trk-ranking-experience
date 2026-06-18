@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-06-18T12:31:52.753013Z",
-    "ref": "2026-06-18T12:31:26.589240+00:00",
+    "geradoEm": "2026-06-18T14:41:56.373047Z",
+    "ref": "2026-06-18T14:41:21.157754+00:00",
     "octadesk_disponivel": true,
     "imobiliar_disponivel": true
   },
@@ -10,111 +10,111 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 5.43,
-      "bonus": 62,
+      "nota": 6.25,
+      "bonus": 66,
       "bonus_proc": "Inadimplência",
       "inds": 14,
       "pts": 68,
       "scores": {
-        "Cont. ADM": 4.074,
-        "Rescisão ADM": 2.5,
+        "Cont. ADM": 6.897,
+        "Rescisão ADM": 5.0,
         "Com. Locação": null,
-        "Cont. Locação": 6.348,
-        "Rescisão Loc.": 6.705,
+        "Cont. Locação": 6.696,
+        "Rescisão Loc.": 7.182,
         "Reparos": null,
-        "Renovação": 4.25,
-        "Inadimplência": 9.82,
+        "Renovação": 4.875,
+        "Inadimplência": 9.832,
         "Vistorias": null,
-        "BackOffice": 5.706,
+        "BackOffice": 5.474,
         "DIRF/DARF": null,
         "WhatsApp": null,
         "Ticket": 4.035
       },
       "detalhes": [
         {
-          "ok": 11,
-          "tot": 27,
-          "pct": 40.7,
+          "ok": 20,
+          "tot": 29,
+          "pct": 69.0,
           "peso": 10,
-          "score": 4.074,
+          "score": 6.897,
           "nome": "Cont. ADM — Confecção <2h",
           "meta": "≤2h úteis"
         },
         {
-          "ok": 1,
-          "tot": 4,
-          "pct": 25.0,
+          "ok": 3,
+          "tot": 6,
+          "pct": 50.0,
           "peso": 10,
-          "score": 2.5,
+          "score": 5.0,
           "nome": "Rescisão ADM — Encerramento <4h",
           "meta": "≤4h corrido"
         },
         {
-          "ok": 10,
-          "tot": 24,
-          "pct": 41.7,
+          "ok": 13,
+          "tot": 28,
+          "pct": 46.4,
           "peso": 5,
-          "score": 2.083,
+          "score": 2.321,
           "nome": "Cont. Locação — NIDO→Concluído <24h",
           "meta": "≤24h corrido"
         },
         {
-          "ok": 29,
-          "tot": 34,
-          "pct": 85.3,
+          "ok": 35,
+          "tot": 40,
+          "pct": 87.5,
           "peso": 5,
-          "score": 4.265,
+          "score": 4.375,
           "nome": "Cont. Locação — Confecção <2h",
           "meta": "≤2h corrido (Pipefy)"
         },
         {
-          "ok": 11,
-          "tot": 19,
-          "pct": 57.9,
+          "ok": 17,
+          "tot": 26,
+          "pct": 65.4,
           "peso": 5,
-          "score": 2.895,
+          "score": 3.269,
           "nome": "Rescisão Loc. — Levant. Taxas Prop <2h",
           "meta": "≤2h corrido"
         },
         {
-          "ok": 16,
-          "tot": 21,
-          "pct": 76.2,
+          "ok": 18,
+          "tot": 23,
+          "pct": 78.3,
           "peso": 5,
-          "score": 3.81,
+          "score": 3.913,
           "nome": "Rescisão Loc. — Levant. Taxas Final <2h",
           "meta": "≤2h corrido"
         },
         {
-          "ok": 13,
-          "tot": 20,
-          "pct": 65.0,
+          "ok": 15,
+          "tot": 24,
+          "pct": 62.5,
           "peso": 5,
-          "score": 3.25,
+          "score": 3.125,
           "nome": "Renovação — Confecção <4h",
           "meta": "≤4h corrido (Pipefy)"
         },
         {
-          "ok": 3,
-          "tot": 15,
-          "pct": 20.0,
+          "ok": 7,
+          "tot": 20,
+          "pct": 35.0,
           "peso": 5,
-          "score": 1.0,
+          "score": 1.75,
           "nome": "Renovação — Finalização <16h",
           "meta": "≤16h úteis"
         },
         {
-          "ok": 230,
-          "tot": 263,
-          "pct": 87.5,
+          "ok": 257,
+          "tot": 291,
+          "pct": 88.3,
           "peso": 2,
-          "score": 1.749,
+          "score": 1.766,
           "nome": "Inadimplência — Cobrança <24h",
           "meta": "≤24h corrido"
         },
         {
-          "ok": 13,
-          "tot": 13,
+          "ok": 15,
+          "tot": 15,
           "pct": 100.0,
           "peso": 1,
           "score": 1.0,
@@ -123,28 +123,28 @@
         },
         {
           "ok": 1,
-          "tot": 16,
-          "pct": 6.2,
+          "tot": 17,
+          "pct": 5.9,
           "peso": 1,
-          "score": 0.062,
+          "score": 0.059,
           "nome": "Inadimplência — Negativação 7-9d",
           "meta": "entre 7 e 9d corrido"
         },
         {
-          "ok": 93,
-          "tot": 127,
-          "pct": 73.2,
+          "ok": 111,
+          "tot": 150,
+          "pct": 74.0,
           "peso": 5,
-          "score": 3.661,
+          "score": 3.7,
           "nome": "BackOffice — Concluído <24h",
           "meta": "≤24h corrido"
         },
         {
-          "ok": 9,
-          "tot": 22,
-          "pct": 40.9,
+          "ok": 11,
+          "tot": 31,
+          "pct": 35.5,
           "peso": 5,
-          "score": 2.045,
+          "score": 1.774,
           "nome": "BackOffice — Troca Titularidade <5d",
           "meta": "≤5d úteis"
         },
@@ -160,197 +160,58 @@
       ],
       "pontosFort": [
         "Inad: 100.0%",
-        "Inad: 87.5%",
-        "Cont.Loc: 85.3%",
-        "RescLoc: 76.2%"
+        "Inad: 88.3%",
+        "Cont.Loc: 87.5%",
+        "RescLoc: 78.3%"
       ],
       "pontosAten": [
-        "Inad: 6.2%",
-        "Renov: 20.0%",
-        "RescADM: 25.0%",
+        "Inad: 5.9%",
+        "Renov: 35.0%",
+        "BO: 35.5%",
         "Tkts: 40.4%"
       ],
       "pos": 1
     },
     {
-      "id": "caio",
-      "nome": "Caio Rodrigues Lima",
-      "cargo": "Comercial",
-      "nota": 5.23,
-      "bonus": 3,
-      "bonus_proc": "Com. Locação",
-      "inds": 11,
-      "pts": 54.0,
-      "scores": {
-        "Cont. ADM": 3.333,
-        "Rescisão ADM": null,
-        "Com. Locação": 3.448,
-        "Cont. Locação": 8.353,
-        "Rescisão Loc.": null,
-        "Reparos": null,
-        "Renovação": 3.333,
-        "Inadimplência": null,
-        "Vistorias": null,
-        "BackOffice": null,
-        "DIRF/DARF": null,
-        "WhatsApp": 6.871,
-        "Ticket": 6.02
-      },
-      "detalhes": [
-        {
-          "ok": 8,
-          "tot": 39,
-          "pct": 20.5,
-          "peso": 2.5,
-          "score": 0.513,
-          "nome": "Comercial — Início processo <24h",
-          "meta": "≤24h corrido"
-        },
-        {
-          "ok": 26,
-          "tot": 67,
-          "pct": 38.8,
-          "peso": 2.5,
-          "score": 0.97,
-          "nome": "Comercial — Anúncio publicado <72h",
-          "meta": "≤72h corrido"
-        },
-        {
-          "ok": 0,
-          "tot": 27,
-          "pct": 0.0,
-          "peso": 5,
-          "score": 0.0,
-          "nome": "Comercial — Card na coluna correta",
-          "meta": "Fase correta"
-        },
-        {
-          "ok": 3,
-          "tot": 3,
-          "pct": 100.0,
-          "peso": 6,
-          "score": 6.0,
-          "nome": "Cont. Locação — Ocupação <30d",
-          "meta": "≤30d corrido"
-        },
-        {
-          "ok": 20,
-          "tot": 34,
-          "pct": 58.8,
-          "peso": 4,
-          "score": 2.353,
-          "nome": "Cont. Locação — Documentação <24h",
-          "meta": "≤24h úteis"
-        },
-        {
-          "ok": 2,
-          "tot": 6,
-          "pct": 33.3,
-          "peso": 10,
-          "score": 3.333,
-          "nome": "Cont. ADM — Criação→NIDO <7d",
-          "meta": "≤7d corrido"
-        },
-        {
-          "ok": 11,
-          "tot": 33,
-          "pct": 33.3,
-          "peso": 10,
-          "score": 3.333,
-          "nome": "Renovação — Avaliação >90d",
-          "meta": ">90d antes do venc"
-        },
-        {
-          "ok": 1408,
-          "tot": 2750,
-          "pct": 51.2,
-          "peso": 4,
-          "score": 2.048,
-          "nome": "WhatsApp — Resposta ≤5min",
-          "meta": "≤5min"
-        },
-        {
-          "ok": 174,
-          "tot": 189,
-          "pct": 92.1,
-          "peso": 3,
-          "score": 2.762,
-          "nome": "WhatsApp — Avaliações positivas",
-          "meta": "% positivas"
-        },
-        {
-          "ok": 875,
-          "tot": 2202,
-          "pct": 39.7,
-          "peso": 4,
-          "score": 1.589,
-          "nome": "Tickets — SLA <4h úteis",
-          "meta": "≤4h úteis"
-        },
-        {
-          "ok": 21,
-          "tot": 24,
-          "pct": 87.5,
-          "peso": 3,
-          "score": 2.625,
-          "nome": "Tickets — Avaliações positivas",
-          "meta": "% positivas"
-        }
-      ],
-      "pontosFort": [
-        "Cont.Loc: 100.0%",
-        "WA: 92.1%",
-        "Tkts: 87.5%",
-        "Cont.Loc: 58.8%"
-      ],
-      "pontosAten": [
-        "Comercial: 0.0%",
-        "Comercial: 20.5%",
-        "Cont.ADM: 33.3%",
-        "Renov: 33.3%"
-      ],
-      "pos": 2
-    },
-    {
       "id": "natalia",
       "nome": "Natália Teixeira",
       "cargo": "Assessora",
-      "nota": 4.86,
-      "bonus": 5,
+      "nota": 4.92,
+      "bonus": 6,
       "bonus_proc": "Cont. ADM",
       "inds": 15,
       "pts": 78,
       "scores": {
-        "Cont. ADM": 4.667,
-        "Rescisão ADM": 5.0,
+        "Cont. ADM": 4.886,
+        "Rescisão ADM": 2.5,
         "Com. Locação": null,
         "Cont. Locação": null,
-        "Rescisão Loc.": 5.858,
-        "Reparos": 4.67,
+        "Rescisão Loc.": 5.238,
+        "Reparos": 4.843,
         "Renovação": 2.0,
         "Inadimplência": null,
         "Vistorias": null,
-        "BackOffice": 0.0,
-        "DIRF/DARF": 5.161,
+        "BackOffice": 2.0,
+        "DIRF/DARF": 6.452,
         "WhatsApp": 9.056,
         "Ticket": 7.313
       },
       "detalhes": [
         {
           "ok": 2,
-          "tot": 10,
-          "pct": 20.0,
+          "tot": 11,
+          "pct": 18.2,
           "peso": 10,
-          "score": 2.0,
+          "score": 1.818,
           "nome": "Cont. ADM — Conferência ≤2h",
           "meta": "≤2h úteis"
         },
         {
           "ok": 1,
-          "tot": 1,
-          "pct": 100.0,
+          "tot": 2,
+          "pct": 50.0,
           "peso": 5,
-          "score": 5.0,
+          "score": 2.5,
           "nome": "Rescisão ADM — Repasse <12h",
           "meta": "≤12h úteis"
         },
@@ -364,74 +225,74 @@
           "meta": "Preenchido"
         },
         {
-          "ok": 5,
-          "tot": 7,
-          "pct": 71.4,
+          "ok": 8,
+          "tot": 12,
+          "pct": 66.7,
           "peso": 2,
-          "score": 1.429,
+          "score": 1.333,
           "nome": "Rescisão Loc. — Boleto prop <24h",
           "meta": "≤24h corrido"
         },
         {
           "ok": 3,
-          "tot": 6,
-          "pct": 50.0,
+          "tot": 7,
+          "pct": 42.9,
           "peso": 3,
-          "score": 1.5,
+          "score": 1.286,
           "nome": "Rescisão Loc. — Boleto final <15d",
           "meta": "≤15d corrido"
         },
         {
-          "ok": 22,
-          "tot": 29,
-          "pct": 75.9,
+          "ok": 27,
+          "tot": 34,
+          "pct": 79.4,
           "peso": 4,
-          "score": 3.034,
+          "score": 3.176,
           "nome": "Reparos — Orçamento <4h",
           "meta": "≤4h úteis"
         },
         {
-          "ok": 9,
-          "tot": 33,
-          "pct": 27.3,
+          "ok": 10,
+          "tot": 36,
+          "pct": 27.8,
           "peso": 6,
-          "score": 1.636,
+          "score": 1.667,
           "nome": "Reparos — Pós-venda ≤7d",
           "meta": "≤7d corrido"
         },
         {
           "ok": 2,
-          "tot": 12,
-          "pct": 16.7,
+          "tot": 13,
+          "pct": 15.4,
           "peso": 4,
-          "score": 0.667,
+          "score": 0.615,
           "nome": "Renovação — Contato >60d",
           "meta": ">60d antes do venc"
         },
         {
-          "ok": 2,
-          "tot": 9,
-          "pct": 22.2,
+          "ok": 3,
+          "tot": 13,
+          "pct": 23.1,
           "peso": 6,
-          "score": 1.333,
+          "score": 1.385,
           "nome": "Renovação — Assinado antes vencimento",
           "meta": "antes do venc"
         },
         {
-          "ok": 0,
-          "tot": 2,
-          "pct": 0.0,
+          "ok": 1,
+          "tot": 5,
+          "pct": 20.0,
           "peso": 10,
-          "score": 0.0,
+          "score": 2.0,
           "nome": "BackOffice — Pendência <24h",
           "meta": "≤24h corrido"
         },
         {
-          "ok": 16,
+          "ok": 20,
           "tot": 31,
-          "pct": 51.6,
+          "pct": 64.5,
           "peso": 10,
-          "score": 5.161,
+          "score": 6.452,
           "nome": "DIRF/DARF — Concluído antes 29/05",
           "meta": "antes de 29/05/2026"
         },
@@ -473,36 +334,36 @@
         }
       ],
       "pontosFort": [
-        "RescADM: 100.0%",
         "WA: 96.6%",
         "WA: 86.0%",
-        "Tkts: 82.8%"
+        "Tkts: 82.8%",
+        "Reparos: 79.4%"
       ],
       "pontosAten": [
         "RescADM: 0.0%",
-        "BO: 0.0%",
-        "Renov: 16.7%",
-        "Cont.ADM: 20.0%"
+        "Renov: 15.4%",
+        "Cont.ADM: 18.2%",
+        "BO: 20.0%"
       ],
-      "pos": 3
+      "pos": 2
     },
     {
       "id": "gardenia",
       "nome": "Gardênia",
       "cargo": "Assessora",
-      "nota": 4.6,
+      "nota": 4.64,
       "bonus": 4,
       "bonus_proc": "Cont. ADM",
       "inds": 15,
       "pts": 78,
       "scores": {
-        "Cont. ADM": 2.857,
+        "Cont. ADM": 3.334,
         "Rescisão ADM": 2.5,
         "Com. Locação": null,
         "Cont. Locação": null,
-        "Rescisão Loc.": 8.0,
-        "Reparos": 4.543,
-        "Renovação": 4.109,
+        "Rescisão Loc.": 8.286,
+        "Reparos": 4.18,
+        "Renovação": 4.071,
         "Inadimplência": null,
         "Vistorias": null,
         "BackOffice": 0.0,
@@ -512,17 +373,17 @@
       },
       "detalhes": [
         {
-          "ok": 0,
-          "tot": 13,
-          "pct": 0.0,
+          "ok": 1,
+          "tot": 15,
+          "pct": 6.7,
           "peso": 10,
-          "score": 0.0,
+          "score": 0.667,
           "nome": "Cont. ADM — Conferência ≤2h",
           "meta": "≤2h úteis"
         },
         {
-          "ok": 1,
-          "tot": 2,
+          "ok": 2,
+          "tot": 4,
           "pct": 50.0,
           "peso": 5,
           "score": 2.5,
@@ -531,7 +392,7 @@
         },
         {
           "ok": 0,
-          "tot": 5,
+          "tot": 6,
           "pct": 0.0,
           "peso": 5,
           "score": 0.0,
@@ -539,11 +400,11 @@
           "meta": "Preenchido"
         },
         {
-          "ok": 6,
-          "tot": 12,
-          "pct": 50.0,
+          "ok": 8,
+          "tot": 14,
+          "pct": 57.1,
           "peso": 2,
-          "score": 1.0,
+          "score": 1.143,
           "nome": "Rescisão Loc. — Boleto prop <24h",
           "meta": "≤24h corrido"
         },
@@ -557,29 +418,29 @@
           "meta": "≤15d corrido"
         },
         {
-          "ok": 40,
-          "tot": 58,
-          "pct": 69.0,
+          "ok": 45,
+          "tot": 69,
+          "pct": 65.2,
           "peso": 4,
-          "score": 2.759,
+          "score": 2.609,
           "nome": "Reparos — Orçamento <4h",
           "meta": "≤4h úteis"
         },
         {
           "ok": 11,
-          "tot": 37,
-          "pct": 29.7,
+          "tot": 42,
+          "pct": 26.2,
           "peso": 6,
-          "score": 1.784,
+          "score": 1.571,
           "nome": "Reparos — Pós-venda ≤7d",
           "meta": "≤7d corrido"
         },
         {
-          "ok": 5,
-          "tot": 13,
-          "pct": 38.5,
+          "ok": 6,
+          "tot": 16,
+          "pct": 37.5,
           "peso": 4,
-          "score": 1.538,
+          "score": 1.5,
           "nome": "Renovação — Contato >60d",
           "meta": ">60d antes do venc"
         },
@@ -594,7 +455,7 @@
         },
         {
           "ok": 0,
-          "tot": 5,
+          "tot": 12,
           "pct": 0.0,
           "peso": 10,
           "score": 0.0,
@@ -654,10 +515,149 @@
         "Tkts: 75.0%"
       ],
       "pontosAten": [
-        "Cont.ADM: 0.0%",
         "RescADM: 0.0%",
         "BO: 0.0%",
-        "Reparos: 29.7%"
+        "Cont.ADM: 6.7%",
+        "Reparos: 26.2%"
+      ],
+      "pos": 3
+    },
+    {
+      "id": "caio",
+      "nome": "Caio Rodrigues Lima",
+      "cargo": "Comercial",
+      "nota": 4.62,
+      "bonus": 4,
+      "bonus_proc": "Com. Locação",
+      "inds": 11,
+      "pts": 54.0,
+      "scores": {
+        "Cont. ADM": 2.0,
+        "Rescisão ADM": null,
+        "Com. Locação": 3.959,
+        "Cont. Locação": 5.8,
+        "Rescisão Loc.": null,
+        "Reparos": null,
+        "Renovação": 3.077,
+        "Inadimplência": null,
+        "Vistorias": null,
+        "BackOffice": null,
+        "DIRF/DARF": null,
+        "WhatsApp": 6.871,
+        "Ticket": 6.02
+      },
+      "detalhes": [
+        {
+          "ok": 10,
+          "tot": 52,
+          "pct": 19.2,
+          "peso": 2.5,
+          "score": 0.481,
+          "nome": "Comercial — Início processo <24h",
+          "meta": "≤24h corrido"
+        },
+        {
+          "ok": 27,
+          "tot": 79,
+          "pct": 34.2,
+          "peso": 2.5,
+          "score": 0.854,
+          "nome": "Comercial — Anúncio publicado <72h",
+          "meta": "≤72h corrido"
+        },
+        {
+          "ok": 1,
+          "tot": 24,
+          "pct": 4.2,
+          "peso": 5,
+          "score": 0.208,
+          "nome": "Comercial — Card na coluna correta",
+          "meta": "Fase correta"
+        },
+        {
+          "ok": 3,
+          "tot": 5,
+          "pct": 60.0,
+          "peso": 6,
+          "score": 3.6,
+          "nome": "Cont. Locação — Ocupação <30d",
+          "meta": "≤30d corrido"
+        },
+        {
+          "ok": 22,
+          "tot": 40,
+          "pct": 55.0,
+          "peso": 4,
+          "score": 2.2,
+          "nome": "Cont. Locação — Documentação <24h",
+          "meta": "≤24h úteis"
+        },
+        {
+          "ok": 2,
+          "tot": 10,
+          "pct": 20.0,
+          "peso": 10,
+          "score": 2.0,
+          "nome": "Cont. ADM — Criação→NIDO <7d",
+          "meta": "≤7d corrido"
+        },
+        {
+          "ok": 12,
+          "tot": 39,
+          "pct": 30.8,
+          "peso": 10,
+          "score": 3.077,
+          "nome": "Renovação — Avaliação >90d",
+          "meta": ">90d antes do venc"
+        },
+        {
+          "ok": 1408,
+          "tot": 2750,
+          "pct": 51.2,
+          "peso": 4,
+          "score": 2.048,
+          "nome": "WhatsApp — Resposta ≤5min",
+          "meta": "≤5min"
+        },
+        {
+          "ok": 174,
+          "tot": 189,
+          "pct": 92.1,
+          "peso": 3,
+          "score": 2.762,
+          "nome": "WhatsApp — Avaliações positivas",
+          "meta": "% positivas"
+        },
+        {
+          "ok": 875,
+          "tot": 2202,
+          "pct": 39.7,
+          "peso": 4,
+          "score": 1.589,
+          "nome": "Tickets — SLA <4h úteis",
+          "meta": "≤4h úteis"
+        },
+        {
+          "ok": 21,
+          "tot": 24,
+          "pct": 87.5,
+          "peso": 3,
+          "score": 2.625,
+          "nome": "Tickets — Avaliações positivas",
+          "meta": "% positivas"
+        }
+      ],
+      "pontosFort": [
+        "WA: 92.1%",
+        "Tkts: 87.5%",
+        "Cont.Loc: 60.0%",
+        "Cont.Loc: 55.0%"
+      ],
+      "pontosAten": [
+        "Comercial: 4.2%",
+        "Comercial: 19.2%",
+        "Cont.ADM: 20.0%",
+        "Renov: 30.8%"
       ],
       "pos": 4
     },
@@ -665,7 +665,7 @@
       "id": "marinho",
       "nome": "Albérico Marinho",
       "cargo": "Vistoriador",
-      "nota": 3.65,
+      "nota": 3.9,
       "bonus": 0,
       "bonus_proc": null,
       "inds": 2,
@@ -679,7 +679,7 @@
         "Reparos": null,
         "Renovação": null,
         "Inadimplência": null,
-        "Vistorias": 3.65,
+        "Vistorias": 3.9,
         "BackOffice": null,
         "DIRF/DARF": null,
         "WhatsApp": null,
@@ -687,11 +687,11 @@
       },
       "detalhes": [
         {
-          "ok": 29,
-          "tot": 46,
-          "pct": 63.0,
+          "ok": 36,
+          "tot": 53,
+          "pct": 67.9,
           "peso": 10,
-          "score": 6.304,
+          "score": 6.792,
           "nome": "Laudos entregues ≤24h após vistoria",
           "meta": "≤24h úteis"
         },
@@ -706,19 +706,19 @@
         }
       ],
       "pontosFort": [
-        "Laudos entregu: 63.0%",
+        "Laudos entregu: 67.9%",
         "Contestações r: 10.0%"
       ],
       "pontosAten": [
         "Contestações r: 10.0%",
-        "Laudos entregu: 63.0%"
+        "Laudos entregu: 67.9%"
       ],
       "pos": 5
     }
   ],
   "IMOVEIS": {
     "caio_inicio": {
-      "titulo": "Caio — Comercial: Início processo <24h (8/39)",
+      "titulo": "Caio — Comercial: Início processo <24h (10/52)",
       "cols": [
         "Imóvel",
         "Título",
@@ -733,9 +733,45 @@
           "✗"
         ],
         [
+          "IM1533",
+          "IM1533 - SHIS QI 28 CONJ 04 CASA 5",
+          "810.6h",
+          "✗"
+        ],
+        [
+          "IM1592",
+          "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
+          "727.6h",
+          "✗"
+        ],
+        [
           "IM949",
           "IM949 - SQS 107 BL A APTO 605",
           "571.9h",
+          "✗"
+        ],
+        [
+          "IM918",
+          "IM918 - SOFN QD 2 BL A LOJA 39",
+          "500.3h",
+          "✗"
+        ],
+        [
+          "IM#1353932372",
+          "Sr. Rogerio KehlSHIS QI 16 CONJUNTO 2 LOTE 13",
+          "481.0h",
+          "✗"
+        ],
+        [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "475.3h",
+          "✗"
+        ],
+        [
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "353.4h",
           "✗"
         ],
         [
@@ -754,6 +790,12 @@
           "IM#1322558879",
           "Rafaelo AbrittaCondomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
           "239.0h",
+          "✗"
+        ],
+        [
+          "IM682",
+          "IM682- SCLRN 703 BLOCO G LOJA 9",
+          "211.8h",
           "✗"
         ],
         [
@@ -817,6 +859,12 @@
           "✗"
         ],
         [
+          "IM#1375825081",
+          "Luciano Lobão SQSW 302 BLOCO I APTO 301",
+          "138.4h",
+          "✗"
+        ],
+        [
           "IM382",
           "IM382 - SCLN 412 BLOCO D LOTE 08 SALA 105",
           "126.1h",
@@ -847,9 +895,21 @@
           "✗"
         ],
         [
+          "IM569",
+          "IM569 - SQSW 101 BL H APTO 315",
+          "88.8h",
+          "✗"
+        ],
+        [
           "IM1341",
           "IM1341 - SQS 112 BL I APTO 304",
           "76.2h",
+          "✗"
+        ],
+        [
+          "IM1852",
+          "IM1852 - Brisas Do Lago Bl C Apto 11316",
+          "71.0h",
           "✗"
         ],
         [
@@ -907,6 +967,12 @@
           "✗"
         ],
         [
+          "IM1329",
+          "IM1329 -  QUADRA 201  LT 7 APT 203",
+          "46.1h",
+          "✗"
+        ],
+        [
           "IM1806",
           "IM1806 - CLN 201 BLOCO C SALA 214",
           "27.4h",
@@ -922,6 +988,12 @@
           "IM1783",
           "IM1783 - CLN 201 BL C SALA 108",
           "19.8h",
+          "✓"
+        ],
+        [
+          "IM634",
+          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
+          "16.7h",
           "✓"
         ],
         [
@@ -955,6 +1027,12 @@
           "✓"
         ],
         [
+          "IM1785",
+          "IM1785 - SHIS QI 26 CJ 16 CASA 22",
+          "0.2h",
+          "✓"
+        ],
+        [
           "IM344",
           "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
           "0.2h",
@@ -963,7 +1041,7 @@
       ]
     },
     "caio_anuncio": {
-      "titulo": "Caio — Comercial: Anúncio publicado <72h (26/67)",
+      "titulo": "Caio — Comercial: Anúncio publicado <72h (27/79)",
       "cols": [
         "Imóvel",
         "Título",
@@ -971,6 +1049,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM#1339882385",
+          "Pablo Duarte CardosoCondomínio Ville Montagne Quadra 22, casa 09",
+          "866.2h",
+          "✗"
+        ],
         [
           "IM949",
           "IM949 - SQS 107 BL A APTO 605",
@@ -1038,6 +1122,12 @@
           "✗"
         ],
         [
+          "IM1169",
+          "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
+          "96.1h",
+          "✗"
+        ],
+        [
           "IM#1286819193",
           "Linea Vitta Lojas 14, 15 e 16",
           "76.2h",
@@ -1047,6 +1137,12 @@
           "IM1796",
           "IM1796 - CLN 201 BLOCO C SALA 204",
           "68.7h",
+          "✓"
+        ],
+        [
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "67.8h",
           "✓"
         ],
         [
@@ -1206,12 +1302,6 @@
           "✗"
         ],
         [
-          "IM#1339882385",
-          "Pablo Duarte CardosoCondomínio Ville Montagne Quadra 22, casa 09",
-          "—",
-          "✗"
-        ],
-        [
           "IM#1343249452",
           "CLN 412 BLOCO D LOJA 8",
           "—",
@@ -1236,14 +1326,32 @@
           "✓"
         ],
         [
-          "IM1169",
-          "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
+          "IM#1353932372",
+          "Sr. Rogerio KehlSHIS QI 16 CONJUNTO 2 LOTE 13",
+          "—",
+          "✗"
+        ],
+        [
+          "IM#1370304728",
+          "QUADRA 201, LOTE 7, APTO 203",
+          "—",
+          "✗"
+        ],
+        [
+          "IM#1375825081",
+          "Luciano Lobão SQSW 302 BLOCO I APTO 301",
           "—",
           "✗"
         ],
         [
           "IM123",
           "IM123 - CLN 306 BL B APTO 112",
+          "—",
+          "✗"
+        ],
+        [
+          "IM1329",
+          "IM1329 -  QUADRA 201  LT 7 APT 203",
           "—",
           "✗"
         ],
@@ -1261,15 +1369,15 @@
         ],
         [
           "IM143",
-          "IM143 - CLN 211 BL D SALA 101",
-          "—",
-          "✗"
-        ],
-        [
-          "IM143",
           "IM143 - CLN 211 BLOCO D SALA 101",
           "0.0h",
           "✓"
+        ],
+        [
+          "IM143",
+          "IM143 - CLN 211 BL D SALA 101",
+          "—",
+          "✗"
         ],
         [
           "IM1483",
@@ -1284,6 +1392,18 @@
           "✗"
         ],
         [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "—",
+          "✗"
+        ],
+        [
+          "IM1592",
+          "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
+          "—",
+          "✗"
+        ],
+        [
           "IM1598",
           "IM1598 - SQS 404 BL O APTO 224",
           "—",
@@ -1292,6 +1412,12 @@
         [
           "IM1783",
           "IM1783 - CLN 201 BL C SALA 108",
+          "—",
+          "✗"
+        ],
+        [
+          "IM1785",
+          "IM1785 - SHIS QI 26 CJ 16 CASA 22",
           "—",
           "✗"
         ],
@@ -1332,14 +1458,14 @@
           "✓"
         ],
         [
-          "IM344",
-          "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
+          "IM1852",
+          "IM1852 - Brisas Do Lago Bl C Apto 11316",
           "—",
           "✗"
         ],
         [
           "IM344",
-          "IM344- SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
+          "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
           "—",
           "✗"
         ],
@@ -1362,8 +1488,26 @@
           "✗"
         ],
         [
+          "IM569",
+          "IM569 - SQSW 101 BL H APTO 315",
+          "—",
+          "✗"
+        ],
+        [
+          "IM634",
+          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
+          "—",
+          "✗"
+        ],
+        [
           "IM662",
           "IM662 - SHIS QI 13 CONJ 10 CASA 14",
+          "—",
+          "✗"
+        ],
+        [
+          "IM682",
+          "IM682- SCLRN 703 BLOCO G LOJA 9",
           "—",
           "✗"
         ],
@@ -1372,11 +1516,17 @@
           "IM80 - CLN 211 BLOCO D SALA 206",
           "—",
           "✗"
+        ],
+        [
+          "IM918",
+          "IM918 - SOFN QD 2 BL A LOJA 39",
+          "—",
+          "✗"
         ]
       ]
     },
     "caio_coluna": {
-      "titulo": "Caio — Comercial: Coluna correta (0/27)",
+      "titulo": "Caio — Comercial: Coluna correta (1/24)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1387,25 +1537,25 @@
         [
           "IM382",
           "IM382 - SCLN 412 BLOCO D LOTE 08 SALA 105",
-          "139d → 90 Dias desocupado",
-          "✗"
-        ],
-        [
-          "IM#1296258921",
-          "VK5089 SHIS QI 11 CONJUNTO 01 CASA 16",
-          "113d → 90 Dias desocupado",
+          "140d → 90 Dias desocupado",
           "✗"
         ],
         [
           "IM1793",
           "IM1793 - CLN 201 BLOCO C SALA 201",
-          "102d → 90 Dias desocupado",
+          "103d → 90 Dias desocupado",
           "✗"
         ],
         [
           "IM1798",
           "IM1798 - CLN 201 BLOCO C SALA 206",
-          "102d → 90 Dias desocupado",
+          "103d → 90 Dias desocupado",
+          "✗"
+        ],
+        [
+          "IM1807",
+          "IM1807 - CLN 201 BLOCO C SALA 218",
+          "101d → 90 Dias desocupado",
           "✗"
         ],
         [
@@ -1435,12 +1585,6 @@
         [
           "IM1806",
           "IM1806 - CLN 201 BLOCO C SALA 214",
-          "100d → 90 Dias desocupado",
-          "✗"
-        ],
-        [
-          "IM1807",
-          "IM1807 - CLN 201 BLOCO C SALA 218",
           "100d → 90 Dias desocupado",
           "✗"
         ],
@@ -1499,18 +1643,6 @@
           "✗"
         ],
         [
-          "IM1839",
-          "IM1839 - QI 11 CONJUNTO 6 CASA 10",
-          "84d → 60 Dias desocupado",
-          "✗"
-        ],
-        [
-          "IM#1318576441",
-          "VK662 SHIS QL 8, Conjunto 4, Casa 2",
-          "79d → 60 Dias desocupado",
-          "✗"
-        ],
-        [
           "IM#1286819193",
           "Linea Vitta Lojas 14, 15 e 16",
           "76d → 60 Dias desocupado",
@@ -1523,21 +1655,15 @@
           "✗"
         ],
         [
-          "IM1842",
-          "IM1842 -Sces Trecho 04 , S/N - Und. 15 (Brisas do Lago apt E015S2)",
-          "56d → 30 Dias desocupado",
-          "✗"
-        ],
-        [
           "IM120",
           "IM120 - SCLN 211 BL D SALA 111",
           "51d → 30 Dias desocupado",
-          "✗"
+          "✓"
         ],
         [
           "IM357",
           "IM357 - Cln 412 BLOCO D LOJAS 8 E 9",
-          "43d → 30 Dias desocupado",
+          "44d → 30 Dias desocupado",
           "✗"
         ],
         [
@@ -1545,11 +1671,17 @@
           "IM1844 - SMDB CONJUNTO 25 LOTE 11 CASA B",
           "41d → 30 Dias desocupado",
           "✗"
+        ],
+        [
+          "IM1169",
+          "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
+          "38d → 30 Dias desocupado",
+          "✗"
         ]
       ]
     },
     "caio_bonus": {
-      "titulo": "Caio — Comercial: Imóvel alugado antes anunciado ★ (3 casos)",
+      "titulo": "Caio — Comercial: Imóvel alugado antes anunciado ★ (4 casos)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1574,11 +1706,17 @@
           "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
           "alugado sem anúncio",
           "★"
+        ],
+        [
+          "IM143",
+          "IM143 - CLN 211 BLOCO D SALA 101",
+          "alugado sem anúncio",
+          "★"
         ]
       ]
     },
     "caio_ocupacao": {
-      "titulo": "Caio — Cont. Locação: Ocupação <30d (3/3)",
+      "titulo": "Caio — Cont. Locação: Ocupação <30d (3/5)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1586,6 +1724,18 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM1843",
+          "IM1843 - VK5389 - SHIS QI 28 CONJUNTO 13 CASA 15",
+          "90.0d",
+          "✗"
+        ],
+        [
+          "IM143",
+          "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
+          "39.2d",
+          "✗"
+        ],
         [
           "IM1787",
           "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
@@ -1607,7 +1757,7 @@
       ]
     },
     "caio_docs": {
-      "titulo": "Caio — Cont. Locação: Documentação <24h (20/34)",
+      "titulo": "Caio — Cont. Locação: Documentação <24h (22/40)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1637,6 +1787,12 @@
           "IM123",
           "IM123 - VK5424 - CLN 306 BLOCO B SALA 112",
           "110.2h",
+          "✗"
+        ],
+        [
+          "IM1835",
+          "IM1835 - VK5459  - SHIS QI 11 CONJUNTO 1 CASA 16 -  NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
+          "99.9h",
           "✗"
         ],
         [
@@ -1670,9 +1826,27 @@
           "✗"
         ],
         [
+          "IM1849",
+          "IM1849 -  SHIS QI 15 CONJUNTO 09 CASA 2",
+          "49.9h",
+          "✗"
+        ],
+        [
+          "IM1835",
+          "IM1835 - VK5459 - SHIS QI 11 CONJUNTO 1 CASA 16 - NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
+          "38.8h",
+          "✗"
+        ],
+        [
           "IM292",
           "IM292 | VK5333  | CLN 211 BLOCO D SALA 106",
           "38.6h",
+          "✗"
+        ],
+        [
+          "IM1839",
+          "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
+          "38.5h",
           "✗"
         ],
         [
@@ -1703,6 +1877,12 @@
           "IM391",
           "IM391 - VK5355 - CLN 412 BLOCO D SALA 114",
           "24.2h",
+          "✓"
+        ],
+        [
+          "IM1586",
+          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
+          "23.5h",
           "✓"
         ],
         [
@@ -1778,6 +1958,12 @@
           "✓"
         ],
         [
+          "IM143",
+          "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
+          "9.1h",
+          "✓"
+        ],
+        [
           "IM39",
           "IM39 - VK5436 - SGAN 911 CONJUNTO G BLOCO E APTO 203 - Edifício: GARDEN PARK",
           "9.0h",
@@ -1822,7 +2008,7 @@
       ]
     },
     "caio_cadm": {
-      "titulo": "Caio — Cont. ADM: Criação→NIDO <7d (2/6)",
+      "titulo": "Caio — Cont. ADM: Criação→NIDO <7d (2/10)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1831,15 +2017,39 @@
       ],
       "rows": [
         [
+          "IM1839",
+          "IM1839 - SHIS QI 11 CONJUNTO 6 CASA 10",
+          "64.7d",
+          "✗"
+        ],
+        [
           "IM1837",
           "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
           "23.8d",
           "✗"
         ],
         [
+          "IM1848",
+          "IM1848 - SHIS QI 16 CONJUNTO 2 LOTE 13",
+          "23d",
+          "✗"
+        ],
+        [
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "19.9d",
+          "✗"
+        ],
+        [
           "IM1836",
           "IM1836 - VK 3238 - SHIS QI 7 CONUNTO 13 CASA 24 -",
           "16.1d",
+          "✗"
+        ],
+        [
+          "IM1849",
+          "IM1849 - SHIS QI 15 CONJUNTO 9 CASA 2",
+          "15.1d",
           "✗"
         ],
         [
@@ -1869,7 +2079,7 @@
       ]
     },
     "caio_renov": {
-      "titulo": "Caio — Renovação: Avaliação >90d (11/33)",
+      "titulo": "Caio — Renovação: Avaliação >90d (12/39)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -1887,6 +2097,12 @@
           "IM682",
           "IM682",
           "204.9d",
+          "✓"
+        ],
+        [
+          "IM#1336266015",
+          "1171.0",
+          "183.6d",
           "✓"
         ],
         [
@@ -1944,6 +2160,12 @@
           "✓"
         ],
         [
+          "IM350",
+          "IM350/2 - SCLN 412 BL D LT 08 LOJAS 1, 2, 3, 10, 11, 12",
+          "88.8d",
+          "✗"
+        ],
+        [
           "IM#1325030572",
           "350/2",
           "88.4d",
@@ -1959,12 +2181,6 @@
           "IM#1320728293",
           "1235/1",
           "63.9d",
-          "✗"
-        ],
-        [
-          "IM350",
-          "IM350/2 - SCLN 412 BL D LT 08 LOJAS 1, 2, 3, 10, 11, 12",
-          "61.8d",
           "✗"
         ],
         [
@@ -2001,6 +2217,12 @@
           "IM#1288070932",
           "129/5",
           "12.3d",
+          "✗"
+        ],
+        [
+          "IM#1325029949",
+          "1538 -  SHIS QL 12  CONJUNTO 08 CASA,13",
+          "7.3d",
           "✗"
         ],
         [
@@ -2074,11 +2296,35 @@
           "VK3806 - SHIN Ql 9 CONJ 3 CASA 18",
           "-153.9d",
           "✗"
+        ],
+        [
+          "IM#1363733799",
+          "107 - SCLN 215 BLOCO C LOJA25",
+          "-11.8d",
+          "✗"
+        ],
+        [
+          "IM#1363736540",
+          "32 - SCLN 215 BLOCO C LJ [LOJA 37 E 49]",
+          "-12.4d",
+          "✗"
+        ],
+        [
+          "IM#1363740189",
+          "73 -  CLN 211 BLOCO D SALA 105",
+          "-11.1d",
+          "✗"
+        ],
+        [
+          "IM#1363741350",
+          "785/1 - SCLS 314 BLOCO B LOJA LJ 28",
+          "-12.0d",
+          "✗"
         ]
       ]
     },
     "vivi_cadm": {
-      "titulo": "Vivianne — Cont. ADM: Confecção <2h (11/27)",
+      "titulo": "Vivianne — Cont. ADM: Confecção <2h (20/29)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2087,33 +2333,9 @@
       ],
       "rows": [
         [
-          "IM1827",
-          "IM1827 - VK5344 - SHIS QI 23 CONJUNTO 15 CASA 29",
-          "58.0h",
-          "✗"
-        ],
-        [
-          "IM1841",
-          "IM1841 - VK4906 - SHIS QL 02 CONJUNTO 01 CASA 02",
-          "33.0h",
-          "✗"
-        ],
-        [
           "IM1832",
           "IM1832 E 1833 SCLS 304 BLOCO A LJ 30",
-          "18.0h",
-          "✗"
-        ],
-        [
-          "IM1840",
-          "IM1840 - Condomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
-          "17.0h",
-          "✗"
-        ],
-        [
-          "IM1848",
-          "IM1848 - SHIS QI 16 CONJUNTO 2 LOTE 13",
-          "12.1h",
+          "14.0h",
           "✗"
         ],
         [
@@ -2135,33 +2357,15 @@
           "✗"
         ],
         [
-          "IM1844",
-          "IM1844 - SMDB CONJUNTO 25 LOTE 11 CASA B",
-          "9.4h",
-          "✗"
-        ],
-        [
-          "IM1837",
-          "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
-          "8.9h",
-          "✗"
-        ],
-        [
           "IM1838",
           "IM1838 - SHIS QI 15 CJ 13 LT 5",
           "8.3h",
           "✗"
         ],
         [
-          "IM1842",
-          "IM1842 - Brisas do Lago apt E015S2",
-          "7.9h",
-          "✗"
-        ],
-        [
-          "IM1847",
-          "IM1847 - SHIS QI 19 CJ 2 LT 6",
-          "6.5h",
+          "IM1837",
+          "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
+          "8.0h",
           "✗"
         ],
         [
@@ -2177,15 +2381,39 @@
           "✗"
         ],
         [
-          "IM1849",
-          "IM1849 - SHIS QI 15 CONJUNTO 9 CASA 2",
-          "3.4h",
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "3.5h",
           "✗"
+        ],
+        [
+          "IM1850",
+          "IM1850 - SEPS 712/912 LOTE E",
+          "1.8h",
+          "✓"
         ],
         [
           "IM1836",
           "IM1836 - VK 3238 - SHIS QI 7 CONUNTO 13 CASA 24 -",
           "1.7h",
+          "✓"
+        ],
+        [
+          "IM1842",
+          "IM1842 - Brisas do Lago apt E015S2",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM1844",
+          "IM1844 - SMDB CONJUNTO 25 LOTE 11 CASA B",
+          "1.3h",
+          "✓"
+        ],
+        [
+          "IM1840",
+          "IM1840 - Condomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
+          "1.1h",
           "✓"
         ],
         [
@@ -2201,14 +2429,14 @@
           "✓"
         ],
         [
-          "IM#1356492053",
-          "SEPS 712/912 LOTE E",
+          "IM1831",
+          "IM1831 - SQS 308 BLOCO I APT 404",
           "0.8h",
           "✓"
         ],
         [
-          "IM1831",
-          "IM1831 - SQS 308 BLOCO I APT 404",
+          "IM1852",
+          "IM1852 - Brisas Do Lago Bl C Apto 11316",
           "0.8h",
           "✓"
         ],
@@ -2219,8 +2447,20 @@
           "✓"
         ],
         [
+          "IM1853",
+          "IM1853 - SQSW 302 BLOCO C APTO 301",
+          "0.6h",
+          "✓"
+        ],
+        [
           "IM#1347195236",
           "Shis Ql 12 Conjunto 10 lote 1",
+          "0.3h",
+          "✓"
+        ],
+        [
+          "IM1849",
+          "IM1849 - SHIS QI 15 CONJUNTO 9 CASA 2",
           "0.3h",
           "✓"
         ],
@@ -2228,6 +2468,24 @@
           "IM1826",
           "IM1826 - VK4678 SHIS QL 8 CONJUNTO 3 CASA 01",
           "0.2h",
+          "✓"
+        ],
+        [
+          "IM1827",
+          "IM1827 - VK5344 - SHIS QI 23 CONJUNTO 15 CASA 29",
+          "0.2h",
+          "✓"
+        ],
+        [
+          "IM1848",
+          "IM1848 - SHIS QI 16 CONJUNTO 2 LOTE 13",
+          "0.2h",
+          "✓"
+        ],
+        [
+          "IM1841",
+          "IM1841 - VK4906 - SHIS QL 02 CONJUNTO 01 CASA 02",
+          "0.1h",
           "✓"
         ],
         [
@@ -2251,7 +2509,7 @@
       ]
     },
     "vivi_resc_adm": {
-      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (1/4)",
+      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (3/6)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2282,11 +2540,23 @@
           "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
           "1.5h",
           "✓"
+        ],
+        [
+          "IM1842",
+          "IM1842 - SCES TRECHO 04 BLOCO E APARTAMENTO,15 - AP S2",
+          "0.5h",
+          "✓"
+        ],
+        [
+          "IM662",
+          "IM662- SHIS QI 13 CONJUNTO 10 CASA 14",
+          "0.1h",
+          "✓"
         ]
       ]
     },
     "vivi_nido": {
-      "titulo": "Vivianne — Cont. Locação: NIDO→Concluído <24h (10/24)",
+      "titulo": "Vivianne — Cont. Locação: NIDO→Concluído <24h (13/28)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2316,6 +2586,12 @@
           "IM152",
           "IM152 - VK5376  - CLN 211 BLOCO D SALA 112",
           "149.5h",
+          "✗"
+        ],
+        [
+          "IM1586",
+          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
+          "143.9h",
           "✗"
         ],
         [
@@ -2403,9 +2679,21 @@
           "✓"
         ],
         [
+          "IM1847",
+          "IM1847 - VK5440 - SHIS QI 19 CONJUNTO  2 LOTE 6",
+          "4.7h",
+          "✓"
+        ],
+        [
           "IM292",
           "IM292 | VK5333  | CLN 211 BLOCO D SALA 106",
           "3.3h",
+          "✓"
+        ],
+        [
+          "IM143",
+          "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
+          "1.8h",
           "✓"
         ],
         [
@@ -2437,11 +2725,17 @@
           "IM1570 - VK5394 - CRS 510 BLOCO A LOJA 1",
           "0.6h",
           "✓"
+        ],
+        [
+          "IM1848",
+          "IM1848 - VK5458 - SHIS QI 16 CONJUNTO 2 LOTE 13",
+          "0.3h",
+          "✓"
         ]
       ]
     },
     "vivi_confec_loc": {
-      "titulo": "Vivianne — Cont. Locação: Confecção <2h (29/34)",
+      "titulo": "Vivianne — Cont. Locação: Confecção <2h (35/40)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2492,6 +2786,12 @@
           "✓"
         ],
         [
+          "IM1839",
+          "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
+          "1.3h",
+          "✓"
+        ],
+        [
           "IM1847",
           "IM1847 - VK5440 - SHIS QI 19 CONJUNTO  2 LOTE 6",
           "1.2h",
@@ -2512,6 +2812,12 @@
         [
           "IM123",
           "IM123 - VK5424 - CLN 306 BLOCO B SALA 112",
+          "0.7h",
+          "✓"
+        ],
+        [
+          "IM1835",
+          "IM1835 - VK5459 - SHIS QI 11 CONJUNTO 1 CASA 16 - NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
           "0.7h",
           "✓"
         ],
@@ -2548,6 +2854,12 @@
         [
           "IM1567",
           "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
+          "0.4h",
+          "✓"
+        ],
+        [
+          "IM1586",
+          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
           "0.4h",
           "✓"
         ],
@@ -2594,8 +2906,20 @@
           "✓"
         ],
         [
+          "IM143",
+          "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
+          "0.2h",
+          "✓"
+        ],
+        [
           "IM1801",
           "IM1801 | VK5336  | CLN 201 BLOCO C SALA 209",
+          "0.2h",
+          "✓"
+        ],
+        [
+          "IM1849",
+          "IM1849 -  SHIS QI 15 CONJUNTO 09 CASA 2",
           "0.2h",
           "✓"
         ],
@@ -2603,6 +2927,12 @@
           "IM391",
           "IM391 - VK5355 - CLN 412 BLOCO D SALA 114",
           "0.2h",
+          "✓"
+        ],
+        [
+          "IM1835",
+          "IM1835 - VK5459  - SHIS QI 11 CONJUNTO 1 CASA 16 -  NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
+          "0.1h",
           "✓"
         ],
         [
@@ -2656,7 +2986,7 @@
       ]
     },
     "vivi_lev_prop": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (11/19)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (17/26)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2698,6 +3028,12 @@
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
           "15.7h",
+          "✗"
+        ],
+        [
+          "IM682",
+          "IM682- SCLRN 703 BLOCO G LOJA 9",
+          "5.4h",
           "✗"
         ],
         [
@@ -2743,6 +3079,30 @@
           "✓"
         ],
         [
+          "IM344",
+          "IM344- SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
+          "0.5h",
+          "✓"
+        ],
+        [
+          "IM1329",
+          "IM1329 -  QUADRA 201  LT 7 APT 203",
+          "0.3h",
+          "✓"
+        ],
+        [
+          "IM569",
+          "IM569 - SQSW 101 BL H APTO 315",
+          "0.3h",
+          "✓"
+        ],
+        [
+          "IM634",
+          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
+          "0.3h",
+          "✓"
+        ],
+        [
           "IM1483",
           "IM1483 - SGCV LOTE 13 BL C APTO 214",
           "0.2h",
@@ -2757,6 +3117,12 @@
         [
           "IM357",
           "IM357 - CLN 412 BL D LOJA 08 e 09",
+          "0.2h",
+          "✓"
+        ],
+        [
+          "IM918",
+          "IM918 - SOFN QD 2 BL A LOJA 39",
           "0.2h",
           "✓"
         ],
@@ -2777,11 +3143,17 @@
           "IM1568 - CRS 510 BL A APTO 103",
           "0.0h",
           "✓"
+        ],
+        [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "0.0h",
+          "✓"
         ]
       ]
     },
     "vivi_lev_final": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (16/21)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (18/23)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2826,6 +3198,12 @@
           "✓"
         ],
         [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "0.9h",
+          "✓"
+        ],
+        [
           "IM1783",
           "IM1783 - CLN 201 BL C SALA 108",
           "0.6h",
@@ -2835,12 +3213,6 @@
           "IM357",
           "IM357 - CLN 412 BL D LOJA 08 e 09",
           "0.6h",
-          "✓"
-        ],
-        [
-          "IM1579",
-          "IM1579 - RUA 21 SUL LT 11 APTO 905",
-          "0.5h",
           "✓"
         ],
         [
@@ -2864,6 +3236,12 @@
         [
           "IM1567",
           "IM1567-  CRS 510 BLOCO A ENT 04 KIT 202",
+          "0.4h",
+          "✓"
+        ],
+        [
+          "IM1592",
+          "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
           "0.4h",
           "✓"
         ],
@@ -2914,11 +3292,17 @@
           "IM662 - SHIS QI 13 CONJ 10 CASA 14",
           "0.1h",
           "✓"
+        ],
+        [
+          "IM1828",
+          "IM1828- SGAS 616 CONJUNTO A LOJAS 14,15,16 LINEA VITTA",
+          "0.0h",
+          "✓"
         ]
       ]
     },
     "vivi_ren_confec": {
-      "titulo": "Vivianne — Renovação: Confecção <4h (13/20)",
+      "titulo": "Vivianne — Renovação: Confecção <4h (15/24)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -2963,10 +3347,34 @@
           "✗"
         ],
         [
+          "IM#1325040753",
+          "91",
+          "15.7h",
+          "✗"
+        ],
+        [
           "IM#1288073690",
           "109/5",
           "8.2h",
           "✗"
+        ],
+        [
+          "IM#1324969301",
+          "1328/2",
+          "6.1h",
+          "✗"
+        ],
+        [
+          "IM#1363736540",
+          "32 - SCLN 215 BLOCO C LJ [LOJA 37 E 49]",
+          "1.1h",
+          "✓"
+        ],
+        [
+          "IM#1336246449",
+          "1241/2",
+          "1.0h",
+          "✓"
         ],
         [
           "IM#1348168867",
@@ -3029,12 +3437,6 @@
           "✓"
         ],
         [
-          "IM#1336246449",
-          "1241/2",
-          "0.3h",
-          "✓"
-        ],
-        [
           "IM#1295060335",
           "1832/1",
           "0.2h",
@@ -3045,11 +3447,17 @@
           "148/3",
           "0.2h",
           "✓"
+        ],
+        [
+          "IM#1363740189",
+          "73 -  CLN 211 BLOCO D SALA 105",
+          "0.2h",
+          "✓"
         ]
       ]
     },
     "vivi_ren_final": {
-      "titulo": "Vivianne — Renovação: Finalização <16h (3/15)",
+      "titulo": "Vivianne — Renovação: Finalização <16h (7/20)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -3130,9 +3538,21 @@
           "✗"
         ],
         [
+          "IM#1348168867",
+          "1171/3",
+          "16.8h",
+          "✗"
+        ],
+        [
           "IM362",
           "IM362",
           "12.3h",
+          "✓"
+        ],
+        [
+          "IM#1320728293",
+          "1235/1",
+          "8.3h",
           "✓"
         ],
         [
@@ -3142,15 +3562,33 @@
           "✓"
         ],
         [
+          "IM#1336246449",
+          "1241/2",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM#1336247407",
+          "1352/4",
+          "2.3h",
+          "✓"
+        ],
+        [
           "IM#1291094954",
           "865/1",
           "2.2h",
+          "✓"
+        ],
+        [
+          "IM#1324969301",
+          "1328/2",
+          "1.5h",
           "✓"
         ]
       ]
     },
     "vivi_cob": {
-      "titulo": "Vivianne — Inadim.: Cobrança <24h (230/263)",
+      "titulo": "Vivianne — Inadim.: Cobrança <24h (257/291)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -3285,6 +3723,12 @@
           "✗"
         ],
         [
+          "IM1674",
+          "CLSW 104 BLOCO B AP KIT 134",
+          "58.4h",
+          "✗"
+        ],
+        [
           "IM#1314198496",
           "WANDA MEYER MATTOS ARRUDA",
           "58.2h",
@@ -3355,6 +3799,12 @@
           "LORENA INACIO CARDOSO",
           "37.2h",
           "✗"
+        ],
+        [
+          "IM#1383396146",
+          "1841/1",
+          "18.2h",
+          "✓"
         ],
         [
           "IM952",
@@ -3963,6 +4413,12 @@
           "✓"
         ],
         [
+          "IM1783",
+          "ANA PAULA DE CASTRO DOS SANTOS",
+          "12.4h",
+          "✓"
+        ],
+        [
           "IM77",
           "THAIS ROCHA DE SOUZA",
           "12.4h",
@@ -4155,6 +4611,12 @@
           "✓"
         ],
         [
+          "IM1557",
+          "EFA ENGENHARIA E SERVICOS LTDA",
+          "11.8h",
+          "✓"
+        ],
+        [
           "IM1758",
           "REGENTE ALVIM COMERCIO DE ALIMENTOS LTDA",
           "11.8h",
@@ -4203,6 +4665,12 @@
           "✓"
         ],
         [
+          "IM#1361002550",
+          "CONCEPT UNIFORMES EIRELI",
+          "11.4h",
+          "✓"
+        ],
+        [
           "IM1570",
           "PARTIDO LIBERAL DO DISTRITO FEDERAL",
           "11.4h",
@@ -4221,9 +4689,69 @@
           "✓"
         ],
         [
+          "IM832",
+          "GERAL REGULADORA CENTRO AUTOMOTIVO EIREL",
+          "11.4h",
+          "✓"
+        ],
+        [
+          "IM834",
+          "IDE LUCAS DE FARIA MACHAY",
+          "11.4h",
+          "✓"
+        ],
+        [
+          "IM835",
+          "PAOLO CALANCHINI",
+          "11.4h",
+          "✓"
+        ],
+        [
           "IM39",
           "GUILHERME JUNIO PINHEIRO",
           "11.3h",
+          "✓"
+        ],
+        [
+          "IM1787",
+          "FABIANA BORGES LUCAS",
+          "11.1h",
+          "✓"
+        ],
+        [
+          "IM1801",
+          "IM1801ALETEA PEIXOTO COSSO",
+          "11.1h",
+          "✓"
+        ],
+        [
+          "IM740",
+          "SRIA COM CEN COMUNAL II LOTE 05 SALA,204 - SL SL 204",
+          "11.1h",
+          "✓"
+        ],
+        [
+          "IM#1376132147",
+          "362",
+          "11.0h",
+          "✓"
+        ],
+        [
+          "IM1273",
+          "ADRIANA LOIOLA OLIVEIRA",
+          "11.0h",
+          "✓"
+        ],
+        [
+          "IM1741",
+          "CARLOS HENRIQUE JARDIM FIGUEREDO",
+          "11.0h",
+          "✓"
+        ],
+        [
+          "IM344",
+          "INSTITUTO DE CONTRACULTURA LTDA",
+          "11.0h",
           "✓"
         ],
         [
@@ -4233,9 +4761,45 @@
           "✓"
         ],
         [
+          "IM79",
+          "PATRICIA MARTINS IZIDORO",
+          "11.0h",
+          "✓"
+        ],
+        [
+          "IM#1376132208",
+          "1581",
+          "10.9h",
+          "✓"
+        ],
+        [
+          "IM368",
+          "IM368",
+          "10.8h",
+          "✓"
+        ],
+        [
           "IM1360",
           "BRUNO CRAVO ALVES",
           "10.7h",
+          "✓"
+        ],
+        [
+          "IM880",
+          "CLN 306 BLOCO A,9 - SL SALA 09",
+          "10.7h",
+          "✓"
+        ],
+        [
+          "IM140",
+          "SCLN 116 BLOCO G [ LOJAS, 05, 11, 15, 19, 23, 25, 37, 41,1 - LJ 47, 51, 57, 61, 65]",
+          "10.6h",
+          "✓"
+        ],
+        [
+          "IM1665",
+          "SHIGS 712 BLOCO N CASA 21",
+          "10.6h",
           "✓"
         ],
         [
@@ -4245,9 +4809,39 @@
           "✓"
         ],
         [
+          "IM379",
+          "SCLN 412 BLOCO D LOTE 08,102 - SL [SALA 102 E 103]",
+          "10.6h",
+          "✓"
+        ],
+        [
           "IM47",
           "DANILO COELHO RIBEIRO",
           "10.6h",
+          "✓"
+        ],
+        [
+          "IM#1371179624",
+          "1533 - SHIS QI 28 CONJ 04 CASA 5",
+          "10.5h",
+          "✓"
+        ],
+        [
+          "IM1785",
+          "IM1785",
+          "10.5h",
+          "✓"
+        ],
+        [
+          "IM31",
+          "IM31",
+          "10.5h",
+          "✓"
+        ],
+        [
+          "IM918",
+          "SOFN QUADRA 2 BL A LOJA 39",
+          "10.5h",
           "✓"
         ],
         [
@@ -4546,6 +5140,12 @@
         ],
         [
           "IM1714",
+          "SQS 310 BL I AP 105 V67/68/75",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1714",
           "SQS 310,310 - AP BL I AP105 V67/68/75",
           "0.0h",
           "✓"
@@ -4695,6 +5295,12 @@
           "✓"
         ],
         [
+          "IM664",
+          "CLN 308 BLOCO D LOJAS,3 - LJ [LJ 03 E 73]",
+          "0.0h",
+          "✓"
+        ],
+        [
           "IM682",
           "IM682 SCLRN 703 BLOCO G LOJA,9",
           "0.0h",
@@ -4739,7 +5345,7 @@
       ]
     },
     "vivi_cred": {
-      "titulo": "Vivianne — Inadim.: CredPago ≤15d (13/13)",
+      "titulo": "Vivianne — Inadim.: CredPago ≤15d (15/15)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -4775,6 +5381,18 @@
           "IM368",
           "IM368/6",
           "8.8d",
+          "✓"
+        ],
+        [
+          "IM1714",
+          "SQS 310 BL I AP 105 V67/68/75",
+          "8.5d",
+          "✓"
+        ],
+        [
+          "IM79",
+          "PATRICIA MARTINS IZIDORO",
+          "8.5d",
           "✓"
         ],
         [
@@ -4828,7 +5446,7 @@
       ]
     },
     "vivi_neg": {
-      "titulo": "Vivianne — Inadim.: Negativação 7-9d (1/16)",
+      "titulo": "Vivianne — Inadim.: Negativação 7-9d (1/17)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -4864,6 +5482,12 @@
           "IM1530",
           "IM1530/2",
           "14.6d",
+          "✗"
+        ],
+        [
+          "IM344",
+          "INSTITUTO DE CONTRACULTURA LTDA",
+          "14.5d",
           "✗"
         ],
         [
@@ -4935,7 +5559,7 @@
       ]
     },
     "vivi_bo_concl": {
-      "titulo": "Vivianne — BackOffice: Concluído <24h (93/127)",
+      "titulo": "Vivianne — BackOffice: Concluído <24h (111/150)",
       "cols": [
         "Imóvel",
         "Título",
@@ -5040,6 +5664,12 @@
           "✗"
         ],
         [
+          "IM1818",
+          "IM1818",
+          "194.0h",
+          "✗"
+        ],
+        [
           "IM1836",
           "IM1836 - VK 3238 - SHIS QI 7 CONUNTO 13 CASA 24",
           "193.3h",
@@ -5076,6 +5706,12 @@
           "✗"
         ],
         [
+          "IM#1375344811",
+          "1802",
+          "92.3h",
+          "✗"
+        ],
+        [
           "IM#1278959303",
           "425",
           "91.3h",
@@ -5090,6 +5726,12 @@
         [
           "IM#1325705123",
           "1748",
+          "70.3h",
+          "✗"
+        ],
+        [
+          "IM#1358419024",
+          "621",
           "70.3h",
           "✗"
         ],
@@ -5130,6 +5772,12 @@
           "✗"
         ],
         [
+          "IM#1363859420",
+          "IPTU 05_2026",
+          "42.2h",
+          "✗"
+        ],
+        [
           "IM#1292970306",
           "1827",
           "30.6h",
@@ -5145,6 +5793,12 @@
           "IM82",
           "IM82 - VK5327  - CLN 211 BLOCO D SALA 208",
           "27.0h",
+          "✗"
+        ],
+        [
+          "IM143",
+          "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
+          "24.9h",
           "✗"
         ],
         [
@@ -5232,6 +5886,12 @@
           "✓"
         ],
         [
+          "IM#1373417761",
+          "1832",
+          "3.9h",
+          "✓"
+        ],
+        [
           "IM376",
           "IM376 - VK5331 - CLN 412 Bloco D LOJAS 27 E 28",
           "3.6h",
@@ -5298,6 +5958,12 @@
           "✓"
         ],
         [
+          "IM#1370076991",
+          "1171",
+          "1.9h",
+          "✓"
+        ],
+        [
           "IM#1300198361",
           "1418/3",
           "1.7h",
@@ -5346,6 +6012,18 @@
           "✓"
         ],
         [
+          "IM#1373685927",
+          "1841",
+          "1.4h",
+          "✓"
+        ],
+        [
+          "IM1843",
+          "IM1843",
+          "1.4h",
+          "✓"
+        ],
+        [
           "IM#1343185188",
           "832",
           "1.3h",
@@ -5382,8 +6060,20 @@
           "✓"
         ],
         [
+          "IM683",
+          "IM683",
+          "1.0h",
+          "✓"
+        ],
+        [
           "IM#1351208082",
           "906",
+          "0.9h",
+          "✓"
+        ],
+        [
+          "IM#1360083584",
+          "TAXA LOFT",
           "0.9h",
           "✓"
         ],
@@ -5400,6 +6090,12 @@
           "✓"
         ],
         [
+          "IM#1382883340",
+          "Certidão de Onus",
+          "0.7h",
+          "✓"
+        ],
+        [
           "IM1837",
           "IM1837",
           "0.7h",
@@ -5412,6 +6108,12 @@
           "✓"
         ],
         [
+          "IM#1358360661",
+          "103",
+          "0.6h",
+          "✓"
+        ],
+        [
           "IM1557",
           "IM1557",
           "0.6h",
@@ -5420,6 +6122,12 @@
         [
           "IM1565",
           "IM1565",
+          "0.6h",
+          "✓"
+        ],
+        [
+          "IM1586",
+          "IM1586",
           "0.6h",
           "✓"
         ],
@@ -5490,6 +6198,12 @@
           "✓"
         ],
         [
+          "IM683",
+          "IM683 ",
+          "0.4h",
+          "✓"
+        ],
+        [
           "IM#1296279348",
           "1821/1",
           "0.3h",
@@ -5526,6 +6240,12 @@
           "✓"
         ],
         [
+          "IM#1382691195",
+          "P5724 e P5648",
+          "0.3h",
+          "✓"
+        ],
+        [
           "IM1826",
           "IM1826",
           "0.3h",
@@ -5534,6 +6254,12 @@
         [
           "IM1842",
           "IM1842",
+          "0.3h",
+          "✓"
+        ],
+        [
+          "IM1847",
+          "IM1847",
           "0.3h",
           "✓"
         ],
@@ -5598,6 +6324,12 @@
           "✓"
         ],
         [
+          "IM1802",
+          "IM1802",
+          "0.2h",
+          "✓"
+        ],
+        [
           "IM1822",
           "IM1822",
           "0.2h",
@@ -5652,6 +6384,18 @@
           "✓"
         ],
         [
+          "IM#1372303568",
+          "1533",
+          "0.1h",
+          "✓"
+        ],
+        [
+          "IM#1382936716",
+          "1586",
+          "0.1h",
+          "✓"
+        ],
+        [
           "IM1824",
           "IM1824",
           "0.1h",
@@ -5700,15 +6444,33 @@
           "✓"
         ],
         [
+          "IM#1372315950",
+          "1754",
+          "0.0h",
+          "✓"
+        ],
+        [
           "IM107",
           "IM107",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM683",
+          "IM683 - VK5408 - CLN 308 BLOCO D LOJA 15",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM683",
+          "IM683 - VK5408 - CLN 308 BLOCO D LOJA 15",
           "0.0h",
           "✓"
         ]
       ]
     },
     "vivi_bo_troca": {
-      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (9/22)",
+      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (11/31)",
       "cols": [
         "Imóvel",
         "Título",
@@ -5717,9 +6479,33 @@
       ],
       "rows": [
         [
+          "IM1824",
+          "IM1824 - VK5308  - CLS 108 BLOCO A LOJAS 01, 02 E 03",
+          "680.4h",
+          "✗"
+        ],
+        [
           "IM#1283882757",
           "1206",
           "408.3h",
+          "✗"
+        ],
+        [
+          "IM1567",
+          "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
+          "388.7h",
+          "✗"
+        ],
+        [
+          "IM1787",
+          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
+          "384.5h",
+          "✗"
+        ],
+        [
+          "IM135",
+          "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
+          "377.2h",
           "✗"
         ],
         [
@@ -5735,9 +6521,21 @@
           "✗"
         ],
         [
+          "IM662",
+          "IM662 - QI 13 Conjunto 10 casa 14",
+          "206.2h",
+          "✗"
+        ],
+        [
           "IM#1333223353",
           "1837 - incluir contas no scaza",
           "193.9h",
+          "✗"
+        ],
+        [
+          "IM143",
+          "IM143 - BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
+          "188.9h",
           "✗"
         ],
         [
@@ -5768,6 +6566,12 @@
           "IM#1347050428",
           "1843",
           "98.5h",
+          "✗"
+        ],
+        [
+          "IM#1354322066",
+          "1341",
+          "84.3h",
           "✗"
         ],
         [
@@ -5819,6 +6623,12 @@
           "✓"
         ],
         [
+          "IM1586",
+          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
+          "8.2h",
+          "✓"
+        ],
+        [
           "IM#1329198964",
           "1598",
           "6.7h",
@@ -5837,6 +6647,12 @@
           "✓"
         ],
         [
+          "IM#1370305143",
+          "1586",
+          "3.3h",
+          "✓"
+        ],
+        [
           "IM#1343250097",
           "357",
           "1.9h",
@@ -5851,7 +6667,7 @@
       ]
     },
     "vivi_bonus_inadim": {
-      "titulo": "Vivianne — Inadim.: Boletos cobrados antes do repasse ★ (N=62 de 159)",
+      "titulo": "Vivianne — Inadim.: Boletos cobrados antes do repasse ★ (N=66 de 159)",
       "cols": [
         "Categoria",
         "Quantidade",
@@ -5860,17 +6676,17 @@
       "rows": [
         [
           "✓ Cobrados antes do repasse com card (entram em N)",
-          "62",
+          "66",
           "✓"
         ],
         [
           "✗ Não cobrados (sem card no mês esperado)",
-          "67",
+          "60",
           "✗"
         ],
         [
           "✗ Cobrança reativa (card criado depois do pagamento)",
-          "7",
+          "10",
           "✗"
         ],
         [
@@ -5881,7 +6697,7 @@
       ]
     },
     "mar_laudo": {
-      "titulo": "Marinho — Vistorias: Laudo <24h (29/46)",
+      "titulo": "Marinho — Vistorias: Laudo <24h (36/53)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6034,6 +6850,12 @@
           "✓"
         ],
         [
+          "IM490",
+          "IM490 - SHIS QI 26 CONJ 12 CASA 03",
+          "11.5h",
+          "✓"
+        ],
+        [
           "IM1567",
           "IM1567-  CRS 510 BLOCO A ENT 04 KIT 202",
           "10.8h",
@@ -6076,6 +6898,24 @@
           "✓"
         ],
         [
+          "IM1586",
+          "IM1586-  CNC 02 LOTE 10 - PREDIO 1º E 2º ANDAR",
+          "6.9h",
+          "✓"
+        ],
+        [
+          "IM1835",
+          "IM1835 - SHIS QI 11 CONJUNTO 1 CASA 16",
+          "6.3h",
+          "✓"
+        ],
+        [
+          "IM1847",
+          "IM1847- SHIS QI 19 CONJUNTO 02- CASA 06",
+          "6.0h",
+          "✓"
+        ],
+        [
           "IM1592",
           "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
           "5.9h",
@@ -6091,6 +6931,12 @@
           "IM#1355243652",
           "Qi 28 conjunto 13 casa 15",
           "5.0h",
+          "✓"
+        ],
+        [
+          "IM#1375752249",
+          "CLN 211 BLOCO D SALA 101",
+          "4.8h",
           "✓"
         ],
         [
@@ -6115,6 +6961,12 @@
           "IM357",
           "IM357 - CLN 412 BL D LOJA 08 e 09",
           "4.4h",
+          "✓"
+        ],
+        [
+          "IM1329",
+          "IM1329 -  QUADRA 201  LT 7 APT 203",
+          "3.0h",
           "✓"
         ],
         [
@@ -6156,6 +7008,12 @@
         [
           "IM1169",
           "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1785",
+          "IM1785 - SHIS QI 26 CJ 16 CASA 22",
           "0.0h",
           "✓"
         ],
@@ -6374,7 +7232,7 @@
       ]
     },
     "nat_cadm": {
-      "titulo": "Natália — Cont. ADM: Conferência ≤2h (2/10)",
+      "titulo": "Natália — Cont. ADM: Conferência ≤2h (2/11)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6385,13 +7243,7 @@
         [
           "IM1843",
           "IM1843 - VK3898 - SHIS QI 28 CONJUNTO 13 CASA 15",
-          "573.3h",
-          "✗"
-        ],
-        [
-          "IM1838",
-          "IM1838 - SHIS QI 15 CJ 13 LT 5",
-          "58.4h",
+          "38.9h",
           "✗"
         ],
         [
@@ -6413,21 +7265,33 @@
           "✗"
         ],
         [
+          "IM1838",
+          "IM1838 - SHIS QI 15 CJ 13 LT 5",
+          "7.5h",
+          "✗"
+        ],
+        [
           "IM1842",
           "IM1842 - Brisas do Lago apt E015S2",
           "6.3h",
           "✗"
         ],
         [
+          "IM1853",
+          "IM1853 - SQSW 302 BLOCO C APTO 301",
+          "4.8h",
+          "✗"
+        ],
+        [
           "IM1831",
           "IM1831 - SQS 308 BLOCO I APT 404",
-          "4.1h",
+          "4.0h",
           "✗"
         ],
         [
           "IM1847",
           "IM1847 - SHIS QI 19 CJ 2 LT 6",
-          "3.1h",
+          "3.0h",
           "✗"
         ],
         [
@@ -6445,7 +7309,7 @@
       ]
     },
     "nat_cadm_bonus": {
-      "titulo": "Natália — Cont. ADM: Vistoria de entrada ★ (5)",
+      "titulo": "Natália — Cont. ADM: Vistoria de entrada ★ (6)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6482,11 +7346,17 @@
           "IM1843 - VK3898 - SHIS QI 28 CONJUNTO 13 CASA 15",
           "vistoria criada",
           "★"
+        ],
+        [
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "vistoria criada",
+          "★"
         ]
       ]
     },
     "nat_resc_adm_rep": {
-      "titulo": "Natália — Resc. ADM: Repasse <12h (1/1)",
+      "titulo": "Natália — Resc. ADM: Repasse <12h (1/2)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6494,6 +7364,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM1823",
+          "IM1823 - SHIS QL 08 CONJ 03 CASA 04",
+          "883.9h",
+          "✗"
+        ],
         [
           "IM737",
           "IM737 - QD 201 LT 05 APTO 704 VG 62",
@@ -6526,7 +7402,7 @@
       ]
     },
     "nat_rl_prop": {
-      "titulo": "Natália — Resc. Loc.: Boleto prop <24h (5/7)",
+      "titulo": "Natália — Resc. Loc.: Boleto prop <24h (8/12)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6534,6 +7410,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "15953827.7h",
+          "✗"
+        ],
         [
           "IM1341",
           "IM1341 - SQS 112 BL I APTO 304",
@@ -6544,6 +7426,12 @@
           "IM39",
           "IM39 - SGAN 911 CONJ G BL E APTO 203",
           "72.0h",
+          "✗"
+        ],
+        [
+          "IM1329",
+          "IM1329 -  QUADRA 201  LT 7 APT 203",
+          "66.3h",
           "✗"
         ],
         [
@@ -6559,9 +7447,27 @@
           "✓"
         ],
         [
+          "IM569",
+          "IM569 - SQSW 101 BL H APTO 315",
+          "15.8h",
+          "✓"
+        ],
+        [
           "IM1483",
           "IM1483 - SGCV LOTE 13 BL C APTO 214",
           "3.3h",
+          "✓"
+        ],
+        [
+          "IM634",
+          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
+          "1.5h",
+          "✓"
+        ],
+        [
+          "IM918",
+          "IM918 - SOFN QD 2 BL A LOJA 39",
+          "1.5h",
           "✓"
         ],
         [
@@ -6579,7 +7485,7 @@
       ]
     },
     "nat_rl_final": {
-      "titulo": "Natália — Resc. Loc.: Boleto final <15d (3/6)",
+      "titulo": "Natália — Resc. Loc.: Boleto final <15d (3/7)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6587,6 +7493,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM1579",
+          "IM1579 - RUA 21 SUL LT 11 APTO 905",
+          "664758d",
+          "✗"
+        ],
         [
           "IM1341",
           "IM1341 - SQS 112 BL I APTO 304",
@@ -6626,7 +7538,7 @@
       ]
     },
     "nat_rep_orc": {
-      "titulo": "Natália — Reparos: Orçamento <4h (22/29)",
+      "titulo": "Natália — Reparos: Orçamento <4h (27/34)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6701,8 +7613,20 @@
           "✓"
         ],
         [
+          "IM1754",
+          "IM1754 - SQS 203 BL H APTO 404",
+          "1.5h",
+          "✓"
+        ],
+        [
           "IM1755",
           "IM1755 - SHIS QL 15 CJ 13 CASA 4",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM6",
+          "IM6 - SQS 114 BL E APTO 201",
           "0.8h",
           "✓"
         ],
@@ -6749,6 +7673,18 @@
           "✓"
         ],
         [
+          "IM1843",
+          "IM1843 - SHIS QI 28 CONJ 13 CASA 15",
+          "0.1h",
+          "✓"
+        ],
+        [
+          "IM1847",
+          "IM1847 - SHIS QI 19 CONJ 02 CASA 6",
+          "0.1h",
+          "✓"
+        ],
+        [
           "IM41",
           "IM41 - SEPS 710/910 CONJ A SALA 102",
           "0.1h",
@@ -6757,6 +7693,12 @@
         [
           "IM1306",
           "IM1306 - SQS 314 BL F APTO 505",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1341",
+          "IM1341 - SQS 112 BLOCO I APTO 304",
           "0.0h",
           "✓"
         ],
@@ -6811,7 +7753,7 @@
       ]
     },
     "nat_rep_pos": {
-      "titulo": "Natália — Reparos: Pós-venda ≤7d (9/33)",
+      "titulo": "Natália — Reparos: Pós-venda ≤7d (10/36)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6835,6 +7777,12 @@
           "IM1785",
           "IM1785 - QI 26 CONJ 16 CASA 22",
           "79.9d",
+          "✗"
+        ],
+        [
+          "IM1306",
+          "IM1306 - SQS 314 BL F APTO 505",
+          "77d",
           "✗"
         ],
         [
@@ -6916,6 +7864,12 @@
           "✗"
         ],
         [
+          "IM1341",
+          "IM1341 - SQS 112 BL I APTO 304",
+          "21.0d",
+          "✗"
+        ],
+        [
           "IM1317",
           "IM1317 - SAUS QD 6 BL K SALA 101",
           "19.8d",
@@ -6982,6 +7936,12 @@
           "✓"
         ],
         [
+          "IM1352",
+          "IM1352 - SQSW 300 BL D APTO 602",
+          "2.0d",
+          "✓"
+        ],
+        [
           "IM1831",
           "IM1831 - SQS 308 BL I APTO 404",
           "1.9d",
@@ -7020,7 +7980,7 @@
       ]
     },
     "nat_ren_cont": {
-      "titulo": "Natália — Renov.: Contato >60d (2/12)",
+      "titulo": "Natália — Renov.: Contato >60d (2/13)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -7042,7 +8002,7 @@
         ],
         [
           "IM#1325029949",
-          "1538",
+          "1538 -  SHIS QL 12  CONJUNTO 08 CASA,13",
           "28.0d",
           "✗"
         ],
@@ -7099,11 +8059,17 @@
           "1352/4",
           "-1.7d",
           "✗"
+        ],
+        [
+          "IM#1348200051",
+          "VK3806 - SHIN Ql 9 CONJ 3 CASA 18",
+          "-175.8d",
+          "✗"
         ]
       ]
     },
     "nat_ren_ass": {
-      "titulo": "Natália — Renov.: Assinado antes venc (2/9)",
+      "titulo": "Natália — Renov.: Assinado antes venc (3/13)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -7121,6 +8087,12 @@
           "IM#1288075020",
           "881/4",
           "4.5d",
+          "✓"
+        ],
+        [
+          "IM#1320728293",
+          "1235/1",
+          "1.7d",
           "✓"
         ],
         [
@@ -7148,6 +8120,12 @@
           "✗"
         ],
         [
+          "IM#1324969301",
+          "1328/2",
+          "-60.8d",
+          "✗"
+        ],
+        [
           "IM#1325025763",
           "745",
           "-21.4d",
@@ -7164,11 +8142,23 @@
           "1021",
           "-26.5d",
           "✗"
+        ],
+        [
+          "IM#1336246449",
+          "1241/2",
+          "-53.5d",
+          "✗"
+        ],
+        [
+          "IM#1336247407",
+          "1352/4",
+          "-42.7d",
+          "✗"
         ]
       ]
     },
     "nat_bo": {
-      "titulo": "Natália — BackOffice: Pendência <24h (0/2)",
+      "titulo": "Natália — BackOffice: Pendência <24h (1/5)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7177,9 +8167,21 @@
       ],
       "rows": [
         [
+          "IM1841",
+          "IM1841 -  VK5416 - SHIS QL 02 CONJUNTO 01 CASA 02",
+          "1061.0h",
+          "✗"
+        ],
+        [
           "IM#1337935808",
           "1341",
           "601.5h",
+          "✗"
+        ],
+        [
+          "IM1818",
+          "IM1818",
+          "146.9h",
           "✗"
         ],
         [
@@ -7187,11 +8189,17 @@
           "IM41 - VK5381 - SEPS 710/910 - SALA 102",
           "115.8h",
           "✗"
+        ],
+        [
+          "IM#1373685927",
+          "1841",
+          "0.8h",
+          "✓"
         ]
       ]
     },
     "nat_dirf": {
-      "titulo": "Natália — DIRF/DARF: Concluído < 29/mai (16/31)",
+      "titulo": "Natália — DIRF/DARF: Concluído < 29/mai (20/31)",
       "cols": [
         "Imóvel",
         "Locatário",
@@ -7199,12 +8207,6 @@
         "Status"
       ],
       "rows": [
-        [
-          "IM#1282506601",
-          "1122/1",
-          "—",
-          "✗"
-        ],
         [
           "IM#1297409200",
           "686.0",
@@ -7214,7 +8216,7 @@
         [
           "IM#1297409216",
           "829.0",
-          "—",
+          "02/06/2026",
           "✗"
         ],
         [
@@ -7244,7 +8246,7 @@
         [
           "IM#1297409270",
           "1509.0",
-          "—",
+          "01/06/2026",
           "✗"
         ],
         [
@@ -7272,22 +8274,10 @@
           "✗"
         ],
         [
-          "IM#1297409337",
-          "1727.0",
-          "—",
-          "✗"
-        ],
-        [
-          "IM#1297409353",
-          "1785.0",
-          "—",
-          "✗"
-        ],
-        [
-          "IM#1314823402",
-          "1746.1",
-          "—",
-          "✗"
+          "IM#1282506601",
+          "1122/1",
+          "28/05/2026",
+          "✓"
         ],
         [
           "IM#1297409178",
@@ -7362,6 +8352,12 @@
           "✓"
         ],
         [
+          "IM#1297409337",
+          "1727.0",
+          "28/05/2026",
+          "✓"
+        ],
+        [
           "IM#1297409341",
           "1729.0",
           "16/03/2026",
@@ -7371,6 +8367,18 @@
           "IM#1297409349",
           "1746.0",
           "30/04/2026",
+          "✓"
+        ],
+        [
+          "IM#1297409353",
+          "1785.0",
+          "28/05/2026",
+          "✓"
+        ],
+        [
+          "IM#1314823402",
+          "1746.1",
+          "28/05/2026",
           "✓"
         ],
         [
@@ -7388,7 +8396,7 @@
       ]
     },
     "gar_cadm": {
-      "titulo": "Gardênia — Cont. ADM: Conferência ≤2h (0/13)",
+      "titulo": "Gardênia — Cont. ADM: Conferência ≤2h (1/15)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7397,21 +8405,21 @@
       ],
       "rows": [
         [
-          "IM#1300121934",
-          "CRS 510 BLOCO A  Loja 01 e Subsolo - KIT 101, 102, 103, 104, 201, 202, 203, 204",
-          "421.2h",
-          "✗"
-        ],
-        [
           "IM1826",
           "IM1826 - VK4678 SHIS QL 8 CONJUNTO 3 CASA 01",
           "91.1h",
           "✗"
         ],
         [
-          "IM1840",
-          "IM1840 - Condomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
-          "84.4h",
+          "IM#1300121934",
+          "CRS 510 BLOCO A  Loja 01 e Subsolo - KIT 101, 102, 103, 104, 201, 202, 203, 204",
+          "58.7h",
+          "✗"
+        ],
+        [
+          "IM1839",
+          "IM1839 - SHIS QI 11 CONJUNTO 6 CASA 10",
+          "51.5h",
           "✗"
         ],
         [
@@ -7424,6 +8432,12 @@
           "IM1832",
           "IM1832 E 1833 SCLS 304 BLOCO A LJ 30",
           "29.9h",
+          "✗"
+        ],
+        [
+          "IM1840",
+          "IM1840 - Condomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
+          "24.8h",
           "✗"
         ],
         [
@@ -7473,6 +8487,12 @@
           "IM1845 - VK5057 - SQS 404 BL O APTO 226",
           "3.4h",
           "✗"
+        ],
+        [
+          "IM1850",
+          "IM1850 - SEPS 712/912 LOTE E",
+          "0.6h",
+          "✓"
         ]
       ]
     },
@@ -7498,21 +8518,21 @@
           "★"
         ],
         [
-          "IM1837",
-          "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
+          "IM1846",
+          "IM1846 - SQS 211 BLOCO G APTO 105",
           "vistoria criada",
           "★"
         ],
         [
-          "IM1846",
-          "IM1846 - SQS 211 BLOCO G APTO 105",
+          "IM1837",
+          "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
           "vistoria criada",
           "★"
         ]
       ]
     },
     "gar_resc_adm_rep": {
-      "titulo": "Gardênia — Resc. ADM: Repasse <12h (1/2)",
+      "titulo": "Gardênia — Resc. ADM: Repasse <12h (2/4)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7520,6 +8540,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM662",
+          "IM662- SHIS QI 13 CONJUNTO 10 CASA 14",
+          "172.0h",
+          "✗"
+        ],
         [
           "IM1827",
           "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
@@ -7531,11 +8557,17 @@
           "IM1206 - SQS 414 BL J APTO 204",
           "11.8h",
           "✓"
+        ],
+        [
+          "IM1842",
+          "IM1842 - SCES TRECHO 04 BLOCO E APARTAMENTO,15 - AP S2",
+          "10.7h",
+          "✓"
         ]
       ]
     },
     "gar_resc_adm_dist": {
-      "titulo": "Gardênia — Resc. ADM: Distrato assinado (0/5)",
+      "titulo": "Gardênia — Resc. ADM: Distrato assinado (0/6)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7546,6 +8578,12 @@
         [
           "IM1206",
           "IM1206 - SQS 414 BL J APTO 204",
+          "Não",
+          "✗"
+        ],
+        [
+          "IM1827",
+          "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
           "Não",
           "✗"
         ],
@@ -7576,7 +8614,7 @@
       ]
     },
     "gar_rl_prop": {
-      "titulo": "Gardênia — Resc. Loc.: Boleto prop <24h (6/12)",
+      "titulo": "Gardênia — Resc. Loc.: Boleto prop <24h (8/14)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7627,6 +8665,12 @@
           "✓"
         ],
         [
+          "IM682",
+          "IM682- SCLRN 703 BLOCO G LOJA 9",
+          "2.2h",
+          "✓"
+        ],
+        [
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
           "1.5h",
@@ -7653,6 +8697,12 @@
         [
           "IM1783",
           "IM1783 - CLN 201 BL C SALA 108",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM344",
+          "IM344- SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
           "0.0h",
           "✓"
         ]
@@ -7730,7 +8780,7 @@
       ]
     },
     "gar_rep_orc": {
-      "titulo": "Gardênia — Reparos: Orçamento <4h (40/58)",
+      "titulo": "Gardênia — Reparos: Orçamento <4h (45/69)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7742,6 +8792,12 @@
           "IM683",
           "IM683-CLN 308 BLOCO D LOJA 15",
           "154.4h",
+          "✗"
+        ],
+        [
+          "IM1837",
+          "IM1837- SHIS QL 08 CONJ 04 CASA 02",
+          "132.3h",
           "✗"
         ],
         [
@@ -7823,6 +8879,30 @@
           "✗"
         ],
         [
+          "IM876",
+          "IM876 - SQS 408 BL B APTO 310",
+          "7.3h",
+          "✗"
+        ],
+        [
+          "IM135",
+          "IM135 - CLN 306 BLOCO B APARTAMENTO 115",
+          "7.0h",
+          "✗"
+        ],
+        [
+          "IM129",
+          "IM129 - CLN 306 BL B APTO 102",
+          "6.9h",
+          "✗"
+        ],
+        [
+          "IM130",
+          "IM130- CLN 306 BLOCO B APARTAMENTO 110",
+          "6.9h",
+          "✗"
+        ],
+        [
           "IM130",
           "IM130 - CLN 306 BL B APTO 110",
           "6.9h",
@@ -7841,6 +8921,12 @@
           "✗"
         ],
         [
+          "IM683",
+          "IM683- CLN 308 BLOCO D LOJA 15",
+          "4.5h",
+          "✗"
+        ],
+        [
           "IM370",
           "IM370 - SCLN 412 BLOCO D  LOJA 21",
           "4.4h",
@@ -7856,6 +8942,18 @@
           "IM373",
           "IM373 - CLN 412 BL D LOJA 26",
           "3.5h",
+          "✓"
+        ],
+        [
+          "IM881",
+          "IM881 - SQN 314 BL A APTO 402",
+          "3.3h",
+          "✓"
+        ],
+        [
+          "IM71",
+          "IM71- CLN 211 BLOCO D SALA 102",
+          "3.2h",
           "✓"
         ],
         [
@@ -7902,6 +9000,12 @@
         ],
         [
           "IM422",
+          "IM422 - SHIS QL 08 CONJUNTO 02 CASA 1",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM422",
           "IM422 - SHIS QL 08 CONJUNTO 02 CASA 01",
           "2.4h",
           "✓"
@@ -7934,6 +9038,12 @@
           "IM84",
           "IM84- CLN 211 BLOCO D SALA 211",
           "1.3h",
+          "✓"
+        ],
+        [
+          "IM1802",
+          "IM1802 - CLN 201 BLOCO C SALA 210",
+          "1.0h",
           "✓"
         ],
         [
@@ -7993,6 +9103,12 @@
         [
           "IM123",
           "IM123- SCLN 306 BLOCO B SL 112",
+          "0.1h",
+          "✓"
+        ],
+        [
+          "IM1464",
+          "IM1464 - SCLN 306 BLOCO B LOJA 1",
           "0.1h",
           "✓"
         ],
@@ -8064,7 +9180,7 @@
         ],
         [
           "IM379",
-          "IM379- SCLN 412 BLOCO D SALA 103",
+          "IM379- SCLN 412 BLOCO D SALA 102 e 103",
           "0.0h",
           "✓"
         ],
@@ -8089,7 +9205,7 @@
       ]
     },
     "gar_rep_pos": {
-      "titulo": "Gardênia — Reparos: Pós-venda ≤7d (11/37)",
+      "titulo": "Gardênia — Reparos: Pós-venda ≤7d (11/42)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8107,6 +9223,24 @@
           "IM1565",
           "IM1565 - CRS 510 PREDIO",
           "71.2d",
+          "✗"
+        ],
+        [
+          "IM401",
+          "IM401 - CLN 412 BL D SALAS 215 A 219",
+          "71.2d",
+          "✗"
+        ],
+        [
+          "IM559",
+          "IM559 - AV NICOLAS BOER - Rua Joseph Nigri, 147",
+          "71d",
+          "✗"
+        ],
+        [
+          "IM1798",
+          "IM1798- CLN 201 BLOCO C",
+          "51.9d",
           "✗"
         ],
         [
@@ -8224,6 +9358,12 @@
           "✗"
         ],
         [
+          "IM881",
+          "IM881 - SQN 314 BL A APTO 402",
+          "15.1d",
+          "✗"
+        ],
+        [
           "IM1801",
           "IM1801-  CLN QUADRA 201 BLOCO C SALA 209",
           "13.9d",
@@ -8251,6 +9391,12 @@
           "IM135",
           "IM135- SCLN 306 BLOCO B SL 115",
           "9.4d",
+          "✗"
+        ],
+        [
+          "IM1570",
+          "IM1570- CRS 510 BLOCO A LOJA 01",
+          "7d",
           "✗"
         ],
         [
@@ -8322,7 +9468,7 @@
       ]
     },
     "gar_ren_cont": {
-      "titulo": "Gardênia — Renov.: Contato >60d (5/13)",
+      "titulo": "Gardênia — Renov.: Contato >60d (6/16)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -8355,16 +9501,16 @@
           "✓"
         ],
         [
+          "IM350",
+          "SCLN 412 BL D LT 08 LOJAS 1, 2, 3, 10, 11, 12",
+          "83.7d",
+          "✓"
+        ],
+        [
           "IM#1325040753",
           "91",
           "69.3d",
           "✓"
-        ],
-        [
-          "IM350",
-          "SCLN 412 BL D LT 08 LOJAS 1, 2, 3, 10, 11, 12",
-          "56.7d",
-          "✗"
         ],
         [
           "IM#1278704023",
@@ -8406,6 +9552,24 @@
           "IM#1324970987",
           "148/3",
           "0.4d",
+          "✗"
+        ],
+        [
+          "IM#1363733799",
+          "107 - SCLN 215 BLOCO C LOJA25",
+          "-18.7d",
+          "✗"
+        ],
+        [
+          "IM#1363736540",
+          "32 - SCLN 215 BLOCO C LJ [LOJA 37 E 49]",
+          "-18.5d",
+          "✗"
+        ],
+        [
+          "IM#1363740189",
+          "73 -  CLN 211 BLOCO D SALA 105",
+          "-18.8d",
           "✗"
         ]
       ]
@@ -8464,7 +9628,7 @@
       ]
     },
     "gar_bo": {
-      "titulo": "Gardênia — BackOffice: Pendência <24h (0/5)",
+      "titulo": "Gardênia — BackOffice: Pendência <24h (0/12)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8479,9 +9643,45 @@
           "✗"
         ],
         [
+          "IM1824",
+          "IM1824 - VK5308  - CLS 108 BLOCO A LOJAS 01, 02 E 03",
+          "1351.5h",
+          "✗"
+        ],
+        [
+          "IM1787",
+          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
+          "1228.8h",
+          "✗"
+        ],
+        [
+          "IM135",
+          "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
+          "1063.1h",
+          "✗"
+        ],
+        [
+          "IM1567",
+          "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
+          "894.6h",
+          "✗"
+        ],
+        [
           "IM#1271941754",
           "560",
           "865.2h",
+          "✗"
+        ],
+        [
+          "IM662",
+          "IM662 - QI 13 Conjunto 10 casa 14",
+          "691.0h",
+          "✗"
+        ],
+        [
+          "IM143",
+          "IM143 - BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
+          "646.9h",
           "✗"
         ],
         [
@@ -8494,6 +9694,12 @@
           "IM1782",
           "IM1782 - VK5302 - CLN 201 BLOCO C UNIDADE 107",
           "351.0h",
+          "✗"
+        ],
+        [
+          "IM#1356504026",
+          "1828",
+          "338.6h",
           "✗"
         ],
         [
@@ -8558,22 +9764,22 @@
       "titulo": "Contrato de Administração",
       "kpis": [
         {
-          "v": "20.0%",
+          "v": "18.2%",
           "l": "Natália Conferência ≤2h",
           "cls": "bad"
         },
         {
-          "v": "0.0%",
+          "v": "6.7%",
           "l": "Gardênia Conferência ≤2h",
           "cls": "bad"
         },
         {
-          "v": "40.7%",
+          "v": "69.0%",
           "l": "Vivianne Confecção <2h",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
-          "v": "★ 9",
+          "v": "★ 10",
           "l": "Vistorias entrada",
           "cls": ""
         }
@@ -8584,16 +9790,16 @@
           "titulo": "Indicadores · Cont. ADM",
           "full": true,
           "labels": [
-            "Vivianne Confecção <2h (11/27)",
-            "Caio Criação→NIDO <7d (2/6)",
-            "Natália Conferência ≤2h (2/10)",
-            "Gardênia Conferência ≤2h (0/13)"
+            "Vivianne Confecção <2h (20/29)",
+            "Natália Conferência ≤2h (2/11)",
+            "Gardênia Conferência ≤2h (1/15)",
+            "Caio Criação→NIDO <7d (2/10)"
           ],
           "data": [
-            40.7,
-            33.3,
-            20.0,
-            0
+            69.0,
+            18.2,
+            6.7,
+            20.0
           ],
           "metas": [
             100,
@@ -8606,16 +9812,16 @@
           "tipo": "bar-v",
           "titulo": "Notas",
           "labels": [
-            "Natália",
             "Vivianne",
-            "Caio",
-            "Gardênia"
+            "Natália",
+            "Gardênia",
+            "Caio"
           ],
           "data": [
-            4.667,
-            4.074,
-            3.333,
-            2.857
+            6.897,
+            4.886,
+            3.334,
+            2.0
           ],
           "colors": [
             "#000",
@@ -8630,47 +9836,47 @@
           "nome": "Confecção <2h",
           "resp": "Vivianne",
           "meta": "≤2h úteis",
-          "ok": 11,
-          "tot": 27,
-          "pct": 40.7
-        },
-        {
-          "nome": "Criação→NIDO <7d",
-          "resp": "Caio",
-          "meta": "≤7d corrido",
-          "ok": 2,
-          "tot": 6,
-          "pct": 33.3
+          "ok": 20,
+          "tot": 29,
+          "pct": 69.0
         },
         {
           "nome": "Conferência ≤2h",
           "resp": "Natália",
           "meta": "≤2h úteis",
           "ok": 2,
-          "tot": 10,
-          "pct": 20.0
+          "tot": 11,
+          "pct": 18.2
         },
         {
           "nome": "Conferência ≤2h",
           "resp": "Gardênia",
           "meta": "≤2h úteis",
-          "ok": 0,
-          "tot": 13,
-          "pct": 0.0
+          "ok": 1,
+          "tot": 15,
+          "pct": 6.7
+        },
+        {
+          "nome": "Criação→NIDO <7d",
+          "resp": "Caio",
+          "meta": "≤7d corrido",
+          "ok": 2,
+          "tot": 10,
+          "pct": 20.0
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera com 40.7%, mas abaixo da meta."
+          "txt": "Vivianne lidera Confecção <2h: 69.0%."
         },
         {
           "tipo": "neg",
-          "txt": "Gardênia Conferência ≤2h: 0.0% — gargalo do processo."
+          "txt": "Gardênia Conferência ≤2h: 6.7% — gargalo do processo."
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 9 vistorias de entrada criadas."
+          "txt": "★ Bônus: 10 vistorias de entrada criadas."
         }
       ]
     },
@@ -8689,9 +9895,9 @@
           "cls": "bad"
         },
         {
-          "v": "25.0%",
+          "v": "50.0%",
           "l": "Vivianne Encerramento <4h",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
           "v": "—",
@@ -8705,15 +9911,15 @@
           "titulo": "Indicadores · Rescisão ADM",
           "full": true,
           "labels": [
-            "Vivianne Encerramento <4h (1/4)",
-            "Natália Repasse <12h (1/1)",
+            "Vivianne Encerramento <4h (3/6)",
+            "Natália Repasse <12h (1/2)",
             "Natália Distrato assinado (0/2)",
-            "Gardênia Repasse <12h (1/2)",
-            "Gardênia Distrato assinado (0/5)"
+            "Gardênia Repasse <12h (2/4)",
+            "Gardênia Distrato assinado (0/6)"
           ],
           "data": [
-            25.0,
-            100.0,
+            50.0,
+            50.0,
             0,
             50.0,
             0
@@ -8730,8 +9936,8 @@
           "tipo": "bar-v",
           "titulo": "Notas",
           "labels": [
-            "Natália",
             "Vivianne",
+            "Natália",
             "Gardênia"
           ],
           "data": [
@@ -8751,29 +9957,13 @@
           "nome": "Encerramento <4h",
           "resp": "Vivianne",
           "meta": "≤4h corrido",
-          "ok": 1,
-          "tot": 4,
-          "pct": 25.0
+          "ok": 3,
+          "tot": 6,
+          "pct": 50.0
         },
         {
           "nome": "Repasse <12h",
           "resp": "Natália",
-          "meta": "≤12h úteis",
-          "ok": 1,
-          "tot": 1,
-          "pct": 100.0
-        },
-        {
-          "nome": "Distrato assinado",
-          "resp": "Natália",
-          "meta": "Preenchido",
-          "ok": 0,
-          "tot": 2,
-          "pct": 0.0
-        },
-        {
-          "nome": "Repasse <12h",
-          "resp": "Gardênia",
           "meta": "≤12h úteis",
           "ok": 1,
           "tot": 2,
@@ -8781,17 +9971,33 @@
         },
         {
           "nome": "Distrato assinado",
+          "resp": "Natália",
+          "meta": "Preenchido",
+          "ok": 0,
+          "tot": 2,
+          "pct": 0.0
+        },
+        {
+          "nome": "Repasse <12h",
+          "resp": "Gardênia",
+          "meta": "≤12h úteis",
+          "ok": 2,
+          "tot": 4,
+          "pct": 50.0
+        },
+        {
+          "nome": "Distrato assinado",
           "resp": "Gardênia",
           "meta": "Preenchido",
           "ok": 0,
-          "tot": 5,
+          "tot": 6,
           "pct": 0.0
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Repasse <12h: 100.0%."
+          "txt": "Vivianne lidera Encerramento <4h: 50.0%."
         },
         {
           "tipo": "neg",
@@ -8799,7 +10005,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 14 cards no período."
+          "txt": "Volume de 20 cards no período."
         }
       ]
     },
@@ -8808,22 +10014,22 @@
       "titulo": "Comercial de Locação",
       "kpis": [
         {
-          "v": "0.0%",
+          "v": "4.2%",
           "l": "Caio Card na coluna",
           "cls": "bad"
         },
         {
-          "v": "38.8%",
+          "v": "34.2%",
           "l": "Caio Anúncio publicado <72h",
           "cls": "bad"
         },
         {
-          "v": "20.5%",
+          "v": "19.2%",
           "l": "Caio Início processo <24h",
           "cls": "bad"
         },
         {
-          "v": "★ 3",
+          "v": "★ 4",
           "l": "Alugados sem anúncio",
           "cls": ""
         }
@@ -8834,14 +10040,14 @@
           "titulo": "Indicadores · Com. Locação",
           "full": true,
           "labels": [
-            "Caio Início processo <24h (8/39)",
-            "Caio Anúncio publicado <72h (26/67)",
-            "Caio Card na coluna correta (0/27)"
+            "Caio Início processo <24h (10/52)",
+            "Caio Anúncio publicado <72h (27/79)",
+            "Caio Card na coluna correta (1/24)"
           ],
           "data": [
-            20.5,
-            38.8,
-            0
+            19.2,
+            34.2,
+            4.2
           ],
           "metas": [
             100,
@@ -8856,7 +10062,7 @@
             "Caio"
           ],
           "data": [
-            3.448
+            3.959
           ],
           "colors": [
             "#000"
@@ -8868,39 +10074,39 @@
           "nome": "Início processo <24h",
           "resp": "Caio",
           "meta": "≤24h corrido",
-          "ok": 8,
-          "tot": 39,
-          "pct": 20.5
+          "ok": 10,
+          "tot": 52,
+          "pct": 19.2
         },
         {
           "nome": "Anúncio publicado <72h",
           "resp": "Caio",
           "meta": "≤72h corrido",
-          "ok": 26,
-          "tot": 67,
-          "pct": 38.8
+          "ok": 27,
+          "tot": 79,
+          "pct": 34.2
         },
         {
           "nome": "Card na coluna correta",
           "resp": "Caio",
           "meta": "Fase correta",
-          "ok": 0,
-          "tot": 27,
-          "pct": 0.0
+          "ok": 1,
+          "tot": 24,
+          "pct": 4.2
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Caio lidera com 38.8%, mas abaixo da meta."
+          "txt": "Caio lidera com 34.2%, mas abaixo da meta."
         },
         {
           "tipo": "neg",
-          "txt": "Caio Card na coluna correta: 0.0% — gargalo do processo."
+          "txt": "Caio Card na coluna correta: 4.2% — gargalo do processo."
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 3 imóveis alugados antes de anunciados."
+          "txt": "★ Bônus: 4 imóveis alugados antes de anunciados."
         }
       ]
     },
@@ -8909,17 +10115,17 @@
       "titulo": "Contrato de Locação",
       "kpis": [
         {
-          "v": "100.0%",
+          "v": "60.0%",
           "l": "Caio Ocupação <30d",
           "cls": "ok"
         },
         {
-          "v": "85.3%",
+          "v": "87.5%",
           "l": "Vivianne Confecção <2h",
           "cls": "ok"
         },
         {
-          "v": "41.7%",
+          "v": "46.4%",
           "l": "Vivianne NIDO→Concluído <24h",
           "cls": "bad"
         },
@@ -8935,16 +10141,16 @@
           "titulo": "Indicadores · Cont. Locação",
           "full": true,
           "labels": [
-            "Vivianne NIDO→Concluído <24h (10/24)",
-            "Vivianne Confecção <2h (29/34)",
-            "Caio Ocupação <30d (3/3)",
-            "Caio Documentação <24h (20/34)"
+            "Vivianne NIDO→Concluído <24h (13/28)",
+            "Vivianne Confecção <2h (35/40)",
+            "Caio Ocupação <30d (3/5)",
+            "Caio Documentação <24h (22/40)"
           ],
           "data": [
-            41.7,
-            85.3,
-            100.0,
-            58.8
+            46.4,
+            87.5,
+            60.0,
+            55.0
           ],
           "metas": [
             100,
@@ -8957,12 +10163,12 @@
           "tipo": "bar-v",
           "titulo": "Notas",
           "labels": [
-            "Caio",
-            "Vivianne"
+            "Vivianne",
+            "Caio"
           ],
           "data": [
-            8.353,
-            6.348
+            6.696,
+            5.8
           ],
           "colors": [
             "#000",
@@ -8975,47 +10181,47 @@
           "nome": "NIDO→Concluído <24h",
           "resp": "Vivianne",
           "meta": "≤24h corrido",
-          "ok": 10,
-          "tot": 24,
-          "pct": 41.7
+          "ok": 13,
+          "tot": 28,
+          "pct": 46.4
         },
         {
           "nome": "Confecção <2h",
           "resp": "Vivianne",
           "meta": "≤2h corrido (Pipefy)",
-          "ok": 29,
-          "tot": 34,
-          "pct": 85.3
+          "ok": 35,
+          "tot": 40,
+          "pct": 87.5
         },
         {
           "nome": "Ocupação <30d",
           "resp": "Caio",
           "meta": "≤30d corrido",
           "ok": 3,
-          "tot": 3,
-          "pct": 100.0
+          "tot": 5,
+          "pct": 60.0
         },
         {
           "nome": "Documentação <24h",
           "resp": "Caio",
           "meta": "≤24h úteis",
-          "ok": 20,
-          "tot": 34,
-          "pct": 58.8
+          "ok": 22,
+          "tot": 40,
+          "pct": 55.0
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Caio lidera Ocupação <30d: 100.0%."
+          "txt": "Vivianne lidera Confecção <2h: 87.5%."
         },
         {
           "tipo": "neg",
-          "txt": "Vivianne NIDO→Concluído <24h: 41.7% — gargalo do processo."
+          "txt": "Vivianne NIDO→Concluído <24h: 46.4% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 95 cards no período."
+          "txt": "Volume de 113 cards no período."
         }
       ]
     },
@@ -9024,19 +10230,19 @@
       "titulo": "Rescisão de Locação",
       "kpis": [
         {
-          "v": "76.2%",
+          "v": "78.3%",
           "l": "Vivianne Levant. Taxas Final",
           "cls": "ok"
         },
         {
-          "v": "57.9%",
+          "v": "65.4%",
           "l": "Vivianne Levant. Taxas Prop",
           "cls": "ok"
         },
         {
-          "v": "50.0%",
+          "v": "42.9%",
           "l": "Natália Boleto final <15d",
-          "cls": "ok"
+          "cls": "bad"
         },
         {
           "v": "100.0%",
@@ -9050,19 +10256,19 @@
           "titulo": "Indicadores · Rescisão Loc.",
           "full": true,
           "labels": [
-            "Vivianne Levant. Taxas Prop <2h (11/19)",
-            "Vivianne Levant. Taxas Final <2 (16/21)",
-            "Natália Boleto prop <24h (5/7)",
-            "Natália Boleto final <15d (3/6)",
-            "Gardênia Boleto prop <24h (6/12)",
+            "Vivianne Levant. Taxas Prop <2h (17/26)",
+            "Vivianne Levant. Taxas Final <2 (18/23)",
+            "Natália Boleto prop <24h (8/12)",
+            "Natália Boleto final <15d (3/7)",
+            "Gardênia Boleto prop <24h (8/14)",
             "Gardênia Boleto final <15d (10/10)"
           ],
           "data": [
-            57.9,
-            76.2,
-            71.4,
-            50.0,
-            50.0,
+            65.4,
+            78.3,
+            66.7,
+            42.9,
+            57.1,
             100.0
           ],
           "metas": [
@@ -9083,9 +10289,9 @@
             "Natália"
           ],
           "data": [
-            8.0,
-            6.705,
-            5.858
+            8.286,
+            7.182,
+            5.238
           ],
           "colors": [
             "#000",
@@ -9099,41 +10305,41 @@
           "nome": "Levant. Taxas Prop <2h",
           "resp": "Vivianne",
           "meta": "≤2h corrido",
-          "ok": 11,
-          "tot": 19,
-          "pct": 57.9
+          "ok": 17,
+          "tot": 26,
+          "pct": 65.4
         },
         {
           "nome": "Levant. Taxas Final <2h",
           "resp": "Vivianne",
           "meta": "≤2h corrido",
-          "ok": 16,
-          "tot": 21,
-          "pct": 76.2
+          "ok": 18,
+          "tot": 23,
+          "pct": 78.3
         },
         {
           "nome": "Boleto prop <24h",
           "resp": "Natália",
           "meta": "≤24h corrido",
-          "ok": 5,
-          "tot": 7,
-          "pct": 71.4
+          "ok": 8,
+          "tot": 12,
+          "pct": 66.7
         },
         {
           "nome": "Boleto final <15d",
           "resp": "Natália",
           "meta": "≤15d corrido",
           "ok": 3,
-          "tot": 6,
-          "pct": 50.0
+          "tot": 7,
+          "pct": 42.9
         },
         {
           "nome": "Boleto prop <24h",
           "resp": "Gardênia",
           "meta": "≤24h corrido",
-          "ok": 6,
-          "tot": 12,
-          "pct": 50.0
+          "ok": 8,
+          "tot": 14,
+          "pct": 57.1
         },
         {
           "nome": "Boleto final <15d",
@@ -9151,11 +10357,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Natália Boleto final <15d: 50.0% — gargalo do processo."
+          "txt": "Natália Boleto final <15d: 42.9% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 75 cards no período."
+          "txt": "Volume de 92 cards no período."
         }
       ]
     },
@@ -9164,12 +10370,12 @@
       "titulo": "Reparos",
       "kpis": [
         {
-          "v": "27.3%",
+          "v": "27.8%",
           "l": "Natália Pós-venda ≤7d",
           "cls": "bad"
         },
         {
-          "v": "29.7%",
+          "v": "26.2%",
           "l": "Gardênia Pós-venda ≤7d",
           "cls": "bad"
         },
@@ -9190,16 +10396,16 @@
           "titulo": "Indicadores · Reparos",
           "full": true,
           "labels": [
-            "Natália Orçamento <4h (22/29)",
-            "Natália Pós-venda ≤7d (9/33)",
-            "Gardênia Orçamento <4h (40/58)",
-            "Gardênia Pós-venda ≤7d (11/37)"
+            "Natália Orçamento <4h (27/34)",
+            "Natália Pós-venda ≤7d (10/36)",
+            "Gardênia Orçamento <4h (45/69)",
+            "Gardênia Pós-venda ≤7d (11/42)"
           ],
           "data": [
-            75.9,
-            27.3,
-            69.0,
-            29.7
+            79.4,
+            27.8,
+            65.2,
+            26.2
           ],
           "metas": [
             100,
@@ -9216,8 +10422,8 @@
             "Gardênia"
           ],
           "data": [
-            4.67,
-            4.543
+            4.843,
+            4.18
           ],
           "colors": [
             "#000",
@@ -9230,47 +10436,47 @@
           "nome": "Orçamento <4h",
           "resp": "Natália",
           "meta": "≤4h úteis",
-          "ok": 22,
-          "tot": 29,
-          "pct": 75.9
+          "ok": 27,
+          "tot": 34,
+          "pct": 79.4
         },
         {
           "nome": "Pós-venda ≤7d",
           "resp": "Natália",
           "meta": "≤7d corrido",
-          "ok": 9,
-          "tot": 33,
-          "pct": 27.3
+          "ok": 10,
+          "tot": 36,
+          "pct": 27.8
         },
         {
           "nome": "Orçamento <4h",
           "resp": "Gardênia",
           "meta": "≤4h úteis",
-          "ok": 40,
-          "tot": 58,
-          "pct": 69.0
+          "ok": 45,
+          "tot": 69,
+          "pct": 65.2
         },
         {
           "nome": "Pós-venda ≤7d",
           "resp": "Gardênia",
           "meta": "≤7d corrido",
           "ok": 11,
-          "tot": 37,
-          "pct": 29.7
+          "tot": 42,
+          "pct": 26.2
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Orçamento <4h: 75.9%."
+          "txt": "Natália lidera Orçamento <4h: 79.4%."
         },
         {
           "tipo": "neg",
-          "txt": "Natália Pós-venda ≤7d: 27.3% — gargalo do processo."
+          "txt": "Gardênia Pós-venda ≤7d: 26.2% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 157 cards no período."
+          "txt": "Volume de 181 cards no período."
         }
       ]
     },
@@ -9279,12 +10485,12 @@
       "titulo": "Renovação de Contratos",
       "kpis": [
         {
-          "v": "33.3%",
+          "v": "30.8%",
           "l": "Caio Avaliação >90d",
           "cls": "bad"
         },
         {
-          "v": "22.2%",
+          "v": "23.1%",
           "l": "Natália Assinado antes vencime",
           "cls": "bad"
         },
@@ -9294,7 +10500,7 @@
           "cls": "bad"
         },
         {
-          "v": "65.0%",
+          "v": "62.5%",
           "l": "Vivianne Confecção <4h",
           "cls": "ok"
         }
@@ -9305,22 +10511,22 @@
           "titulo": "Indicadores · Renovação",
           "full": true,
           "labels": [
-            "Vivianne Confecção <4h (13/20)",
-            "Vivianne Finalização <16h (3/15)",
-            "Caio Avaliação >90d (11/33)",
-            "Natália Contato >60d (2/12)",
-            "Natália Assinado antes vencime (2/9)",
-            "Gardênia Contato >60d (5/13)",
-            "Gardênia Assinado antes vencime (3/7)"
+            "Vivianne Confecção <4h (15/24)",
+            "Vivianne Finalização <16h (7/20)",
+            "Natália Contato >60d (2/13)",
+            "Natália Assinado antes vencime (3/13)",
+            "Gardênia Contato >60d (6/16)",
+            "Gardênia Assinado antes vencime (3/7)",
+            "Caio Avaliação >90d (12/39)"
           ],
           "data": [
-            65.0,
-            20.0,
-            33.3,
-            16.7,
-            22.2,
-            38.5,
-            42.9
+            62.5,
+            35.0,
+            15.4,
+            23.1,
+            37.5,
+            42.9,
+            30.8
           ],
           "metas": [
             100,
@@ -9342,9 +10548,9 @@
             "Natália"
           ],
           "data": [
-            4.25,
-            4.109,
-            3.333,
+            4.875,
+            4.071,
+            3.077,
             2.0
           ],
           "colors": [
@@ -9360,49 +10566,41 @@
           "nome": "Confecção <4h",
           "resp": "Vivianne",
           "meta": "≤4h corrido (Pipefy)",
-          "ok": 13,
-          "tot": 20,
-          "pct": 65.0
+          "ok": 15,
+          "tot": 24,
+          "pct": 62.5
         },
         {
           "nome": "Finalização <16h",
           "resp": "Vivianne",
           "meta": "≤16h úteis",
-          "ok": 3,
-          "tot": 15,
-          "pct": 20.0
-        },
-        {
-          "nome": "Avaliação >90d",
-          "resp": "Caio",
-          "meta": ">90d antes do venc",
-          "ok": 11,
-          "tot": 33,
-          "pct": 33.3
+          "ok": 7,
+          "tot": 20,
+          "pct": 35.0
         },
         {
           "nome": "Contato >60d",
           "resp": "Natália",
           "meta": ">60d antes do venc",
           "ok": 2,
-          "tot": 12,
-          "pct": 16.7
+          "tot": 13,
+          "pct": 15.4
         },
         {
           "nome": "Assinado antes vencimento",
           "resp": "Natália",
           "meta": "antes do venc",
-          "ok": 2,
-          "tot": 9,
-          "pct": 22.2
+          "ok": 3,
+          "tot": 13,
+          "pct": 23.1
         },
         {
           "nome": "Contato >60d",
           "resp": "Gardênia",
           "meta": ">60d antes do venc",
-          "ok": 5,
-          "tot": 13,
-          "pct": 38.5
+          "ok": 6,
+          "tot": 16,
+          "pct": 37.5
         },
         {
           "nome": "Assinado antes vencimento",
@@ -9411,20 +10609,28 @@
           "ok": 3,
           "tot": 7,
           "pct": 42.9
+        },
+        {
+          "nome": "Avaliação >90d",
+          "resp": "Caio",
+          "meta": ">90d antes do venc",
+          "ok": 12,
+          "tot": 39,
+          "pct": 30.8
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Confecção <4h: 65.0%."
+          "txt": "Vivianne lidera Confecção <4h: 62.5%."
         },
         {
           "tipo": "neg",
-          "txt": "Natália Contato >60d: 16.7% — gargalo do processo."
+          "txt": "Natália Contato >60d: 15.4% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 109 cards no período."
+          "txt": "Volume de 132 cards no período."
         }
       ]
     },
@@ -9433,7 +10639,7 @@
       "titulo": "Inadimplência",
       "kpis": [
         {
-          "v": "87.5%",
+          "v": "88.3%",
           "l": "Vivianne Cobrança <24h",
           "cls": "ok"
         },
@@ -9443,12 +10649,12 @@
           "cls": "ok"
         },
         {
-          "v": "6.2%",
+          "v": "5.9%",
           "l": "Vivianne Negativação 7-9d",
           "cls": "bad"
         },
         {
-          "v": "★ 62",
+          "v": "★ 66",
           "l": "Boletos antes repasse",
           "cls": ""
         }
@@ -9459,14 +10665,14 @@
           "titulo": "Indicadores · Inadimplência",
           "full": true,
           "labels": [
-            "Vivianne Cobrança <24h (230/263)",
-            "Vivianne CredPago ≤15d (13/13)",
-            "Vivianne Negativação 7-9d (1/16)"
+            "Vivianne Cobrança <24h (257/291)",
+            "Vivianne CredPago ≤15d (15/15)",
+            "Vivianne Negativação 7-9d (1/17)"
           ],
           "data": [
-            87.5,
+            88.3,
             100.0,
-            6.2
+            5.9
           ],
           "metas": [
             100,
@@ -9481,7 +10687,7 @@
             "Vivianne"
           ],
           "data": [
-            9.82
+            9.832
           ],
           "colors": [
             "#000"
@@ -9493,16 +10699,16 @@
           "nome": "Cobrança <24h",
           "resp": "Vivianne",
           "meta": "≤24h corrido",
-          "ok": 230,
-          "tot": 263,
-          "pct": 87.5
+          "ok": 257,
+          "tot": 291,
+          "pct": 88.3
         },
         {
           "nome": "CredPago ≤15d",
           "resp": "Vivianne",
           "meta": "≤15d corrido",
-          "ok": 13,
-          "tot": 13,
+          "ok": 15,
+          "tot": 15,
           "pct": 100.0
         },
         {
@@ -9510,8 +10716,8 @@
           "resp": "Vivianne",
           "meta": "entre 7 e 9d corrido",
           "ok": 1,
-          "tot": 16,
-          "pct": 6.2
+          "tot": 17,
+          "pct": 5.9
         }
       ],
       "insights": [
@@ -9521,11 +10727,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Vivianne Negativação 7-9d: 6.2% — gargalo do processo."
+          "txt": "Vivianne Negativação 7-9d: 5.9% — gargalo do processo."
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 62 boletos cobrados antes do repasse."
+          "txt": "★ Bônus: 66 boletos cobrados antes do repasse."
         }
       ]
     },
@@ -9534,12 +10740,12 @@
       "titulo": "Vistorias e Contestações (Marinho)",
       "kpis": [
         {
-          "v": "46",
+          "v": "53",
           "l": "vistorias no período",
           "cls": ""
         },
         {
-          "v": "63.0%",
+          "v": "67.9%",
           "l": "Laudo <24h úteis",
           "cls": "ok"
         },
@@ -9560,11 +10766,11 @@
           "titulo": "Indicadores · Vistorias",
           "full": true,
           "labels": [
-            "Marinho Laudos entregues ≤24h  (29/46)",
+            "Marinho Laudos entregues ≤24h  (36/53)",
             "Marinho Contestações respondid (1/10)"
           ],
           "data": [
-            63.0,
+            67.9,
             10.0
           ],
           "metas": [
@@ -9579,7 +10785,7 @@
             "Marinho"
           ],
           "data": [
-            3.65
+            3.9
           ],
           "colors": [
             "#000"
@@ -9591,9 +10797,9 @@
           "nome": "Laudos entregues ≤24h após vistoria",
           "resp": "Marinho",
           "meta": "≤24h úteis",
-          "ok": 29,
-          "tot": 46,
-          "pct": 63.0
+          "ok": 36,
+          "tot": 53,
+          "pct": 67.9
         },
         {
           "nome": "Contestações respondidas <24h",
@@ -9607,7 +10813,7 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Marinho lidera Laudos entregues ≤24h após vistoria: 63.0%."
+          "txt": "Marinho lidera Laudos entregues ≤24h após vistoria: 67.9%."
         },
         {
           "tipo": "neg",
@@ -9615,7 +10821,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 56 cards no período."
+          "txt": "Volume de 63 cards no período."
         }
       ]
     },
@@ -9624,7 +10830,7 @@
       "titulo": "BackOffice",
       "kpis": [
         {
-          "v": "0.0%",
+          "v": "20.0%",
           "l": "Natália Pendência <24h",
           "cls": "bad"
         },
@@ -9634,12 +10840,12 @@
           "cls": "bad"
         },
         {
-          "v": "73.2%",
+          "v": "74.0%",
           "l": "Vivianne Concluído <24h",
           "cls": "ok"
         },
         {
-          "v": "40.9%",
+          "v": "35.5%",
           "l": "Vivianne Troca Titularidade <5d",
           "cls": "bad"
         }
@@ -9650,15 +10856,15 @@
           "titulo": "Indicadores · BackOffice",
           "full": true,
           "labels": [
-            "Vivianne Concluído <24h (93/127)",
-            "Vivianne Troca Titularidade <5d (9/22)",
-            "Natália Pendência <24h (0/2)",
-            "Gardênia Pendência <24h (0/5)"
+            "Vivianne Concluído <24h (111/150)",
+            "Vivianne Troca Titularidade <5d (11/31)",
+            "Natália Pendência <24h (1/5)",
+            "Gardênia Pendência <24h (0/12)"
           ],
           "data": [
-            73.2,
-            40.9,
-            0,
+            74.0,
+            35.5,
+            20.0,
             0
           ],
           "metas": [
@@ -9677,8 +10883,8 @@
             "Gardênia"
           ],
           "data": [
-            5.706,
-            0.0,
+            5.474,
+            2.0,
             0.0
           ],
           "colors": [
@@ -9693,47 +10899,47 @@
           "nome": "Concluído <24h",
           "resp": "Vivianne",
           "meta": "≤24h corrido",
-          "ok": 93,
-          "tot": 127,
-          "pct": 73.2
+          "ok": 111,
+          "tot": 150,
+          "pct": 74.0
         },
         {
           "nome": "Troca Titularidade <5d",
           "resp": "Vivianne",
           "meta": "≤5d úteis",
-          "ok": 9,
-          "tot": 22,
-          "pct": 40.9
+          "ok": 11,
+          "tot": 31,
+          "pct": 35.5
         },
         {
           "nome": "Pendência <24h",
           "resp": "Natália",
           "meta": "≤24h corrido",
-          "ok": 0,
-          "tot": 2,
-          "pct": 0.0
+          "ok": 1,
+          "tot": 5,
+          "pct": 20.0
         },
         {
           "nome": "Pendência <24h",
           "resp": "Gardênia",
           "meta": "≤24h corrido",
           "ok": 0,
-          "tot": 5,
+          "tot": 12,
           "pct": 0.0
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Concluído <24h: 73.2%."
+          "txt": "Vivianne lidera Concluído <24h: 74.0%."
         },
         {
           "tipo": "neg",
-          "txt": "Natália Pendência <24h: 0.0% — gargalo do processo."
+          "txt": "Gardênia Pendência <24h: 0.0% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 156 cards no período."
+          "txt": "Volume de 198 cards no período."
         }
       ]
     },
@@ -9742,7 +10948,7 @@
       "titulo": "DIRF/DARF",
       "kpis": [
         {
-          "v": "51.6%",
+          "v": "64.5%",
           "l": "Natália Concluído antes 29/05",
           "cls": "ok"
         },
@@ -9768,11 +10974,11 @@
           "titulo": "Indicadores · DIRF/DARF",
           "full": true,
           "labels": [
-            "Natália Concluído antes 29/05 (16/31)",
+            "Natália Concluído antes 29/05 (20/31)",
             "Gardênia Concluído antes 29/05 (3/6)"
           ],
           "data": [
-            51.6,
+            64.5,
             50.0
           ],
           "metas": [
@@ -9788,7 +10994,7 @@
             "Gardênia"
           ],
           "data": [
-            5.161,
+            6.452,
             5.0
           ],
           "colors": [
@@ -9802,9 +11008,9 @@
           "nome": "Concluído antes 29/05",
           "resp": "Natália",
           "meta": "antes de 29/05/2026",
-          "ok": 16,
+          "ok": 20,
           "tot": 31,
-          "pct": 51.6
+          "pct": 64.5
         },
         {
           "nome": "Concluído antes 29/05",
@@ -9818,7 +11024,7 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Concluído antes 29/05: 51.6%."
+          "txt": "Natália lidera Concluído antes 29/05: 64.5%."
         },
         {
           "tipo": "neg",
@@ -9862,21 +11068,21 @@
           "full": true,
           "labels": [
             "Vivianne SLA <4h úteis (136/337)",
-            "Caio SLA <4h úteis (875/2202)",
-            "Caio Avaliações positivas (21/24)",
             "Natália SLA <4h úteis (228/359)",
             "Natália Avaliações positivas (24/29)",
             "Gardênia SLA <4h úteis (88/232)",
-            "Gardênia Avaliações positivas (6/8)"
+            "Gardênia Avaliações positivas (6/8)",
+            "Caio SLA <4h úteis (875/2202)",
+            "Caio Avaliações positivas (21/24)"
           ],
           "data": [
             40.4,
-            39.7,
-            87.5,
             63.5,
             82.8,
             37.9,
-            75.0
+            75.0,
+            39.7,
+            87.5
           ],
           "metas": [
             100,
@@ -9922,22 +11128,6 @@
         },
         {
           "nome": "SLA <4h úteis",
-          "resp": "Caio",
-          "meta": "≤4h úteis",
-          "ok": 875,
-          "tot": 2202,
-          "pct": 39.7
-        },
-        {
-          "nome": "Avaliações positivas",
-          "resp": "Caio",
-          "meta": "% positivas",
-          "ok": 21,
-          "tot": 24,
-          "pct": 87.5
-        },
-        {
-          "nome": "SLA <4h úteis",
           "resp": "Natália",
           "meta": "≤4h úteis",
           "ok": 228,
@@ -9967,6 +11157,22 @@
           "ok": 6,
           "tot": 8,
           "pct": 75.0
+        },
+        {
+          "nome": "SLA <4h úteis",
+          "resp": "Caio",
+          "meta": "≤4h úteis",
+          "ok": 875,
+          "tot": 2202,
+          "pct": 39.7
+        },
+        {
+          "nome": "Avaliações positivas",
+          "resp": "Caio",
+          "meta": "% positivas",
+          "ok": 21,
+          "tot": 24,
+          "pct": 87.5
         }
       ],
       "insights": [
@@ -10015,20 +11221,20 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Caio Resposta ≤5min (1408/2750)",
-            "Caio Avaliações positivas (174/189)",
             "Natália Resposta ≤5min (2128/2473)",
             "Natália Avaliações positivas (196/203)",
             "Gardênia Resposta ≤5min (2084/2574)",
-            "Gardênia Avaliações positivas (240/252)"
+            "Gardênia Avaliações positivas (240/252)",
+            "Caio Resposta ≤5min (1408/2750)",
+            "Caio Avaliações positivas (174/189)"
           ],
           "data": [
-            51.2,
-            92.1,
             86.0,
             96.6,
             81.0,
-            95.2
+            95.2,
+            51.2,
+            92.1
           ],
           "metas": [
             100,
@@ -10062,22 +11268,6 @@
       "indicadores": [
         {
           "nome": "Resposta ≤5min",
-          "resp": "Caio",
-          "meta": "≤5min",
-          "ok": 1408,
-          "tot": 2750,
-          "pct": 51.2
-        },
-        {
-          "nome": "Avaliações positivas",
-          "resp": "Caio",
-          "meta": "% positivas",
-          "ok": 174,
-          "tot": 189,
-          "pct": 92.1
-        },
-        {
-          "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
           "ok": 2128,
@@ -10107,6 +11297,22 @@
           "ok": 240,
           "tot": 252,
           "pct": 95.2
+        },
+        {
+          "nome": "Resposta ≤5min",
+          "resp": "Caio",
+          "meta": "≤5min",
+          "ok": 1408,
+          "tot": 2750,
+          "pct": 51.2
+        },
+        {
+          "nome": "Avaliações positivas",
+          "resp": "Caio",
+          "meta": "% positivas",
+          "ok": 174,
+          "tot": 189,
+          "pct": 92.1
         }
       ],
       "insights": [
@@ -10126,10 +11332,10 @@
     }
   },
   "BASELINE_9": {
-    "caio": 5.48,
-    "vivianne": 5.22,
-    "marinho": 4.76,
-    "natalia": 3.98,
-    "gardenia": 3.97
+    "caio": 5.34,
+    "vivianne": 5.01,
+    "marinho": 3.91,
+    "natalia": 4.02,
+    "gardenia": 4.1
   }
 }

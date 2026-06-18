@@ -268,12 +268,13 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
         "PESSOAS": pessoas,
         "IMOVEIS": gerar_imoveis(dfs, ref),
         "PROC_RICH": gerar_proc_rich(pessoas),
-        # Baseline da edição IMEDIATAMENTE anterior (10ª Ed, ref para deltas no painel).
-        # Variável mantém o nome "BASELINE_9" por compat com HTML/JS legado da 10ª;
-        # renomeação opcional para "BASELINE_EDICAO_ANTERIOR" fica para sessão futura.
-        # Valores fonte: baselines.json["colaboradores"][i]["nota_final"].
-        "BASELINE_9": {"caio": 5.48, "vivianne": 5.22, "marinho": 4.76,
-                       "natalia": 3.98, "gardenia": 3.97},
+        # Baseline da edição IMEDIATAMENTE anterior (11ª Ed, ref para deltas no painel).
+        # Variável mantém o nome "BASELINE_9" por compat com HTML/JS legado (key lida em
+        # ~10 pontos de docs/index.html); renomear para "BASELINE_EDICAO_ANTERIOR" continua
+        # pendência cosmética no CHECKLIST. Valores: notas finais oficiais da 11ª Ed
+        # (relatorio_edicao_11.md · tabela NOTAS FINAIS, fechamento 14/05/2026).
+        "BASELINE_9": {"caio": 5.34, "vivianne": 5.01, "marinho": 3.91,
+                       "natalia": 4.02, "gardenia": 4.10},
     }
 
 
@@ -342,29 +343,36 @@ def _contar_bonus_caio(dfs: dict, ref: Optional[pd.Timestamp] = None,
               f"fases={c['fases_comercial']}")
 
     # Carrega lista de IMs validados de config/bonus_caio.json se não passada explicitamente
+    override_ims: set[int] = set()
     if validated_ims is None:
         cfg_path = ROOT / "config" / "bonus_caio.json"
         if cfg_path.exists():
             cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
-            # Cobertura: continuação da 10ª + IMs validados na 11ª
-            validated_ims = set(cfg.get("edicao_11_continuacao", []) + cfg.get("edicao_11_validados", []))
-            print(f"[bonus_caio] carregada config/bonus_caio.json: continuação={cfg.get('edicao_11_continuacao')}  "
-                  f"validados_11={cfg.get('edicao_11_validados')}")
+            # Cobertura: continuação + IMs validados da edição vigente (12ª).
+            validated_ims = set(cfg.get("edicao_12_continuacao", []) + cfg.get("edicao_12_validados", []))
+            # Override manual: IMs que a regra automática EXCLUI (ex.: "Data publicação
+            # Anúncio" preenchido sem publicação real) mas que a gestora validou como
+            # elegíveis caso a caso. Somados ao N mesmo não estando entre os candidatos.
+            override_ims = set((cfg.get("edicao_12_override_incluir", {}) or {}).get("ims", []))
+            print(f"[bonus_caio] carregada config/bonus_caio.json: continuação={cfg.get('edicao_12_continuacao')}  "
+                  f"validados_12={cfg.get('edicao_12_validados')}  override={sorted(override_ims)}")
         else:
             print(f"[bonus_caio] config/bonus_caio.json não encontrado — N=0")
             return 0
 
     cand_ims = {c["im"] for c in candidatos}
     validos = validated_ims & cand_ims
+    override_efetivo = override_ims - validos  # evita contar duas vezes
     invalidos_da_config = validated_ims - cand_ims  # IMs validados mas que não estão entre os candidatos (drift)
     pendentes = cand_ims - validated_ims
-    print(f"[bonus_caio] N={len(validos)}  validados∩candidatos={sorted(validos)}")
+    n_total = len(validos) + len(override_efetivo)
+    print(f"[bonus_caio] N={n_total}  validados∩candidatos={sorted(validos)}  override(+{len(override_efetivo)})={sorted(override_efetivo)}")
     if invalidos_da_config:
         print(f"[bonus_caio] AVISO: validados na config mas fora dos candidatos atuais (drift): "
               f"{sorted(invalidos_da_config)}")
     if pendentes:
         print(f"[bonus_caio] pendentes (precisam validação): {sorted(pendentes)}")
-    return len(validos)
+    return n_total
 
 
 def _contar_bonus_assessora(dfs: dict, assessora: str, ref: Optional[pd.Timestamp] = None) -> int:
@@ -444,7 +452,7 @@ def main(argv: list[str]) -> None:
     cfg_viv = ROOT / "config" / "bonus_vivianne.json"
     cfg_viv.parent.mkdir(parents=True, exist_ok=True)
     cfg_viv.write_text(json.dumps({
-        "edicao_11": {
+        "edicao_12": {
             "N": bonus_viv["N"],
             "denominador_R1": bonus_viv["denominador_R1"],
             "taxa": round(bonus_viv["taxa"], 4),
@@ -458,11 +466,11 @@ def main(argv: list[str]) -> None:
             "excluidos_valor0_count": int(len(bonus_viv["excluidos_valor0"])),
             "multiplos_count": int(len(bonus_viv["multiplos"])),
             "_aviso_drift_vs_baseline": (
-                f"Drift de {bonus_viv['N'] - 124:+d} vs baseline 10ª (N=124) é INTENCIONAL. "
-                "A 10ª Edição usava regra mais permissiva (sem checar temporalidade do card). "
-                "A regra correta foi confirmada pela gestora em 14/05/2026: bônus só conta se "
-                "Vivianne abriu card ANTES ou NO MESMO DIA do pagamento, excluindo casos onde "
-                "card foi criado dias/semanas depois (cobrança reativa, não proativa)."
+                f"Drift de {bonus_viv['N'] - 61:+d} vs 11ª (N=61). Regra estrita R1+R2+R3 "
+                "mantida desde a 11ª (confirmada pela gestora em 14/05/2026): bônus só conta "
+                "se Vivianne abriu card ANTES ou NO MESMO DIA do pagamento (cobrança proativa), "
+                "com multa ≤15% (exclui rescisões) e pagamento ≤ data de repasse. Variação vs "
+                "11ª é drift natural da janela rolando."
             ),
         }
     }, ensure_ascii=False, indent=2), encoding="utf-8")

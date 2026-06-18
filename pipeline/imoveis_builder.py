@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 from calculate import (
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
-    horas_uteis, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
+    horas_uteis, horas_uteis_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
 )
@@ -175,7 +175,10 @@ def caio_bonus(df_comercial: pd.DataFrame, df_cont_loc: pd.DataFrame, ref: pd.Ti
     Lookup de título: 1º Comercial Caio → 2º Cont.Locação → 3º fallback texto.
     """
     cfg = json.loads((ROOT / "config" / "bonus_caio.json").read_text(encoding="utf-8"))
-    ims_validados = cfg.get("edicao_11_continuacao", []) + cfg.get("edicao_11_validados", [])
+    # Mesma composição do N em run._contar_bonus_caio (Armadilha 1): continuação +
+    # validados + override manual (IM143). Mantém drilldown↔pontuação consistentes.
+    ims_validados = (cfg.get("edicao_12_continuacao", []) + cfg.get("edicao_12_validados", [])
+                     + (cfg.get("edicao_12_override_incluir", {}) or {}).get("ims", []))
 
     com = excluir_rascunhos(df_comercial)
     com = filtrar_por_assignee(com, "Profissional responsável", "Caio").copy()
@@ -364,6 +367,32 @@ def _gen_indicador_horas(df: pd.DataFrame, col_in: str, col_out: str,
     }
 
 
+def _gen_indicador_uteis_fase(df: pd.DataFrame, fase: str, meta_h: float, titulo: str) -> dict:
+    """
+    Drilldown de indicador em horas ÚTEIS dentro de UMA fase, robusto a reabertura.
+    Espelha calc_*_contrato_adm: usa calculate.horas_uteis_fase (mesma fonte de
+    verdade do ✓/✗ da pontuação — ver Armadilha 1 do CHECKLIST).
+    """
+    col_in = f"Primeira vez que entrou na fase {fase}"
+    col_lastin = f"Última vez que entrou na fase {fase}"
+    col_out = f"Última vez que saiu da fase {fase}"
+    col_dur = f"Tempo total na fase {fase} (dias)"
+    sub = df.dropna(subset=[col_in, col_out]).copy()
+    horas = sub.apply(
+        lambda r: horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)),
+        axis=1,
+    )
+    rows = []
+    for (_, r), h in zip(sub.iterrows(), horas):
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(meta_h) else "✗"])
+    ok = sum(1 for r in rows if r[3] == "✓")
+    return {
+        "titulo": titulo.format(ok=ok, tot=len(sub)),
+        "cols": ["Imóvel", "Título", "Tempo", "Status"],
+        "rows": _ord_pior_primeiro(rows, idx_valor=2),
+    }
+
+
 def _gen_indicador_tempo_col(df: pd.DataFrame, col_tempo_dias: str, meta_h: float,
                               titulo: str, cols_endereco: bool = False) -> dict:
     """Helper genérico: usa coluna 'Tempo total na fase X (dias)' × 24 → horas."""
@@ -382,15 +411,12 @@ def _gen_indicador_tempo_col(df: pd.DataFrame, col_tempo_dias: str, meta_h: floa
 
 
 def vivi_cadm(df_cont_adm: pd.DataFrame, ref: pd.Timestamp) -> dict:
-    """Vivianne · Cont. ADM · Confecção <2h ÚTEIS."""
+    """Vivianne · Cont. ADM · Confecção <2h ÚTEIS (robusto a reabertura — 12ª Ed)."""
     df = excluir_rascunhos(df_cont_adm)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
-    return _gen_indicador_horas(
-        df,
-        "Primeira vez que entrou na fase Confecção do contrato",
-        "Última vez que saiu da fase Confecção do contrato",
+    return _gen_indicador_uteis_fase(
+        df, "Confecção do contrato",
         2, "Vivianne — Cont. ADM: Confecção <2h ({ok}/{tot})",
-        modo="uteis",
     )
 
 
@@ -590,7 +616,7 @@ def vivi_bo_troca(df_bo: pd.DataFrame, ref: pd.Timestamp) -> dict:
 def vivi_bonus_inadim() -> dict:
     """Vivianne · Bônus Inadimplência. Agregado 4 linhas a partir de config/bonus_vivianne.json."""
     cfg = json.loads((ROOT / "config" / "bonus_vivianne.json").read_text(encoding="utf-8"))
-    ed = cfg["edicao_11"]
+    ed = cfg["edicao_12"]
     N = ed["N"]
     denom = ed["denominador_R1"]
     return {
@@ -634,19 +660,11 @@ def assessora_cadm(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp)
         concluido = df["Primeira vez que entrou na fase Concluído"].notna()
         mask = mask | (sem_assessor & concluido)
     df_assess = df[mask].copy()
-    col_in = "Primeira vez que entrou na fase Conferência do contrato"
-    col_out = "Última vez que saiu da fase Conferência do contrato"
-    sub = df_assess.dropna(subset=[col_in, col_out]).copy()
-    horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
-    rows = []
-    for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(2) else "✗"])
-    ok = sum(1 for r in rows if r[3] == "✓")
-    return {
-        "titulo": f"{_label_pessoa(assessora)} — Cont. ADM: Conferência ≤2h ({ok}/{len(sub)})",
-        "cols": ["Imóvel", "Título", "Tempo", "Status"],
-        "rows": _ord_pior_primeiro(rows, idx_valor=2),
-    }
+    # Robusto a reabertura (12ª Ed): mesma fonte de verdade da pontuação.
+    return _gen_indicador_uteis_fase(
+        df_assess, "Conferência do contrato",
+        2, f"{_label_pessoa(assessora)} — Cont. ADM: Conferência ≤2h ({{ok}}/{{tot}})",
+    )
 
 
 def assessora_cadm_bonus(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:

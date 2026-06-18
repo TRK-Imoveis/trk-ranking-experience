@@ -214,15 +214,21 @@ def _card_to_row(card: dict, cfg: dict) -> dict:
     for phase_name, info in (cfg.get("phases") or {}).items():
         h = ph_by_id.get(info["id"])
         col_in = f"Primeira vez que entrou na fase {phase_name}"
+        col_lastin = f"Última vez que entrou na fase {phase_name}"
         col_out = f"Última vez que saiu da fase {phase_name}"
         col_dur = f"Tempo total na fase {phase_name} (dias)"
         if h:
             row[col_in] = _parse_dt(h.get("firstTimeIn"))
+            # lastTimeIn distingue card de visita única (==firstTimeIn) de card
+            # reaberto (>firstTimeIn). Usado por horas_uteis_fase p/ horas úteis
+            # robustas a reabertura (ver calculate.horas_uteis_fase).
+            row[col_lastin] = _parse_dt(h.get("lastTimeIn"))
             row[col_out] = _parse_dt(h.get("lastTimeOut"))
             dur = h.get("duration")
             row[col_dur] = (dur / 86400.0) if dur is not None else None
         else:
             row[col_in] = pd.NaT
+            row[col_lastin] = pd.NaT
             row[col_out] = pd.NaT
             row[col_dur] = None
     return row

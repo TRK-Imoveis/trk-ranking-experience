@@ -14,5 +14,21 @@
       "4 IMs: contrato fechado direto via ADM, sem passar pelo Comercial (não-elegível)"
     ],
     "lista_completa": [152, 292, 372, 373, 376, 406, 558, 640, 1782, 1801, 1802, 1826, 1831, 1836, 1841]
+  },
+  "edicao_12_continuacao": [39, 123, 135],
+  "edicao_12_validados": [],
+  "edicao_12_override_incluir": {
+    "_motivo": "IM143 (CLN 211 Bloco D Sala 101): imóvel alugado ANTES de publicação real. A regra automática o exclui porque um card do Caio (criado 07/05/2026) tem 'Data publicação Anúncio'=08/05/2026 preenchido, mas a gestora confirmou (18/06/2026) que NÃO houve publicação real — o imóvel foi alugado quando estava em Agendamento de Fotos/Placas. Aluguel da edição: card de locação VK5464, 1º Boleto 16/06/2026 (dentro do recorte).",
+    "ims": [143]
+  },
+  "edicao_12_descartados": {
+    "_validacao": "Gestora validou os candidatos pendentes em 18/06/2026. Todos descartados.",
+    "continuacao_descarte_11": "12 IMs já descartados na 11ª permanecem descartados (publicação anterior à janela ou entrada direta em ADM).",
+    "novos_descartados": {
+      "1586": "Anunciado (anúncio 02/08/2024) e card do Comercial é da Natália, não do Caio.",
+      "1843": "Sem card no Comercial — entrada direta em ADM (não-elegível).",
+      "1848": "Sem card no Comercial — entrada direta em ADM (não-elegível)."
+    },
+    "lista_completa": [152, 292, 372, 373, 376, 1586, 1782, 1801, 1802, 1826, 1831, 1836, 1841, 1843, 1848]
   }
 }

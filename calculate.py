@@ -257,6 +257,52 @@ def dias_uteis(inicio: pd.Timestamp, fim: pd.Timestamp) -> float:
     return horas_uteis(inicio, fim) / 10.0
 
 
+def horas_uteis_fase(first_in, last_in, last_out, dur_dias) -> float:
+    """
+    Horas úteis (08-18h, seg-sex) que um card passou DENTRO de uma fase,
+    robusto a reaberturas (card que entra, sai e volta à MESMA fase).
+
+    Por que existe (correção do bug latente da 11ª, fechado na 12ª):
+    o Pipefy reporta o histórico AGREGADO por fase — firstTimeIn, lastTimeIn,
+    lastTimeOut e `duration` (CORRIDO cumulativo) — e não cada passagem
+    individual. Usar horas_uteis(firstTimeIn, lastTimeOut) conta o tempo em que
+    o card esteve em OUTRAS fases entre idas e vindas, superestimando
+    grosseiramente (ex.: IM1471 — janela 173h vs 1,7h reais na fase). Já o
+    `duration` é CORRIDO, então não serve direto para metas em horas ÚTEIS.
+
+    Reconstrução com os campos agregados (dentro de UMA visita o card é contínuo
+    na fase, logo ocupa um intervalo de relógio exato):
+      • 1 visita (last_in == first_in): horas_uteis(first_in, last_out) — EXATO.
+      • 2 visitas: última visita [last_in, last_out] é exata; o restante do
+        `duration` é o corrido da 1ª visita, que começou em first_in e ocupou
+        [first_in, first_in + restante] — EXATO.
+      • 3+ visitas: as visitas intermediárias não têm timestamp; aproxima-se o
+        bloco anterior à última como contíguo a partir de first_in. Aproximação
+        documentada — usa só o `duration` REAL na fase, nunca a janela inteira.
+
+    NaN se faltarem first_in/last_out. Sem dur_dias → fallback p/ janela simples.
+    """
+    if first_in is None or pd.isna(first_in) or last_out is None or pd.isna(last_out):
+        return float("nan")
+    # Sem duration não há como reconstruir → janela simples (comportamento antigo).
+    if dur_dias is None or pd.isna(dur_dias):
+        return horas_uteis(first_in, last_out)
+    fin = pd.Timestamp(first_in)
+    lout = pd.Timestamp(last_out)
+    # Visita única: nunca reabriu → a janela [first_in, last_out] é exata.
+    if (last_in is None or pd.isna(last_in)
+            or abs((pd.Timestamp(last_in) - fin).total_seconds()) <= 1):
+        return horas_uteis(fin, lout)
+    # Reaberto: última visita exata + bloco anterior contíguo a partir de first_in.
+    lin = pd.Timestamp(last_in)
+    total_sec = float(dur_dias) * 86400.0
+    ultima_sec = max(0.0, (lout - lin).total_seconds())
+    anterior_sec = max(0.0, total_sec - ultima_sec)
+    util_ultima = horas_uteis(lin, lout)
+    util_anterior = horas_uteis(fin, fin + pd.Timedelta(seconds=anterior_sec))
+    return util_ultima + util_anterior
+
+
 def horas_corridas(inicio: pd.Timestamp, fim: pd.Timestamp) -> float:
     """Diferença em horas corridas. Negativo → 0."""
     if pd.isna(inicio) or pd.isna(fim):
@@ -673,9 +719,16 @@ def calc_vivianne_contrato_adm(df_cont_adm: pd.DataFrame,
     df = excluir_rascunhos(df_cont_adm)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_in = "Primeira vez que entrou na fase Confecção do contrato"
+    col_lastin = "Última vez que entrou na fase Confecção do contrato"
     col_out = "Última vez que saiu da fase Confecção do contrato"
+    col_dur = "Tempo total na fase Confecção do contrato (dias)"
     sub = df.dropna(subset=[col_in, col_out]).copy()
-    horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
+    # horas_uteis_fase: robusto a reabertura (12ª Ed). Visita única → idêntico
+    # ao antigo horas_uteis(in, out); reaberto → usa o duration real na fase.
+    horas = sub.apply(
+        lambda r: horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)),
+        axis=1,
+    )
     ok = int((horas <= _meta_tol(2)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Cont. ADM — Confecção <2h"
@@ -930,9 +983,15 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
     df_assess = df[mask].copy()
 
     col_in = "Primeira vez que entrou na fase Conferência do contrato"
+    col_lastin = "Última vez que entrou na fase Conferência do contrato"
     col_out = "Última vez que saiu da fase Conferência do contrato"
+    col_dur = "Tempo total na fase Conferência do contrato (dias)"
     sub = df_assess.dropna(subset=[col_in, col_out]).copy()
-    horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
+    # horas_uteis_fase: robusto a reabertura (12ª Ed) — ver calc_vivianne_contrato_adm.
+    horas = sub.apply(
+        lambda r: horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)),
+        axis=1,
+    )
     ok = int((horas <= _meta_tol(2)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Cont. ADM — Conferência ≤2h"

@@ -87,9 +87,12 @@ if ($pullOut -match "Already up to date|Já está atualizado") {
 
 # [2/5] pipeline
 Write-Host ""
-Write-Host "[2/5] Rodando pipeline (~30s)..." -ForegroundColor Yellow
+# --no-cache: re-extrai os 12 pipes do Pipefy a cada rodada (~2-3 min). Sem isso o
+# cache de dados/raw/ congela e os indicadores do Pipefy param de atualizar (bug que
+# congelou os dados entre 27/05 e 18/06/2026). Octadesk/CSV são sempre lidos do disco.
+Write-Host "[2/5] Rodando pipeline com dados frescos do Pipefy (~2-3 min)..." -ForegroundColor Yellow
 $logFile = Join-Path $env:TEMP "trk_pipeline.log"
-python pipeline/run.py *> $logFile
+python pipeline/run.py --no-cache *> $logFile
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Erro no pipeline." -ForegroundColor Red
     Write-Host "   Últimas 20 linhas do log:" -ForegroundColor Gray
