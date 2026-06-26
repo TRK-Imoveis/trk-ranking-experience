@@ -32,6 +32,7 @@ CRÍTICO — releia o manual antes de mexer:
 """
 
 import json
+import re
 import zoneinfo
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -1260,61 +1261,166 @@ def calc_assessora_ticket(df_tickets: pd.DataFrame, df_aval: pd.DataFrame, asses
 
 
 # ─────────────────────────────────────────────────────────────────────
+# EFICIÊNCIA DA VISTORIA (Marinho) — config + classificador COMPARTILHADOS
+# Usados por calculate.py (nota) E imoveis_builder.py (drilldown) para
+# garantir simetria total — uma única fonte de verdade (Armadilha 1).
+# ─────────────────────────────────────────────────────────────────────
+META_LAUDO_CORRIDO = 48.0          # horas corridas (Laudo)
+TOL_EFIC = 0.15                    # tolerância da eficiência (15%)
+FATOR_OUTLIER_EFIC = 2.0           # > 2x teto -> revisão manual (nunca auto-exclui)
+DIR_EFIC_PONTUAVEIS = {"Entrada", "Saída"}  # Conferência/Proprietário excluídos
+
+# Teto em horas ÚTEIS por (balde, direção) — calibrado pela gestora, 12ª Ed.
+LOOKUP_EFIC = {
+    "Kit/Sala/Loja":     {"Entrada": 4,  "Saída": 2},
+    "Apto padrão":       {"Entrada": 8,  "Saída": 4},
+    "Apto Super Quadra": {"Entrada": 8,  "Saída": 6},
+    "Casa Lago":         {"Entrada": 32, "Saída": 20},
+    "Comercial grande":  {"Entrada": 7,  "Saída": 4},
+}
+# Override persistente IM -> balde (casos confirmados manualmente).
+OVERRIDE_IM_BALDE = {"1817": "Casa Lago"}  # COND RESIDENCIAL SANTA MÔNICA
+
+
+def _primeiro_tipo_vistoria(v):
+    """'Saída, Conferência' -> 'Saída'. Limpa e pega o 1º rótulo do multi-select."""
+    if v is None or (isinstance(v, float) and pd.isna(v)):
+        return None
+    return str(v).split(",")[0].strip()
+
+
+def classificar_balde_vistoria(endereco, im=None, area=None):
+    """Classifica o imóvel no balde da tabela TRK pelo ENDEREÇO (mais confiável
+    que o campo 'Tipo do Imóvel'). REVISAR = não classificou -> entra na revisão."""
+    e = ("" if endereco is None else str(endereco)).upper()
+    if im is not None and not (isinstance(im, float) and pd.isna(im)):
+        chave = str(int(im)) if isinstance(im, float) else str(im).strip()
+        if chave in OVERRIDE_IM_BALDE:
+            return OVERRIDE_IM_BALDE[chave]
+    if "SANTA MÔNICA" in e or "SANTA MONICA" in e:
+        return "Casa Lago"
+    if re.search(r"\b(SQS|SQN|SQSW|SQNW)\b", e):
+        return "Apto Super Quadra"
+    if re.search(r"(SHIS|\bQI\s*\d|\bQL\s*\d|LAGO)", e):
+        return "Casa Lago"
+    if re.search(r"(SALA|LOJA|\bKIT\b)", e):
+        try:
+            if area is not None and not pd.isna(area) and float(area) >= 120:
+                return "Comercial grande"
+        except (TypeError, ValueError):
+            pass
+        return "Kit/Sala/Loja"
+    if re.search(r"(APARTAMENTO|\bAPTO\b|\bAPT\b|\bAP\b)", e):
+        return "Apto padrão"
+    return "REVISAR"
+
+
+def avaliar_eficiencia_vistoria(row):
+    """Verdict de UMA vistoria (Series). Retorna dict {direcao, balde, horas, teto,
+    ok, outlier} ou None se fora do escopo (Conferência/Proprietário/sem timestamp).
+    Função única usada na NOTA e no DRILLDOWN -> simetria garantida."""
+    direcao = _primeiro_tipo_vistoria(row.get("Tipo de vistoria"))
+    if direcao not in DIR_EFIC_PONTUAVEIS:
+        return None
+    ci = "vistoria iniciada em" if "vistoria iniciada em" in row.index else "vistoria iniciada em "
+    ini, fim = row.get(ci), row.get("Vistoria finalizada em")
+    if pd.isna(ini) or pd.isna(fim):
+        return None
+    balde = classificar_balde_vistoria(
+        row.get("Endereço do imóvel:"), row.get("IM"), row.get("Área útil M²"))
+    h = horas_uteis(ini, fim)
+    if balde == "REVISAR" or balde not in LOOKUP_EFIC:
+        return {"direcao": direcao, "balde": "REVISAR", "horas": h,
+                "teto": None, "ok": None, "outlier": True}
+    teto = LOOKUP_EFIC[balde][direcao]
+    ok = h <= teto * (1 + TOL_EFIC)
+    outlier = h is not None and h > teto * FATOR_OUTLIER_EFIC
+    return {"direcao": direcao, "balde": balde, "horas": h, "teto": teto,
+            "ok": ok, "outlier": outlier}
+
+
+# ─────────────────────────────────────────────────────────────────────
 # MARINHO — Vistorias + Contestações
 # ─────────────────────────────────────────────────────────────────────
 
 def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None) -> dict:
     """
-    Marinho — Laudo <24h úteis
+    Marinho — Vistorias (2 indicadores quando marinho_eficiencia_ativa):
+      • Laudo ≤48h CORRIDAS (peso 4): Vistoria finalizada em → Última saída de
+        Em produção. Card parado em Em produção (saída vazia) = ✗ (regra educativa).
+      • Eficiência (peso 6): tempo útil iniciada→finalizada vs teto do balde
+        (tabela TRK), tolerância 15%. Conferência/Proprietário fora. Outliers
+        (>2x teto) são LISTADOS para revisão manual, nunca auto-excluídos.
 
-    Fonte: Vistoria finalizada em → Última saída fase Em produção
-    Peso: 10 (Produtividade m²/h temporariamente desativada, peso consolidado no Laudo)
-
-    NOTA SOBRE A MÉTRICA:
-    A métrica usa o tempo até o card sair da fase "Em produção" no Pipefy,
-    NÃO o tempo de entrega do laudo ao cliente. Card parado em "Em produção"
-    depois do laudo entregue conta como atraso.
-
-    REGRA DE OPERAÇÃO (decidida na 11ª Edição):
-    O Marinho deve fechar o card no Pipefy imediatamente após entregar o laudo.
-    Cards que permanecem em "Em produção" por dias após a entrega física do
-    laudo são considerados atraso operacional e contam contra a nota. A métrica
-    é educativa: força disciplina de uso do Pipefy.
-
-    REABERTURAS (re-entradas na fase "Em produção" para conferência de reparo do
-    prestador): NÃO são excluídas pela lógica. A métrica usa lastTimeOut (última
-    saída), o que naturalmente captura o ciclo completo. Caso seja necessário
-    isolar reaberturas no futuro, revisitar com base nos dados (referência:
-    scripts/diag_marinho.py).
+    Com o flag desligado, mantém o comportamento anterior (Laudo 24h úteis peso 10).
     """
     df = excluir_rascunhos(df_vist)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
-
     indicadores = []
-    produtividade_ativa = FEATURE_FLAGS.get("marinho_produtividade_ativa", False)
-    peso_laudo = 4 if produtividade_ativa else 10
 
     col_vfim = "Vistoria finalizada em"
     col_prod_out = "Última vez que saiu da fase Em produção"
-    sub_l = df.dropna(subset=[col_vfim, col_prod_out]).copy()
-    horas_l = sub_l.apply(lambda r: horas_uteis(r[col_vfim], r[col_prod_out]), axis=1)
-    ok_l = int((horas_l <= _meta_tol(24)).sum())
-    ind_l = score_indicador(ok_l, len(sub_l), peso_laudo)
-    ind_l["nome"] = "Laudos entregues ≤24h após vistoria"
+
+    if not FEATURE_FLAGS.get("marinho_eficiencia_ativa", False):
+        # ---- comportamento anterior (compat) ----
+        produtividade_ativa = FEATURE_FLAGS.get("marinho_produtividade_ativa", False)
+        peso_laudo = 4 if produtividade_ativa else 10
+        sub_l = df.dropna(subset=[col_vfim, col_prod_out]).copy()
+        horas_l = sub_l.apply(lambda r: horas_uteis(r[col_vfim], r[col_prod_out]), axis=1)
+        ok_l = int((horas_l <= _meta_tol(24)).sum())
+        ind_l = score_indicador(ok_l, len(sub_l), peso_laudo)
+        ind_l["nome"] = "Laudos entregues ≤24h após vistoria"
+        indicadores.append(ind_l)
+        if produtividade_ativa:
+            col_vini = "vistoria iniciada em"
+            if col_vini not in df.columns:
+                col_vini = "vistoria iniciada em "
+            sub_p = df.dropna(subset=[col_vini, col_vfim, "Área útil M²"]).copy()
+            horas_p = (sub_p[col_vfim] - sub_p[col_vini]).dt.total_seconds() / 3600
+            sub_p = sub_p[horas_p > 0].copy()
+            m2h = sub_p["Área útil M²"].astype(float) / ((sub_p[col_vfim] - sub_p[col_vini]).dt.total_seconds() / 3600)
+            ok_p = int((m2h >= 32).sum())
+            ind_p = score_indicador(ok_p, len(sub_p), 6)
+            ind_p["nome"] = "Vistorias — Produtividade ≥32 m²/h"
+            indicadores.append(ind_p)
+        return {"nota": nota_processo(indicadores), "indicadores": indicadores}
+
+    # ---- desenho novo (eficiência ativa) ----
+    # LAUDO 48h corridas, parado em produção = ✗, peso 4.
+    sub_l = df.dropna(subset=[col_vfim]).copy()  # denominador = vistorias finalizadas
+    def _laudo_ok(r):
+        if pd.isna(r[col_prod_out]):
+            return False  # parado em produção -> atraso ✗
+        return horas_corridas(r[col_vfim], r[col_prod_out]) <= META_LAUDO_CORRIDO
+    ok_l = int(sub_l.apply(_laudo_ok, axis=1).sum()) if len(sub_l) else 0
+    ind_l = score_indicador(ok_l, len(sub_l), 4)
+    ind_l["nome"] = "Laudos entregues ≤48h após vistoria"
     indicadores.append(ind_l)
 
-    if produtividade_ativa:
-        col_vini = "vistoria iniciada em"  # label tem trailing space
-        if col_vini not in df.columns:
-            col_vini = "vistoria iniciada em "
-        sub_p = df.dropna(subset=[col_vini, col_vfim, "Área útil M²"]).copy()
-        horas_p = (sub_p[col_vfim] - sub_p[col_vini]).dt.total_seconds() / 3600
-        sub_p = sub_p[horas_p > 0].copy()
-        m2h = sub_p["Área útil M²"].astype(float) / ((sub_p[col_vfim] - sub_p[col_vini]).dt.total_seconds() / 3600)
-        ok_p = int((m2h >= 32).sum())
-        ind_p = score_indicador(ok_p, len(sub_p), 6)
-        ind_p["nome"] = "Vistorias — Produtividade ≥32 m²/h"
-        indicadores.append(ind_p)
+    # EFICIÊNCIA peso 6.
+    verdicts = []
+    for _, r in df.iterrows():
+        v = avaliar_eficiencia_vistoria(r)
+        if v is not None:
+            v["im"] = r.get("IM"); v["end"] = r.get("Endereço do imóvel:")
+            verdicts.append(v)
+    scoraveis = [v for v in verdicts if v["ok"] is not None]
+    ok_e = sum(1 for v in scoraveis if v["ok"])
+    ind_e = score_indicador(ok_e, len(scoraveis), 6)
+    ind_e["nome"] = "Vistorias dentro do tempo padrão"
+    indicadores.append(ind_e)
+
+    # ALERTA de revisão manual (outliers + não classificados) na rodada.
+    revisar = [v for v in verdicts if v["outlier"] or v["ok"] is None]
+    if revisar:
+        print("\n⚠️  MARINHO — VISTORIAS PARA REVISÃO MANUAL "
+              "(outliers > 2x teto ou não classificadas):")
+        for v in sorted(revisar, key=lambda x: (x["horas"] is None, -(x["horas"] or 0))):
+            motivo = "não classificada (fora do cálculo)" if v["ok"] is None else "outlier — conta ✗"
+            h = "—" if v["horas"] is None else f"{v['horas']:.1f}h"
+            print(f"   IM{v.get('im')}  {v['direcao']}  {v['balde']}  {h}  "
+                  f"teto={v['teto']}  → {motivo}  | {str(v.get('end'))[:55]}")
+        print("   (avalie caso a caso antes de finalizar o painel)\n")
 
     return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 

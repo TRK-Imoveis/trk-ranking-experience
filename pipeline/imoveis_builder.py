@@ -30,7 +30,8 @@ ROOT = Path(__file__).resolve().parent.parent
 from calculate import (
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
-    horas_uteis, horas_uteis_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
+    horas_uteis, horas_uteis_fase, horas_corridas, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
+    avaliar_eficiencia_vistoria,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
 )
@@ -952,20 +953,45 @@ def assessora_dirf(df_dirf: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> 
 # ────────────────────────────────────────────────────────────────────
 
 def mar_laudo(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
-    """Marinho · Laudo ≤24h ÚTEIS. Sem exclusão de reabertura (decisão 11ª Ed)."""
+    """Marinho · Laudo ≤48h CORRIDAS. Parado em produção (saída vazia) = ✗."""
     df = excluir_rascunhos(df_vist)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_vfim = "Vistoria finalizada em"
     col_prod_out = "Última vez que saiu da fase Em produção"
-    sub = df.dropna(subset=[col_vfim, col_prod_out]).copy()
-    horas = sub.apply(lambda r: horas_uteis(r[col_vfim], r[col_prod_out]), axis=1)
+    sub = df.dropna(subset=[col_vfim]).copy()  # denominador = vistorias finalizadas
     rows = []
-    for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
+    for _, r in sub.iterrows():
+        if pd.isna(r[col_prod_out]):
+            rows.append([_im_label(r), r["Título"], "em produção", "✗"])  # parado
+        else:
+            h = horas_corridas(r[col_vfim], r[col_prod_out])
+            rows.append([_im_label(r), r["Título"], _fmt_horas(h),
+                         "✓" if h <= 48.0 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"Marinho — Vistorias: Laudo <24h ({ok}/{len(sub)})",
+        "titulo": f"Marinho — Vistorias: Laudo <48h ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
+        "rows": _ord_pior_primeiro(rows, idx_valor=2),
+    }
+
+
+def mar_eficiencia(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
+    """Marinho · Vistorias dentro do tempo padrão (eficiência).
+    Reusa avaliar_eficiencia_vistoria do calculate -> mesmo verdict da nota."""
+    df = excluir_rascunhos(df_vist)
+    df = aplicar_cutoff(df, "Criado em", ref=ref)
+    rows = []
+    for _, r in df.iterrows():
+        v = avaliar_eficiencia_vistoria(r)
+        if v is None or v["ok"] is None:
+            continue  # fora do escopo ou REVISAR (não entra no ok/tot)
+        status = "✗⚠" if (v["outlier"] and not v["ok"]) else ("✓" if v["ok"] else "✗")
+        rows.append([_im_label(r), f"{v['balde']} · {v['direcao']}",
+                     _fmt_horas(v["horas"]), status])
+    ok = sum(1 for r in rows if r[3] == "✓")
+    return {
+        "titulo": f"Marinho — Vistorias: dentro do tempo padrão ({ok}/{len(rows)})",
+        "cols": ["Imóvel", "Tipo · Direção", "Tempo", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
 
@@ -1085,8 +1111,9 @@ def gerar_imoveis(dfs: dict, ref: pd.Timestamp) -> dict:
         "vivi_bo_concl":     vivi_bo_concl(dfs["backoffice"], ref),
         "vivi_bo_troca":     vivi_bo_troca(dfs["backoffice"], ref),
         "vivi_bonus_inadim": vivi_bonus_inadim(),
-        # Marinho (2 chaves)
+        # Marinho (3 chaves)
         "mar_laudo":         mar_laudo(dfs["vistorias"], ref),
+        "mar_eficiencia":    mar_eficiencia(dfs["vistorias"], ref),
         "mar_cont":          mar_cont(dfs["contestacoes"], ref),
         # Octadesk (6 chaves) + Vivianne Tickets (1) = 7
         "caio_wa":           _wa_drilldown(df_conv, "caio", "Caio"),
