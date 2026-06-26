@@ -60,7 +60,7 @@ PREFIXOS_PROC = {
     "Reparos":        ("Reparos —",),
     "Renovação":      ("Renovação —",),
     "Inadimplência":  ("Inadimplência —",),
-    "Vistorias":      ("Laudos entregues", "Contestações respondidas"),
+    "Vistorias":      ("Laudos entregues", "Vistorias dentro", "Contestaç"),
     "BackOffice":     ("BackOffice —",),
     "DIRF/DARF":      ("DIRF/DARF —",),
     "Ticket":         ("Tickets —",),
@@ -142,7 +142,8 @@ META_MAP = {
     "Inadimplência — Negativação": "entre 7 e 9d corrido",
     "Inadimplência — Boletos em atraso": "Sim/Não (bônus)",
     # Vistorias (Marinho — nomes sem prefixo "Vistorias —")
-    "Laudos entregues":            "≤24h úteis",
+    "Laudos entregues":            "≤48h corrido",
+    "Vistorias dentro":            "≤ teto do balde +15%",
     "Contestações respondidas":    "≤24h corrido",
     # BackOffice
     "BackOffice — Pendência":      "≤24h corrido",
@@ -310,19 +311,23 @@ def _build_kpis(proc: str, indicadores: list[dict], pessoas: list) -> list[dict]
     # Caso especial Vistorias: gestora pede formato 10ª (volume + Laudo, volume + Contestações)
     if proc == "Vistorias":
         normais = [i for i in indicadores if "★" not in i["nome"]]
-        laudos = next((i for i in normais if "Laudo" in i["nome"]), None)
+        laudos  = next((i for i in normais if "Laudo" in i["nome"]), None)
+        efic    = next((i for i in normais if "tempo padrão" in i["nome"]), None)
         contest = next((i for i in normais if "Contestaç" in i["nome"]), None)
         kpis = []
         if laudos:
             kpis.append({"v": str(laudos["tot"]), "l": "vistorias no período", "cls": ""})
             pct = laudos.get("pct")
             kpis.append({"v": f"{pct:.1f}%" if pct is not None else "—",
-                          "l": "Laudo <24h úteis", "cls": _kpi_cls(pct)})
+                         "l": "Laudo <48h", "cls": _kpi_cls(pct)})
+        if efic:
+            pct = efic.get("pct")
+            kpis.append({"v": f"{pct:.1f}%" if pct is not None else "—",
+                         "l": "Dentro do tempo padrão", "cls": _kpi_cls(pct)})
         if contest:
-            kpis.append({"v": str(contest["tot"]), "l": "contestações", "cls": ""})
             pct = contest.get("pct")
             kpis.append({"v": f"{pct:.1f}%" if pct is not None else "—",
-                          "l": "Contestações <24h", "cls": _kpi_cls(pct)})
+                         "l": "Contestações <24h", "cls": _kpi_cls(pct)})
 
     while len(kpis) < 4:
         kpis.append({"v": "—", "l": "", "cls": ""})
