@@ -176,6 +176,20 @@ def _extract_field_value(cf: dict, field_type: str) -> Any:
     if t == "assignee_select":
         avs = cf.get("assignee_values") or []
         return [a.get("name") for a in avs if a.get("name")]
+    if t == "multi_select":
+        raw = cf.get("value")
+        parsed = None
+        if isinstance(raw, str) and raw.strip():
+            try:
+                parsed = json.loads(raw)
+            except (ValueError, TypeError):
+                parsed = None
+        if parsed is None:
+            parsed = cf.get("native_value") or raw
+        if isinstance(parsed, list):
+            labels = [str(x).strip() for x in parsed if x not in (None, "")]
+            return ", ".join(labels) if labels else None
+        return parsed or None
     if t in ("number", "currency", "id"):
         v = cf.get("float_value")
         if v is not None:

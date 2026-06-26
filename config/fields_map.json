@@ -419,6 +419,18 @@
         "internal_id": "427700527",
         "label": "Vistoria finalizada em",
         "type": "datetime"
+      },
+      "Tipo de vistoria": {
+        "id": "tipo_de_vistoria_1",
+        "internal_id": "345235734",
+        "label": "Tipo de vistoria",
+        "type": "multi_select"
+      },
+      "Endereço do imóvel:": {
+        "id": "endere_o_do_im_vel",
+        "internal_id": "344921897",
+        "label": "Endereço do imóvel:",
+        "type": "text"
       }
     },
     "phases": {
