@@ -1118,7 +1118,6 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
         Bônus vistoria entrada
       </div>
     </div>
-    <div class="footer-note" style="line-height:1.5;max-width:680px"><span style="color:var(--gold)">*</span> Nota do Marinho considera, em Vistorias, apenas o indicador <em>Laudo &le;24h úteis</em> (peso 10). O indicador <em>Produtividade m²/h</em> está temporariamente suspenso enquanto a meta e o método de cálculo são revisados em conjunto com o vistoriador, a fim de definir parâmetros alcançáveis e justos para avaliar a área vistoriada por hora. Será reincorporado na próxima edição com a métrica recalibrada.</div>
   </div>
   </div>
 </main>
@@ -1306,7 +1305,7 @@ function renderRow(p){
   const tdT=document.createElement('td');
   tdT.className='total-td';
   const nc=p.nota>=5?'nt':(p.nota>=3.5?'nm':'nl');
-  const asterisk = (p.id === 'marinho') ? '<span style="color:var(--gold);font-weight:300;margin-left:1px">*</span>' : '';
+  const asterisk = '';
   const tierPips = tier.key==='excelencia'?3:(tier.key==='alta'?2:1);
   const pipsHTML = Array(tierPips).fill('◆').join('');
   // Calcular delta vs 10ª edição (variável BASELINE_9 mantém o nome legado)
@@ -1473,7 +1472,7 @@ function openDrawer(id){
   document.getElementById('dr-av').src=`data:image/png;base64,${F[id]}`;
   document.getElementById('dr-name').textContent=p.nome;
   document.getElementById('dr-role').textContent=p.cargo;
-  document.getElementById('dr-nota').textContent=p.nota.toFixed(2).replace('.',',')+(p.id==='marinho'?'*':'');
+  document.getElementById('dr-nota').textContent=p.nota.toFixed(2).replace('.',',');
 
   const body=document.getElementById('drawer-body');
   const maxPeso=Math.max(...p.detalhes.filter(d=>d.score!==null).map(d=>d.peso||0));
