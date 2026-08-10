@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-10T14:38:55.909488Z",
-    "ref": "2026-08-10T14:15:53.609422+00:00",
+    "geradoEm": "2026-08-10T15:41:32.592918Z",
+    "ref": "2026-08-10T15:20:46.702705+00:00",
     "octadesk_disponivel": true,
     "imobiliar_disponivel": true
   },
@@ -10,7 +10,7 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 6.7,
+      "nota": 6.71,
       "bonus": 49,
       "bonus_proc": "Inadimplência",
       "inds": 14,
@@ -20,7 +20,7 @@
         "Rescisão ADM": 6.25,
         "Com. Locação": null,
         "Cont. Locação": 6.348,
-        "Rescisão Loc.": 8.106,
+        "Rescisão Loc.": 8.17,
         "Reparos": null,
         "Renovação": 5.5,
         "Inadimplência": 9.716,
@@ -68,11 +68,11 @@
           "meta": "≤2h corrido (Pipefy)"
         },
         {
-          "ok": 22,
-          "tot": 27,
-          "pct": 81.5,
+          "ok": 24,
+          "tot": 29,
+          "pct": 82.8,
           "peso": 5,
-          "score": 4.074,
+          "score": 4.138,
           "nome": "Rescisão Loc. — Levant. Taxas Prop <2h",
           "meta": "≤2h corrido"
         },
@@ -161,8 +161,8 @@
       "pontosFort": [
         "Cont.Loc: 85.3%",
         "Inad: 83.4%",
-        "Cont.ADM: 81.5%",
-        "RescLoc: 81.5%"
+        "RescLoc: 82.8%",
+        "Cont.ADM: 81.5%"
       ],
       "pontosAten": [
         "Inad: 5.9%",
@@ -360,7 +360,7 @@
       "id": "gardenia",
       "nome": "Gardênia",
       "cargo": "Assessora",
-      "nota": 4.8,
+      "nota": 4.83,
       "bonus": 3,
       "bonus_proc": "Cont. ADM",
       "inds": 16,
@@ -370,7 +370,7 @@
         "Rescisão ADM": 4.444,
         "Com. Locação": null,
         "Cont. Locação": null,
-        "Rescisão Loc.": 7.862,
+        "Rescisão Loc.": 8.066,
         "Reparos": 4.159,
         "Renovação": 3.733,
         "Inadimplência": null,
@@ -418,11 +418,11 @@
           "meta": "+1/distrato (bônus)"
         },
         {
-          "ok": 8,
-          "tot": 13,
-          "pct": 61.5,
+          "ok": 10,
+          "tot": 15,
+          "pct": 66.7,
           "peso": 2,
-          "score": 1.231,
+          "score": 1.333,
           "nome": "Rescisão Loc. — Boleto prop <24h",
           "meta": "≤24h corrido"
         },
@@ -1620,7 +1620,7 @@
         [
           "IM120",
           "IM120 - SCLN 211 BL D SALA 111",
-          "104d → 90 Dias desocupado",
+          "105d → 90 Dias desocupado",
           "✗"
         ],
         [
@@ -2985,7 +2985,7 @@
       ]
     },
     "vivi_lev_prop": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (22/27)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (24/29)",
       "cols": [
         "Imóvel",
         "Título",
@@ -3060,6 +3060,12 @@
           "✓"
         ],
         [
+          "IM401",
+          "IM401 - CLN 412 BL D SALAS 215 A 219",
+          "0.5h",
+          "✓"
+        ],
+        [
           "IM1329",
           "IM1329 -  QUADRA 201  LT 7 APT 203",
           "0.3h",
@@ -3081,6 +3087,12 @@
           "IM634",
           "IM634 - SHIS QI 19 CONJ 6 CASA 10",
           "0.3h",
+          "✓"
+        ],
+        [
+          "IM128",
+          "IM128-  SCLN 306 BLOCO B SALA 101",
+          "0.2h",
           "✓"
         ],
         [
@@ -9474,7 +9486,7 @@
       ]
     },
     "gar_rl_prop": {
-      "titulo": "Gardênia — Resc. Loc.: Boleto prop <24h (8/13)",
+      "titulo": "Gardênia — Resc. Loc.: Boleto prop <24h (10/15)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9525,6 +9537,12 @@
           "✓"
         ],
         [
+          "IM128",
+          "IM128-  SCLN 306 BLOCO B SALA 101",
+          "1.9h",
+          "✓"
+        ],
+        [
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
           "1.5h",
@@ -9557,6 +9575,12 @@
         [
           "IM344",
           "IM344 - SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM401",
+          "IM401 - CLN 412 BL D SALAS 215 A 219",
           "0.0h",
           "✓"
         ]
@@ -11111,7 +11135,7 @@
           "cls": "ok"
         },
         {
-          "v": "81.5%",
+          "v": "82.8%",
           "l": "Vivianne Levant. Taxas Prop",
           "cls": "ok"
         },
@@ -11132,19 +11156,19 @@
           "titulo": "Indicadores · Rescisão Loc.",
           "full": true,
           "labels": [
-            "Vivianne Levant. Taxas Prop <2h (22/27)",
+            "Vivianne Levant. Taxas Prop <2h (24/29)",
             "Vivianne Levant. Taxas Final <2 (25/31)",
             "Natália Boleto prop <24h (11/14)",
             "Natália Boleto final <15d (8/15)",
-            "Gardênia Boleto prop <24h (8/13)",
+            "Gardênia Boleto prop <24h (10/15)",
             "Gardênia Boleto final <15d (9/10)"
           ],
           "data": [
-            81.5,
+            82.8,
             80.6,
             78.6,
             53.3,
-            61.5,
+            66.7,
             90.0
           ],
           "metas": [
@@ -11165,8 +11189,8 @@
             "Natália"
           ],
           "data": [
-            8.106,
-            7.862,
+            8.17,
+            8.066,
             6.342
           ],
           "colors": [
@@ -11181,9 +11205,9 @@
           "nome": "Levant. Taxas Prop <2h",
           "resp": "Vivianne",
           "meta": "≤2h corrido",
-          "ok": 22,
-          "tot": 27,
-          "pct": 81.5
+          "ok": 24,
+          "tot": 29,
+          "pct": 82.8
         },
         {
           "nome": "Levant. Taxas Final <2h",
@@ -11213,9 +11237,9 @@
           "nome": "Boleto prop <24h",
           "resp": "Gardênia",
           "meta": "≤24h corrido",
-          "ok": 8,
-          "tot": 13,
-          "pct": 61.5
+          "ok": 10,
+          "tot": 15,
+          "pct": 66.7
         },
         {
           "nome": "Boleto final <15d",
@@ -11237,7 +11261,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 110 cards no período."
+          "txt": "Volume de 114 cards no período."
         }
       ]
     },
