@@ -162,10 +162,20 @@
       }
     },
     "phases": {
+      "Alinhamento com o proprietário": {
+        "id": "325158065",
+        "name": "Alinhamento com o proprietário",
+        "cards_count": 118
+      },
       "Caixa de entrada": {
         "id": "311192388",
         "name": "Caixa de entrada",
         "cards_count": 0
+      },
+      "Concluído": {
+        "id": "311192390",
+        "name": "Concluído",
+        "cards_count": 273
       },
       "Encerramento": {
         "id": "325158622",
@@ -176,11 +186,6 @@
         "id": "325159187",
         "name": "Repasse final / Distrato (FINANCEIRO)",
         "cards_count": 0
-      },
-      "Concluído": {
-        "id": "311192390",
-        "name": "Concluído",
-        "cards_count": 273
       }
     }
   },

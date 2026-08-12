@@ -106,7 +106,7 @@ Write-Host "   ✓ docs/dados/atual.json gerado" -ForegroundColor Green
 # [3/5] git add
 Write-Host ""
 Write-Host "[3/5] Adicionando arquivos..." -ForegroundColor Yellow
-git add docs/dados/atual.json 2>$null
+git add docs/dados/atual.json docs/index.html 2>$null
 $staged = @(git diff --cached --name-only)
 if ($staged.Count -eq 0) {
     Write-Host "   ⚠️  Nenhuma mudança detectada. Painel já está atualizado." -ForegroundColor Yellow

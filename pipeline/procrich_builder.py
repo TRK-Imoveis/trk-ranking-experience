@@ -109,8 +109,9 @@ META_MAP = {
     "Cont. ADM — Criação→NIDO":    "≤7d corrido",
     "Cont. ADM — Vistoria de entrada": "+1/vistoria (bônus)",
     # Rescisão ADM
-    "Rescisão ADM — Repasse":      "≤12h úteis",
-    "Rescisão ADM — Distrato":     "Preenchido",
+    "Rescisão ADM — Alinhamento":  "≤24h corrido",
+    "Rescisão ADM — Conclusão":    "≤10d corrido",
+    "Rescisão ADM — Distrato":     "+1/distrato (bônus)",
     "Rescisão ADM — Encerramento": "≤4h corrido",
     # Comercial Locação (Caio)
     "Comercial — Início":          "≤24h corrido",

@@ -304,6 +304,48 @@ def horas_uteis_fase(first_in, last_in, last_out, dur_dias) -> float:
     return util_ultima + util_anterior
 
 
+def primeira_saida_fase(first_in, last_in, last_out, dur_dias):
+    """
+    PRIMEIRA saída de uma fase — imune à "passagem-fantasma" do Pipefy.
+
+    Por que existe (auditoria de 05/08/2026):
+    quando o card é encerrado, o Pipefy o ARRASTA pelas fases, gravando entradas
+    e saídas de segundos em cada uma. Isso empurra `lastTimeOut` para a data do
+    fechamento e destrói qualquer medida de ciclo — chegou a produzir intervalos
+    NEGATIVOS que a regra de "negativo → 0" transformava em ✓ falso (IM737), e
+    ciclos de 17 segundos (IM1353). No Marinho, 5 laudos entregues no prazo
+    apareciam como ✗.
+
+    Regra (validada no dw_trk — bate 100% nos cards reabertos):
+      • visita única (last_in == first_in) → `last_out` é EXATO, usar direto;
+      • reaberto → a última visita ocupa [last_in, last_out]; o restante do
+        `duration` é o corrido das visitas anteriores, que começaram em
+        first_in. Logo: 1ª saída ≈ first_in + (duration − última visita).
+      • guarda final: a primeira saída NUNCA pode ser posterior à última.
+
+    ⚠️ NÃO usar a coluna "Última vez que saiu da fase X" como fim de ciclo sem
+    passar por aqui. Ela continua válida para RECORTE de período (onde o que se
+    quer é justamente "atividade recente").
+    """
+    if first_in is None or pd.isna(first_in) or last_out is None or pd.isna(last_out):
+        return pd.NaT
+    fin = pd.Timestamp(first_in)
+    lout = pd.Timestamp(last_out)
+    # Visita única: nunca reabriu → a saída registrada é a primeira e é exata.
+    if (last_in is None or pd.isna(last_in)
+            or abs((pd.Timestamp(last_in) - fin).total_seconds()) <= 1):
+        return lout
+    # Reaberto sem duration → não há como reconstruir; mantém o comportamento antigo.
+    if dur_dias is None or pd.isna(dur_dias):
+        return lout
+    lin = pd.Timestamp(last_in)
+    total_sec = float(dur_dias) * 86400.0
+    ultima_sec = max(0.0, (lout - lin).total_seconds())
+    anterior_sec = max(0.0, total_sec - ultima_sec)
+    candidata = fin + pd.Timedelta(seconds=anterior_sec)
+    return min(candidata, lout)
+
+
 def horas_corridas(inicio: pd.Timestamp, fim: pd.Timestamp) -> float:
     """Diferença em horas corridas. Negativo → 0."""
     if pd.isna(inicio) or pd.isna(fim):
@@ -1003,51 +1045,84 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
 def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
                                 ref: Optional[datetime] = None) -> dict:
     """
-    Assessora · Rescisão ADM · 2 indicadores · peso 10.
+    Assessora · Rescisão ADM · 2 indicadores + bônus · peso 10.
 
-    Indicador 2: Repasse <12h úteis (peso 5).
+    ESTRUTURA NOVA — fechada com a gestora em 05/08/2026, valida a partir da 13ª Ed.
+    Substitui a antiga (Repasse <12h peso 5 + Distrato assinado peso 5).
+    O indicador "Repasse <12h" foi REMOVIDO — não reincluir.
 
-      REGRA DE INÍCIO (refinada na 11ª Ed — decisão da gestora 14/05/2026):
-        Início = "Última vez que saiu da fase Caixa de entrada" (≈ momento da triagem).
-        Fallback: se card não passou por essa fase, usa "Criado em" (regra antiga).
+    RECORTE: "Última vez que saiu da fase Caixa de entrada" nos últimos 180 dias
+      (NÃO "Criado em"). Decisão da gestora: mantém no recorte cards reabertos,
+      como o IM477, cuja 1ª saída da Caixa é de nov/2025 mas voltou a andar em jul/2026.
 
-        Justificativa: card fica na Caixa de entrada aguardando triagem — tempo NÃO
-        é responsabilidade da assessora. A contagem começa quando o caso é assumido.
+    Indicador 1 — Alinhamento com o proprietário ≤24h (peso 4)
+      Medida: SOMA do tempo dentro da fase ("Tempo total na fase ... (dias)" × 24).
+      Meta 24h corridas + 30 min de tolerância. Denominador: tempo na fase > 0.
 
-    Indicador 3: Distrato assinado (peso 5) — denominador: cards concluídos.
+    Indicador 2 — Conclusão da rescisão ≤10 dias (peso 6)
+      PRIMEIRA saída da Caixa de entrada → PRIMEIRA saída do Repasse final.
+      Ambas via primeira_saida_fase() — a coluna "Última vez que saiu" é
+      contaminada pela passagem-fantasma do fechamento (ver auditoria 05/08/2026).
+      Meta 10 dias corridos, SEM tolerância (tolerância só vale p/ metas em horas).
+      Denominador: cards que ENTRARAM no Repasse final.
+        entrou e não saiu = ✗ · nunca entrou = fora do denominador.
 
-    Filtro: 'Assessor (lista)' contém nome (validado contra baseline 10ª — manual diz
-    'sem filtro' mas baseline mostra denominadores diferentes por assessora).
+    Bônus — Distrato assinado: N = cards com o campo = "Sim" ("Não" não conta).
+
+    Filtro: 'Assessor (lista)' contém nome (texto limpo no select).
     """
     df = excluir_rascunhos(df_resc_adm)
-    df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
+    # Recorte pela ÚLTIMA saída da Caixa de entrada (não por "Criado em").
+    df = aplicar_cutoff(df, "Última vez que saiu da fase Caixa de entrada", ref=ref)
 
-    col_repasse = "Primeira vez que entrou na fase Repasse final / Distrato (FINANCEIRO)"
-    col_caixa_out = "Última vez que saiu da fase Caixa de entrada"
-    sub_2 = df.dropna(subset=[col_repasse]).copy()
-    # 1ª prioridade: saída da Caixa de entrada; fallback: Criado em
-    inicio_2 = sub_2.get(col_caixa_out, pd.Series(pd.NaT, index=sub_2.index))
-    inicio_2 = inicio_2.where(inicio_2.notna(), sub_2["Criado em"])
-    horas_2 = pd.Series(
-        [horas_uteis(i, f) for i, f in zip(inicio_2, sub_2[col_repasse])],
-        index=sub_2.index,
-    )
-    ok_2 = int((horas_2 <= _meta_tol(12)).sum())
-    ind_2 = score_indicador(ok_2, len(sub_2), 5)
-    ind_2["nome"] = "Rescisão ADM — Repasse <12h"
+    F_ALI = "Alinhamento com o proprietário"
+    F_REP = "Repasse final / Distrato (FINANCEIRO)"
+    F_CX = "Caixa de entrada"
 
-    col_concl = "Primeira vez que entrou na fase Concluído"
-    sub_3 = df.dropna(subset=[col_concl]).copy()
-    # Indicador 3: campo Termo de Distrato assinado = "Sim" (radio_horizontal).
-    val = sub_3["Termo de Distrato assinado"].astype(str).str.strip().str.lower()
-    ok_3 = int((val == "sim").sum())
-    ind_3 = score_indicador(ok_3, len(sub_3), 5)
-    ind_3["nome"] = "Rescisão ADM — Distrato assinado"
+    # ── Indicador 1: Alinhamento ≤24h (tempo DENTRO da fase, imune a reabertura)
+    col_ali_dur = f"Tempo total na fase {F_ALI} (dias)"
+    if col_ali_dur in df.columns:
+        horas_ali = pd.to_numeric(df[col_ali_dur], errors="coerce") * 24
+    else:  # fase ainda não registrada em fields_map.json
+        horas_ali = pd.Series(dtype="float64", index=df.index)
+    sub_1 = df[horas_ali.notna() & (horas_ali > 0)]
+    h1 = horas_ali.loc[sub_1.index]
+    ok_1 = int((h1 <= _meta_tol(24)).sum())
+    ind_1 = score_indicador(ok_1, len(sub_1), 4)
+    ind_1["nome"] = "Rescisão ADM — Alinhamento ≤24h"
 
-    indicadores = [ind_2, ind_3]
-    return {"nota": nota_processo(indicadores), "indicadores": indicadores}
+    # ── Indicador 2: Conclusão ≤10 dias (primeira saída → primeira saída)
+    col_rep_in = f"Primeira vez que entrou na fase {F_REP}"
+    sub_2 = df.dropna(subset=[col_rep_in]).copy()
+    ok_2 = 0
+    for _, r in sub_2.iterrows():
+        inicio = primeira_saida_fase(r.get(f"Primeira vez que entrou na fase {F_CX}"),
+                                     r.get(f"Última vez que entrou na fase {F_CX}"),
+                                     r.get(f"Última vez que saiu da fase {F_CX}"),
+                                     r.get(f"Tempo total na fase {F_CX} (dias)"))
+        fim = primeira_saida_fase(r.get(col_rep_in),
+                                  r.get(f"Última vez que entrou na fase {F_REP}"),
+                                  r.get(f"Última vez que saiu da fase {F_REP}"),
+                                  r.get(f"Tempo total na fase {F_REP} (dias)"))
+        if pd.isna(inicio) or pd.isna(fim):
+            continue  # ainda na fase Repasse (ou sem saída da Caixa) → ✗
+        if dias_corridos(inicio, fim) <= 10:
+            ok_2 += 1
+    ind_2 = score_indicador(ok_2, len(sub_2), 6)
+    ind_2["nome"] = "Rescisão ADM — Conclusão ≤10 dias"
+
+    # ── Bônus: Termo de Distrato assinado = "Sim"
+    val = df.get("Termo de Distrato assinado", pd.Series(dtype=object))
+    bonus_n = int((val.astype(str).str.strip().str.lower() == "sim").sum())
+
+    nota = nota_processo([ind_1, ind_2], bonus_n=bonus_n)
+    # Linha ★ só para exibição/drilldown — peso 0 e pct None mantêm a nota intacta
+    # (run.pontos_fort_aten e procrich já filtram nomes com ★).
+    ind_bonus = {"nome": "Rescisão ADM — Distrato assinado ★",
+                 "ok": bonus_n, "tot": bonus_n, "pct": None, "peso": 0, "score": None}
+    return {"nota": nota, "indicadores": [ind_1, ind_2, ind_bonus], "bonus_n": bonus_n}
 
 
 def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
@@ -1359,7 +1434,10 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
     indicadores = []
 
     col_vfim = "Vistoria finalizada em"
+    col_prod_in = "Primeira vez que entrou na fase Em produção"
+    col_prod_lastin = "Última vez que entrou na fase Em produção"
     col_prod_out = "Última vez que saiu da fase Em produção"
+    col_prod_dur = "Tempo total na fase Em produção (dias)"
 
     if not FEATURE_FLAGS.get("marinho_eficiencia_ativa", False):
         # ---- comportamento anterior (compat) ----
@@ -1387,11 +1465,16 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
 
     # ---- desenho novo (eficiência ativa) ----
     # LAUDO 48h corridas, parado em produção = ✗, peso 4.
+    # Fim do ciclo pela PRIMEIRA saída de "Em produção" (auditoria 05/08/2026):
+    # a coluna "Última vez que saiu" é contaminada pela passagem-fantasma do
+    # fechamento e marcava 5 laudos entregues no prazo como ✗.
     sub_l = df.dropna(subset=[col_vfim]).copy()  # denominador = vistorias finalizadas
     def _laudo_ok(r):
-        if pd.isna(r[col_prod_out]):
+        saida = primeira_saida_fase(r.get(col_prod_in), r.get(col_prod_lastin),
+                                    r.get(col_prod_out), r.get(col_prod_dur))
+        if pd.isna(saida):
             return False  # parado em produção -> atraso ✗
-        return horas_corridas(r[col_vfim], r[col_prod_out]) <= META_LAUDO_CORRIDO
+        return horas_corridas(r[col_vfim], saida) <= META_LAUDO_CORRIDO
     ok_l = int(sub_l.apply(_laudo_ok, axis=1).sum()) if len(sub_l) else 0
     ind_l = score_indicador(ok_l, len(sub_l), 4)
     ind_l["nome"] = "Laudos entregues ≤48h após vistoria"

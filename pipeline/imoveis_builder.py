@@ -30,7 +30,8 @@ ROOT = Path(__file__).resolve().parent.parent
 from calculate import (
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
-    horas_uteis, horas_uteis_fase, horas_corridas, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
+    horas_uteis, horas_uteis_fase, horas_corridas, dias_corridos,
+    primeira_saida_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
     avaliar_eficiencia_vistoria,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
@@ -694,39 +695,71 @@ def assessora_cadm_bonus(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Time
     }
 
 
-def assessora_resc_adm_rep(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """Rescisão ADM · Repasse <12h ÚTEIS.
-    Regra 11ª Ed: início = Última saída Caixa de entrada (fallback: Criado em).
-    """
+def _resc_adm_recorte(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> pd.DataFrame:
+    """Recorte comum da Rescisão ADM (13ª Ed): assessora + última saída da Caixa em 180d."""
     df = excluir_rascunhos(df_resc_adm)
-    df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    col_rep = "Primeira vez que entrou na fase Repasse final / Distrato (FINANCEIRO)"
-    col_caixa_out = "Última vez que saiu da fase Caixa de entrada"
-    sub = df.dropna(subset=[col_rep]).copy()
-    inicio = sub.get(col_caixa_out, pd.Series(pd.NaT, index=sub.index))
-    inicio = inicio.where(inicio.notna(), sub["Criado em"])
+    return aplicar_cutoff(df, "Última vez que saiu da fase Caixa de entrada", ref=ref)
+
+
+def assessora_resc_adm_ali(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """Rescisão ADM · Alinhamento com o proprietário ≤24h (soma do tempo na fase)."""
+    df = _resc_adm_recorte(df_resc_adm, assessora, ref)
+    col_dur = "Tempo total na fase Alinhamento com o proprietário (dias)"
+    if col_dur in df.columns:
+        horas = pd.to_numeric(df[col_dur], errors="coerce") * 24
+    else:
+        horas = pd.Series(dtype="float64", index=df.index)
+    sub = df[horas.notna() & (horas > 0)]
     rows = []
-    for (_, r), ini in zip(sub.iterrows(), inicio):
-        h = horas_uteis(ini, r[col_rep])
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(12) else "✗"])
+    for (_, r), h in zip(sub.iterrows(), horas.loc[sub.index]):
+        rows.append([_im_label(r), r["Título"], _fmt_horas(h),
+                     "✓" if h <= _meta_tol(24) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Repasse <12h ({ok}/{len(sub)})",
+        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Alinhamento ≤24h ({ok}/{len(sub)})",
+        "cols": ["Imóvel", "Título", "Tempo na fase", "Status"],
+        "rows": _ord_pior_primeiro(rows, idx_valor=2),
+    }
+
+
+def assessora_resc_adm_concl(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """Rescisão ADM · Conclusão ≤10 dias.
+    1ª saída da Caixa de entrada → 1ª saída do Repasse final (primeira_saida_fase).
+    Denominador: cards que entraram no Repasse. Entrou e não saiu = ✗.
+    """
+    df = _resc_adm_recorte(df_resc_adm, assessora, ref)
+    F_CX, F_REP = "Caixa de entrada", "Repasse final / Distrato (FINANCEIRO)"
+    col_rep_in = f"Primeira vez que entrou na fase {F_REP}"
+    sub = df.dropna(subset=[col_rep_in]).copy()
+    rows = []
+    for _, r in sub.iterrows():
+        ini = primeira_saida_fase(r.get(f"Primeira vez que entrou na fase {F_CX}"),
+                                  r.get(f"Última vez que entrou na fase {F_CX}"),
+                                  r.get(f"Última vez que saiu da fase {F_CX}"),
+                                  r.get(f"Tempo total na fase {F_CX} (dias)"))
+        fim = primeira_saida_fase(r.get(col_rep_in),
+                                  r.get(f"Última vez que entrou na fase {F_REP}"),
+                                  r.get(f"Última vez que saiu da fase {F_REP}"),
+                                  r.get(f"Tempo total na fase {F_REP} (dias)"))
+        if pd.isna(ini) or pd.isna(fim):
+            rows.append([_im_label(r), r["Título"], "em andamento", "✗"])
+        else:
+            d = dias_corridos(ini, fim)
+            rows.append([_im_label(r), r["Título"], f"{d:.1f}d", "✓" if d <= 10 else "✗"])
+    ok = sum(1 for r in rows if r[3] == "✓")
+    return {
+        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Conclusão ≤10 dias ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
 
 
 def assessora_resc_adm_dist(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """Rescisão ADM · Distrato assinado. Denominador: cards concluídos. Status ✓ se 'Sim'."""
-    df = excluir_rascunhos(df_resc_adm)
-    df = aplicar_cutoff(df, "Criado em", ref=ref)
-    nomes = _nome_assessora_alt(assessora)
-    df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    col_concl = "Primeira vez que entrou na fase Concluído"
-    sub = df.dropna(subset=[col_concl]).copy()
+    """Rescisão ADM · Distrato assinado — BÔNUS (13ª Ed). ✓ conta +1; 'Não' não conta."""
+    df = _resc_adm_recorte(df_resc_adm, assessora, ref)
+    sub = df.copy()
     rows = []
     for _, r in sub.iterrows():
         raw = r.get("Termo de Distrato assinado", "")
@@ -743,8 +776,8 @@ def assessora_resc_adm_dist(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.T
     # ordena: ✗ primeiro (problemas), ✓ depois — empate alfabético
     rows.sort(key=lambda r: (r[3] == "✓", str(r[0])))
     return {
-        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Distrato assinado ({ok}/{len(sub)})",
-        "cols": ["Imóvel", "Título", "Distrato", "Status"],
+        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Distrato assinado ★ ({ok}/{len(sub)})",
+        "cols": ["Imóvel", "Título", "Distrato", "Bônus"],
         "rows": rows,
     }
 
@@ -957,14 +990,20 @@ def mar_laudo(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
     df = excluir_rascunhos(df_vist)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_vfim = "Vistoria finalizada em"
+    # PRIMEIRA saída de "Em produção" — mesma regra da nota (calculate.primeira_saida_fase).
+    col_prod_in = "Primeira vez que entrou na fase Em produção"
+    col_prod_lastin = "Última vez que entrou na fase Em produção"
     col_prod_out = "Última vez que saiu da fase Em produção"
+    col_prod_dur = "Tempo total na fase Em produção (dias)"
     sub = df.dropna(subset=[col_vfim]).copy()  # denominador = vistorias finalizadas
     rows = []
     for _, r in sub.iterrows():
-        if pd.isna(r[col_prod_out]):
+        saida = primeira_saida_fase(r.get(col_prod_in), r.get(col_prod_lastin),
+                                    r.get(col_prod_out), r.get(col_prod_dur))
+        if pd.isna(saida):
             rows.append([_im_label(r), r["Título"], "em produção", "✗"])  # parado
         else:
-            h = horas_corridas(r[col_vfim], r[col_prod_out])
+            h = horas_corridas(r[col_vfim], saida)
             rows.append([_im_label(r), r["Título"], _fmt_horas(h),
                          "✓" if h <= 48.0 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
@@ -1068,8 +1107,9 @@ def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict
     return {
         f"{prefix}_cadm":          assessora_cadm(dfs["cont_adm"], pid, ref),
         f"{prefix}_cadm_bonus":    assessora_cadm_bonus(dfs["cont_adm"], pid, ref),
-        f"{prefix}_resc_adm_rep":  assessora_resc_adm_rep(dfs["rescisao_adm"], pid, ref),
-        f"{prefix}_resc_adm_dist": assessora_resc_adm_dist(dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_resc_adm_ali":   assessora_resc_adm_ali(dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_resc_adm_concl": assessora_resc_adm_concl(dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_resc_adm_dist":  assessora_resc_adm_dist(dfs["rescisao_adm"], pid, ref),
         f"{prefix}_rl_prop":       assessora_rl_prop(dfs["rescisao_loc"], pid, ref),
         f"{prefix}_rl_final":      assessora_rl_final(dfs["rescisao_loc"], pid, ref),
         f"{prefix}_rep_orc":       assessora_rep_orc(dfs["reparos"], pid, ref),
