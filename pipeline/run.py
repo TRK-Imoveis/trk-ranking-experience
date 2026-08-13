@@ -48,7 +48,8 @@ from calculate import (
 )
 from pipeline.extract_pipefy import extract_pipe
 from pipeline.extract_octadesk import extract_octadesk
-from pipeline.extract_imobiliar import extract_imobiliar, calcular_bonus_inadimplencia
+from pipeline.extract_imobiliar import (extract_imobiliar, calcular_bonus_inadimplencia,
+                                        carregar_distratos, carregar_repasses)
 from pipeline.imoveis_builder import gerar_imoveis
 from pipeline.procrich_builder import gerar_proc_rich, _meta_from_nome
 
@@ -95,6 +96,10 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True) -> dict
         print("\n[imobiliar] carregando CSVs locais…")
     imob = extract_imobiliar(verbose=verbose)
     dfs["imobiliar"] = imob   # guarda os 3 sub-DFs sob "imobiliar"
+    # data_distrato = entrega efetiva das chaves (Rescisão Loc., 13ª Ed)
+    dfs["distratos"] = carregar_distratos(verbose=verbose)
+    # data real do repasse ao proprietário ("Pagto Prop") p/ a regra R3 do bônus
+    dfs["repasses"] = carregar_repasses(verbose=verbose)
     return dfs
 
 
@@ -168,10 +173,28 @@ def calc_vivianne(dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict:
     return _montar_pessoa("vivianne", scores, detalhes, bonus_n, "Inadimplência")
 
 
+def _listar_revisoes() -> None:
+    """Cards que o cálculo marcou para conferência manual (13ª Ed)."""
+    import calculate as _C
+    fant = getattr(_C, "_RESC_ADM_FANTASMA", [])
+    if fant:
+        print(f"\n[revisar] Rescisão ADM — {len(fant)} card(s) com ciclo NEGATIVO "
+              f"(passagem-fantasma, contam ✗):")
+        for quem, titulo, d in fant:
+            print(f"   {quem:9} {titulo[:58]:58} {d:>9.1f}d")
+    neg = getattr(_C, "_RESC_LOC_NEGATIVOS", [])
+    if neg:
+        print(f"\n[revisar] Rescisão Loc. — {len(neg)} card(s) com levantamento ANTES "
+              f"da entrega das chaves (fora do denominador):")
+        for quem, unidade, titulo, v in neg:
+            print(f"   {quem:9} {unidade:16} {titulo[:44]:44} {v:>9.1f}")
+
+
 def calc_assessora(pid: str, dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict:
     cadm = calc_assessora_contrato_adm(dfs["cont_adm"], pid, bonus_n=bonus_n, ref=ref)
     radm = calc_assessora_rescisao_adm(dfs["rescisao_adm"], pid, ref=ref)
-    rloc = calc_assessora_rescisao_locacao(dfs["rescisao_loc"], pid, ref=ref)
+    rloc = calc_assessora_rescisao_locacao(dfs["rescisao_loc"], pid, ref=ref,
+                                           distratos=dfs.get("distratos"))
     rep  = calc_assessora_reparos(dfs["reparos"], pid, ref=ref)
     ren  = calc_assessora_renovacao(dfs["renovacao"], pid, ref=ref)
     bo   = calc_assessora_backoffice(dfs["backoffice"], pid, ref=ref)
@@ -246,6 +269,10 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
         print(f"\n[bonus] caio_imovel_alugado={bonus_caio}  vivianne_boletos={bonus_n_vivianne}  "
               f"natalia_vistoria={bonus_natalia}  gardenia_vistoria={bonus_gardenia}")
 
+    import calculate as _C   # listas de revisão manual acumulam por chamada
+    _C._RESC_ADM_FANTASMA.clear()
+    _C._RESC_LOC_NEGATIVOS.clear()
+
     pessoas = [
         calc_caio(dfs, bonus_caio, ref),
         calc_vivianne(dfs, bonus_n_vivianne, ref),
@@ -256,6 +283,9 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
     pessoas.sort(key=lambda p: (p["nota"] or 0), reverse=True)
     for pos, p in enumerate(pessoas, 1):
         p["pos"] = pos
+
+    if verbose:
+        _listar_revisoes()
 
     return {
         "_meta": {
@@ -446,7 +476,8 @@ def main(argv: list[str]) -> None:
         return
 
     bonus_viv = calcular_bonus_inadimplencia(
-        dfs["imobiliar"], df_inadimplencia=dfs["inadimplencia"], ref=ref
+        dfs["imobiliar"], df_inadimplencia=dfs["inadimplencia"], ref=ref,
+        repasses_reais=dfs.get("repasses"),
     )
     # Persiste resultado em config/bonus_vivianne.json para auditoria e drilldown.
     cfg_viv = ROOT / "config" / "bonus_vivianne.json"

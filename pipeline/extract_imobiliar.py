@@ -27,10 +27,13 @@ Quando o usuário entregar o 1º conjunto de CSVs, completar a lógica usando es
 from __future__ import annotations
 
 import sys
+import zoneinfo
 from pathlib import Path
 from typing import Optional
 
 import pandas as pd
+
+TZ_BSB = zoneinfo.ZoneInfo("America/Sao_Paulo")
 
 if hasattr(sys.stdout, "reconfigure"):
     try:
@@ -311,11 +314,136 @@ def _parse_im_titulo(t: str) -> Optional[int]:
     return None
 
 
+
+# ────────────────────────────────────────────────────────────────────
+# Data de entrega das chaves — fonte Imobiliar (13ª Ed, 13/08/2026)
+# ────────────────────────────────────────────────────────────────────
+def carregar_distratos(*, verbose: bool = True) -> dict[int, pd.Timestamp]:
+    """
+    `codigo_imovel` → `data_distrato` da tabela `imobiliar_contratos_loc` do dw_trk.
+
+    POR QUE ESSA COLUNA E NÃO O CAMPO DO PIPEFY
+    ------------------------------------------
+    O indicador "Boleto prop" mede o tempo entre a ENTREGA DAS CHAVES e o
+    levantamento das taxas proporcionais. O campo `Data do recebimento das
+    chaves:` do Pipefy é digitado à mão e erra com frequência (IM344, IM1742,
+    IM1783 e IM1785 têm data posterior ao próprio levantamento).
+
+    No Imobiliar existem dois campos e é fácil trocá-los:
+      • "Chaves" (`dataentrega`) → quando a assessora SENTOU para registrar.
+        Se ela recebe hoje e cadastra amanhã, esse campo traz amanhã. Usar
+        aqui deixaria o indicador CIRCULAR (mede-se contra o próprio registro).
+      • "Encerramento" (`data_distrato`) → a data em que as chaves foram de
+        fato entregues. É a que alimenta o cálculo do boleto final, então a
+        equipe tem incentivo real de preenchê-la certo.  ← é esta.
+
+    Retorna {} (silenciosamente) se o banco não estiver acessível — o cálculo
+    então cai no encadeamento antigo (campo Pipefy → fase CHAVES RECEBIDAS →
+    saída de Vistoria recebida / Agendamento).
+    """
+    sandbox = Path(__file__).resolve().parent.parent / "trk-bd-sandbox"
+    if str(sandbox) not in sys.path:
+        sys.path.insert(0, str(sandbox))
+    try:
+        from db_connection import query as _query  # type: ignore
+        df = _query(
+            "SELECT codigo_imovel, max(data_distrato) AS data_distrato "
+            "FROM imobiliar_contratos_loc "
+            "WHERE data_distrato IS NOT NULL AND codigo_imovel IS NOT NULL "
+            "GROUP BY codigo_imovel"
+        )
+    except Exception as exc:  # banco fora do ar, .env ausente, etc.
+        if verbose:
+            print(f"[imobiliar] data_distrato indisponível ({exc.__class__.__name__}) "
+                  f"— Boleto prop/final cai no campo do Pipefy")
+        return {}
+
+    fora = {}
+    for _, r in df.iterrows():
+        try:
+            im = int(r["codigo_imovel"])
+        except (TypeError, ValueError):
+            continue
+        d = pd.Timestamp(r["data_distrato"])
+        if pd.isna(d):
+            continue
+        # Meia-noite de Brasília, em UTC (as colunas do pipeline são tz-aware UTC).
+        d = d.normalize()
+        if d.tzinfo is None:
+            d = d.tz_localize(TZ_BSB)
+        fora[im] = d.tz_convert("UTC")
+    if verbose:
+        print(f"[imobiliar] data_distrato: {len(fora)} imóveis")
+    return fora
+
+
+def carregar_repasses(*, verbose: bool = True) -> dict[tuple[int, str], pd.Timestamp]:
+    """
+    (codigo_imovel, competencia 'MM/AAAA') → `data_retirada_repasse` do `dw_trk`.
+
+    É a data em que o PROPRIETÁRIO efetivamente recebeu — a coluna "Pagto Prop"
+    da tela de Boletos do Imobiliar. Confirmada pela gestora em 13/08/2026 com o
+    IM87 (CLN 211 BL D, 216): boleto pago 09/07/2026, repasse 30/07/2026, e o
+    Demonstrativo de competência 06/2026 traz a linha ALUGUEL de 09/07.
+
+    POR QUE ISSO IMPORTA
+    --------------------
+    Até 13/08/2026 a regra R3 usava uma data ESTIMADA:
+        mês do "Vencimento 1º Boleto" do card + dia_pag do proprietário.
+    O repasse real anda para o dia útil anterior quando o dia cai em fim de
+    semana. No próprio IM87 (dia_pag cadastrado = 30) os repasses foram
+    30/07 · 30/06 · 29/05 · 30/04 · 30/03 · 27/02 · 30/01 · 30/12 · 28/11 · 29/08.
+    Medido nos 77 boletos da janela: a estimativa erra em 52 (67,5%) — para os
+    dois lados, gerando ✓ e ✗ falsos.
+
+    Retorna {} se o banco estiver fora — aí o cálculo cai na estimativa antiga.
+    """
+    sandbox = Path(__file__).resolve().parent.parent / "trk-bd-sandbox"
+    if str(sandbox) not in sys.path:
+        sys.path.insert(0, str(sandbox))
+    try:
+        from db_connection import query as _query  # type: ignore
+        df = _query(
+            "SELECT codigo_imovel, competencia, max(data_retirada_repasse) AS repasse "
+            "FROM imobiliar_boletos_encargo_adm "
+            "WHERE data_retirada_repasse IS NOT NULL "
+            "GROUP BY codigo_imovel, competencia"
+        )
+    except Exception as exc:
+        if verbose:
+            print(f"[imobiliar] data_retirada_repasse indisponível ({exc.__class__.__name__}) "
+                  f"— R3 cai na data de repasse ESTIMADA")
+        return {}
+
+    fora: dict[tuple[int, str], pd.Timestamp] = {}
+    for _, r in df.iterrows():
+        try:
+            im = int(r["codigo_imovel"])
+        except (TypeError, ValueError):
+            continue
+        comp = str(r["competencia"] or "").strip()      # banco: 'AAAA-MM'
+        if len(comp) != 7 or "-" not in comp:
+            continue
+        ano, mes = comp.split("-")
+        chave = (im, f"{mes}/{ano}")                    # CSV: 'MM/AAAA'
+        d = pd.Timestamp(r["repasse"])
+        if pd.isna(d):
+            continue
+        d = d.normalize()
+        if d.tzinfo is None:
+            d = d.tz_localize(TZ_BSB)
+        fora[chave] = d.tz_convert("UTC")
+    if verbose:
+        print(f"[imobiliar] data_retirada_repasse: {len(fora)} pares imóvel×competência")
+    return fora
+
 def calcular_bonus_inadimplencia(
     dfs: dict[str, pd.DataFrame],
     df_inadimplencia: Optional[pd.DataFrame] = None,
     *,
     ref: Optional[pd.Timestamp] = None,
+    repasses_reais: Optional[dict] = None,
+    cutoff_dias: int = 180,
     verbose: bool = True,
 ) -> dict:
     """
@@ -389,7 +517,21 @@ def calcular_bonus_inadimplencia(
     # 4. Filtra: precisa ter dia_pag preenchido
     b_enc = b_enc.dropna(subset=["dia_pag"]).copy()
     b_enc["dia_pag"] = b_enc["dia_pag"].astype(int)
-    denominador_r1 = len(b_enc)  # denominador após R1 (e antes de R2/R3)
+
+    # 4b. RECORTE DE 180 DIAS (13/08/2026) — até aqui este era o ÚNICO indicador
+    # do ranking sem janela: media o que o CSV do Imobiliar por acaso trouxesse
+    # (22/01 a 10/07) enquanto todo o resto media 14/02 a 13/08.
+    fora_janela = 0
+    if cutoff_dias:
+        base = pd.Timestamp(ref) if ref is not None else pd.Timestamp.utcnow()
+        if base.tzinfo is None:
+            base = base.tz_localize("UTC")
+        limite = base - pd.Timedelta(days=cutoff_dias)
+        pag = pd.to_datetime(b_enc["data_pag"], errors="coerce", utc=True)
+        fora_janela = int((pag < limite).sum())
+        b_enc = b_enc[pag >= limite].copy()
+
+    denominador_r1 = len(b_enc)  # denominador após R1 + janela (antes de R2/R3)
 
     # 5. Index dos cards do pipe Inadimplência por (IM, ano-mes do Venc 1º Boleto)
     cards_no_venc: list[dict] = []
@@ -443,18 +585,28 @@ def calcular_bonus_inadimplencia(
             continue
 
         # R3 — data_pag ≤ data_repasse
-        data_rep = _data_repasse_from_card(card["venc"], int(r.dia_pag))
-        if pd.notna(data_pag) and data_pag <= data_rep:
+        # PRIMEIRO a data REAL do banco (coluna "Pagto Prop" do Imobiliar);
+        # só cai na estimativa quando o par imóvel×competência não existe lá.
+        data_rep = (repasses_reais or {}).get((int(r.cd_imovel), str(r.mes_ref).strip()))
+        repasse_real = data_rep is not None
+        if not repasse_real:
+            data_rep = _data_repasse_from_card(card["venc"], int(r.dia_pag))
+        # Compara DATA, não instante — "Pagto Prop" é um dia no Imobiliar e o
+        # pagamento também. Pagar NO dia do repasse conta como antes.
+        # (mesmo critério já usado na R2 acima)
+        if pd.notna(data_pag) and data_pag.date() <= pd.Timestamp(data_rep).date():
             antes_rows.append({"cd_imovel": r.cd_imovel, "data_pag": data_pag,
                                 "mes_ref": r.mes_ref, "venc_card": card["venc"],
                                 "data_repasse": data_rep, "dia_pag": r.dia_pag,
+                                "repasse_real": repasse_real,
                                 "multa_adm": r.multa_adm, "multa_ratio": r.multa_ratio,
                                 "card_id": card["id"], "card_titulo": card["Título"],
                                 "card_criado_em": criado_em})
         else:
             depois_rows.append({"cd_imovel": r.cd_imovel, "data_pag": data_pag,
                                  "mes_ref": r.mes_ref, "venc_card": card["venc"],
-                                 "data_repasse": data_rep, "card_titulo": card["Título"]})
+                                 "data_repasse": data_rep, "card_titulo": card["Título"],
+                                 "repasse_real": repasse_real})
 
     N = len(antes_rows)
 
@@ -469,12 +621,19 @@ def calcular_bonus_inadimplencia(
         print(f"[bonus_vivianne] excluídos por pagamento após repasse: {len(depois_rows)}")
         print(f"[bonus_vivianne] múltiplos cards no mesmo mês (escolhido o mais recente): {len(multiplos_rows)}")
         print(f"[bonus_vivianne] taxa de exibição: {taxa:.1f}%")
+        if cutoff_dias:
+            print(f"[bonus_vivianne] fora da janela de {cutoff_dias}d (descartados): {fora_janela}")
+        _com_real = sum(1 for x in antes_rows + depois_rows if x.get("repasse_real"))
+        _tot_r3 = len(antes_rows) + len(depois_rows)
+        print(f"[bonus_vivianne] R3 com data de repasse REAL: {_com_real}/{_tot_r3} "
+              f"(resto caiu na estimativa)")
         if cards_no_venc:
             print(f"[bonus_vivianne] ⚠ {len(cards_no_venc)} cards sem 'Vencimento 1º Boleto:' preenchido — não podem casar")
 
     return {
         "N": N,
         "denominador_R1": denominador_r1,
+        "fora_janela": fora_janela,
         "taxa": (N / denominador_r1) if denominador_r1 else 0.0,
         "antes": pd.DataFrame(antes_rows),
         "depois": pd.DataFrame(depois_rows),
