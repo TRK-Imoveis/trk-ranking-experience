@@ -160,7 +160,9 @@ def calc_vivianne(dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict:
     cloc = calc_vivianne_contrato_locacao(dfs["cont_locacao"], ref=ref)
     rloc = calc_vivianne_rescisao_locacao(dfs["rescisao_loc"], ref=ref)
     ren  = calc_vivianne_renovacao(dfs["renovacao"], ref=ref)
-    ina  = calc_vivianne_inadimplencia(dfs["inadimplencia"], bonus_n=bonus_n, ref=ref)
+    ina  = calc_vivianne_inadimplencia(dfs["inadimplencia"], bonus_n=bonus_n, ref=ref,
+                                       bonus_tot=dfs.get("_bonus_viv_tot", 0),
+                                       cobrados=dfs.get("_bonus_viv_cobrados", 0))
     bo   = calc_vivianne_backoffice(dfs["backoffice"], ref=ref)
     tkt  = _safe(calc_vivianne_ticket, dfs["tickets"])
     scores = {
@@ -170,7 +172,9 @@ def calc_vivianne(dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict:
     }
     detalhes = (cadm["indicadores"] + radm["indicadores"] + cloc["indicadores"] + rloc["indicadores"]
                 + ren["indicadores"] + ina["indicadores"] + bo["indicadores"] + tkt["indicadores"])
-    return _montar_pessoa("vivianne", scores, detalhes, bonus_n, "Inadimplência")
+    # 13ª Ed: a Vivianne não tem mais BÔNUS — "Cobrança antes do repasse" virou
+    # indicador com peso 4. Sem ★ na linha dela.
+    return _montar_pessoa("vivianne", scores, detalhes, 0, None)
 
 
 def _listar_revisoes() -> None:
@@ -505,6 +509,12 @@ def main(argv: list[str]) -> None:
             ),
         }
     }, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 13ª Ed: "Cobrança antes do repasse" virou INDICADOR (peso 4) — precisa do
+    # denominador, não só do N.
+    dfs["_bonus_viv_tot"] = int(bonus_viv["denominador_R1"])
+    # cobrados = boletos com cobrança PROATIVA (card antes/no dia do pagamento),
+    # independentemente de o dinheiro ter chegado antes ou depois do repasse.
+    dfs["_bonus_viv_cobrados"] = int(len(bonus_viv["antes"]) + len(bonus_viv["depois"]))
     atual = build_atual(dfs, ref=ref, bonus_n_vivianne=bonus_viv["N"])
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)

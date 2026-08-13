@@ -366,22 +366,49 @@ def score_indicador(ok: int, tot: int, peso: float) -> dict:
     return {"ok": ok, "tot": tot, "pct": pct, "peso": peso, "score": score}
 
 
+# Bônus de CONTAGEM (13ª Ed, decisão da gestora 13/08/2026).
+# Vale só para os bônus que NÃO têm denominador natural:
+#   Caio · Comercial      — imóvel alugado antes de ser anunciado
+#   Natália/Gardênia      — vistoria de entrada realizada
+# Os que TÊM denominador viraram indicadores com peso próprio:
+#   Vivianne · Inadimplência — Cobrança antes do repasse (47/113)
+#   Natália/Gardênia         — Distrato assinado (2/8)
+BONUS_POR_UNIDADE = 0.25
+BONUS_TETO = 1.5
+
+
 def nota_processo(indicadores: list, bonus_n: int = 0) -> Optional[float]:
     """
     Calcula nota do processo (0-10).
 
-    Fórmula base:    sum(scores) / sum(pesos) * 10
-    Fórmula bônus:   (sum(scores) + bonus_n) / (sum(pesos) + bonus_n) * 10
+    Fórmula:  sum(scores) / sum(pesos) * 10  +  min(bonus_n * 0,25 ; 1,5)
 
-    Indicadores sem dados (tot=0) são excluídos.
-    Se todos sem dados, retorna None.
+    ⚠️ MUDANÇA DA 13ª EDIÇÃO — POR QUE O BÔNUS SAIU DO DENOMINADOR
+    --------------------------------------------------------------
+    Até 13/08/2026 a fórmula era (scores + N) / (pesos + N) × 10, ou seja, cada
+    ponto extra entrava como um indicador virtual de peso 1 com 100% de acerto.
+    Quando N ficava grande em relação ao peso do processo, a nota convergia para
+    10 e escondia o desempenho real:
+
+      Vivianne · Inadimplência : N=47 contra peso 4 → o bônus carregava 92% do
+        processo. Nota real 6,46 · exibida 9,72. Corrigimos a data do repasse
+        (que errava em 67,5%) e a nota andou 0,01 — prova de que nenhuma
+        correção de dado movia aquela nota.
+      Natália · Cont. ADM      : 0/8 no único indicador, e o painel mostrava 3,33.
+
+    Agora o bônus é ACRÉSCIMO COM TETO: soma depois da nota, no máximo +1,5.
+    A nota do processo volta a ser visível e o extra continua premiado.
+
+    Indicadores sem dados (tot=0) são excluídos. Se todos sem dados, retorna None.
     """
     validos = [i for i in indicadores if i["tot"] > 0]
     if not validos:
         return None
     soma_scores = sum(i["score"] for i in validos)
     soma_pesos = sum(i["peso"] for i in validos)
-    return round((soma_scores + bonus_n) / (soma_pesos + bonus_n) * 10, 3)
+    base = soma_scores / soma_pesos * 10
+    extra = min(bonus_n * BONUS_POR_UNIDADE, BONUS_TETO) if bonus_n else 0.0
+    return round(min(10.0, base + extra), 3)
 
 
 def nota_final(scores_processos: dict) -> Optional[float]:
@@ -736,7 +763,7 @@ def calc_caio_whatsapp(df_conv: pd.DataFrame) -> dict:
     if df_conv is None or len(df_conv) == 0:
         return {"nota": None, "indicadores": []}
     indicadores = _whatsapp_indicadores(df_conv, NOMES_AGENTE["caio"]["whatsapp"],
-                                         peso_resposta=4, peso_aval=3)
+                                         peso_resposta=6, peso_aval=4)
     return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 
 
@@ -750,8 +777,8 @@ def calc_caio_ticket(df_tickets: pd.DataFrame, df_aval: pd.DataFrame) -> dict:
         return {"nota": None, "indicadores": []}
     nome = NOMES_AGENTE["caio"]["ticket"]
     df_t = _tickets_filtrados(df_tickets, nome)
-    ind1 = _ticket_sla_ind(df_t, peso=4)
-    ind2 = _ticket_aval_ind(df_aval, nome, peso=3)
+    ind1 = _ticket_sla_ind(df_t, peso=6)      # 4:3 normalizado p/ somar 10
+    ind2 = _ticket_aval_ind(df_aval, nome, peso=4)
     return {"nota": nota_processo([ind1, ind2]), "indicadores": [ind1, ind2]}
 
 
@@ -923,12 +950,33 @@ def calc_vivianne_renovacao(df_renov: pd.DataFrame,
 
 
 def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
-                                ref: Optional[datetime] = None) -> dict:
+                                ref: Optional[datetime] = None,
+                                bonus_tot: int = 0, cobrados: int = 0) -> dict:
     """
-    Vivianne · Inadimplência · 3 indicadores Pipefy + bônus.
-    7: Cobrança ≤8h ÚTEIS (Criado em → entrada Cobrança inicial) (peso 2)
-    8: CredPago ≤15d corrido (Vencimento 1º Boleto: → entrada CredPago: Acionar) (peso 1)
-    9: Negativação 7-9d corrido (Vencimento 1º Boleto: → entrada Negativação) (peso 1)
+    Vivianne · Inadimplência · 4 indicadores · peso total 10.
+
+    ⚠️ 13ª ED (13/08/2026): "Cobrança antes do repasse" DEIXOU DE SER BÔNUS e
+    virou indicador com o MAIOR peso do processo (decisão da gestora). Ele já
+    tinha numerador E denominador calculados (47 de 113) — era um indicador
+    vestido de bônus. Como bônus ele carregava 92% do peso e travava a nota
+    em 9,7, escondendo que a Negativação está em 1/17.
+
+    7:  Cobrança ≤8h ÚTEIS — VELOCIDADE de abrir o card (peso 2)
+    8:  CredPago ≤15d corrido (peso 1,25)
+    9:  Negativação 7-9d corrido (peso 1,25)
+    10: Cobrança dos boletos em atraso — COBERTURA (cobrados / bonus_tot) (peso 2,5)
+    11: Recebido antes do repasse — RESULTADO (bonus_n / cobrados) (peso 3) ← maior
+
+    ⚠️ POR QUE 10 E 11 SÃO SEPARADOS (decisão da gestora, 13/08/2026)
+    ----------------------------------------------------------------
+    Até aqui existia um indicador só, "Cobrança antes do repasse" = 47/113, que
+    misturava duas coisas de responsabilidade diferente:
+      • ABRIR a cobrança é 100% da Vivianne;
+      • o locatário PAGAR antes do repasse não é.
+    Um boleto cobrado no dia certo em que o locatário só pagou depois do repasse
+    contava igual a um boleto que ela nem viu. Agora:
+      10 mede se ela viu e agiu     → 64/113
+      11 mede o resultado do que cobrou → 47/64
 
     Bônus N: boletos em atraso recebidos antes do repasse — passado como bonus_n.
     """
@@ -957,7 +1005,7 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     dias_8 = (sub_8[col_credpago] - sub_8[col_venc]).dt.total_seconds() / 86400
     dias_8 = dias_8.clip(lower=0)
     ok_8 = int((dias_8 <= 15).sum())
-    ind_8 = score_indicador(ok_8, len(sub_8), 1)
+    ind_8 = score_indicador(ok_8, len(sub_8), 1.25)
     ind_8["nome"] = "Inadimplência — CredPago ≤15d"
 
     # 9: Negativação 7-9d corrido a partir de Vencimento 1º Boleto:
@@ -965,11 +1013,19 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     sub_9 = df.dropna(subset=[col_venc, col_neg]).copy()
     dias_9 = (sub_9[col_neg] - sub_9[col_venc]).dt.total_seconds() / 86400
     ok_9 = int(((dias_9 >= 7) & (dias_9 <= 9)).sum())
-    ind_9 = score_indicador(ok_9, len(sub_9), 1)
+    ind_9 = score_indicador(ok_9, len(sub_9), 1.25)
     ind_9["nome"] = "Inadimplência — Negativação 7-9d"
 
-    indicadores = [ind_7, ind_8, ind_9]
-    return {"nota": nota_processo(indicadores, bonus_n=bonus_n), "indicadores": indicadores}
+    # 10: COBERTURA — dos boletos em atraso, em quantos ela abriu cobrança
+    ind_10 = score_indicador(int(cobrados), int(bonus_tot), 2.5)
+    ind_10["nome"] = "Inadimplência — Cobrança dos boletos em atraso"
+
+    # 11: RESULTADO — dos que ela cobrou, quantos entraram antes do repasse
+    ind_11 = score_indicador(int(bonus_n), int(cobrados), 3)
+    ind_11["nome"] = "Inadimplência — Recebido antes do repasse"
+
+    indicadores = [ind_7, ind_8, ind_9, ind_10, ind_11]
+    return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 
 
 def calc_vivianne_backoffice(df_bo: pd.DataFrame,
@@ -1145,7 +1201,7 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
     sub_1 = df[horas_ali.notna() & (horas_ali > 0)]
     h1 = horas_ali.loc[sub_1.index]
     ok_1 = int((h1 <= _meta_tol(24)).sum())
-    ind_1 = score_indicador(ok_1, len(sub_1), 4)
+    ind_1 = score_indicador(ok_1, len(sub_1), 3)
     ind_1["nome"] = "Rescisão ADM — Alinhamento ≤24h"
 
     # ── Indicador 2: Conclusão ≤10 dias (primeira saída → primeira saída)
@@ -1176,19 +1232,28 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
         elif dias < 0:
             _RESC_ADM_FANTASMA.append(
                 (assessora, str(r.get("Título") or r.get("Titulo") or ""), round(dias, 2)))
-    ind_2 = score_indicador(ok_2, len(sub_2), 6)
+    ind_2 = score_indicador(ok_2, len(sub_2), 4)
     ind_2["nome"] = "Rescisão ADM — Conclusão ≤10 dias"
 
-    # ── Bônus: Termo de Distrato assinado = "Sim"
-    val = df.get("Termo de Distrato assinado", pd.Series(dtype=object))
-    bonus_n = int((val.astype(str).str.strip().str.lower() == "sim").sum())
+    # ── Indicador 3: Distrato assinado (peso 3) — era BÔNUS até 12/08/2026
+    # 13ª Ed: virou indicador porque tem denominador natural. Como bônus ele
+    # inflava a nota sem medir nada: Gardênia 3,50 aparecia 4,58.
+    #
+    # ⚠️ DENOMINADOR = CARDS CONCLUÍDOS (decisão da gestora, 13/08/2026), que é a
+    # regra escrita nas instruções do Project. NÃO usar "cards com o campo
+    # respondido": o campo está vazio em 11 dos 16 cards, e naquele desenho a
+    # Natália tirava 2/2 = 100% justamente por ter só dois respondidos — deixar
+    # em branco melhorava a nota. Card concluído sem distrato assinado é ✗,
+    # esteja o campo em "Não" ou em branco.
+    val = df.get("Termo de Distrato assinado", pd.Series(dtype=object)).astype(str).str.strip().str.lower()
+    col_concl = f"Primeira vez que entrou na fase Concluído"
+    concluidos = df.dropna(subset=[col_concl]) if col_concl in df.columns else df.iloc[0:0]
+    dist_ok = int((val.reindex(concluidos.index) == "sim").sum())
+    ind_3 = score_indicador(dist_ok, len(concluidos), 3)
+    ind_3["nome"] = "Rescisão ADM — Distrato assinado"
 
-    nota = nota_processo([ind_1, ind_2], bonus_n=bonus_n)
-    # Linha ★ só para exibição/drilldown — peso 0 e pct None mantêm a nota intacta
-    # (run.pontos_fort_aten e procrich já filtram nomes com ★).
-    ind_bonus = {"nome": "Rescisão ADM — Distrato assinado ★",
-                 "ok": bonus_n, "tot": bonus_n, "pct": None, "peso": 0, "score": None}
-    return {"nota": nota, "indicadores": [ind_1, ind_2, ind_bonus], "bonus_n": bonus_n}
+    nota = nota_processo([ind_1, ind_2, ind_3])
+    return {"nota": nota, "indicadores": [ind_1, ind_2, ind_3], "bonus_n": dist_ok}
 
 
 # Cards com levantamento registrado ANTES da entrega das chaves.
@@ -1277,7 +1342,7 @@ def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
     # 48h SEM tolerância: os 48h já SÃO a folga (meta de 24h medida a partir
     # da meia-noite da data de entrega). Somar margem seria contar duas vezes.
     ok_4 = int((val_4 <= 48).sum())
-    ind_4 = score_indicador(ok_4, len(val_4), 2)
+    ind_4 = score_indicador(ok_4, len(val_4), 4)
     ind_4["nome"] = "Rescisão Loc. — Boleto prop <48h"
 
     # 5: Boleto final <15d
@@ -1287,7 +1352,7 @@ def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
     _registrar_negativos(sub_5, dias_5, "Boleto final (d)")
     val_5 = dias_5[dias_5 >= 0]
     ok_5 = int((val_5 <= 15).sum())
-    ind_5 = score_indicador(ok_5, len(val_5), 3)
+    ind_5 = score_indicador(ok_5, len(val_5), 6)
     ind_5["nome"] = "Rescisão Loc. — Boleto final <15d"
 
     indicadores = [ind_4, ind_5]
@@ -1423,7 +1488,7 @@ def calc_assessora_whatsapp(df_conv: pd.DataFrame, assessora: str) -> dict:
     if df_conv is None or len(df_conv) == 0:
         return {"nota": None, "indicadores": []}
     nome = NOMES_AGENTE[assessora]["whatsapp"]
-    indicadores = _whatsapp_indicadores(df_conv, nome, peso_resposta=4, peso_aval=3)
+    indicadores = _whatsapp_indicadores(df_conv, nome, peso_resposta=6, peso_aval=4)
     return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 
 
@@ -1437,8 +1502,8 @@ def calc_assessora_ticket(df_tickets: pd.DataFrame, df_aval: pd.DataFrame, asses
         return {"nota": None, "indicadores": []}
     nome = NOMES_AGENTE[assessora]["ticket"]
     df_t = _tickets_filtrados(df_tickets, nome)
-    ind1 = _ticket_sla_ind(df_t, peso=3)
-    ind2 = _ticket_aval_ind(df_aval, nome, peso=3)
+    ind1 = _ticket_sla_ind(df_t, peso=5)      # 3:3 normalizado p/ somar 10
+    ind2 = _ticket_aval_ind(df_aval, nome, peso=5)
     return {"nota": nota_processo([ind1, ind2]), "indicadores": [ind1, ind2]}
 
 

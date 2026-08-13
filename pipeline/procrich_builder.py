@@ -111,7 +111,7 @@ META_MAP = {
     # Rescisão ADM
     "Rescisão ADM — Alinhamento":  "≤24h úteis",
     "Rescisão ADM — Conclusão":    "≤10d corrido",
-    "Rescisão ADM — Distrato":     "+1/distrato (bônus)",
+    "Rescisão ADM — Distrato":     "assinado ao concluir",
     "Rescisão ADM — Encerramento": "≤4h úteis",
     # Comercial Locação (Caio)
     "Comercial — Início":          "≤24h úteis",
@@ -141,7 +141,8 @@ META_MAP = {
     "Inadimplência — Cobrança":    "≤8h úteis",
     "Inadimplência — CredPago":    "≤15d corrido",
     "Inadimplência — Negativação": "entre 7 e 9d corrido",
-    "Inadimplência — Boletos em atraso": "Sim/Não (bônus)",
+    "Inadimplência — Cobrança dos boletos em atraso": "abrir cobrança no atraso",
+    "Inadimplência — Recebido antes do repasse": "receber antes do repasse",
     # Vistorias (Marinho — nomes sem prefixo "Vistorias —")
     "Laudos entregues":            "≤48h corrido",
     "Vistorias dentro":            "≤ teto do balde +15%",

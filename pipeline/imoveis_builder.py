@@ -624,20 +624,36 @@ def vivi_bo_troca(df_bo: pd.DataFrame, ref: pd.Timestamp) -> dict:
 # VIVIANNE — Inadimplência (bônus agregado)
 # ────────────────────────────────────────────────────────────────────
 
-def vivi_bonus_inadim() -> dict:
-    """Vivianne · Bônus Inadimplência. Agregado 4 linhas a partir de config/bonus_vivianne.json."""
-    cfg = json.loads((ROOT / "config" / "bonus_vivianne.json").read_text(encoding="utf-8"))
-    ed = cfg["edicao_12"]
-    N = ed["N"]
+def _ed_inadim() -> dict:
+    return json.loads((ROOT / "config" / "bonus_vivianne.json").read_text(encoding="utf-8"))["edicao_12"]
+
+
+def vivi_cobertura() -> dict:
+    """Vivianne · Inadim.: COBERTURA — dos boletos em atraso, em quantos abriu cobrança."""
+    ed = _ed_inadim()
+    cobrados = ed["antes_count"] + ed["depois_count"]
     denom = ed["denominador_R1"]
     return {
-        "titulo": f"Vivianne — Inadim.: Boletos cobrados antes do repasse ★ (N={N} de {denom})",
+        "titulo": f"Vivianne — Inadim.: Cobrança dos boletos em atraso ({cobrados}/{denom})",
         "cols": ["Categoria", "Quantidade", "Status"],
         "rows": [
-            [f"✓ Cobrados antes do repasse com card (entram em N)", str(ed["antes_count"]), "✓"],
-            [f"✗ Não cobrados (sem card no mês esperado)", str(ed["sem_card_count"]), "✗"],
-            [f"✗ Cobrança reativa (card criado depois do pagamento)", str(ed["reativos_count"]), "✗"],
-            [f"✗ Cobrados após o repasse", str(ed["depois_count"]), "✗"],
+            ["✓ Cobrança proativa aberta (card antes ou no dia do pagamento)", str(cobrados), "✓"],
+            ["✗ Sem card no mês esperado — passou batido", str(ed["sem_card_count"]), "✗"],
+            ["✗ Cobrança reativa (card criado depois do pagamento)", str(ed["reativos_count"]), "✗"],
+        ],
+    }
+
+
+def vivi_bonus_inadim() -> dict:
+    """Vivianne · Inadim.: RESULTADO — dos boletos cobrados, quantos entraram antes do repasse."""
+    ed = _ed_inadim()
+    cobrados = ed["antes_count"] + ed["depois_count"]
+    return {
+        "titulo": f"Vivianne — Inadim.: Recebido antes do repasse ({ed['antes_count']}/{cobrados})",
+        "cols": ["Categoria", "Quantidade", "Status"],
+        "rows": [
+            ["✓ Pago até a data do repasse ao proprietário", str(ed["antes_count"]), "✓"],
+            ["✗ Pago depois do repasse — entrou no mês seguinte", str(ed["depois_count"]), "✗"],
         ],
     }
 
@@ -769,27 +785,25 @@ def assessora_resc_adm_concl(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.
 
 
 def assessora_resc_adm_dist(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """Rescisão ADM · Distrato assinado — BÔNUS (13ª Ed). ✓ conta +1; 'Não' não conta."""
+    """Rescisão ADM · Distrato assinado — INDICADOR peso 3 (13ª Ed, 13/08/2026).
+    Era bônus; virou indicador porque tem denominador natural (cards concluídos,
+    campo preenchido com Sim ou Não). Cards com o campo vazio ficam FORA."""
     df = _resc_adm_recorte(df_resc_adm, assessora, ref)
-    sub = df.copy()
+    col_concl = "Primeira vez que entrou na fase Concluído"
+    sub = df.dropna(subset=[col_concl]) if col_concl in df.columns else df.iloc[0:0]
     rows = []
-    for _, r in sub.iterrows():
+    for _, r in sub.iterrows():                       # espelha calculate.py
         raw = r.get("Termo de Distrato assinado", "")
         val = "" if pd.isna(raw) else str(raw).strip()
         is_sim = val.lower() == "sim"
-        if is_sim:
-            distrato_label = "Sim"
-        elif val and val.lower() not in ("nan", "none"):
-            distrato_label = val
-        else:
-            distrato_label = "Não"
-        rows.append([_im_label(r), r["Título"], distrato_label, "✓" if is_sim else "✗"])
+        rotulo = val if val and val.lower() not in ("nan", "none") else "(em branco)"
+        rows.append([_im_label(r), r["Título"], rotulo, "✓" if is_sim else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     # ordena: ✗ primeiro (problemas), ✓ depois — empate alfabético
     rows.sort(key=lambda r: (r[3] == "✓", str(r[0])))
     return {
-        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Distrato assinado ★ ({ok}/{len(sub)})",
-        "cols": ["Imóvel", "Título", "Distrato", "Bônus"],
+        "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Distrato assinado ({ok}/{len(sub)})",
+        "cols": ["Imóvel", "Título", "Distrato", "Status"],
         "rows": rows,
     }
 
@@ -1190,6 +1204,7 @@ def gerar_imoveis(dfs: dict, ref: pd.Timestamp) -> dict:
         "vivi_neg":          vivi_neg(dfs["inadimplencia"], ref),
         "vivi_bo_concl":     vivi_bo_concl(dfs["backoffice"], ref),
         "vivi_bo_troca":     vivi_bo_troca(dfs["backoffice"], ref),
+        "vivi_cobertura":    vivi_cobertura(),
         "vivi_bonus_inadim": vivi_bonus_inadim(),
         # Marinho (3 chaves)
         "mar_laudo":         mar_laudo(dfs["vistorias"], ref),
