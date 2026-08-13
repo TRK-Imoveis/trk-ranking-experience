@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-12T13:51:24.837672Z",
-    "ref": "2026-08-12T13:27:40.463616+00:00",
+    "geradoEm": "2026-08-13T14:27:24.918880Z",
+    "ref": "2026-08-13T14:01:24.229572+00:00",
     "octadesk_disponivel": true,
     "imobiliar_disponivel": true
   },
@@ -10,22 +10,22 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 6.84,
+      "nota": 7.23,
       "bonus": 49,
       "bonus_proc": "Inadimplência",
       "inds": 14,
       "pts": 68,
       "scores": {
         "Cont. ADM": 8.148,
-        "Rescisão ADM": 7.143,
+        "Rescisão ADM": 7.5,
         "Com. Locação": null,
-        "Cont. Locação": 6.14,
-        "Rescisão Loc.": 8.2,
+        "Cont. Locação": 7.137,
+        "Rescisão Loc.": 8.591,
         "Reparos": null,
-        "Renovação": 5.724,
-        "Inadimplência": 9.716,
+        "Renovação": 6.685,
+        "Inadimplência": 9.732,
         "Vistorias": null,
-        "BackOffice": 5.373,
+        "BackOffice": 5.781,
         "DIRF/DARF": null,
         "WhatsApp": null,
         "Ticket": 4.295
@@ -41,58 +41,58 @@
           "meta": "≤2h úteis"
         },
         {
-          "ok": 5,
-          "tot": 7,
-          "pct": 71.4,
+          "ok": 6,
+          "tot": 8,
+          "pct": 75.0,
           "peso": 10,
-          "score": 7.143,
+          "score": 7.5,
           "nome": "Rescisão ADM — Encerramento <4h",
-          "meta": "≤4h corrido"
+          "meta": "≤4h úteis"
         },
         {
-          "ok": 9,
+          "ok": 13,
           "tot": 24,
-          "pct": 37.5,
+          "pct": 54.2,
           "peso": 5,
-          "score": 1.875,
+          "score": 2.708,
           "nome": "Cont. Locação — NIDO→Concluído <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
-          "ok": 29,
-          "tot": 34,
-          "pct": 85.3,
+          "ok": 31,
+          "tot": 35,
+          "pct": 88.6,
           "peso": 5,
-          "score": 4.265,
+          "score": 4.429,
           "nome": "Cont. Locação — Confecção <2h",
-          "meta": "≤2h corrido (Pipefy)"
+          "meta": "≤2h úteis"
         },
         {
-          "ok": 24,
-          "tot": 29,
-          "pct": 82.8,
+          "ok": 27,
+          "tot": 30,
+          "pct": 90.0,
           "peso": 5,
-          "score": 4.138,
+          "score": 4.5,
           "nome": "Rescisão Loc. — Levant. Taxas Prop <2h",
-          "meta": "≤2h corrido"
+          "meta": "≤2h úteis"
         },
         {
-          "ok": 26,
-          "tot": 32,
-          "pct": 81.2,
+          "ok": 27,
+          "tot": 33,
+          "pct": 81.8,
           "peso": 5,
-          "score": 4.062,
+          "score": 4.091,
           "nome": "Rescisão Loc. — Levant. Taxas Final <2h",
-          "meta": "≤2h corrido"
+          "meta": "≤2h úteis"
         },
         {
-          "ok": 16,
+          "ok": 21,
           "tot": 26,
-          "pct": 61.5,
+          "pct": 80.8,
           "peso": 5,
-          "score": 3.077,
+          "score": 4.038,
           "nome": "Renovação — Confecção <4h",
-          "meta": "≤4h corrido (Pipefy)"
+          "meta": "≤4h úteis"
         },
         {
           "ok": 9,
@@ -104,13 +104,13 @@
           "meta": "≤16h úteis"
         },
         {
-          "ok": 247,
-          "tot": 296,
-          "pct": 83.4,
+          "ok": 261,
+          "tot": 297,
+          "pct": 87.9,
           "peso": 2,
-          "score": 1.669,
-          "nome": "Inadimplência — Cobrança <24h",
-          "meta": "≤24h corrido"
+          "score": 1.758,
+          "nome": "Inadimplência — Cobrança <8h úteis",
+          "meta": "≤8h úteis"
         },
         {
           "ok": 13,
@@ -131,20 +131,20 @@
           "meta": "entre 7 e 9d corrido"
         },
         {
-          "ok": 128,
-          "tot": 174,
-          "pct": 73.6,
+          "ok": 145,
+          "tot": 175,
+          "pct": 82.9,
           "peso": 5,
-          "score": 3.678,
+          "score": 4.143,
           "nome": "BackOffice — Concluído <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
-          "ok": 20,
-          "tot": 59,
-          "pct": 33.9,
+          "ok": 19,
+          "tot": 58,
+          "pct": 32.8,
           "peso": 5,
-          "score": 1.695,
+          "score": 1.638,
           "nome": "BackOffice — Troca Titularidade <5d",
           "meta": "≤5d úteis"
         },
@@ -159,16 +159,16 @@
         }
       ],
       "pontosFort": [
-        "Cont.Loc: 85.3%",
-        "Inad: 83.4%",
-        "RescLoc: 82.8%",
-        "Cont.ADM: 81.5%"
+        "RescLoc: 90.0%",
+        "Cont.Loc: 88.6%",
+        "Inad: 87.9%",
+        "BO: 82.9%"
       ],
       "pontosAten": [
         "Inad: 5.9%",
-        "BO: 33.9%",
-        "Cont.Loc: 37.5%",
-        "Tkts: 42.9%"
+        "BO: 32.8%",
+        "Tkts: 42.9%",
+        "Renov: 52.9%"
       ],
       "pos": 1
     },
@@ -176,22 +176,22 @@
       "id": "natalia",
       "nome": "Natália Teixeira",
       "cargo": "Assessora",
-      "nota": 5.6,
+      "nota": 5.8,
       "bonus": 5,
       "bonus_proc": "Cont. ADM",
       "inds": 16,
       "pts": 78,
       "scores": {
         "Cont. ADM": 3.333,
-        "Rescisão ADM": 5.934,
+        "Rescisão ADM": 6.548,
         "Com. Locação": null,
         "Cont. Locação": null,
-        "Rescisão Loc.": 6.342,
-        "Reparos": 4.743,
+        "Rescisão Loc.": 6.576,
+        "Reparos": 4.797,
         "Renovação": 2.596,
         "Inadimplência": null,
         "Vistorias": null,
-        "BackOffice": 4.545,
+        "BackOffice": 5.455,
         "DIRF/DARF": 6.452,
         "WhatsApp": 8.976,
         "Ticket": 7.442
@@ -207,56 +207,56 @@
           "meta": "≤2h úteis"
         },
         {
-          "ok": 6,
-          "tot": 8,
-          "pct": 75.0,
+          "ok": 5,
+          "tot": 7,
+          "pct": 71.4,
           "peso": 4,
-          "score": 3.0,
+          "score": 2.857,
           "nome": "Rescisão ADM — Alinhamento ≤24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
-          "ok": 2,
-          "tot": 7,
-          "pct": 28.6,
+          "ok": 3,
+          "tot": 6,
+          "pct": 50.0,
           "peso": 6,
-          "score": 1.714,
+          "score": 3.0,
           "nome": "Rescisão ADM — Conclusão ≤10 dias",
           "meta": "≤10d corrido"
         },
         {
           "nome": "Rescisão ADM — Distrato assinado ★",
-          "ok": 3,
-          "tot": 3,
+          "ok": 2,
+          "tot": 2,
           "pct": null,
           "peso": 0,
           "score": null,
           "meta": "+1/distrato (bônus)"
         },
         {
-          "ok": 11,
-          "tot": 14,
-          "pct": 78.6,
+          "ok": 12,
+          "tot": 15,
+          "pct": 80.0,
           "peso": 2,
-          "score": 1.571,
+          "score": 1.6,
           "nome": "Rescisão Loc. — Boleto prop <24h",
           "meta": "≤24h corrido"
         },
         {
-          "ok": 8,
-          "tot": 15,
-          "pct": 53.3,
+          "ok": 9,
+          "tot": 16,
+          "pct": 56.2,
           "peso": 3,
-          "score": 1.6,
+          "score": 1.688,
           "nome": "Rescisão Loc. — Boleto final <15d",
           "meta": "≤15d corrido"
         },
         {
-          "ok": 23,
-          "tot": 29,
-          "pct": 79.3,
+          "ok": 25,
+          "tot": 31,
+          "pct": 80.6,
           "peso": 4,
-          "score": 3.172,
+          "score": 3.226,
           "nome": "Reparos — Orçamento <4h",
           "meta": "≤4h úteis"
         },
@@ -288,13 +288,13 @@
           "meta": "antes do venc"
         },
         {
-          "ok": 5,
+          "ok": 6,
           "tot": 11,
-          "pct": 45.5,
+          "pct": 54.5,
           "peso": 10,
-          "score": 4.545,
+          "score": 5.455,
           "nome": "BackOffice — Pendência <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
           "ok": 20,
@@ -346,13 +346,13 @@
         "WA: 97.2%",
         "WA: 84.2%",
         "Tkts: 80.8%",
-        "Reparos: 79.3%"
+        "Reparos: 80.6%"
       ],
       "pontosAten": [
         "Cont.ADM: 0.0%",
         "Renov: 18.8%",
         "Reparos: 26.2%",
-        "RescADM: 28.6%"
+        "Renov: 30.8%"
       ],
       "pos": 2
     },
@@ -360,22 +360,22 @@
       "id": "gardenia",
       "nome": "Gardênia",
       "cargo": "Assessora",
-      "nota": 4.83,
+      "nota": 4.97,
       "bonus": 3,
       "bonus_proc": "Cont. ADM",
       "inds": 16,
       "pts": 78,
       "scores": {
         "Cont. ADM": 3.162,
-        "Rescisão ADM": 4.444,
+        "Rescisão ADM": 4.583,
         "Com. Locação": null,
         "Cont. Locação": null,
         "Rescisão Loc.": 8.066,
-        "Reparos": 4.205,
+        "Reparos": 4.224,
         "Renovação": 3.733,
         "Inadimplência": null,
         "Vistorias": null,
-        "BackOffice": 1.111,
+        "BackOffice": 2.222,
         "DIRF/DARF": 5.0,
         "WhatsApp": 8.704,
         "Ticket": 5.068
@@ -391,20 +391,20 @@
           "meta": "≤2h úteis"
         },
         {
-          "ok": 1,
-          "tot": 3,
-          "pct": 33.3,
+          "ok": 2,
+          "tot": 4,
+          "pct": 50.0,
           "peso": 4,
-          "score": 1.333,
+          "score": 2.0,
           "nome": "Rescisão ADM — Alinhamento ≤24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
           "ok": 1,
-          "tot": 3,
-          "pct": 33.3,
+          "tot": 4,
+          "pct": 25.0,
           "peso": 6,
-          "score": 2.0,
+          "score": 1.5,
           "nome": "Rescisão ADM — Conclusão ≤10 dias",
           "meta": "≤10d corrido"
         },
@@ -436,11 +436,11 @@
           "meta": "≤15d corrido"
         },
         {
-          "ok": 43,
-          "tot": 61,
-          "pct": 70.5,
+          "ok": 44,
+          "tot": 62,
+          "pct": 71.0,
           "peso": 4,
-          "score": 2.82,
+          "score": 2.839,
           "nome": "Reparos — Orçamento <4h",
           "meta": "≤4h úteis"
         },
@@ -472,13 +472,13 @@
           "meta": "antes do venc"
         },
         {
-          "ok": 2,
+          "ok": 4,
           "tot": 18,
-          "pct": 11.1,
+          "pct": 22.2,
           "peso": 10,
-          "score": 1.111,
+          "score": 2.222,
           "nome": "BackOffice — Pendência <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
           "ok": 3,
@@ -530,13 +530,13 @@
         "WA: 95.6%",
         "RescLoc: 90.0%",
         "WA: 80.7%",
-        "Reparos: 70.5%"
+        "Reparos: 71.0%"
       ],
       "pontosAten": [
         "Cont.ADM: 11.1%",
-        "BO: 11.1%",
+        "BO: 22.2%",
         "Reparos: 23.1%",
-        "RescADM: 33.3%"
+        "RescADM: 25.0%"
       ],
       "pos": 3
     },
@@ -544,7 +544,7 @@
       "id": "caio",
       "nome": "Caio Rodrigues Lima",
       "cargo": "Comercial",
-      "nota": 4.5,
+      "nota": 4.58,
       "bonus": 4,
       "bonus_proc": "Com. Locação",
       "inds": 11,
@@ -552,8 +552,8 @@
       "scores": {
         "Cont. ADM": 2.105,
         "Rescisão ADM": null,
-        "Com. Locação": 6.219,
-        "Cont. Locação": 2.622,
+        "Com. Locação": 6.781,
+        "Cont. Locação": 2.571,
         "Rescisão Loc.": null,
         "Reparos": null,
         "Renovação": 3.333,
@@ -566,29 +566,29 @@
       },
       "detalhes": [
         {
-          "ok": 11,
+          "ok": 27,
           "tot": 52,
-          "pct": 21.2,
+          "pct": 51.9,
           "peso": 2.5,
-          "score": 0.529,
+          "score": 1.298,
           "nome": "Comercial — Início processo <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         },
         {
-          "ok": 25,
+          "ok": 31,
           "tot": 74,
-          "pct": 33.8,
+          "pct": 41.9,
           "peso": 2.5,
-          "score": 0.845,
+          "score": 1.047,
           "nome": "Comercial — Anúncio publicado <72h",
-          "meta": "≤72h corrido"
+          "meta": "≤72h úteis"
         },
         {
-          "ok": 18,
+          "ok": 17,
           "tot": 27,
-          "pct": 66.7,
+          "pct": 63.0,
           "peso": 5,
-          "score": 3.333,
+          "score": 3.148,
           "nome": "Comercial — Card na coluna correta",
           "meta": "Fase correta"
         },
@@ -603,10 +603,10 @@
         },
         {
           "ok": 15,
-          "tot": 34,
-          "pct": 44.1,
+          "tot": 35,
+          "pct": 42.9,
           "peso": 4,
-          "score": 1.765,
+          "score": 1.714,
           "nome": "Cont. Locação — Documentação <24h",
           "meta": "≤24h úteis"
         },
@@ -668,14 +668,14 @@
       "pontosFort": [
         "WA: 94.9%",
         "Tkts: 74.5%",
-        "Comercial: 66.7%",
+        "Comercial: 63.0%",
         "WA: 52.2%"
       ],
       "pontosAten": [
         "Cont.Loc: 14.3%",
         "Cont.ADM: 21.1%",
-        "Comercial: 21.2%",
-        "Renov: 33.3%"
+        "Renov: 33.3%",
+        "Comercial: 41.9%"
       ],
       "pos": 4
     },
@@ -683,7 +683,7 @@
       "id": "marinho",
       "nome": "Albérico Marinho",
       "cargo": "Vistoriador",
-      "nota": 4.23,
+      "nota": 4.24,
       "bonus": 0,
       "bonus_proc": null,
       "inds": 3,
@@ -697,7 +697,7 @@
         "Reparos": null,
         "Renovação": null,
         "Inadimplência": null,
-        "Vistorias": 4.23,
+        "Vistorias": 4.24,
         "BackOffice": null,
         "DIRF/DARF": null,
         "WhatsApp": null,
@@ -705,11 +705,11 @@
       },
       "detalhes": [
         {
-          "ok": 38,
-          "tot": 61,
-          "pct": 62.3,
+          "ok": 39,
+          "tot": 62,
+          "pct": 62.9,
           "peso": 4,
-          "score": 2.492,
+          "score": 2.516,
           "nome": "Laudos entregues ≤48h após vistoria",
           "meta": "≤48h corrido"
         },
@@ -729,17 +729,17 @@
           "peso": 10,
           "score": 1.429,
           "nome": "Contestações respondidas <24h",
-          "meta": "≤24h corrido"
+          "meta": "≤24h úteis"
         }
       ],
       "pontosFort": [
         "Vistorias dent: 75.6%",
-        "Laudos entregu: 62.3%",
+        "Laudos entregu: 62.9%",
         "Contestações r: 14.3%"
       ],
       "pontosAten": [
         "Contestações r: 14.3%",
-        "Laudos entregu: 62.3%",
+        "Laudos entregu: 62.9%",
         "Vistorias dent: 75.6%"
       ],
       "pos": 5
@@ -747,7 +747,7 @@
   ],
   "IMOVEIS": {
     "caio_inicio": {
-      "titulo": "Caio — Comercial: Início processo <24h (11/52)",
+      "titulo": "Caio — Comercial: Início processo <24h (27/52)",
       "cols": [
         "Imóvel",
         "Título",
@@ -758,265 +758,247 @@
         [
           "IM1533",
           "IM1533 - SHIS QI 28 CONJ 04 CASA 5",
-          "810.6h",
+          "234.6h",
           "✗"
         ],
         [
           "IM1592",
           "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
-          "727.6h",
+          "227.6h",
           "✗"
         ],
         [
           "IM918",
           "IM918 - SOFN QD 2 BL A LOJA 39",
-          "500.3h",
+          "146.3h",
           "✗"
         ],
         [
           "IM#1353932372",
           "Sr. Rogerio KehlSHIS QI 16 CONJUNTO 2 LOTE 13",
-          "481.0h",
+          "141.0h",
           "✗"
         ],
         [
           "IM152",
           "IM152 - CLN 211 BLOCO D SALA 112",
-          "477.0h",
+          "137.0h",
           "✗"
         ],
         [
           "IM1579",
           "IM1579 - RUA 21 SUL LT 11 APTO 905",
-          "475.3h",
+          "135.3h",
           "✗"
         ],
         [
           "IM1847",
           "IM1847 - SHIS QI 19 CJ 2 LT 6",
-          "353.4h",
+          "103.4h",
           "✗"
         ],
         [
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
-          "311.0h",
+          "89.0h",
           "✗"
         ],
         [
           "IM143",
           "IM143 - CLN 211 BL D SALA 101",
-          "309.1h",
+          "87.1h",
           "✗"
         ],
         [
           "IM#1322558879",
           "Rafaelo AbrittaCondomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
-          "239.0h",
+          "79.0h",
           "✗"
         ],
         [
           "IM682",
           "IM682- SCLRN 703 BLOCO G LOJA 9",
-          "211.8h",
+          "65.8h",
           "✗"
         ],
         [
           "IM#1318576441",
           "VK662 SHIS QL 8, Conjunto 4, Casa 2",
-          "209.1h",
+          "63.1h",
           "✗"
         ],
         [
           "IM1483",
           "IM1483 - SGCV LOTE 13 BL C APTO 214",
-          "191.3h",
+          "59.3h",
           "✗"
         ],
         [
           "IM1787",
           "IM1787 - CLN 201 BLOCO C SALA 102",
-          "170.3h",
+          "52.3h",
           "✗"
         ],
         [
           "IM1786",
           "IM1786 - CLN 201 BLOCO C SALA 101",
-          "169.0h",
+          "51.0h",
           "✗"
         ],
         [
           "IM1790",
           "IM1790 - CLN 201 BLOCO C SALA 109",
-          "146.3h",
+          "42.3h",
           "✗"
         ],
         [
           "IM1791",
           "IM1791 - CLN 201 BLOCO C SALA 110",
-          "145.9h",
+          "41.9h",
           "✗"
         ],
         [
           "IM1792",
           "IM1792 - CLN 201 BLOCO C SALA 112",
-          "145.2h",
+          "41.2h",
           "✗"
         ],
         [
           "IM1794",
           "IM1794 - CLN 201 BLOCO C SALA 202",
-          "144.3h",
+          "40.3h",
           "✗"
         ],
         [
           "IM1795",
           "IM1795 - CLN 201 BLOCO C SALA 203",
-          "143.6h",
-          "✗"
-        ],
-        [
-          "IM1853",
-          "IM1853 - SQSW 302 BLOCO I APTO 301",
-          "138.4h",
-          "✗"
-        ],
-        [
-          "IM1796",
-          "IM1796 - CLN 201 BLOCO C SALA 204",
-          "121.2h",
-          "✗"
-        ],
-        [
-          "IM1797",
-          "IM1797 - CLN 201 BLOCO C SALA 205",
-          "97.3h",
-          "✗"
-        ],
-        [
-          "IM39",
-          "IM39 - SGAN 911 CONJ G BL E APTO 203",
-          "91.4h",
-          "✗"
-        ],
-        [
-          "IM1799",
-          "IM1799 - CLN 201 BLOCO C SALA 207",
-          "90.6h",
-          "✗"
-        ],
-        [
-          "IM569",
-          "IM569 - SQSW 101 BL H APTO 315",
-          "88.8h",
+          "39.6h",
           "✗"
         ],
         [
           "IM1559",
           "IM1559 - SQS 310 BL I APTO 106",
-          "77.2h",
+          "35.2h",
           "✗"
         ],
         [
-          "IM1341",
-          "IM1341 - SQS 112 BL I APTO 304",
-          "76.2h",
+          "IM1853",
+          "IM1853 - SQSW 302 BLOCO I APTO 301",
+          "34.4h",
+          "✗"
+        ],
+        [
+          "IM1796",
+          "IM1796 - CLN 201 BLOCO C SALA 204",
+          "31.2h",
           "✗"
         ],
         [
           "IM1852",
           "IM1852 - Brisas Do Lago Bl C Apto 11316",
-          "71.0h",
+          "29.0h",
           "✗"
         ],
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "70.8h",
-          "✗"
-        ],
-        [
-          "IM1800",
-          "IM1800 - CLN 201 BLOCO C SALA 208",
-          "70.5h",
-          "✗"
-        ],
-        [
-          "IM1802",
-          "IM1802  - CLN 201 BLOCO C SALA 210 ",
-          "70.0h",
-          "✗"
-        ],
-        [
-          "IM1803",
-          "IM1803 - CLN 201 BLOCO C SALA 211",
-          "69.7h",
-          "✗"
-        ],
-        [
-          "IM1804",
-          "IM1804 - CLN 201 BLOCO C SALA 212 ",
-          "69.1h",
-          "✗"
-        ],
-        [
-          "IM120",
-          "IM120 - SCLN 211 BL D SALA 111",
-          "65.3h",
+          "28.8h",
           "✗"
         ],
         [
           "IM1844",
           "IM1844 - SMDB CONJUNTO 25 LOTE 11 CASA B",
-          "51.7h",
-          "✗"
+          "23.7h",
+          "✓"
         ],
         [
-          "IM1807",
-          "IM1807 - CLN 201 BLOCO C SALA 218",
-          "51.5h",
-          "✗"
+          "IM120",
+          "IM120 - SCLN 211 BL D SALA 111",
+          "23.3h",
+          "✓"
         ],
         [
-          "IM1842",
-          "IM1842 -Sces Trecho 04 , S/N - Und. 15 (Brisas do Lago apt E015S2)",
-          "51.4h",
-          "✗"
+          "IM1797",
+          "IM1797 - CLN 201 BLOCO C SALA 205",
+          "21.3h",
+          "✓"
         ],
         [
           "IM1329",
           "IM1329 -  QUADRA 201  LT 7 APT 203",
-          "46.1h",
-          "✗"
+          "18.1h",
+          "✓"
+        ],
+        [
+          "IM39",
+          "IM39 - SGAN 911 CONJ G BL E APTO 203",
+          "15.4h",
+          "✓"
         ],
         [
           "IM1742",
           "IM1742 - SETOR RESIDENCIAL B VILA WESLIAN RORIZ CASA 16",
-          "29.0h",
-          "✗"
+          "15.0h",
+          "✓"
         ],
         [
-          "IM1806",
-          "IM1806 - CLN 201 BLOCO C SALA 214",
-          "27.4h",
-          "✗"
+          "IM1799",
+          "IM1799 - CLN 201 BLOCO C SALA 207",
+          "14.6h",
+          "✓"
+        ],
+        [
+          "IM1341",
+          "IM1341 - SQS 112 BL I APTO 304",
+          "14.2h",
+          "✓"
+        ],
+        [
+          "IM569",
+          "IM569 - SQSW 101 BL H APTO 315",
+          "12.8h",
+          "✓"
+        ],
+        [
+          "IM1800",
+          "IM1800 - CLN 201 BLOCO C SALA 208",
+          "12.1h",
+          "✓"
+        ],
+        [
+          "IM1802",
+          "IM1802  - CLN 201 BLOCO C SALA 210 ",
+          "12.0h",
+          "✓"
+        ],
+        [
+          "IM1803",
+          "IM1803 - CLN 201 BLOCO C SALA 211",
+          "12.0h",
+          "✓"
+        ],
+        [
+          "IM1804",
+          "IM1804 - CLN 201 BLOCO C SALA 212 ",
+          "12.0h",
+          "✓"
         ],
         [
           "IM357",
           "IM357 - Cln 412 BLOCO D LOJAS 8 E 9",
-          "24.1h",
+          "10.1h",
           "✓"
         ],
         [
-          "IM1783",
-          "IM1783 - CLN 201 BL C SALA 108",
-          "19.8h",
+          "IM1807",
+          "IM1807 - CLN 201 BLOCO C SALA 218",
+          "8.6h",
           "✓"
         ],
         [
-          "IM634",
-          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
-          "16.7h",
+          "IM1842",
+          "IM1842 -Sces Trecho 04 , S/N - Und. 15 (Brisas do Lago apt E015S2)",
+          "7.3h",
           "✓"
         ],
         [
@@ -1026,27 +1008,27 @@
           "✓"
         ],
         [
+          "IM1783",
+          "IM1783 - CLN 201 BL C SALA 108",
+          "5.8h",
+          "✓"
+        ],
+        [
           "IM#1339882385",
           "Pablo Duarte CardosoCondomínio Ville Montagne Quadra 22, casa 09",
           "3.5h",
           "✓"
         ],
         [
-          "IM1769",
-          "IM1769 - CLN 201 BLOCO C SALA 217",
-          "2.2h",
+          "IM634",
+          "IM634 - SHIS QI 19 CONJ 6 CASA 10",
+          "2.7h",
           "✓"
         ],
         [
           "IM1169",
           "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
           "1.9h",
-          "✓"
-        ],
-        [
-          "IM1808",
-          "IM1808 - CLN 201 BLOCO C SALA 219",
-          "1.1h",
           "✓"
         ],
         [
@@ -1066,11 +1048,29 @@
           "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
           "0.2h",
           "✓"
+        ],
+        [
+          "IM1769",
+          "IM1769 - CLN 201 BLOCO C SALA 217",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1806",
+          "IM1806 - CLN 201 BLOCO C SALA 214",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1808",
+          "IM1808 - CLN 201 BLOCO C SALA 219",
+          "0.0h",
+          "✓"
         ]
       ]
     },
     "caio_anuncio": {
-      "titulo": "Caio — Comercial: Anúncio publicado <72h (25/74)",
+      "titulo": "Caio — Comercial: Anúncio publicado <72h (31/74)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1081,223 +1081,223 @@
         [
           "IM1852",
           "IM1852 - Brisas Do Lago Bl C Apto 11316",
-          "997.0h",
+          "297.0h",
           "✗"
         ],
         [
           "IM1483",
           "IM1483 - SGCV LOTE 13 BL C APTO 214",
-          "885.7h",
+          "267.7h",
           "✗"
         ],
         [
           "IM#1339882385",
           "Pablo Duarte CardosoCondomínio Ville Montagne Quadra 22, casa 09",
-          "866.2h",
+          "260.2h",
           "✗"
         ],
         [
           "IM344",
           "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
-          "575.9h",
+          "179.9h",
           "✗"
         ],
         [
           "IM918",
           "IM918 - SOFN QD 2 BL A LOJA 39",
-          "500.8h",
+          "146.8h",
           "✗"
         ],
         [
           "IM682",
           "IM682- SCLRN 703 BLOCO G LOJA 9",
-          "450.6h",
+          "124.6h",
           "✗"
         ],
         [
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
-          "448.5h",
+          "122.5h",
           "✗"
         ],
         [
           "IM1795",
           "IM1795 - CLN 201 BLOCO C SALA 203",
-          "382.4h",
+          "118.4h",
           "✗"
         ],
         [
           "IM357",
           "IM357 - Cln 412 BLOCO D LOJAS 8 E 9",
-          "354.0h",
+          "104.0h",
           "✗"
         ],
         [
           "IM120",
           "IM120 - SCLN 211 BL D SALA 111",
-          "333.1h",
+          "97.1h",
           "✗"
         ],
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "313.5h",
-          "✗"
-        ],
-        [
-          "IM#1322558879",
-          "Rafaelo AbrittaCondomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
-          "277.4h",
-          "✗"
-        ],
-        [
-          "IM1559",
-          "IM1559 - SQS 310 BL I APTO 106",
-          "258.7h",
+          "91.5h",
           "✗"
         ],
         [
           "IM634",
           "IM634 - SHIS QI 19 CONJ 6 CASA 10",
-          "257.2h",
+          "83.2h",
           "✗"
         ],
         [
           "IM569",
           "IM569 - SQSW 101 BL H APTO 315",
-          "240.0h",
+          "80.0h",
+          "✗"
+        ],
+        [
+          "IM#1322558879",
+          "Rafaelo AbrittaCondomínio Jardins do Lago 1, Rua Flamboyants casa 1. Jardim Botânico/DF 71.680-372",
+          "77.4h",
           "✗"
         ],
         [
           "IM1853",
           "IM1853 - SQSW 302 BLOCO I APTO 301",
-          "214.2h",
-          "✗"
+          "68.2h",
+          "✓"
+        ],
+        [
+          "IM1559",
+          "IM1559 - SQS 310 BL I APTO 106",
+          "64.7h",
+          "✓"
         ],
         [
           "IM1787",
           "IM1787 - CLN 201 BLOCO C SALA 102",
-          "188.0h",
-          "✗"
+          "56.0h",
+          "✓"
         ],
         [
           "IM1803",
           "IM1803 - CLN 201 BLOCO C SALA 211",
-          "120.3h",
-          "✗"
+          "46.0h",
+          "✓"
         ],
         [
           "IM#1318576441",
           "VK662 SHIS QL 8, Conjunto 4, Casa 2",
-          "120.1h",
-          "✗"
-        ],
-        [
-          "IM1169",
-          "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
-          "96.1h",
-          "✗"
+          "30.1h",
+          "✓"
         ],
         [
           "IM1796",
           "IM1796 - CLN 201 BLOCO C SALA 204",
-          "68.7h",
+          "26.7h",
           "✓"
         ],
         [
-          "IM1847",
-          "IM1847 - SHIS QI 19 CJ 2 LT 6",
-          "67.8h",
-          "✓"
-        ],
-        [
-          "IM1808",
-          "IM1808 - CLN 201 BLOCO C SALA 219",
-          "51.8h",
-          "✓"
-        ],
-        [
-          "IM1769",
-          "IM1769 - CLN 201 BLOCO C SALA 217",
-          "50.7h",
+          "IM1169",
+          "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
+          "20.1h",
           "✓"
         ],
         [
           "IM1794",
           "IM1794 - CLN 201 BLOCO C SALA 202",
-          "45.8h",
+          "17.8h",
           "✓"
         ],
         [
           "IM1792",
           "IM1792 - CLN 201 BLOCO C SALA 112",
-          "45.1h",
+          "17.1h",
           "✓"
         ],
         [
           "IM1797",
           "IM1797 - CLN 201 BLOCO C SALA 205",
-          "44.8h",
+          "16.8h",
           "✓"
         ],
         [
           "IM1791",
           "IM1791 - CLN 201 BLOCO C SALA 110",
-          "44.4h",
+          "16.4h",
           "✓"
         ],
         [
           "IM1842",
           "IM1842 -Sces Trecho 04 , S/N - Und. 15 (Brisas do Lago apt E015S2)",
-          "42.7h",
+          "14.7h",
           "✓"
         ],
         [
           "IM1844",
           "IM1844 - SMDB CONJUNTO 25 LOTE 11 CASA B",
-          "27.9h",
+          "11.9h",
           "✓"
         ],
         [
-          "IM1806",
-          "IM1806 - CLN 201 BLOCO C SALA 214",
-          "25.6h",
-          "✓"
-        ],
-        [
-          "IM1804",
-          "IM1804 - CLN 201 BLOCO C SALA 212 ",
-          "24.9h",
-          "✓"
-        ],
-        [
-          "IM1800",
-          "IM1800 - CLN 201 BLOCO C SALA 208",
-          "23.5h",
+          "IM1847",
+          "IM1847 - SHIS QI 19 CJ 2 LT 6",
+          "7.6h",
           "✓"
         ],
         [
           "IM1786",
           "IM1786 - CLN 201 BLOCO C SALA 101",
-          "21.4h",
+          "7.4h",
           "✓"
         ],
         [
-          "IM1807",
-          "IM1807 - CLN 201 BLOCO C SALA 218",
-          "21.1h",
+          "IM1769",
+          "IM1769 - CLN 201 BLOCO C SALA 217",
+          "6.0h",
           "✓"
         ],
         [
           "IM1790",
           "IM1790 - CLN 201 BLOCO C SALA 109",
-          "20.0h",
+          "6.0h",
+          "✓"
+        ],
+        [
+          "IM1800",
+          "IM1800 - CLN 201 BLOCO C SALA 208",
+          "6.0h",
+          "✓"
+        ],
+        [
+          "IM1804",
+          "IM1804 - CLN 201 BLOCO C SALA 212 ",
+          "6.0h",
+          "✓"
+        ],
+        [
+          "IM1806",
+          "IM1806 - CLN 201 BLOCO C SALA 214",
+          "6.0h",
+          "✓"
+        ],
+        [
+          "IM1808",
+          "IM1808 - CLN 201 BLOCO C SALA 219",
+          "6.0h",
           "✓"
         ],
         [
           "IM1799",
           "IM1799 - CLN 201 BLOCO C SALA 207",
           "3.5h",
+          "✓"
+        ],
+        [
+          "IM1807",
+          "IM1807 - CLN 201 BLOCO C SALA 218",
+          "2.0h",
           "✓"
         ],
         [
@@ -1525,7 +1525,7 @@
       ]
     },
     "caio_coluna": {
-      "titulo": "Caio — Comercial: Coluna correta (18/27)",
+      "titulo": "Caio — Comercial: Coluna correta (17/27)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1536,163 +1536,163 @@
         [
           "IM1798",
           "IM1798 - CLN 201 BLOCO C SALA 206",
-          "158d → 90 Dias desocupado",
+          "159d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1807",
           "IM1807 - CLN 201 BLOCO C SALA 218",
-          "156d → 90 Dias desocupado",
+          "157d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1769",
           "IM1769 - CLN 201 BLOCO C SALA 217",
-          "155d → 90 Dias desocupado",
+          "156d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1799",
           "IM1799 - CLN 201 BLOCO C SALA 207",
-          "155d → 90 Dias desocupado",
+          "156d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1800",
           "IM1800 - CLN 201 BLOCO C SALA 208",
-          "155d → 90 Dias desocupado",
+          "156d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1806",
           "IM1806 - CLN 201 BLOCO C SALA 214",
-          "155d → 90 Dias desocupado",
+          "156d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1808",
           "IM1808 - CLN 201 BLOCO C SALA 219",
-          "155d → 90 Dias desocupado",
+          "156d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1797",
           "IM1797 - CLN 201 BLOCO C SALA 205",
-          "153d → 90 Dias desocupado",
+          "154d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1790",
           "IM1790 - CLN 201 BLOCO C SALA 109",
-          "152d → 90 Dias desocupado",
+          "153d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1786",
           "IM1786 - CLN 201 BLOCO C SALA 101",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1791",
           "IM1791 - CLN 201 BLOCO C SALA 110",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1792",
           "IM1792 - CLN 201 BLOCO C SALA 112",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1794",
           "IM1794 - CLN 201 BLOCO C SALA 202",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1796",
           "IM1796 - CLN 201 BLOCO C SALA 204",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1803",
           "IM1803 - CLN 201 BLOCO C SALA 211",
-          "151d → 90 Dias desocupado",
+          "152d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM120",
           "IM120 - SCLN 211 BL D SALA 111",
-          "106d → 90 Dias desocupado",
+          "107d → 90 Dias desocupado",
           "✗"
         ],
         [
           "IM357",
           "IM357 - Cln 412 BLOCO D LOJAS 8 E 9",
-          "99d → 90 Dias desocupado",
+          "100d → 90 Dias desocupado",
           "✗"
         ],
         [
           "IM80",
           "IM80 - CLN 211 BLOCO D SALA 206",
-          "51d → 30 Dias desocupado",
+          "52d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM1483",
           "IM1483 - SGCV LOTE 13 BL C APTO 214",
-          "48d → 30 Dias desocupado",
+          "49d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM1853",
           "IM1853 - SQSW 302 BLOCO I APTO 301",
-          "47d → 30 Dias desocupado",
+          "48d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM634",
           "IM634 - SHIS QI 19 CONJ 6 CASA 10",
-          "47d → 30 Dias desocupado",
+          "48d → 30 Dias desocupado",
           "✓"
         ],
         [
           "IM918",
           "IM918 - SOFN QD 2 BL A LOJA 39",
-          "41d → 30 Dias desocupado",
+          "42d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM344",
           "IM344 - CLN 412 BLOCO D  - SALAS 208;209;210;211;212",
-          "34d → 30 Dias desocupado",
+          "35d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM1559",
           "IM1559 - SQS 310 BL I APTO 106",
-          "29d → 30 Dias desocupado",
+          "30d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM682",
           "IM682- SCLRN 703 BLOCO G LOJA 9",
-          "29d → 30 Dias desocupado",
+          "30d → 30 Dias desocupado",
           "✗"
         ],
         [
           "IM#1413926611",
           "VK5280 - Cln 201 Bloco C (SALAS 205 Á 208)",
-          "28d → 15 dias desocupado",
-          "✓"
+          "29d → 30 Dias desocupado",
+          "✗"
         ],
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "26d → 15 dias desocupado",
+          "27d → 15 dias desocupado",
           "✓"
         ]
       ]
@@ -1786,7 +1786,7 @@
       ]
     },
     "caio_docs": {
-      "titulo": "Caio — Cont. Locação: Documentação <24h (15/34)",
+      "titulo": "Caio — Cont. Locação: Documentação <24h (15/35)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1852,6 +1852,12 @@
           "IM1849",
           "IM1849 -  SHIS QI 15 CONJUNTO 09 CASA 2  - VK2303",
           "49.9h",
+          "✗"
+        ],
+        [
+          "IM634",
+          "IM634 - VK5516 - SHIS QI 19 CONJUNTO 6 CASA 10",
+          "39.6h",
           "✗"
         ],
         [
@@ -2562,7 +2568,7 @@
       ]
     },
     "vivi_resc_adm": {
-      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (5/7)",
+      "titulo": "Vivianne — Resc. ADM: Encerramento <4h (6/8)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2573,13 +2579,13 @@
         [
           "IM1579",
           "IM1579 - RUA 21 SUL LOTE 11 APTO 905",
-          "149.3h",
+          "45.3h",
           "✗"
         ],
         [
           "IM1329",
           "IM1329 -  QUADRA 201  LT 7 APT 203",
-          "80.7h",
+          "18.7h",
           "✗"
         ],
         [
@@ -2592,6 +2598,12 @@
           "IM1827",
           "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
           "1.5h",
+          "✓"
+        ],
+        [
+          "IM1608",
+          "IM1608 - SQNW 311,511 - AP BL C APT 511A VG 107",
+          "1.1h",
           "✓"
         ],
         [
@@ -2615,7 +2627,7 @@
       ]
     },
     "vivi_nido": {
-      "titulo": "Vivianne — Cont. Locação: NIDO→Concluído <24h (9/24)",
+      "titulo": "Vivianne — Cont. Locação: NIDO→Concluído <24h (13/24)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2626,121 +2638,97 @@
         [
           "IM1839",
           "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
-          "331.3h",
+          "95.3h",
           "✗"
         ],
         [
           "IM41",
           "IM41 - VK5381 - SEPS 710/910 - SALA 102",
-          "262.9h",
-          "✗"
-        ],
-        [
-          "IM1854",
-          "IM1854 - VK5488 - CLN 115 BLOCO D SALA 104",
-          "245.4h",
+          "68.9h",
           "✗"
         ],
         [
           "IM1841",
           "IM1841 -  VK5416 - SHIS QL 02 CONJUNTO 01 CASA 02",
-          "197.5h",
+          "65.5h",
           "✗"
         ],
         [
-          "IM1835",
-          "IM1835 - VK5461  - SHIS QI 11 CONJUNTO 1 CASA 16 -  NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
-          "160.2h",
+          "IM1854",
+          "IM1854 - VK5488 - CLN 115 BLOCO D SALA 104",
+          "65.4h",
           "✗"
         ],
         [
           "IM152",
           "IM152 - VK5376  - CLN 211 BLOCO D SALA 112",
-          "149.5h",
+          "45.5h",
+          "✗"
+        ],
+        [
+          "IM1835",
+          "IM1835 - VK5461  - SHIS QI 11 CONJUNTO 1 CASA 16 -  NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
+          "42.2h",
           "✗"
         ],
         [
           "IM1586",
           "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
-          "143.9h",
-          "✗"
-        ],
-        [
-          "IM683",
-          "IM683 - VK5408 - CLN 308 BLOCO D LOJA 15",
-          "137.0h",
-          "✗"
-        ],
-        [
-          "IM1793",
-          "IM1793 - VK5482 - CLN 201 BLOCO C SALA 201",
-          "121.0h",
-          "✗"
-        ],
-        [
-          "IM135",
-          "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
-          "119.0h",
+          "39.9h",
           "✗"
         ],
         [
           "IM1804",
           "IM1804 - VK5475 - CLN 201 BLOCO C SALA 212",
-          "80.1h",
+          "38.1h",
           "✗"
         ],
         [
-          "IM123",
-          "IM123 - VK5424 - CLN 306 BLOCO B SALA 112",
-          "66.8h",
+          "IM683",
+          "IM683 - VK5408 - CLN 308 BLOCO D LOJA 15",
+          "33.0h",
+          "✗"
+        ],
+        [
+          "IM1793",
+          "IM1793 - VK5482 - CLN 201 BLOCO C SALA 201",
+          "32.4h",
+          "✗"
+        ],
+        [
+          "IM135",
+          "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
+          "29.0h",
           "✗"
         ],
         [
           "IM1846",
           "IM1846 - VK5484  - SQS 211 BLOCO G APTO 105",
-          "49.9h",
-          "✗"
+          "21.9h",
+          "✓"
         ],
         [
           "IM1568",
           "IM1568 - VK5373  - CRS 510 BLOCO A ENTRADA 4 KIT 103",
-          "48.3h",
-          "✗"
-        ],
-        [
-          "IM39",
-          "IM39 - VK5436 - SGAN 911 CONJUNTO G BLOCO E APTO 203 - Edifício: GARDEN PARK",
-          "45.7h",
-          "✗"
-        ],
-        [
-          "IM1849",
-          "IM1849 -  SHIS QI 15 CONJUNTO 09 CASA 2  - VK2303",
-          "22.3h",
-          "✓"
-        ],
-        [
-          "IM1787",
-          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM1567",
-          "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
-          "11.7h",
+          "20.3h",
           "✓"
         ],
         [
           "IM1169",
           "IM1169 - VK5489 - Condomínio Parque Jardim das Paineiras, lote 154",
-          "9.4h",
+          "8.6h",
           "✓"
         ],
         [
-          "IM1847",
-          "IM1847 - VK5440 - SHIS QI 19 CONJUNTO  2 LOTE 6",
-          "4.7h",
+          "IM1849",
+          "IM1849 -  SHIS QI 15 CONJUNTO 09 CASA 2  - VK2303",
+          "8.3h",
+          "✓"
+        ],
+        [
+          "IM123",
+          "IM123 - VK5424 - CLN 306 BLOCO B SALA 112",
+          "4.8h",
           "✓"
         ],
         [
@@ -2750,9 +2738,27 @@
           "✓"
         ],
         [
+          "IM1787",
+          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM1567",
+          "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
+          "1.5h",
+          "✓"
+        ],
+        [
           "IM1570",
           "IM1570 - VK5394 - CRS 510 BLOCO A LOJA 1",
           "0.6h",
+          "✓"
+        ],
+        [
+          "IM39",
+          "IM39 - VK5436 - SGAN 911 CONJUNTO G BLOCO E APTO 203 - Edifício: GARDEN PARK",
+          "0.4h",
           "✓"
         ],
         [
@@ -2766,11 +2772,17 @@
           "IM382 - VK5512 - CLN 412 BLOCO D SALA 105",
           "0.3h",
           "✓"
+        ],
+        [
+          "IM1847",
+          "IM1847 - VK5440 - SHIS QI 19 CONJUNTO  2 LOTE 6",
+          "0.2h",
+          "✓"
         ]
       ]
     },
     "vivi_confec_loc": {
-      "titulo": "Vivianne — Cont. Locação: Confecção <2h (29/34)",
+      "titulo": "Vivianne — Cont. Locação: Confecção <2h (31/35)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2781,19 +2793,13 @@
         [
           "IM1838",
           "IM1838 - VK5385 - SHIS QI 15 CONJUNTO 13 CASA 5",
-          "137.6h",
+          "33.6h",
           "✗"
         ],
         [
           "IM1839",
           "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
-          "51.3h",
-          "✗"
-        ],
-        [
-          "IM1787",
-          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
-          "17.7h",
+          "7.7h",
           "✗"
         ],
         [
@@ -2803,9 +2809,9 @@
           "✗"
         ],
         [
-          "IM1856",
-          "IM1856 - VK5507 -  SMPW 15 Conjunto 3 Lt 5 casa E",
-          "3.9h",
+          "IM1787",
+          "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
+          "3.7h",
           "✗"
         ],
         [
@@ -2857,12 +2863,6 @@
           "✓"
         ],
         [
-          "IM1846",
-          "IM1846 - VK5484  - SQS 211 BLOCO G APTO 105",
-          "0.5h",
-          "✓"
-        ],
-        [
           "IM1169",
           "IM1169 - VK5489 - Condomínio Parque Jardim das Paineiras, lote 154",
           "0.4h",
@@ -2871,12 +2871,6 @@
         [
           "IM1567",
           "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
-          "0.4h",
-          "✓"
-        ],
-        [
-          "IM1586",
-          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
           "0.4h",
           "✓"
         ],
@@ -2894,6 +2888,12 @@
         ],
         [
           "IM1846",
+          "IM1846 - VK5484  - SQS 211 BLOCO G APTO 105",
+          "0.4h",
+          "✓"
+        ],
+        [
+          "IM1846",
           "IM1846 - VK5447 - SQS 211 BLOCO  G APTO 105",
           "0.4h",
           "✓"
@@ -2902,6 +2902,12 @@
           "IM39",
           "IM39 - VK5436 - SGAN 911 CONJUNTO G BLOCO E APTO 203 - Edifício: GARDEN PARK",
           "0.4h",
+          "✓"
+        ],
+        [
+          "IM1586",
+          "IM1586- VK5471 -  CNC 02 LOTE 10- PREDIO 1º e 2º ANDAR",
+          "0.3h",
           "✓"
         ],
         [
@@ -2937,6 +2943,12 @@
         [
           "IM1793",
           "IM1793 - VK5482 - CLN 201 BLOCO C SALA 201",
+          "0.2h",
+          "✓"
+        ],
+        [
+          "IM634",
+          "IM634 - VK5516 - SHIS QI 19 CONJUNTO 6 CASA 10",
           "0.2h",
           "✓"
         ],
@@ -2977,6 +2989,12 @@
           "✓"
         ],
         [
+          "IM1856",
+          "IM1856 - VK5507 -  SMPW 15 Conjunto 3 Lt 5 casa E",
+          "0.0h",
+          "✓"
+        ],
+        [
           "IM41",
           "IM41 - VK5381 - SEPS 710/910 - SALA 102",
           "0.0h",
@@ -2985,7 +3003,7 @@
       ]
     },
     "vivi_lev_prop": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (24/29)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (27/30)",
       "cols": [
         "Imóvel",
         "Título",
@@ -2994,27 +3012,15 @@
       ],
       "rows": [
         [
-          "IM1341",
-          "IM1341 - SQS 112 BL I APTO 304",
-          "67.0h",
-          "✗"
-        ],
-        [
           "IM1785",
           "IM1785 - SHIS QI 26 CJ 16 CASA 22",
-          "51.0h",
+          "21.7h",
           "✗"
         ],
         [
-          "IM80",
-          "IM80 - CLN 211 BLOCO D SALA 206",
-          "15.7h",
-          "✗"
-        ],
-        [
-          "IM682",
-          "IM682 - SCLRN 703 BLOCO G LOJA 9",
-          "5.4h",
+          "IM1341",
+          "IM1341 - SQS 112 BL I APTO 304",
+          "5.0h",
           "✗"
         ],
         [
@@ -3033,6 +3039,18 @@
           "IM344",
           "IM344 - SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
           "1.8h",
+          "✓"
+        ],
+        [
+          "IM80",
+          "IM80 - CLN 211 BLOCO D SALA 206",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM682",
+          "IM682 - SCLRN 703 BLOCO G LOJA 9",
+          "1.2h",
           "✓"
         ],
         [
@@ -3166,11 +3184,17 @@
           "IM1742 - SETOR RESIDENCIAL B VILA WESLIAN RORIZ CASA 16",
           "0.0h",
           "✓"
+        ],
+        [
+          "IM247",
+          "IM247 - SQS 313 BL K APTO 603",
+          "0.0h",
+          "✓"
         ]
       ]
     },
     "vivi_lev_final": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (26/32)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (27/33)",
       "cols": [
         "Imóvel",
         "Título",
@@ -3181,31 +3205,31 @@
         [
           "IM344",
           "IM344 - SCLN 412 BLOCO D LOTE 08  SL 208;209;210;211;212",
-          "46.9h",
+          "18.9h",
           "✗"
         ],
         [
           "IM39",
           "IM39 - SGAN 911 CONJ G BL E APTO 203",
-          "24.1h",
+          "10.1h",
           "✗"
         ],
         [
           "IM634",
           "IM634 - SHIS QI 19 CONJ 6 CASA 10",
-          "22.0h",
+          "8.0h",
           "✗"
         ],
         [
           "IM1742",
           "IM1742 - SETOR RESIDENCIAL B VILA WESLIAN RORIZ CASA 16",
-          "18.4h",
+          "4.4h",
           "✗"
         ],
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "17.0h",
+          "3.0h",
           "✗"
         ],
         [
@@ -3217,7 +3241,7 @@
         [
           "IM71",
           "IM71 - CLN 211 BL D SALA 102",
-          "2.0h",
+          "1.5h",
           "✓"
         ],
         [
@@ -3251,8 +3275,8 @@
           "✓"
         ],
         [
-          "IM357",
-          "IM357 - CLN 412 BL D LOJA 08 e 09",
+          "IM247",
+          "IM247 - SQS 313 BL K APTO 603",
           "0.6h",
           "✓"
         ],
@@ -3277,6 +3301,12 @@
         [
           "IM1592",
           "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
+          "0.4h",
+          "✓"
+        ],
+        [
+          "IM357",
+          "IM357 - CLN 412 BL D LOJA 08 e 09",
           "0.4h",
           "✓"
         ],
@@ -3373,7 +3403,7 @@
       ]
     },
     "vivi_ren_confec": {
-      "titulo": "Vivianne — Renovação: Confecção <4h (16/26)",
+      "titulo": "Vivianne — Renovação: Confecção <4h (21/26)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -3384,62 +3414,62 @@
         [
           "IM350",
           "SCLN 412 BL D LT 08 LOJAS 1, 2, 3, 10, 11, 12",
-          "186.4h",
+          "54.4h",
           "✗"
         ],
         [
           "IM15",
           "IM15/2",
-          "120.8h",
+          "30.8h",
+          "✗"
+        ],
+        [
+          "IM71",
+          "IM71",
+          "14.8h",
           "✗"
         ],
         [
           "IM#1299107329",
           "1317/2 e 1478",
-          "70.2h",
-          "✗"
-        ],
-        [
-          "IM71",
-          "IM71",
-          "28.8h",
+          "8.2h",
           "✗"
         ],
         [
           "IM#1363733799",
           "107 - SCLN 215 BLOCO C LOJA25",
-          "20.6h",
+          "6.6h",
           "✗"
         ],
         [
           "IM1386",
           "SQNW 309 BL G APTO 312",
-          "17.4h",
-          "✗"
-        ],
-        [
-          "IM#1325025763",
-          "745",
-          "15.8h",
-          "✗"
-        ],
-        [
-          "IM#1325040753",
-          "91",
-          "15.7h",
-          "✗"
-        ],
-        [
-          "IM115",
-          "SHS QUADRA 01 BLOCO A LOJA 56",
-          "15.4h",
-          "✗"
+          "3.4h",
+          "✓"
         ],
         [
           "IM#1324969301",
           "1328/2",
-          "6.1h",
-          "✗"
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM#1325025763",
+          "745",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM#1325040753",
+          "91",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM115",
+          "SHS QUADRA 01 BLOCO A LOJA 56",
+          "1.4h",
+          "✓"
         ],
         [
           "IM#1363741350",
@@ -3472,12 +3502,6 @@
           "✓"
         ],
         [
-          "IM362",
-          "IM362",
-          "0.7h",
-          "✓"
-        ],
-        [
           "IM#1320728293",
           "1235/1",
           "0.6h",
@@ -3486,6 +3510,12 @@
         [
           "IM#1336244528",
           "641/1",
+          "0.6h",
+          "✓"
+        ],
+        [
+          "IM362",
+          "IM362",
           "0.6h",
           "✓"
         ],
@@ -3653,7 +3683,7 @@
       ]
     },
     "vivi_cob": {
-      "titulo": "Vivianne — Inadim.: Cobrança <24h (247/296)",
+      "titulo": "Vivianne — Inadim.: Cobrança <8h úteis (261/297)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -3664,1459 +3694,1021 @@
         [
           "IM1767",
           "CLN QUADRA 201 BLOCO C SALA 215 [216]",
-          "157.5h",
+          "43.8h",
           "✗"
         ],
         [
           "IM1436",
           "SHS Qd 06 Cj A Bl A VG SS 152, 440-451  – Asa Sul",
-          "136.7h",
+          "36.9h",
           "✗"
         ],
         [
           "IM50",
           "SCLN 116 Bloco F Lojas [17;21;25;29;33;37] – Asa Norte",
-          "136.6h",
+          "36.8h",
           "✗"
         ],
         [
           "IM1714",
           "SQS 310 Bl I Ap 105 V67/68/75 – Asa Sul",
-          "136.5h",
+          "36.7h",
           "✗"
         ],
         [
           "IM79",
           "CLN 211 Bloco D, 204 – Asa Norte",
-          "136.3h",
+          "36.5h",
           "✗"
         ],
         [
           "IM56",
           "IM56/2 ADE CONJUNTO 21,23 - PAV 23",
-          "134.2h",
+          "34.4h",
           "✗"
         ],
         [
           "IM401",
           "Q SCLN 412 BLOCO D LOTE 08 [ SALAS 216, 217, 218, 219],215",
-          "134.1h",
+          "34.3h",
           "✗"
         ],
         [
           "IM558",
           "Nicolas Boer c/ Av. Marquês de São Vicente Bl. B Apto 171 – São Paulo",
-          "112.0h",
+          "26.2h",
           "✗"
         ],
         [
           "IM1557",
           "SHIS QI Conj 16 Casa 08 – Lago Sul",
-          "111.1h",
+          "25.3h",
           "✗"
         ],
         [
           "IM1586",
           "CNC 02 Lote 10, 1º e 2º andar – Taguatinga Norte",
-          "111.0h",
+          "25.2h",
           "✗"
         ],
         [
           "IM1699",
           "IM1699 DIVINA ANTONIO DIAS",
-          "109.6h",
+          "23.8h",
           "✗"
         ],
         [
           "IM1727",
           "SCLN 402 BLOCO B LJ 5",
-          "109.5h",
+          "23.7h",
           "✗"
         ],
         [
           "IM1765",
           "DEISE TERESINHA DOS SANTOS BOECHAT",
-          "109.5h",
+          "23.7h",
           "✗"
         ],
         [
           "IM#1321565803",
           "MARIO HENRIQUE MELO SOARES",
-          "109.4h",
+          "23.6h",
           "✗"
         ],
         [
           "IM1169",
           "LEONARDO DE BARROS SILVA",
-          "109.2h",
+          "23.4h",
           "✗"
         ],
         [
           "IM#1321565730",
           "WALKIRIA GAIAO TORREAO BRAZ",
-          "109.0h",
-          "✗"
-        ],
-        [
-          "IM357",
-          "JACIRA ANDREIA DOCE TEIXEIRA",
-          "85.5h",
-          "✗"
-        ],
-        [
-          "IM918",
-          "BRASIL SERVICOS DE TELECOMUNICACOES S.A.",
-          "85.3h",
-          "✗"
-        ],
-        [
-          "IM#1329868708",
-          "143 - CLN 211 BLOCO D,101 - SL 101 - BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
-          "85.2h",
-          "✗"
-        ],
-        [
-          "IM682",
-          "SCLRN 703 BLOCO G LOJA,9",
-          "84.8h",
-          "✗"
-        ],
-        [
-          "IM1714",
-          "SQS 310,310 - AP BL I AP105 V67/68/75",
-          "84.7h",
-          "✗"
-        ],
-        [
-          "IM344",
-          "INSTITUTO DE CONTRACULTURA LTDA",
-          "84.7h",
-          "✗"
-        ],
-        [
-          "IM723",
-          "IM723 LEANDRO CEZAR DOS SANTOS EDUARDO",
-          "84.5h",
-          "✗"
-        ],
-        [
-          "IM#1411477698",
-          "1169/1 COND PARQUE JARDIM DAS PAINEIRAS QUADRA 08 LOTE  CASA 154",
-          "65.1h",
-          "✗"
-        ],
-        [
-          "IM1530",
-          "CLS 302 A BLOCO B LOJA 1",
-          "64.6h",
-          "✗"
-        ],
-        [
-          "IM#1321565819",
-          "SANTINO GONÇALVES FILHO",
-          "61.3h",
-          "✗"
-        ],
-        [
-          "IM1828",
-          "PAULO DOLABELA DE LIMA VASCONCELOS",
-          "61.3h",
-          "✗"
-        ],
-        [
-          "IM#1321565851",
-          "PAULO DOLABELA DE LIMA VASCONCELOS",
-          "61.2h",
-          "✗"
-        ],
-        [
-          "IM785",
-          "IM785",
-          "60.7h",
-          "✗"
-        ],
-        [
-          "IM1585",
-          "2228056",
-          "60.1h",
-          "✗"
-        ],
-        [
-          "IM406",
-          "DEIVID WILLIAN JANUARIO DE SOUSA",
-          "59.0h",
-          "✗"
-        ],
-        [
-          "IM785",
-          "CONCEPT UNIFORMES EIRELI",
-          "58.9h",
-          "✗"
-        ],
-        [
-          "IM832",
-          "GERAL REGULADORA CENTRO AUTOMOTIVO EIREL",
-          "58.9h",
-          "✗"
-        ],
-        [
-          "IM835",
-          "PAOLO CALANCHINI",
-          "58.9h",
-          "✗"
-        ],
-        [
-          "IM834",
-          "IDE LUCAS DE FARIA MACHAY",
-          "58.8h",
-          "✗"
-        ],
-        [
-          "IM1674",
-          "CLSW 104 BLOCO B AP KIT 134",
-          "58.4h",
+          "23.2h",
           "✗"
         ],
         [
           "IM#1314198496",
           "WANDA MEYER MATTOS ARRUDA",
-          "58.2h",
+          "20.4h",
           "✗"
         ],
         [
           "IM47",
           "IM47 LUCIANA MENEZES DE MEDEIROS",
-          "58.1h",
-          "✗"
-        ],
-        [
-          "IM#1321764943",
-          "WALKIRIA GAIAO TORREAO BRAZ",
-          "47.7h",
+          "20.4h",
           "✗"
         ],
         [
           "IM#1335521249",
           "FELIPE DE CARVALHO MENDONCA",
-          "42.5h",
+          "18.7h",
           "✗"
         ],
         [
           "IM#1335521288",
           "FELIPE DE CARVALHO MENDONCA",
-          "42.5h",
+          "18.7h",
           "✗"
         ],
         [
           "IM#1335521324",
           "KARINE TABATA DE CARVALHO BISPO",
-          "42.5h",
+          "18.7h",
           "✗"
         ],
         [
           "IM#1335521385",
           "PRIMOS TABACARIA E C. ATACADO E V. LTDA",
-          "42.4h",
-          "✗"
-        ],
-        [
-          "IM80",
-          "CLN 211 BLOCO D SALA 206",
-          "41.3h",
-          "✗"
-        ],
-        [
-          "IM1783",
-          "CLN QUADRA 201 BLOCO C SALA 108",
-          "41.1h",
+          "18.6h",
           "✗"
         ],
         [
           "IM401",
           "Q SCLN 412 BLOCO D LOTE 08 [ SALAS 216, 217, 218, 219],215 - TAXA LOFT",
-          "39.8h",
+          "17.8h",
+          "✗"
+        ],
+        [
+          "IM80",
+          "CLN 211 BLOCO D SALA 206",
+          "17.6h",
+          "✗"
+        ],
+        [
+          "IM1783",
+          "CLN QUADRA 201 BLOCO C SALA 108",
+          "17.3h",
           "✗"
         ],
         [
           "IM142",
           "IM142/4, 264, 272, 87, 88 - CLN 211 Bloco D, 218",
-          "38.8h",
+          "15.0h",
           "✗"
         ],
         [
           "IM#1327485598",
           "PALAZZO VRR PRESTACAO DE SERV ADM E PROD",
-          "37.5h",
+          "13.7h",
+          "✗"
+        ],
+        [
+          "IM357",
+          "JACIRA ANDREIA DOCE TEIXEIRA",
+          "13.7h",
+          "✗"
+        ],
+        [
+          "IM918",
+          "BRASIL SERVICOS DE TELECOMUNICACOES S.A.",
+          "13.6h",
+          "✗"
+        ],
+        [
+          "IM#1329868708",
+          "143 - CLN 211 BLOCO D,101 - SL 101 - BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
+          "13.5h",
           "✗"
         ],
         [
           "IM1594",
           "LORENA INACIO CARDOSO",
-          "37.2h",
+          "13.4h",
+          "✗"
+        ],
+        [
+          "IM682",
+          "SCLRN 703 BLOCO G LOJA,9",
+          "13.1h",
+          "✗"
+        ],
+        [
+          "IM1714",
+          "SQS 310,310 - AP BL I AP105 V67/68/75",
+          "12.9h",
+          "✗"
+        ],
+        [
+          "IM344",
+          "INSTITUTO DE CONTRACULTURA LTDA",
+          "12.9h",
+          "✗"
+        ],
+        [
+          "IM723",
+          "IM723 LEANDRO CEZAR DOS SANTOS EDUARDO",
+          "12.7h",
           "✗"
         ],
         [
           "IM#1383396146",
           "1841/1",
-          "18.2h",
-          "✓"
-        ],
-        [
-          "IM952",
-          "IM952 DROGARIA ROSARIO LTDA",
-          "17.9h",
-          "✓"
+          "8.4h",
+          "✗"
         ],
         [
           "IM1765",
           "CLN QUADRA 201 BLOCO C,105 - SL SALA 105 [106]",
-          "17.6h",
+          "7.8h",
           "✓"
         ],
         [
           "IM12",
           "VIRGINIA PAULA DE SIQUEIRA CAVALCANTI FE",
-          "17.4h",
+          "7.6h",
           "✓"
         ],
         [
           "IM740",
           "JULIANA INACIO DE MAGALHAES",
-          "17.4h",
+          "7.6h",
           "✓"
         ],
         [
           "IM86",
           "MURILO CESAR OLIVEIRA RAMOS",
-          "17.4h",
+          "7.6h",
           "✓"
         ],
         [
           "IM1211",
           "ASI COMPANY TECNOLOGIA S/A",
-          "17.3h",
+          "7.5h",
           "✓"
         ],
         [
           "IM115",
           "FACILITA SERVICOS COMBINADOS DE ESCRITOR",
-          "17.1h",
+          "7.4h",
           "✓"
         ],
         [
           "IM1748",
           "INSTITUTO LIVRE MERCADO",
-          "17.1h",
+          "7.4h",
           "✓"
         ],
         [
-          "IM1273",
-          "ADRIANA LOIOLA OLIVEIRA",
-          "17.0h",
-          "✓"
-        ],
-        [
-          "IM1436",
-          "PARTIDO LIBERAL",
-          "17.0h",
+          "IM#1411477698",
+          "1169/1 COND PARQUE JARDIM DAS PAINEIRAS QUADRA 08 LOTE  CASA 154",
+          "7.3h",
           "✓"
         ],
         [
           "IM634",
           "ANTONIO EUSTAQUIO BOSQUE",
-          "17.0h",
-          "✓"
-        ],
-        [
-          "IM833",
-          "GILSON TEODORO DA SILVA",
-          "17.0h",
-          "✓"
-        ],
-        [
-          "IM58",
-          "JOAO DOMINGOS GOMES DOS SANTOS FILHO",
-          "16.9h",
-          "✓"
-        ],
-        [
-          "IM664",
-          "VITOR AUGUSTO LEIVAS CRAVEIRO",
-          "16.9h",
-          "✓"
-        ],
-        [
-          "IM745",
-          "RODRIGO BORBA CAVALHEIRO",
-          "16.9h",
-          "✓"
-        ],
-        [
-          "IM85",
-          "MIRA DESIGN DE ORGANIZACOES LTDA",
-          "16.9h",
-          "✓"
-        ],
-        [
-          "IM89",
-          "COMERCIAL DE ALIMENTOS CERES S/A",
-          "16.9h",
-          "✓"
-        ],
-        [
-          "IM11",
-          "LUIS GUSTAVO EMEDIATO CAMPOS",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM1171",
-          "JORGE ALBERTO DE ANDRADE EURICH",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM1523",
-          "CAIO CASTAGINE MARINHO",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM344",
-          "INSTITUTO DE CONTRACULTURA LTDA",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM558",
-          "MALIDE HONG",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM689",
-          "THIAGO BRAS ROCHA",
-          "16.8h",
-          "✓"
-        ],
-        [
-          "IM129",
-          "MARIA DE DEUS SOARES SILVA",
-          "16.7h",
-          "✓"
-        ],
-        [
-          "IM132",
-          "ANA LUIZA FERREIRA LACERDA",
-          "16.7h",
-          "✓"
-        ],
-        [
-          "IM1328",
-          "QUENIO CERQUEIRA DE FRANCA",
-          "16.7h",
-          "✓"
-        ],
-        [
-          "IM1530",
-          "DROGARIA ALAMEDA LTDA",
-          "16.7h",
-          "✓"
-        ],
-        [
-          "IM1581",
-          "PAO DE MEL GRACA TORRES LTDA",
-          "16.7h",
-          "✓"
-        ],
-        [
-          "IM1609",
-          "CARLOS ATSUSHI NISIYAMA",
-          "16.5h",
-          "✓"
-        ],
-        [
-          "IM723",
-          "SQS 212 BLOCO C    AP 607",
-          "16.4h",
-          "✓"
-        ],
-        [
-          "IM614",
-          "IM614",
-          "16.0h",
-          "✓"
-        ],
-        [
-          "IM1837",
-          "SHIS QL 08 CONJ 4 - CASA 02",
-          "15.9h",
-          "✓"
-        ],
-        [
-          "IM1586",
-          "Q CNC 02 LOTE 10,10 - PREDIO 1º E 2º ANDAR - VERIFICAR COM JACKE",
-          "15.7h",
-          "✓"
-        ],
-        [
-          "IM372",
-          "IM372 -",
-          "15.7h",
-          "✓"
-        ],
-        [
-          "IM16",
-          "EDNA MACEDO DAVI",
-          "15.2h",
-          "✓"
-        ],
-        [
-          "IM22",
-          "ROGERIO SEIXAS RORIZ",
-          "15.2h",
-          "✓"
-        ],
-        [
-          "IM#1349442273",
-          "1765 - DEISE TERESINHA DOS SANTOS BOECHAT",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM1545",
-          "DAVITA SERVICOS DE NEFROLOGIA ALVORADA L",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM1556",
-          "MICHAELLA GAYA J. P. DE SANTANA PEREIRA",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM1571",
-          "OTICA AGUAS CLARAS LTDA",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM1770",
-          "RODRIGO CARVALHO DOS SANTOS",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM80",
-          "DEYSIVANDA ROCHA SERPA DE ARAUJO DIAS",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM886",
-          "IBRANUTRO INSTITUTO BRASILEIRO DE NUTROL",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM9",
-          "MARTHA DE SOUZA TEIXEIRA DA ROCHA",
-          "15.0h",
-          "✓"
-        ],
-        [
-          "IM#1349442311",
-          "GUSTAVO SA LEITAO FIUZA LIMA",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM131",
-          "ALICIA COSTA DA SILVA",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM1520",
-          "JOSE MARTINS SOLUCOES EM DESENVOLVIMENTO",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM1674",
-          "KATIA ROVANA OZORIO",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM1678",
-          "J ALVES VERAS",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM1818",
-          "PEDRO NEVES CASTRO DA ROS",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM293",
-          "VALDIR RICARDO LIMA POMPEO MARINHO",
-          "14.9h",
-          "✓"
-        ],
-        [
-          "IM1617",
-          "DAIANA CASTILHO DIAS LTDA",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM1664",
-          "WALDEMAR WALTER DE ASSUNCAO E SILVA FILH",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM1700",
-          "DENNYS ALBUQUERQUE RODRIGUES",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM1810",
-          "LEONARDO ANTONIO LIMEIRA RIBEIRO",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM1821",
-          "ADRIANA ESEQUIEL DE MENDONCA",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM368",
-          "JOÃO GUILHERME TEIXEIRA MELILLO",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM681",
-          "FATIMA APARECIDA GOMES MAIA",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM71",
-          "LUIZ CARLOS GOMES",
-          "14.8h",
-          "✓"
-        ],
-        [
-          "IM#1346039431",
-          "ESFERA BRASIL LTDA",
-          "14.7h",
-          "✓"
-        ],
-        [
-          "IM136",
-          "REJANE STANZIONI",
-          "14.7h",
-          "✓"
-        ],
-        [
-          "IM143",
-          "BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
-          "14.7h",
-          "✓"
-        ],
-        [
-          "IM682",
-          "LUDMILLA DE CARVALHO ALVES",
-          "14.7h",
-          "✓"
-        ],
-        [
-          "IM79",
-          "PATRICIA MARTINS IZIDORO",
-          "14.7h",
-          "✓"
-        ],
-        [
-          "IM1557",
-          "EFA ENGENHARIA E SERVICOS LTDA",
-          "14.6h",
-          "✓"
-        ],
-        [
-          "IM1679",
-          "VANDO DE ALBUQUERQUE FERREIRA",
-          "14.6h",
-          "✓"
-        ],
-        [
-          "IM1471",
-          "EDUARDO WEYNE PEDROSA",
-          "14.5h",
-          "✓"
-        ],
-        [
-          "IM1675",
-          "HEBERTH JUNIO FARIAS DE SOUZA",
-          "14.5h",
-          "✓"
-        ],
-        [
-          "IM918",
-          "BRASIL SERVICOS DE TELECOMUNICACOES S.A.",
-          "14.5h",
-          "✓"
-        ],
-        [
-          "IM103",
-          "ADRIANO DO ALMO MESQUITA",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM1354",
-          "LEANDRO GOMES DE OLIVEIRA",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM1485",
-          "CAMILLA CAMARGO FELIPE ANDO",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM247",
-          "DANIEL SARKIS BONER",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM667",
-          "MARCELO URQUIDI FURTADO",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM678",
-          "HENRIQUE BARBOSA DINIZ",
-          "14.4h",
-          "✓"
-        ],
-        [
-          "IM116",
-          "CINTHIA KATIANE MARTINS CALADO",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM1593",
-          "VICTOR GUIMARAES DE MORAES PELLEGRINO JR",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM1812",
-          "GIANCARLO AUGUSTO DI MITO MARIANO",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM1816",
-          "SIDNEY SÁ DAS NEVES",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM371",
-          "MARIANA DE BRITO SEIXAS NEVES",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM81",
-          "AUGUSTO CESAR BEZERRA FONTOURA BORGES",
-          "14.3h",
-          "✓"
-        ],
-        [
-          "IM124",
-          "CLAUDIO CORREA E CASTRO GONÇALVES",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM1537",
-          "LEONARDO VIGOLO",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM1666",
-          "ERICA BATISTA DA SILVA",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM1805",
-          "LAIS FERNANDA DA CUNHA",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM295",
-          "ANDRÉA PATZSCH FURTADO",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM72",
-          "CAIO ALVES NASCIMENTO",
-          "14.2h",
-          "✓"
-        ],
-        [
-          "IM78",
-          "TIKRÉ BRASIL SOLUÇÕES AMBIENTAIS",
-          "14.1h",
-          "✓"
-        ],
-        [
-          "IM47",
-          "DANILO COELHO RIBEIRO",
-          "13.9h",
-          "✓"
-        ],
-        [
-          "IM#1392154898",
-          "1186/1 - SQS 213 BLOCO A APTO 501",
-          "13.8h",
-          "✓"
-        ],
-        [
-          "IM1070",
-          "GUSTAVO BASTOS RIBAS",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM1544",
-          "PEDRO HENRIQUE PEIXOTO LEAL",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM1801",
-          "ALETEA PEIXOTO COSSO",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM372",
-          "MARCELO ROCHA DE MORAIS",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM393",
-          "C S SAMPAIO MEDICINA LTDA",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM640",
-          "CRISTIANO BOAVENTURA DUARTE",
-          "13.7h",
-          "✓"
-        ],
-        [
-          "IM#1392155084",
-          "1699/2 - ST AREA ESPECIAL,136 - LJ SETOR H NORTE",
-          "13.6h",
-          "✓"
-        ],
-        [
-          "IM560",
-          "SAMUEL WOO SUK PARK",
-          "13.6h",
-          "✓"
-        ],
-        [
-          "IM1050",
-          "SQSW 100 BLOCO G  APTO,606 - AP VG 67 E 91",
-          "13.5h",
-          "✓"
-        ],
-        [
-          "IM664",
-          "CLN 308 BLOCO D LOJAS,3 - LJ [LJ 03 E 73]",
-          "13.4h",
-          "✓"
-        ],
-        [
-          "IM785",
-          "IM785 CONCEPT UNIFORMES EIRELI",
-          "13.4h",
-          "✓"
-        ],
-        [
-          "IM935",
-          "SHIS QL 08 CONJUNTO 04 CASA 05",
-          "13.4h",
-          "✓"
-        ],
-        [
-          "IM#1322252382",
-          "OTICA GABANA 2 LTDA",
-          "13.2h",
-          "✓"
-        ],
-        [
-          "IM#1392155145",
-          "1767/1 - CLN QUADRA 201 BLOCO C SALAS 215 [216]",
-          "13.1h",
-          "✓"
-        ],
-        [
-          "IM#1392155194",
-          "1809/1 - CLN QUADRA 201 BLOCO C SALA 220",
-          "13.1h",
-          "✓"
-        ],
-        [
-          "IM47",
-          "SCLN 116 BLOCO G,7 - LJ 07",
-          "13.1h",
-          "✓"
-        ],
-        [
-          "IM683",
-          "CLN 308 BLOCO D LOJAS,15 - LJ LJ 15",
-          "13.1h",
-          "✓"
-        ],
-        [
-          "IM#1322252397",
-          "BG FARMÁCIA DE MANIPULAÇÃO LTDA",
-          "13.0h",
-          "✓"
-        ],
-        [
-          "IM#1339555365",
-          "WALKIRIA GAIAO TORREAO BRAZ",
-          "12.8h",
-          "✓"
-        ],
-        [
-          "IM1699",
-          "LEONARDO DE BARROS SILVA",
-          "12.8h",
-          "✓"
-        ],
-        [
-          "IM#1339555372",
-          "DIVINA ANTONIO DIAS",
-          "12.6h",
-          "✓"
-        ],
-        [
-          "IM142",
-          "NADJA LOPES SARAIVA",
-          "12.6h",
-          "✓"
-        ],
-        [
-          "IM1782",
-          "DEISE TERESINHA DOS SANTOS BOECHAT",
-          "12.6h",
-          "✓"
-        ],
-        [
-          "IM1533",
-          "RAFAEL ANTONIO MENDES RIBEIRO VAZ",
-          "12.5h",
-          "✓"
-        ],
-        [
-          "IM368",
-          "SCLN 412 BLOCO D LOTE 08  LOJA 19,20 E 213",
-          "12.5h",
-          "✓"
-        ],
-        [
-          "IM128",
-          "MARIA DA PIEDADE CARNEIRO ELMIRO DE OLIV",
-          "12.4h",
-          "✓"
-        ],
-        [
-          "IM1329",
-          "THIAGO FERREIRA BORGES",
-          "12.4h",
-          "✓"
-        ],
-        [
-          "IM1783",
-          "ANA PAULA DE CASTRO DOS SANTOS",
-          "12.4h",
-          "✓"
-        ],
-        [
-          "IM77",
-          "THAIS ROCHA DE SOUZA",
-          "12.4h",
-          "✓"
-        ],
-        [
-          "IM1040",
-          "FRANCISCO NILSON MOREIRA COSTA E SILVA",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM1337",
-          "SKBORGES SOLUCOES DE CONSTRUCAO CIVIL LT",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM148",
-          "ROSIMEIRE GAUDAD SARDINHA CARNEIRO",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM1510",
-          "IKHON GESTAO CONHECIMENTOS E TECNOLOGIA",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM168",
-          "ACERVO COFFEE ROASTERS CAFETERIA LTDA",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM54",
-          "DANIELLE MELO VERGNE DE ABREU",
-          "12.3h",
-          "✓"
-        ],
-        [
-          "IM#1331705416",
-          "65 - DROGARIA ROSARIO LTDA",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM107",
-          "ANDERSON GOMES MONTEIRO",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM118",
-          "MG RODRIGUES ESTETICA E TERAPIAS UNIPESS",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM1341",
-          "ALEX QUEIROZ PEREIRA",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM1350",
-          "MARIA EDITH RANGEL LICASSALI",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM1483",
-          "ALICE LUZ GALINDO",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM64",
-          "BBA COMERCIO DE COSMETICOS LTDA",
-          "12.2h",
-          "✓"
-        ],
-        [
-          "IM1050",
-          "LEONARDO DA SILVA LUCAS TAVARES DE LIMA",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM1076",
-          "LOYANE DE FARIA RODARTE",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM1076",
-          "LOYANE DE FARIA RODARTE",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM151",
-          "BARCELOS E PEREIRA PNR ALIMENTAR LTDA EP",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM395",
-          "MANATUS SOLU. EM TEC. DA INFORMACAO LTDA",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM5",
-          "TALITA COUTO FALCAO DE ARAUJO",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM708",
-          "IMOVEL INATIVO 2615467",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM865",
-          "FERNANDO ANTONIO CALMON REIS",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM880",
-          "GUILHERME CESTAC",
-          "12.1h",
-          "✓"
-        ],
-        [
-          "IM263",
-          "MARIA DO SOCORRO DAS NEVES LIMA",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM408",
-          "DANIEL ALVES DE ANDRADE - ESTÁ EM AÇÕES",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM45",
-          "MARCIA RIBEIRO",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM87",
-          "NADJA LOPES SARAIVA",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM87",
-          "NADJA LOPES SARAIVA",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM906",
-          "DROGARIA ROSARIO LTDA",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM935",
-          "ANDRE LUIS SANTOS MEIRA",
-          "12.0h",
-          "✓"
-        ],
-        [
-          "IM1594",
-          "LORENA INACIO CARDOSO",
-          "11.9h",
-          "✓"
-        ],
-        [
-          "IM1767",
-          "MARIO HENRIQUE MELO SOARES",
-          "11.9h",
-          "✓"
-        ],
-        [
-          "IM1557",
-          "EFA ENGENHARIA E SERVICOS LTDA",
-          "11.8h",
-          "✓"
-        ],
-        [
-          "IM1758",
-          "REGENTE ALVIM COMERCIO DE ALIMENTOS LTDA",
-          "11.8h",
-          "✓"
-        ],
-        [
-          "IM143",
-          "BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
-          "11.6h",
-          "✓"
-        ],
-        [
-          "IM1668",
-          "KIKOOKIES LTDA",
-          "11.6h",
-          "✓"
-        ],
-        [
-          "IM1246",
-          "EBAZAR.COM.BR LTDA.",
-          "11.5h",
-          "✓"
-        ],
-        [
-          "IM1568",
-          "LUIS CARLOS MARTINS ABREU",
-          "11.5h",
-          "✓"
-        ],
-        [
-          "IM1727",
-          "BG FARMÁCIA DE MANIPULAÇÃO LTDA",
-          "11.5h",
-          "✓"
-        ],
-        [
-          "IM1822",
-          "MARIA GRAZIELLA DE FRANCESCO COUTO",
-          "11.5h",
-          "✓"
-        ],
-        [
-          "IM391",
-          "DERCILIO GOMES RORIZ",
-          "11.5h",
-          "✓"
-        ],
-        [
-          "IM#1361002550",
-          "CONCEPT UNIFORMES EIRELI",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM1570",
-          "PARTIDO LIBERAL DO DISTRITO FEDERAL",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM1787",
-          "FABIANA BORGES LUCAS",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM1841",
-          "BRUNO BIANCO LEAL SOCIEDADE INDIVIDUAL D",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM832",
-          "GERAL REGULADORA CENTRO AUTOMOTIVO EIREL",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM834",
-          "IDE LUCAS DE FARIA MACHAY",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM835",
-          "PAOLO CALANCHINI",
-          "11.4h",
-          "✓"
-        ],
-        [
-          "IM39",
-          "GUILHERME JUNIO PINHEIRO",
-          "11.3h",
-          "✓"
-        ],
-        [
-          "IM1787",
-          "FABIANA BORGES LUCAS",
-          "11.1h",
-          "✓"
-        ],
-        [
-          "IM1801",
-          "IM1801ALETEA PEIXOTO COSSO",
-          "11.1h",
-          "✓"
-        ],
-        [
-          "IM740",
-          "SRIA COM CEN COMUNAL II LOTE 05 SALA,204 - SL SL 204",
-          "11.1h",
-          "✓"
-        ],
-        [
-          "IM#1376132147",
-          "362",
-          "11.0h",
+          "7.3h",
           "✓"
         ],
         [
           "IM1273",
           "ADRIANA LOIOLA OLIVEIRA",
-          "11.0h",
+          "7.2h",
           "✓"
         ],
         [
-          "IM1741",
-          "CARLOS HENRIQUE JARDIM FIGUEREDO",
-          "11.0h",
+          "IM1436",
+          "PARTIDO LIBERAL",
+          "7.2h",
+          "✓"
+        ],
+        [
+          "IM664",
+          "VITOR AUGUSTO LEIVAS CRAVEIRO",
+          "7.2h",
+          "✓"
+        ],
+        [
+          "IM833",
+          "GILSON TEODORO DA SILVA",
+          "7.2h",
+          "✓"
+        ],
+        [
+          "IM89",
+          "COMERCIAL DE ALIMENTOS CERES S/A",
+          "7.2h",
+          "✓"
+        ],
+        [
+          "IM11",
+          "LUIS GUSTAVO EMEDIATO CAMPOS",
+          "7.1h",
           "✓"
         ],
         [
           "IM344",
           "INSTITUTO DE CONTRACULTURA LTDA",
-          "11.0h",
+          "7.1h",
+          "✓"
+        ],
+        [
+          "IM58",
+          "JOAO DOMINGOS GOMES DOS SANTOS FILHO",
+          "7.1h",
+          "✓"
+        ],
+        [
+          "IM689",
+          "THIAGO BRAS ROCHA",
+          "7.1h",
+          "✓"
+        ],
+        [
+          "IM745",
+          "RODRIGO BORBA CAVALHEIRO",
+          "7.1h",
+          "✓"
+        ],
+        [
+          "IM85",
+          "MIRA DESIGN DE ORGANIZACOES LTDA",
+          "7.1h",
+          "✓"
+        ],
+        [
+          "IM1171",
+          "JORGE ALBERTO DE ANDRADE EURICH",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM129",
+          "MARIA DE DEUS SOARES SILVA",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM1328",
+          "QUENIO CERQUEIRA DE FRANCA",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM1523",
+          "CAIO CASTAGINE MARINHO",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM1530",
+          "DROGARIA ALAMEDA LTDA",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM558",
+          "MALIDE HONG",
+          "7.0h",
           "✓"
         ],
         [
           "IM717",
           "IMÓVEL INATIVO NO SISTEMA",
-          "11.0h",
+          "7.0h",
+          "✓"
+        ],
+        [
+          "IM132",
+          "ANA LUIZA FERREIRA LACERDA",
+          "6.9h",
+          "✓"
+        ],
+        [
+          "IM1581",
+          "PAO DE MEL GRACA TORRES LTDA",
+          "6.9h",
+          "✓"
+        ],
+        [
+          "IM1530",
+          "CLS 302 A BLOCO B LOJA 1",
+          "6.8h",
+          "✓"
+        ],
+        [
+          "IM1609",
+          "CARLOS ATSUSHI NISIYAMA",
+          "6.7h",
+          "✓"
+        ],
+        [
+          "IM723",
+          "SQS 212 BLOCO C    AP 607",
+          "6.6h",
+          "✓"
+        ],
+        [
+          "IM614",
+          "IM614",
+          "6.4h",
+          "✓"
+        ],
+        [
+          "IM1837",
+          "SHIS QL 08 CONJ 4 - CASA 02",
+          "6.3h",
+          "✓"
+        ],
+        [
+          "IM1586",
+          "Q CNC 02 LOTE 10,10 - PREDIO 1º E 2º ANDAR - VERIFICAR COM JACKE",
+          "6.1h",
+          "✓"
+        ],
+        [
+          "IM372",
+          "IM372 -",
+          "6.0h",
+          "✓"
+        ],
+        [
+          "IM1585",
+          "2228056",
+          "5.6h",
+          "✓"
+        ],
+        [
+          "IM708",
+          "IMOVEL INATIVO 2615467",
+          "5.6h",
+          "✓"
+        ],
+        [
+          "IM16",
+          "EDNA MACEDO DAVI",
+          "5.5h",
+          "✓"
+        ],
+        [
+          "IM22",
+          "ROGERIO SEIXAS RORIZ",
+          "5.5h",
+          "✓"
+        ],
+        [
+          "IM1545",
+          "DAVITA SERVICOS DE NEFROLOGIA ALVORADA L",
+          "5.3h",
+          "✓"
+        ],
+        [
+          "IM1556",
+          "MICHAELLA GAYA J. P. DE SANTANA PEREIRA",
+          "5.3h",
+          "✓"
+        ],
+        [
+          "IM1571",
+          "OTICA AGUAS CLARAS LTDA",
+          "5.3h",
+          "✓"
+        ],
+        [
+          "IM80",
+          "DEYSIVANDA ROCHA SERPA DE ARAUJO DIAS",
+          "5.3h",
+          "✓"
+        ],
+        [
+          "IM#1349442273",
+          "1765 - DEISE TERESINHA DOS SANTOS BOECHAT",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM131",
+          "ALICIA COSTA DA SILVA",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM1674",
+          "KATIA ROVANA OZORIO",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM1678",
+          "J ALVES VERAS",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM1770",
+          "RODRIGO CARVALHO DOS SANTOS",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM293",
+          "VALDIR RICARDO LIMA POMPEO MARINHO",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM886",
+          "IBRANUTRO INSTITUTO BRASILEIRO DE NUTROL",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM9",
+          "MARTHA DE SOUZA TEIXEIRA DA ROCHA",
+          "5.2h",
+          "✓"
+        ],
+        [
+          "IM#1349442311",
+          "GUSTAVO SA LEITAO FIUZA LIMA",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1520",
+          "JOSE MARTINS SOLUCOES EM DESENVOLVIMENTO",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1617",
+          "DAIANA CASTILHO DIAS LTDA",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1664",
+          "WALDEMAR WALTER DE ASSUNCAO E SILVA FILH",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1700",
+          "DENNYS ALBUQUERQUE RODRIGUES",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1810",
+          "LEONARDO ANTONIO LIMEIRA RIBEIRO",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1818",
+          "PEDRO NEVES CASTRO DA ROS",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM1821",
+          "ADRIANA ESEQUIEL DE MENDONCA",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM71",
+          "LUIZ CARLOS GOMES",
+          "5.1h",
+          "✓"
+        ],
+        [
+          "IM#1346039431",
+          "ESFERA BRASIL LTDA",
+          "5.0h",
+          "✓"
+        ],
+        [
+          "IM136",
+          "REJANE STANZIONI",
+          "5.0h",
+          "✓"
+        ],
+        [
+          "IM143",
+          "BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
+          "5.0h",
+          "✓"
+        ],
+        [
+          "IM368",
+          "JOÃO GUILHERME TEIXEIRA MELILLO",
+          "5.0h",
+          "✓"
+        ],
+        [
+          "IM681",
+          "FATIMA APARECIDA GOMES MAIA",
+          "5.0h",
+          "✓"
+        ],
+        [
+          "IM682",
+          "LUDMILLA DE CARVALHO ALVES",
+          "5.0h",
           "✓"
         ],
         [
           "IM79",
           "PATRICIA MARTINS IZIDORO",
-          "11.0h",
+          "5.0h",
           "✓"
         ],
         [
-          "IM#1376132208",
-          "1581",
-          "10.9h",
+          "IM1679",
+          "VANDO DE ALBUQUERQUE FERREIRA",
+          "4.9h",
           "✓"
         ],
         [
-          "IM368",
-          "IM368",
-          "10.8h",
+          "IM1471",
+          "EDUARDO WEYNE PEDROSA",
+          "4.8h",
           "✓"
         ],
         [
-          "IM1360",
-          "BRUNO CRAVO ALVES",
-          "10.7h",
+          "IM1557",
+          "EFA ENGENHARIA E SERVICOS LTDA",
+          "4.8h",
           "✓"
         ],
         [
-          "IM880",
-          "CLN 306 BLOCO A,9 - SL SALA 09",
-          "10.7h",
+          "IM1675",
+          "HEBERTH JUNIO FARIAS DE SOUZA",
+          "4.8h",
           "✓"
         ],
         [
-          "IM140",
-          "SCLN 116 BLOCO G [ LOJAS, 05, 11, 15, 19, 23, 25, 37, 41,1 - LJ 47, 51, 57, 61, 65]",
-          "10.6h",
+          "IM918",
+          "BRASIL SERVICOS DE TELECOMUNICACOES S.A.",
+          "4.8h",
           "✓"
         ],
         [
-          "IM1665",
-          "SHIGS 712 BLOCO N CASA 21",
-          "10.6h",
+          "IM103",
+          "ADRIANO DO ALMO MESQUITA",
+          "4.7h",
           "✓"
         ],
         [
-          "IM1729",
-          "AGENCIA DE PROM E INVEST DE MACEIO",
-          "10.6h",
+          "IM116",
+          "CINTHIA KATIANE MARTINS CALADO",
+          "4.7h",
           "✓"
         ],
         [
-          "IM379",
-          "SCLN 412 BLOCO D LOTE 08,102 - SL [SALA 102 E 103]",
-          "10.6h",
+          "IM1354",
+          "LEANDRO GOMES DE OLIVEIRA",
+          "4.7h",
+          "✓"
+        ],
+        [
+          "IM1485",
+          "CAMILLA CAMARGO FELIPE ANDO",
+          "4.7h",
+          "✓"
+        ],
+        [
+          "IM247",
+          "DANIEL SARKIS BONER",
+          "4.7h",
+          "✓"
+        ],
+        [
+          "IM667",
+          "MARCELO URQUIDI FURTADO",
+          "4.7h",
+          "✓"
+        ],
+        [
+          "IM678",
+          "HENRIQUE BARBOSA DINIZ",
+          "4.7h",
+          "✓"
+        ],
+        [
+          "IM1593",
+          "VICTOR GUIMARAES DE MORAES PELLEGRINO JR",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM1805",
+          "LAIS FERNANDA DA CUNHA",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM1812",
+          "GIANCARLO AUGUSTO DI MITO MARIANO",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM1816",
+          "SIDNEY SÁ DAS NEVES",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM371",
+          "MARIANA DE BRITO SEIXAS NEVES",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM81",
+          "AUGUSTO CESAR BEZERRA FONTOURA BORGES",
+          "4.6h",
+          "✓"
+        ],
+        [
+          "IM124",
+          "CLAUDIO CORREA E CASTRO GONÇALVES",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM1537",
+          "LEONARDO VIGOLO",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM1666",
+          "ERICA BATISTA DA SILVA",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM295",
+          "ANDRÉA PATZSCH FURTADO",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM72",
+          "CAIO ALVES NASCIMENTO",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM78",
+          "TIKRÉ BRASIL SOLUÇÕES AMBIENTAIS",
+          "4.5h",
+          "✓"
+        ],
+        [
+          "IM1070",
+          "GUSTAVO BASTOS RIBAS",
+          "4.1h",
           "✓"
         ],
         [
           "IM47",
           "DANILO COELHO RIBEIRO",
-          "10.6h",
+          "4.1h",
           "✓"
         ],
         [
-          "IM#1371179624",
-          "1533 - SHIS QI 28 CONJ 04 CASA 5",
-          "10.5h",
+          "IM#1392154898",
+          "1186/1 - SQS 213 BLOCO A APTO 501",
+          "4.0h",
           "✓"
         ],
         [
-          "IM1785",
-          "IM1785",
-          "10.5h",
+          "IM1544",
+          "PEDRO HENRIQUE PEIXOTO LEAL",
+          "4.0h",
           "✓"
         ],
         [
-          "IM31",
-          "IM31",
-          "10.5h",
+          "IM1801",
+          "ALETEA PEIXOTO COSSO",
+          "4.0h",
           "✓"
         ],
         [
-          "IM918",
-          "SOFN QUADRA 2 BL A LOJA 39",
-          "10.5h",
+          "IM372",
+          "MARCELO ROCHA DE MORAIS",
+          "4.0h",
           "✓"
         ],
         [
-          "IM362",
-          "FELIPE DE CARVALHO MENDONCA",
-          "10.4h",
+          "IM393",
+          "C S SAMPAIO MEDICINA LTDA",
+          "4.0h",
           "✓"
         ],
         [
-          "IM#1316189975",
-          "ASI COMPANY TECNOLOGIA S/A",
-          "10.2h",
+          "IM560",
+          "SAMUEL WOO SUK PARK",
+          "4.0h",
           "✓"
         ],
         [
-          "IM#1316189997",
+          "IM640",
+          "CRISTIANO BOAVENTURA DUARTE",
+          "4.0h",
+          "✓"
+        ],
+        [
+          "IM952",
+          "IM952 DROGARIA ROSARIO LTDA",
+          "3.9h",
+          "✓"
+        ],
+        [
+          "IM#1392155084",
+          "1699/2 - ST AREA ESPECIAL,136 - LJ SETOR H NORTE",
+          "3.8h",
+          "✓"
+        ],
+        [
+          "IM1050",
+          "SQSW 100 BLOCO G  APTO,606 - AP VG 67 E 91",
+          "3.7h",
+          "✓"
+        ],
+        [
+          "IM935",
+          "SHIS QL 08 CONJUNTO 04 CASA 05",
+          "3.7h",
+          "✓"
+        ],
+        [
+          "IM1828",
+          "PAULO DOLABELA DE LIMA VASCONCELOS",
+          "3.6h",
+          "✓"
+        ],
+        [
+          "IM664",
+          "CLN 308 BLOCO D LOJAS,3 - LJ [LJ 03 E 73]",
+          "3.6h",
+          "✓"
+        ],
+        [
+          "IM785",
+          "IM785 CONCEPT UNIFORMES EIRELI",
+          "3.6h",
+          "✓"
+        ],
+        [
+          "IM#1321565819",
+          "SANTINO GONÇALVES FILHO",
+          "3.5h",
+          "✓"
+        ],
+        [
+          "IM#1321565851",
+          "PAULO DOLABELA DE LIMA VASCONCELOS",
+          "3.4h",
+          "✓"
+        ],
+        [
+          "IM#1321764943",
+          "WALKIRIA GAIAO TORREAO BRAZ",
+          "3.4h",
+          "✓"
+        ],
+        [
+          "IM#1322252382",
+          "OTICA GABANA 2 LTDA",
+          "3.4h",
+          "✓"
+        ],
+        [
+          "IM368",
+          "SCLN 412 BLOCO D LOTE 08,19 - LJ [LOJA 19,20 E 213",
+          "3.4h",
+          "✓"
+        ],
+        [
+          "IM#1392155145",
+          "1767/1 - CLN QUADRA 201 BLOCO C SALAS 215 [216]",
+          "3.3h",
+          "✓"
+        ],
+        [
+          "IM#1392155194",
+          "1809/1 - CLN QUADRA 201 BLOCO C SALA 220",
+          "3.3h",
+          "✓"
+        ],
+        [
+          "IM47",
+          "SCLN 116 BLOCO G,7 - LJ 07",
+          "3.3h",
+          "✓"
+        ],
+        [
+          "IM683",
+          "CLN 308 BLOCO D LOJAS,15 - LJ LJ 15",
+          "3.3h",
+          "✓"
+        ],
+        [
+          "IM#1322252397",
+          "BG FARMÁCIA DE MANIPULAÇÃO LTDA",
+          "3.2h",
+          "✓"
+        ],
+        [
+          "IM#1339555365",
+          "WALKIRIA GAIAO TORREAO BRAZ",
+          "3.0h",
+          "✓"
+        ],
+        [
+          "IM1699",
+          "LEONARDO DE BARROS SILVA",
+          "3.0h",
+          "✓"
+        ],
+        [
+          "IM785",
+          "IM785",
+          "3.0h",
+          "✓"
+        ],
+        [
+          "IM#1339555372",
+          "DIVINA ANTONIO DIAS",
+          "2.8h",
+          "✓"
+        ],
+        [
+          "IM142",
+          "NADJA LOPES SARAIVA",
+          "2.8h",
+          "✓"
+        ],
+        [
+          "IM1533",
+          "RAFAEL ANTONIO MENDES RIBEIRO VAZ",
+          "2.8h",
+          "✓"
+        ],
+        [
+          "IM1782",
+          "DEISE TERESINHA DOS SANTOS BOECHAT",
+          "2.8h",
+          "✓"
+        ],
+        [
+          "IM368",
+          "SCLN 412 BLOCO D LOTE 08  LOJA 19,20 E 213",
+          "2.7h",
+          "✓"
+        ],
+        [
+          "IM1040",
+          "FRANCISCO NILSON MOREIRA COSTA E SILVA",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM128",
+          "MARIA DA PIEDADE CARNEIRO ELMIRO DE OLIV",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM1329",
+          "THIAGO FERREIRA BORGES",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM148",
+          "ROSIMEIRE GAUDAD SARDINHA CARNEIRO",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM168",
+          "ACERVO COFFEE ROASTERS CAFETERIA LTDA",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM1783",
           "ANA PAULA DE CASTRO DOS SANTOS",
-          "10.2h",
+          "2.6h",
           "✓"
         ],
         [
-          "IM1519",
-          "JOSE EDUARDO TODESCATO",
-          "9.7h",
+          "IM54",
+          "DANIELLE MELO VERGNE DE ABREU",
+          "2.6h",
+          "✓"
+        ],
+        [
+          "IM77",
+          "THAIS ROCHA DE SOUZA",
+          "2.6h",
           "✓"
         ],
         [
@@ -5126,8 +4718,308 @@
           "✓"
         ],
         [
+          "IM1337",
+          "SKBORGES SOLUCOES DE CONSTRUCAO CIVIL LT",
+          "2.5h",
+          "✓"
+        ],
+        [
+          "IM1350",
+          "MARIA EDITH RANGEL LICASSALI",
+          "2.5h",
+          "✓"
+        ],
+        [
+          "IM1483",
+          "ALICE LUZ GALINDO",
+          "2.5h",
+          "✓"
+        ],
+        [
+          "IM1510",
+          "IKHON GESTAO CONHECIMENTOS E TECNOLOGIA",
+          "2.5h",
+          "✓"
+        ],
+        [
+          "IM#1331705416",
+          "65 - DROGARIA ROSARIO LTDA",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM107",
+          "ANDERSON GOMES MONTEIRO",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM118",
+          "MG RODRIGUES ESTETICA E TERAPIAS UNIPESS",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM1341",
+          "ALEX QUEIROZ PEREIRA",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM64",
+          "BBA COMERCIO DE COSMETICOS LTDA",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM880",
+          "GUILHERME CESTAC",
+          "2.4h",
+          "✓"
+        ],
+        [
+          "IM1050",
+          "LEONARDO DA SILVA LUCAS TAVARES DE LIMA",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM1076",
+          "LOYANE DE FARIA RODARTE",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM1076",
+          "LOYANE DE FARIA RODARTE",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM151",
+          "BARCELOS E PEREIRA PNR ALIMENTAR LTDA EP",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM395",
+          "MANATUS SOLU. EM TEC. DA INFORMACAO LTDA",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM5",
+          "TALITA COUTO FALCAO DE ARAUJO",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM865",
+          "FERNANDO ANTONIO CALMON REIS",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM935",
+          "ANDRE LUIS SANTOS MEIRA",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM263",
+          "MARIA DO SOCORRO DAS NEVES LIMA",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM408",
+          "DANIEL ALVES DE ANDRADE - ESTÁ EM AÇÕES",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM45",
+          "MARCIA RIBEIRO",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM87",
+          "NADJA LOPES SARAIVA",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM87",
+          "NADJA LOPES SARAIVA",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM906",
+          "DROGARIA ROSARIO LTDA",
+          "2.2h",
+          "✓"
+        ],
+        [
+          "IM1594",
+          "LORENA INACIO CARDOSO",
+          "2.1h",
+          "✓"
+        ],
+        [
+          "IM1767",
+          "MARIO HENRIQUE MELO SOARES",
+          "2.1h",
+          "✓"
+        ],
+        [
+          "IM1557",
+          "EFA ENGENHARIA E SERVICOS LTDA",
+          "2.0h",
+          "✓"
+        ],
+        [
+          "IM1758",
+          "REGENTE ALVIM COMERCIO DE ALIMENTOS LTDA",
+          "2.0h",
+          "✓"
+        ],
+        [
+          "IM1801",
+          "IM1801ALETEA PEIXOTO COSSO",
+          "2.0h",
+          "✓"
+        ],
+        [
+          "IM1273",
+          "ADRIANA LOIOLA OLIVEIRA",
+          "1.9h",
+          "✓"
+        ],
+        [
+          "IM1787",
+          "FABIANA BORGES LUCAS",
+          "1.9h",
+          "✓"
+        ],
+        [
+          "IM344",
+          "INSTITUTO DE CONTRACULTURA LTDA",
+          "1.9h",
+          "✓"
+        ],
+        [
+          "IM391",
+          "DERCILIO GOMES RORIZ",
+          "1.9h",
+          "✓"
+        ],
+        [
+          "IM79",
+          "PATRICIA MARTINS IZIDORO",
+          "1.9h",
+          "✓"
+        ],
+        [
+          "IM143",
+          "BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1568",
+          "LUIS CARLOS MARTINS ABREU",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1570",
+          "PARTIDO LIBERAL DO DISTRITO FEDERAL",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1668",
+          "KIKOOKIES LTDA",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1741",
+          "CARLOS HENRIQUE JARDIM FIGUEREDO",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1822",
+          "MARIA GRAZIELLA DE FRANCESCO COUTO",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1841",
+          "BRUNO BIANCO LEAL SOCIEDADE INDIVIDUAL D",
+          "1.8h",
+          "✓"
+        ],
+        [
+          "IM1246",
+          "EBAZAR.COM.BR LTDA.",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM1727",
+          "BG FARMÁCIA DE MANIPULAÇÃO LTDA",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM1787",
+          "FABIANA BORGES LUCAS",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM39",
+          "GUILHERME JUNIO PINHEIRO",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM834",
+          "IDE LUCAS DE FARIA MACHAY",
+          "1.7h",
+          "✓"
+        ],
+        [
+          "IM#1361002550",
+          "CONCEPT UNIFORMES EIRELI",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM1519",
+          "JOSE EDUARDO TODESCATO",
+          "1.6h",
+          "✓"
+        ],
+        [
           "IM689",
           "THIAGO BRAS ROCHA",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM832",
+          "GERAL REGULADORA CENTRO AUTOMOTIVO EIREL",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM835",
+          "PAOLO CALANCHINI",
           "1.6h",
           "✓"
         ],
@@ -5138,9 +5030,141 @@
           "✓"
         ],
         [
+          "IM740",
+          "SRIA COM CEN COMUNAL II LOTE 05 SALA,204 - SL SL 204",
+          "1.3h",
+          "✓"
+        ],
+        [
+          "IM#1376132147",
+          "362",
+          "1.2h",
+          "✓"
+        ],
+        [
+          "IM406",
+          "DEIVID WILLIAN JANUARIO DE SOUSA",
+          "1.2h",
+          "✓"
+        ],
+        [
+          "IM#1376132208",
+          "1581",
+          "1.1h",
+          "✓"
+        ],
+        [
+          "IM785",
+          "CONCEPT UNIFORMES EIRELI",
+          "1.1h",
+          "✓"
+        ],
+        [
+          "IM832",
+          "GERAL REGULADORA CENTRO AUTOMOTIVO EIREL",
+          "1.1h",
+          "✓"
+        ],
+        [
+          "IM834",
+          "IDE LUCAS DE FARIA MACHAY",
+          "1.1h",
+          "✓"
+        ],
+        [
+          "IM835",
+          "PAOLO CALANCHINI",
+          "1.1h",
+          "✓"
+        ],
+        [
           "IM1607",
           "IM1607",
           "1.0h",
+          "✓"
+        ],
+        [
+          "IM368",
+          "IM368",
+          "1.0h",
+          "✓"
+        ],
+        [
+          "IM1360",
+          "BRUNO CRAVO ALVES",
+          "0.9h",
+          "✓"
+        ],
+        [
+          "IM880",
+          "CLN 306 BLOCO A,9 - SL SALA 09",
+          "0.9h",
+          "✓"
+        ],
+        [
+          "IM140",
+          "SCLN 116 BLOCO G [ LOJAS, 05, 11, 15, 19, 23, 25, 37, 41,1 - LJ 47, 51, 57, 61, 65]",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM1665",
+          "SHIGS 712 BLOCO N CASA 21",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM1729",
+          "AGENCIA DE PROM E INVEST DE MACEIO",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM379",
+          "SCLN 412 BLOCO D LOTE 08,102 - SL [SALA 102 E 103]",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM47",
+          "DANILO COELHO RIBEIRO",
+          "0.8h",
+          "✓"
+        ],
+        [
+          "IM#1371179624",
+          "1533 - SHIS QI 28 CONJ 04 CASA 5",
+          "0.7h",
+          "✓"
+        ],
+        [
+          "IM1785",
+          "IM1785",
+          "0.7h",
+          "✓"
+        ],
+        [
+          "IM31",
+          "IM31",
+          "0.7h",
+          "✓"
+        ],
+        [
+          "IM918",
+          "SOFN QUADRA 2 BL A LOJA 39",
+          "0.7h",
+          "✓"
+        ],
+        [
+          "IM1674",
+          "CLSW 104 BLOCO B AP KIT 134",
+          "0.6h",
+          "✓"
+        ],
+        [
+          "IM362",
+          "FELIPE DE CARVALHO MENDONCA",
+          "0.6h",
           "✓"
         ],
         [
@@ -5153,6 +5177,18 @@
           "IM614",
           "PEACH TREE PARTICIPACOES E EMPREENDIMENT",
           "0.5h",
+          "✓"
+        ],
+        [
+          "IM#1316189975",
+          "ASI COMPANY TECNOLOGIA S/A",
+          "0.4h",
+          "✓"
+        ],
+        [
+          "IM#1316189997",
+          "ANA PAULA DE CASTRO DOS SANTOS",
+          "0.4h",
           "✓"
         ],
         [
@@ -5666,7 +5702,7 @@
       ]
     },
     "vivi_bo_concl": {
-      "titulo": "Vivianne — BackOffice: Concluído <24h (128/174)",
+      "titulo": "Vivianne — BackOffice: Concluído <24h (145/175)",
       "cols": [
         "Imóvel",
         "Título",
@@ -5677,373 +5713,307 @@
         [
           "IM#1350353036",
           "1169 -",
-          "1031.6h",
+          "309.6h",
           "✗"
         ],
         [
           "IM#1397058972",
           "1853",
-          "762.4h",
+          "214.4h",
           "✗"
         ],
         [
           "IM#1323282320",
           "2379",
-          "698.7h",
+          "212.7h",
           "✗"
         ],
         [
           "IM682",
           "IM682 -  SCLRN 703 BLOCO G LOJA,9",
-          "691.8h",
+          "205.8h",
           "✗"
         ],
         [
           "IM569",
           "IM569 - SQSW 101 BLOCO H AP,315 - AP AP 315",
-          "666.4h",
+          "194.4h",
           "✗"
         ],
         [
           "IM#1325815870",
           "1826",
-          "571.7h",
+          "155.7h",
           "✗"
         ],
         [
           "IM152",
           "IM152 - VK5376  - CLN 211 BLOCO D SALA 112",
-          "496.9h",
+          "142.9h",
           "✗"
         ],
         [
           "IM123",
           "IM123 - VK5424 - CLN 306 BLOCO B SALA 112",
-          "463.2h",
-          "✗"
-        ],
-        [
-          "IM#1376730582",
-          "1483",
-          "430.7h",
+          "137.2h",
           "✗"
         ],
         [
           "IM#1332274136",
           "1823",
-          "405.9h",
+          "127.9h",
+          "✗"
+        ],
+        [
+          "IM#1376730582",
+          "1483",
+          "118.7h",
+          "✗"
+        ],
+        [
+          "IM1583",
+          "IM1583",
+          "88.9h",
           "✗"
         ],
         [
           "IM#1411369482",
           "1843",
-          "306.3h",
+          "84.3h",
           "✗"
         ],
         [
           "IM#1315825153",
           "382",
-          "268.4h",
-          "✗"
-        ],
-        [
-          "IM1583",
-          "IM1583",
-          "262.9h",
+          "74.4h",
           "✗"
         ],
         [
           "IM#1309698272",
           "399",
-          "198.1h",
+          "66.1h",
           "✗"
         ],
         [
           "IM1818",
           "IM1818",
-          "194.0h",
+          "62.0h",
           "✗"
         ],
         [
           "IM1836",
           "IM1836 - VK 3238 - SHIS QI 7 CONUNTO 13 CASA 24",
-          "193.3h",
+          "61.3h",
           "✗"
         ],
         [
           "IM1579",
           "IM1579 - RUA 21 SUL LOTE 11,905 - AP APTO 905 VG 81",
-          "161.9h",
+          "43.9h",
           "✗"
         ],
         [
           "IM#1414830507",
           "71",
-          "160.5h",
+          "42.5h",
           "✗"
         ],
         [
           "IM#1415207725",
           "1329 - QUADRA 201 - AP LT 7 APT 203 - TAGUATINGA -",
-          "144.9h",
+          "40.9h",
           "✗"
         ],
         [
           "IM#1415331735",
           "1556",
-          "143.5h",
-          "✗"
-        ],
-        [
-          "IM1568",
-          "IM1568 - VK5373  - CRS 510 BLOCO A ENTRADA 4 KIT 103",
-          "130.2h",
-          "✗"
-        ],
-        [
-          "IM1822",
-          "IM1822 - VK5371  - SQN 303 BLOCO E APTO 102",
-          "130.1h",
-          "✗"
-        ],
-        [
-          "IM#1333248239",
-          "886",
-          "124.7h",
-          "✗"
-        ],
-        [
-          "IM#1411378467",
-          "1665",
-          "119.7h",
-          "✗"
-        ],
-        [
-          "IM#1309901728",
-          "1676",
-          "115.7h",
-          "✗"
-        ],
-        [
-          "IM#1375344811",
-          "1802",
-          "92.3h",
-          "✗"
-        ],
-        [
-          "IM#1420313417",
-          "532",
-          "91.0h",
-          "✗"
-        ],
-        [
-          "IM1592",
-          "IM1592",
-          "89.1h",
+          "39.5h",
           "✗"
         ],
         [
           "IM1785",
           "IM1785 - SHIS QI 26  CJ 16 CASA 22",
-          "83.1h",
+          "37.5h",
           "✗"
         ],
         [
-          "IM#1387020510",
-          "1756 - Nada consta condomínio",
-          "73.6h",
+          "IM#1420313417",
+          "532",
+          "35.0h",
+          "✗"
+        ],
+        [
+          "IM#1333248239",
+          "886",
+          "34.7h",
+          "✗"
+        ],
+        [
+          "IM1568",
+          "IM1568 - VK5373  - CRS 510 BLOCO A ENTRADA 4 KIT 103",
+          "31.8h",
+          "✗"
+        ],
+        [
+          "IM1822",
+          "IM1822 - VK5371  - SQN 303 BLOCO E APTO 102",
+          "31.8h",
           "✗"
         ],
         [
           "IM1833",
           "IM1833",
-          "72.4h",
+          "30.4h",
           "✗"
         ],
         [
           "IM#1416548415",
           "921",
-          "72.2h",
+          "30.2h",
           "✗"
         ],
         [
-          "IM#1325705123",
-          "1748",
-          "70.3h",
-          "✗"
-        ],
-        [
-          "IM#1358419024",
-          "621",
-          "70.3h",
-          "✗"
-        ],
-        [
-          "IM#1412694807",
-          "642",
-          "66.1h",
+          "IM#1411378467",
+          "1665",
+          "29.7h",
           "✗"
         ],
         [
           "IM#1416977444",
           "1839",
-          "53.8h",
+          "25.8h",
           "✗"
+        ],
+        [
+          "IM#1309901728",
+          "1676",
+          "25.7h",
+          "✗"
+        ],
+        [
+          "IM#1412694807",
+          "642",
+          "24.1h",
+          "✓"
         ],
         [
           "IM#1303930846",
           "1334",
-          "45.5h",
-          "✗"
+          "17.5h",
+          "✓"
         ],
         [
           "IM#1303941691",
           "1341",
-          "45.3h",
-          "✗"
-        ],
-        [
-          "IM#1304092533",
-          "640",
-          "43.0h",
-          "✗"
-        ],
-        [
-          "IM#1363859420",
-          "IPTU 05_2026",
-          "42.2h",
-          "✗"
-        ],
-        [
-          "IM1854",
-          "IM1854 - VK5488 - CLN 115 BLOCO D SALA 104",
-          "41.1h",
-          "✗"
+          "17.3h",
+          "✓"
         ],
         [
           "IM#1413086812",
           "5",
-          "30.9h",
-          "✗"
+          "16.9h",
+          "✓"
+        ],
+        [
+          "IM#1375344811",
+          "1802",
+          "16.3h",
+          "✓"
+        ],
+        [
+          "IM#1304092533",
+          "640",
+          "15.0h",
+          "✓"
         ],
         [
           "IM#1413151797",
           "350",
-          "29.0h",
-          "✗"
+          "15.0h",
+          "✓"
+        ],
+        [
+          "IM#1363859420",
+          "IPTU 05_2026",
+          "14.2h",
+          "✓"
+        ],
+        [
+          "IM1592",
+          "IM1592",
+          "13.1h",
+          "✓"
+        ],
+        [
+          "IM1854",
+          "IM1854 - VK5488 - CLN 115 BLOCO D SALA 104",
+          "13.1h",
+          "✓"
         ],
         [
           "IM#1410447517",
           "1855",
-          "26.5h",
-          "✗"
+          "12.5h",
+          "✓"
         ],
         [
-          "IM#1410234113",
-          "1778",
-          "25.6h",
-          "✗"
+          "IM#1387020510",
+          "1756 - Nada consta condomínio",
+          "11.6h",
+          "✓"
         ],
         [
           "IM143",
           "IM143 -  VK5464  - CLN 211 BLOCO D SALA 101",
-          "24.9h",
-          "✗"
+          "10.9h",
+          "✓"
+        ],
+        [
+          "IM#1410234113",
+          "1778",
+          "10.2h",
+          "✓"
         ],
         [
           "IM#1307037121",
           "486",
-          "23.4h",
+          "9.4h",
           "✓"
         ],
         [
           "IM1586",
           "IM1586",
-          "23.2h",
+          "9.2h",
           "✓"
         ],
         [
           "IM#1420773138",
           "662",
-          "23.1h",
+          "9.1h",
           "✓"
         ],
         [
           "IM#1425825079",
           "1846",
-          "22.7h",
+          "8.7h",
+          "✓"
+        ],
+        [
+          "IM#1325705123",
+          "1748",
+          "8.3h",
+          "✓"
+        ],
+        [
+          "IM#1358419024",
+          "621",
+          "8.3h",
           "✓"
         ],
         [
           "IM#1307116360",
           "532",
-          "22.0h",
-          "✓"
-        ],
-        [
-          "IM#1304666149",
-          "952/1",
-          "20.6h",
-          "✓"
-        ],
-        [
-          "IM614",
-          "IM614 - VK5274 - SQS 311 BLOCO F APTO 401",
-          "20.6h",
-          "✓"
-        ],
-        [
-          "IM#1309177793",
-          "922/2",
-          "20.1h",
-          "✓"
-        ],
-        [
-          "IM#1405940519",
-          "1551",
-          "18.8h",
-          "✓"
-        ],
-        [
-          "IM#1346472705",
-          "804",
-          "17.8h",
-          "✓"
-        ],
-        [
-          "IM#1336881088",
-          "64",
-          "17.6h",
-          "✓"
-        ],
-        [
-          "IM#1418518262",
-          "1843",
-          "16.3h",
-          "✓"
-        ],
-        [
-          "IM#1351001498",
-          "906",
-          "16.1h",
-          "✓"
-        ],
-        [
-          "IM1839",
-          "IM1839",
-          "15.6h",
-          "✓"
-        ],
-        [
-          "IM1854",
-          "IM1854",
-          "15.6h",
-          "✓"
-        ],
-        [
-          "IM1839",
-          "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
-          "14.7h",
+          "8.0h",
           "✓"
         ],
         [
@@ -6053,9 +6023,39 @@
           "✓"
         ],
         [
+          "IM#1304666149",
+          "952/1",
+          "6.6h",
+          "✓"
+        ],
+        [
+          "IM614",
+          "IM614 - VK5274 - SQS 311 BLOCO F APTO 401",
+          "6.6h",
+          "✓"
+        ],
+        [
           "IM#1329197225",
           "382",
           "6.2h",
+          "✓"
+        ],
+        [
+          "IM#1309177793",
+          "922/2",
+          "6.1h",
+          "✓"
+        ],
+        [
+          "IM#1428204249",
+          "1821",
+          "4.9h",
+          "✓"
+        ],
+        [
+          "IM#1405940519",
+          "1551",
+          "4.8h",
           "✓"
         ],
         [
@@ -6065,14 +6065,20 @@
           "✓"
         ],
         [
+          "IM#1346472705",
+          "804",
+          "3.8h",
+          "✓"
+        ],
+        [
           "IM1598",
           "IM1598",
           "3.8h",
           "✓"
         ],
         [
-          "IM376",
-          "IM376 - VK5331 - CLN 412 Bloco D LOJAS 27 E 28",
+          "IM#1336881088",
+          "64",
           "3.6h",
           "✓"
         ],
@@ -6080,6 +6086,12 @@
           "IM1837",
           "IM1837",
           "3.0h",
+          "✓"
+        ],
+        [
+          "IM1839",
+          "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
+          "2.8h",
           "✓"
         ],
         [
@@ -6101,9 +6113,15 @@
           "✓"
         ],
         [
-          "IM#1405924683",
-          "1523",
-          "2.2h",
+          "IM#1418518262",
+          "1843",
+          "2.3h",
+          "✓"
+        ],
+        [
+          "IM#1351001498",
+          "906",
+          "2.1h",
           "✓"
         ],
         [
@@ -6146,6 +6164,24 @@
           "IM#1391433363",
           "62/2",
           "1.7h",
+          "✓"
+        ],
+        [
+          "IM#1428777122",
+          "1608",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM1839",
+          "IM1839",
+          "1.6h",
+          "✓"
+        ],
+        [
+          "IM1854",
+          "IM1854",
+          "1.6h",
           "✓"
         ],
         [
@@ -6223,6 +6259,12 @@
         [
           "IM#1346262441",
           "103",
+          "1.3h",
+          "✓"
+        ],
+        [
+          "IM#1405924683",
+          "1523",
           "1.3h",
           "✓"
         ],
@@ -6721,7 +6763,7 @@
       ]
     },
     "vivi_bo_troca": {
-      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (20/59)",
+      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (19/58)",
       "cols": [
         "Imóvel",
         "Título",
@@ -6976,12 +7018,6 @@
           "✓"
         ],
         [
-          "IM391",
-          "IM391 - VK5355 - CLN 412 BLOCO D SALA 114",
-          "34.9h",
-          "✓"
-        ],
-        [
           "IM#1335910788",
           "123",
           "28.2h",
@@ -7116,7 +7152,7 @@
       ]
     },
     "mar_laudo": {
-      "titulo": "Marinho — Vistorias: Laudo <48h (38/61)",
+      "titulo": "Marinho — Vistorias: Laudo <48h (39/62)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7338,6 +7374,12 @@
           "IM1783",
           "IM1783 - CLN 201 BL C SALA 108",
           "18.7h",
+          "✓"
+        ],
+        [
+          "IM63",
+          "IM63-  SCLN 306 BLOCO B SL 114 E 116",
+          "18.1h",
           "✓"
         ],
         [
@@ -7785,37 +7827,37 @@
         [
           "IM375",
           "IM 375 376 - CLN 412 bloco D  Salas 27 28",
-          "1577.6h",
+          "471.9h",
           "✗"
         ],
         [
           "IM391",
           "Im391 - Q SCLN 412 Bloco D lote 08 sala 114 Brasília DF",
-          "1446.7h",
+          "444.9h",
           "✗"
         ],
         [
           "IM398",
           "IM398 - 412 bloco D lote 08",
-          "1441.7h",
+          "440.2h",
           "✗"
         ],
         [
           "IM1568",
           "IM1568 - CRS 510 BL A UNIDADE 103",
-          "1297.4h",
+          "400.0h",
           "✗"
         ],
         [
           "IM1822",
           "Im1822 - SQN 303, bloco E, apartamento 102",
-          "1273.7h",
+          "390.0h",
           "✗"
         ],
         [
           "IM1169",
           "IM1169 - Condomínio Parque Jardim das Paineiras, quadra 08, casa 154",
-          "123.7h",
+          "33.7h",
           "✗"
         ],
         [
@@ -8062,7 +8104,7 @@
       ]
     },
     "nat_resc_adm_ali": {
-      "titulo": "Natália — Resc. ADM: Alinhamento ≤24h (6/8)",
+      "titulo": "Natália — Resc. ADM: Alinhamento ≤24h (5/7)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8095,12 +8137,6 @@
           "✓"
         ],
         [
-          "IM1823",
-          "IM1823 - SHIS QL 08 CONJ 03 CASA 04",
-          "5.0h",
-          "✓"
-        ],
-        [
           "IM1353",
           "IM1353 - CCSW 02 LT 5 BL A APTO 104",
           "3.5h",
@@ -8121,7 +8157,7 @@
       ]
     },
     "nat_resc_adm_concl": {
-      "titulo": "Natália — Resc. ADM: Conclusão ≤10 dias (2/7)",
+      "titulo": "Natália — Resc. ADM: Conclusão ≤10 dias (3/6)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8129,12 +8165,6 @@
         "Status"
       ],
       "rows": [
-        [
-          "IM1823",
-          "IM1823 - SHIS QL 08 CONJ 03 CASA 04",
-          "145.0d",
-          "✗"
-        ],
         [
           "IM737",
           "IM737 - QD 201 LT 05 APTO 704 VG 62",
@@ -8154,16 +8184,16 @@
           "✓"
         ],
         [
+          "IM1334",
+          "IM1334 - SQN 310 BL M APTO 501",
+          "5.9d",
+          "✓"
+        ],
+        [
           "IM1353",
           "IM1353 - CCSW 02 LT 5 BL A APTO 104",
           "1.2d",
           "✓"
-        ],
-        [
-          "IM1334",
-          "IM1334 - SQN 310 BL M APTO 501",
-          "em andamento",
-          "✗"
         ],
         [
           "IM1579",
@@ -8174,7 +8204,7 @@
       ]
     },
     "nat_resc_adm_dist": {
-      "titulo": "Natália — Resc. ADM: Distrato assinado ★ (3/9)",
+      "titulo": "Natália — Resc. ADM: Distrato assinado ★ (2/8)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8229,17 +8259,11 @@
           "IM1353 - CCSW 02 LT 5 BL A APTO 104",
           "Sim",
           "✓"
-        ],
-        [
-          "IM1823",
-          "IM1823 - SHIS QL 08 CONJ 03 CASA 04",
-          "Sim",
-          "✓"
         ]
       ]
     },
     "nat_rl_prop": {
-      "titulo": "Natália — Resc. Loc.: Boleto prop <24h (11/14)",
+      "titulo": "Natália — Resc. Loc.: Boleto prop <24h (12/15)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8330,11 +8354,17 @@
           "IM1785 - SHIS QI 26 CJ 16 CASA 22",
           "0.0h",
           "✓"
+        ],
+        [
+          "IM247",
+          "IM247 - SQS 313 BL K APTO 603",
+          "0.0h",
+          "✓"
         ]
       ]
     },
     "nat_rl_final": {
-      "titulo": "Natália — Resc. Loc.: Boleto final <15d (8/15)",
+      "titulo": "Natália — Resc. Loc.: Boleto final <15d (9/16)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8421,6 +8451,12 @@
           "✓"
         ],
         [
+          "IM247",
+          "IM247 - SQS 313 BL K APTO 603",
+          "0.1d",
+          "✓"
+        ],
+        [
           "IM1334",
           "IM1334 - SQN 310 BL M APTO 501",
           "0d",
@@ -8435,7 +8471,7 @@
       ]
     },
     "nat_rep_orc": {
-      "titulo": "Natália — Reparos: Orçamento <4h (23/29)",
+      "titulo": "Natália — Reparos: Orçamento <4h (25/31)",
       "cols": [
         "Imóvel",
         "Título",
@@ -8540,6 +8576,12 @@
           "✓"
         ],
         [
+          "IM1785",
+          "IM1785 - SHIS QI 26 CJ 16 CASA 22",
+          "0.2h",
+          "✓"
+        ],
+        [
           "IM1169",
           "IM1169 - COND PARQUE JARDIM DAS PAINEIRAS QD 08 LT 154",
           "0.1h",
@@ -8548,6 +8590,12 @@
         [
           "IM1663",
           "IM1663 - SQS 110 BL A APTO 605",
+          "0.1h",
+          "✓"
+        ],
+        [
+          "IM1748",
+          "IM1748 - SHIS QI 09 CONJ 08 CASA 24",
           "0.1h",
           "✓"
         ],
@@ -9079,7 +9127,7 @@
       ]
     },
     "nat_bo": {
-      "titulo": "Natália — BackOffice: Pendência <24h (5/11)",
+      "titulo": "Natália — BackOffice: Pendência <24h (6/11)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9090,43 +9138,43 @@
         [
           "IM1841",
           "IM1841 -  VK5416 - SHIS QL 02 CONJUNTO 01 CASA 02",
-          "1061.0h",
+          "325.0h",
           "✗"
         ],
         [
           "IM#1337935808",
           "1341",
-          "601.5h",
+          "171.5h",
           "✗"
         ],
         [
           "IM1559",
           "IM1559 - SQS 310 BL I APT 106",
-          "169.6h",
+          "51.6h",
           "✗"
         ],
         [
           "IM1818",
           "IM1818",
-          "146.9h",
+          "42.9h",
           "✗"
         ],
         [
           "IM41",
           "IM41 - VK5381 - SEPS 710/910 - SALA 102",
-          "115.8h",
+          "25.8h",
           "✗"
         ],
         [
           "IM918",
           "IM918 | SOFN QUADRA 2 BLOCO A LOJA 39",
-          "72.9h",
-          "✗"
+          "10.9h",
+          "✓"
         ],
         [
           "IM#1412694807",
           "642",
-          "17.7h",
+          "3.7h",
           "✓"
         ],
         [
@@ -9501,7 +9549,7 @@
       ]
     },
     "gar_resc_adm_ali": {
-      "titulo": "Gardênia — Resc. ADM: Alinhamento ≤24h (1/3)",
+      "titulo": "Gardênia — Resc. ADM: Alinhamento ≤24h (2/4)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9526,11 +9574,17 @@
           "IM1842 - SCES TRECHO 04 BLOCO E APARTAMENTO,15 - AP S2",
           "24.2h",
           "✓"
+        ],
+        [
+          "IM1608",
+          "IM1608 - SQNW 311,511 - AP BL C APT 511A VG 107",
+          "4.4h",
+          "✓"
         ]
       ]
     },
     "gar_resc_adm_concl": {
-      "titulo": "Gardênia — Resc. ADM: Conclusão ≤10 dias (1/3)",
+      "titulo": "Gardênia — Resc. ADM: Conclusão ≤10 dias (1/4)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9555,11 +9609,17 @@
           "IM1842 - SCES TRECHO 04 BLOCO E APARTAMENTO,15 - AP S2",
           "7.8d",
           "✓"
+        ],
+        [
+          "IM1608",
+          "IM1608 - SQNW 311,511 - AP BL C APT 511A VG 107",
+          "em andamento",
+          "✗"
         ]
       ]
     },
     "gar_resc_adm_dist": {
-      "titulo": "Gardênia — Resc. ADM: Distrato assinado ★ (2/7)",
+      "titulo": "Gardênia — Resc. ADM: Distrato assinado ★ (2/8)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9567,6 +9627,12 @@
         "Bônus"
       ],
       "rows": [
+        [
+          "IM1608",
+          "IM1608 - SQNW 311,511 - AP BL C APT 511A VG 107",
+          "Não",
+          "✗"
+        ],
         [
           "IM1827",
           "IM1827 - SHIS QI 23 CONJUNTO 15 CASA 29",
@@ -9784,7 +9850,7 @@
       ]
     },
     "gar_rep_orc": {
-      "titulo": "Gardênia — Reparos: Orçamento <4h (43/61)",
+      "titulo": "Gardênia — Reparos: Orçamento <4h (44/62)",
       "cols": [
         "Imóvel",
         "Título",
@@ -10125,6 +10191,12 @@
         [
           "IM140",
           "IM140 -SCLN 116 BLOCO G LOJAS 01, 05, 11, 15, 19, 23, 25, 37, 41, 47, 51, 57, 61 e 65 SUBSOLO",
+          "0.0h",
+          "✓"
+        ],
+        [
+          "IM1666",
+          "IM1666- SQS 405 BLOCO H APTO 107",
           "0.0h",
           "✓"
         ],
@@ -10596,7 +10668,7 @@
       ]
     },
     "gar_bo": {
-      "titulo": "Gardênia — BackOffice: Pendência <24h (2/18)",
+      "titulo": "Gardênia — BackOffice: Pendência <24h (4/18)",
       "cols": [
         "Imóvel",
         "Título",
@@ -10607,103 +10679,103 @@
         [
           "IM1570",
           "IM1570 - VK5394 - CRS 510 BLOCO A LOJA 1",
-          "2086.3h",
+          "608.3h",
           "✗"
         ],
         [
           "IM47",
           "IM47 - Q SCLN 116 BLOCO G LJ 07",
-          "1495.5h",
+          "447.5h",
           "✗"
         ],
         [
           "IM1824",
           "IM1824 - VK5308  - CLS 108 BLOCO A LOJAS 01, 02 E 03",
-          "1351.5h",
+          "405.3h",
           "✗"
         ],
         [
           "IM1787",
           "IM1787 - VK5400 - CLN 201 BLOCO C SALA 102",
-          "1228.8h",
+          "354.8h",
           "✗"
         ],
         [
           "IM135",
           "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
-          "1063.1h",
+          "306.1h",
           "✗"
         ],
         [
           "IM1567",
           "IM1567 - VK5425 - CRS 510 BLOCO A KIT 202",
-          "894.6h",
+          "276.6h",
           "✗"
         ],
         [
           "IM#1397058972",
           "1853",
-          "761.5h",
+          "213.5h",
           "✗"
         ],
         [
           "IM662",
           "IM662 - QI 13 Conjunto 10 casa 14",
-          "691.0h",
+          "205.0h",
           "✗"
         ],
         [
           "IM143",
           "IM143 - BLEVIR CENTRO DE TECNOLOGIA NEGOCIOS DIG",
-          "646.9h",
+          "188.9h",
           "✗"
         ],
         [
           "IM1835",
           "IM1835 - VK5459  - SHIS QI 11 CONJUNTO 1 CASA 16 -  NÃO REALIZAR A TROCA DE TITULARIDADE DA ENERGIA",
-          "553.5h",
+          "171.5h",
           "✗"
         ],
         [
           "IM1839",
           "IM1839 - SHIS QI 11 CONJUNTO 6 CASA 10",
-          "486.6h",
+          "166.6h",
           "✗"
         ],
         [
           "IM#1325815870",
           "1826",
-          "425.6h",
+          "113.6h",
           "✗"
         ],
         [
           "IM1828",
           "IM1828 - SGAS 616 CONJUNTO A,15 - LJ {14,16} LINEA VITTA",
-          "338.6h",
+          "102.6h",
           "✗"
         ],
         [
           "IM1848",
           "IM1848 - VK5458 - SHIS QI 16 CONJUNTO 2 LOTE 13",
-          "179.9h",
+          "67.9h",
           "✗"
         ],
         [
           "IM1854",
           "IM1854 - VK5488 - CLN 115 BLOCO D SALA 104",
-          "51.0h",
-          "✗"
+          "23.0h",
+          "✓"
         ],
         [
           "IM#1424881041",
           "1558",
-          "25.3h",
-          "✗"
+          "11.3h",
+          "✓"
         ],
         [
           "IM1839",
           "IM1839 - VK5455 - SHIS QI 11 CONJUNTO 6 CASA 10",
-          "17.1h",
+          "3.1h",
           "✓"
         ],
         [
@@ -10889,17 +10961,17 @@
       "titulo": "Rescisão de Administração",
       "kpis": [
         {
-          "v": "28.6%",
+          "v": "50.0%",
           "l": "Natália Conclusão ≤10 dias",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
-          "v": "33.3%",
+          "v": "25.0%",
           "l": "Gardênia Conclusão ≤10 dias",
           "cls": "bad"
         },
         {
-          "v": "71.4%",
+          "v": "75.0%",
           "l": "Vivianne Encerramento <4h",
           "cls": "ok"
         },
@@ -10915,18 +10987,18 @@
           "titulo": "Indicadores · Rescisão ADM",
           "full": true,
           "labels": [
-            "Vivianne Encerramento <4h (5/7)",
-            "Natália Alinhamento ≤24h (6/8)",
-            "Natália Conclusão ≤10 dias (2/7)",
-            "Gardênia Alinhamento ≤24h (1/3)",
-            "Gardênia Conclusão ≤10 dias (1/3)"
+            "Vivianne Encerramento <4h (6/8)",
+            "Natália Alinhamento ≤24h (5/7)",
+            "Natália Conclusão ≤10 dias (3/6)",
+            "Gardênia Alinhamento ≤24h (2/4)",
+            "Gardênia Conclusão ≤10 dias (1/4)"
           ],
           "data": [
-            71.4,
             75.0,
-            28.6,
-            33.3,
-            33.3
+            71.4,
+            50.0,
+            50.0,
+            25.0
           ],
           "metas": [
             100,
@@ -10945,9 +11017,9 @@
             "Gardênia"
           ],
           "data": [
-            7.143,
-            5.934,
-            4.444
+            7.5,
+            6.548,
+            4.583
           ],
           "colors": [
             "#000",
@@ -10960,50 +11032,50 @@
         {
           "nome": "Encerramento <4h",
           "resp": "Vivianne",
-          "meta": "≤4h corrido",
-          "ok": 5,
-          "tot": 7,
-          "pct": 71.4
-        },
-        {
-          "nome": "Alinhamento ≤24h",
-          "resp": "Natália",
-          "meta": "≤24h corrido",
+          "meta": "≤4h úteis",
           "ok": 6,
           "tot": 8,
           "pct": 75.0
         },
         {
+          "nome": "Alinhamento ≤24h",
+          "resp": "Natália",
+          "meta": "≤24h úteis",
+          "ok": 5,
+          "tot": 7,
+          "pct": 71.4
+        },
+        {
           "nome": "Conclusão ≤10 dias",
           "resp": "Natália",
           "meta": "≤10d corrido",
-          "ok": 2,
-          "tot": 7,
-          "pct": 28.6
+          "ok": 3,
+          "tot": 6,
+          "pct": 50.0
         },
         {
           "nome": "Distrato assinado ★",
           "resp": "Natália",
           "meta": "+1/distrato (bônus)",
-          "ok": 3,
-          "tot": 3,
+          "ok": 2,
+          "tot": 2,
           "pct": null
         },
         {
           "nome": "Alinhamento ≤24h",
           "resp": "Gardênia",
-          "meta": "≤24h corrido",
-          "ok": 1,
-          "tot": 3,
-          "pct": 33.3
+          "meta": "≤24h úteis",
+          "ok": 2,
+          "tot": 4,
+          "pct": 50.0
         },
         {
           "nome": "Conclusão ≤10 dias",
           "resp": "Gardênia",
           "meta": "≤10d corrido",
           "ok": 1,
-          "tot": 3,
-          "pct": 33.3
+          "tot": 4,
+          "pct": 25.0
         },
         {
           "nome": "Distrato assinado ★",
@@ -11017,15 +11089,15 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Alinhamento ≤24h: 75.0%."
+          "txt": "Vivianne lidera Encerramento <4h: 75.0%."
         },
         {
           "tipo": "neg",
-          "txt": "Natália Conclusão ≤10 dias: 28.6% — gargalo do processo."
+          "txt": "Gardênia Conclusão ≤10 dias: 25.0% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 28 cards no período."
+          "txt": "Volume de 29 cards no período."
         }
       ]
     },
@@ -11034,19 +11106,19 @@
       "titulo": "Comercial de Locação",
       "kpis": [
         {
-          "v": "66.7%",
+          "v": "63.0%",
           "l": "Caio Card na coluna",
           "cls": "ok"
         },
         {
-          "v": "33.8%",
+          "v": "41.9%",
           "l": "Caio Anúncio publicado <72h",
           "cls": "bad"
         },
         {
-          "v": "21.2%",
+          "v": "51.9%",
           "l": "Caio Início processo <24h",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
           "v": "★ 4",
@@ -11060,14 +11132,14 @@
           "titulo": "Indicadores · Com. Locação",
           "full": true,
           "labels": [
-            "Caio Início processo <24h (11/52)",
-            "Caio Anúncio publicado <72h (25/74)",
-            "Caio Card na coluna correta (18/27)"
+            "Caio Início processo <24h (27/52)",
+            "Caio Anúncio publicado <72h (31/74)",
+            "Caio Card na coluna correta (17/27)"
           ],
           "data": [
-            21.2,
-            33.8,
-            66.7
+            51.9,
+            41.9,
+            63.0
           ],
           "metas": [
             100,
@@ -11082,7 +11154,7 @@
             "Caio"
           ],
           "data": [
-            6.219
+            6.781
           ],
           "colors": [
             "#000"
@@ -11093,36 +11165,36 @@
         {
           "nome": "Início processo <24h",
           "resp": "Caio",
-          "meta": "≤24h corrido",
-          "ok": 11,
+          "meta": "≤24h úteis",
+          "ok": 27,
           "tot": 52,
-          "pct": 21.2
+          "pct": 51.9
         },
         {
           "nome": "Anúncio publicado <72h",
           "resp": "Caio",
-          "meta": "≤72h corrido",
-          "ok": 25,
+          "meta": "≤72h úteis",
+          "ok": 31,
           "tot": 74,
-          "pct": 33.8
+          "pct": 41.9
         },
         {
           "nome": "Card na coluna correta",
           "resp": "Caio",
           "meta": "Fase correta",
-          "ok": 18,
+          "ok": 17,
           "tot": 27,
-          "pct": 66.7
+          "pct": 63.0
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Caio lidera Card na coluna correta: 66.7%."
+          "txt": "Caio lidera Card na coluna correta: 63.0%."
         },
         {
           "tipo": "neg",
-          "txt": "Caio Início processo <24h: 21.2% — gargalo do processo."
+          "txt": "Caio Anúncio publicado <72h: 41.9% — gargalo do processo."
         },
         {
           "tipo": "pos",
@@ -11140,14 +11212,14 @@
           "cls": "bad"
         },
         {
-          "v": "85.3%",
+          "v": "88.6%",
           "l": "Vivianne Confecção <2h",
           "cls": "ok"
         },
         {
-          "v": "37.5%",
+          "v": "54.2%",
           "l": "Vivianne NIDO→Concluído <24h",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
           "v": "—",
@@ -11161,16 +11233,16 @@
           "titulo": "Indicadores · Cont. Locação",
           "full": true,
           "labels": [
-            "Vivianne NIDO→Concluído <24h (9/24)",
-            "Vivianne Confecção <2h (29/34)",
+            "Vivianne NIDO→Concluído <24h (13/24)",
+            "Vivianne Confecção <2h (31/35)",
             "Caio Ocupação <30d (1/7)",
-            "Caio Documentação <24h (15/34)"
+            "Caio Documentação <24h (15/35)"
           ],
           "data": [
-            37.5,
-            85.3,
+            54.2,
+            88.6,
             14.3,
-            44.1
+            42.9
           ],
           "metas": [
             100,
@@ -11187,8 +11259,8 @@
             "Caio"
           ],
           "data": [
-            6.14,
-            2.622
+            7.137,
+            2.571
           ],
           "colors": [
             "#000",
@@ -11200,18 +11272,18 @@
         {
           "nome": "NIDO→Concluído <24h",
           "resp": "Vivianne",
-          "meta": "≤24h corrido",
-          "ok": 9,
+          "meta": "≤24h úteis",
+          "ok": 13,
           "tot": 24,
-          "pct": 37.5
+          "pct": 54.2
         },
         {
           "nome": "Confecção <2h",
           "resp": "Vivianne",
-          "meta": "≤2h corrido (Pipefy)",
-          "ok": 29,
-          "tot": 34,
-          "pct": 85.3
+          "meta": "≤2h úteis",
+          "ok": 31,
+          "tot": 35,
+          "pct": 88.6
         },
         {
           "nome": "Ocupação <30d",
@@ -11226,14 +11298,14 @@
           "resp": "Caio",
           "meta": "≤24h úteis",
           "ok": 15,
-          "tot": 34,
-          "pct": 44.1
+          "tot": 35,
+          "pct": 42.9
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Confecção <2h: 85.3%."
+          "txt": "Vivianne lidera Confecção <2h: 88.6%."
         },
         {
           "tipo": "neg",
@@ -11241,7 +11313,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 99 cards no período."
+          "txt": "Volume de 101 cards no período."
         }
       ]
     },
@@ -11250,17 +11322,17 @@
       "titulo": "Rescisão de Locação",
       "kpis": [
         {
-          "v": "81.2%",
+          "v": "81.8%",
           "l": "Vivianne Levant. Taxas Final",
           "cls": "ok"
         },
         {
-          "v": "82.8%",
+          "v": "90.0%",
           "l": "Vivianne Levant. Taxas Prop",
           "cls": "ok"
         },
         {
-          "v": "53.3%",
+          "v": "56.2%",
           "l": "Natália Boleto final <15d",
           "cls": "ok"
         },
@@ -11276,18 +11348,18 @@
           "titulo": "Indicadores · Rescisão Loc.",
           "full": true,
           "labels": [
-            "Vivianne Levant. Taxas Prop <2h (24/29)",
-            "Vivianne Levant. Taxas Final <2 (26/32)",
-            "Natália Boleto prop <24h (11/14)",
-            "Natália Boleto final <15d (8/15)",
+            "Vivianne Levant. Taxas Prop <2h (27/30)",
+            "Vivianne Levant. Taxas Final <2 (27/33)",
+            "Natália Boleto prop <24h (12/15)",
+            "Natália Boleto final <15d (9/16)",
             "Gardênia Boleto prop <24h (10/15)",
             "Gardênia Boleto final <15d (9/10)"
           ],
           "data": [
-            82.8,
-            81.2,
-            78.6,
-            53.3,
+            90.0,
+            81.8,
+            80.0,
+            56.2,
             66.7,
             90.0
           ],
@@ -11309,9 +11381,9 @@
             "Natália"
           ],
           "data": [
-            8.2,
+            8.591,
             8.066,
-            6.342
+            6.576
           ],
           "colors": [
             "#000",
@@ -11324,34 +11396,34 @@
         {
           "nome": "Levant. Taxas Prop <2h",
           "resp": "Vivianne",
-          "meta": "≤2h corrido",
-          "ok": 24,
-          "tot": 29,
-          "pct": 82.8
+          "meta": "≤2h úteis",
+          "ok": 27,
+          "tot": 30,
+          "pct": 90.0
         },
         {
           "nome": "Levant. Taxas Final <2h",
           "resp": "Vivianne",
-          "meta": "≤2h corrido",
-          "ok": 26,
-          "tot": 32,
-          "pct": 81.2
+          "meta": "≤2h úteis",
+          "ok": 27,
+          "tot": 33,
+          "pct": 81.8
         },
         {
           "nome": "Boleto prop <24h",
           "resp": "Natália",
           "meta": "≤24h corrido",
-          "ok": 11,
-          "tot": 14,
-          "pct": 78.6
+          "ok": 12,
+          "tot": 15,
+          "pct": 80.0
         },
         {
           "nome": "Boleto final <15d",
           "resp": "Natália",
           "meta": "≤15d corrido",
-          "ok": 8,
-          "tot": 15,
-          "pct": 53.3
+          "ok": 9,
+          "tot": 16,
+          "pct": 56.2
         },
         {
           "nome": "Boleto prop <24h",
@@ -11373,15 +11445,15 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Gardênia lidera Boleto final <15d: 90.0%."
+          "txt": "Vivianne lidera Levant. Taxas Prop <2h: 90.0%."
         },
         {
           "tipo": "neg",
-          "txt": "Natália Boleto final <15d: 53.3% — gargalo do processo."
+          "txt": "Natália Boleto final <15d: 56.2% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 115 cards no período."
+          "txt": "Volume de 119 cards no período."
         }
       ]
     },
@@ -11416,15 +11488,15 @@
           "titulo": "Indicadores · Reparos",
           "full": true,
           "labels": [
-            "Natália Orçamento <4h (23/29)",
+            "Natália Orçamento <4h (25/31)",
             "Natália Pós-venda ≤7d (11/42)",
-            "Gardênia Orçamento <4h (43/61)",
+            "Gardênia Orçamento <4h (44/62)",
             "Gardênia Pós-venda ≤7d (9/39)"
           ],
           "data": [
-            79.3,
+            80.6,
             26.2,
-            70.5,
+            71.0,
             23.1
           ],
           "metas": [
@@ -11442,8 +11514,8 @@
             "Gardênia"
           ],
           "data": [
-            4.743,
-            4.205
+            4.797,
+            4.224
           ],
           "colors": [
             "#000",
@@ -11456,9 +11528,9 @@
           "nome": "Orçamento <4h",
           "resp": "Natália",
           "meta": "≤4h úteis",
-          "ok": 23,
-          "tot": 29,
-          "pct": 79.3
+          "ok": 25,
+          "tot": 31,
+          "pct": 80.6
         },
         {
           "nome": "Pós-venda ≤7d",
@@ -11472,9 +11544,9 @@
           "nome": "Orçamento <4h",
           "resp": "Gardênia",
           "meta": "≤4h úteis",
-          "ok": 43,
-          "tot": 61,
-          "pct": 70.5
+          "ok": 44,
+          "tot": 62,
+          "pct": 71.0
         },
         {
           "nome": "Pós-venda ≤7d",
@@ -11488,7 +11560,7 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Natália lidera Orçamento <4h: 79.3%."
+          "txt": "Natália lidera Orçamento <4h: 80.6%."
         },
         {
           "tipo": "neg",
@@ -11496,7 +11568,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 171 cards no período."
+          "txt": "Volume de 174 cards no período."
         }
       ]
     },
@@ -11520,7 +11592,7 @@
           "cls": "bad"
         },
         {
-          "v": "61.5%",
+          "v": "80.8%",
           "l": "Vivianne Confecção <4h",
           "cls": "ok"
         }
@@ -11531,7 +11603,7 @@
           "titulo": "Indicadores · Renovação",
           "full": true,
           "labels": [
-            "Vivianne Confecção <4h (16/26)",
+            "Vivianne Confecção <4h (21/26)",
             "Vivianne Finalização <16h (9/17)",
             "Natália Contato >60d (3/16)",
             "Natália Assinado antes vencime (4/13)",
@@ -11540,7 +11612,7 @@
             "Caio Avaliação >90d (14/42)"
           ],
           "data": [
-            61.5,
+            80.8,
             52.9,
             18.8,
             30.8,
@@ -11568,7 +11640,7 @@
             "Natália"
           ],
           "data": [
-            5.724,
+            6.685,
             3.733,
             3.333,
             2.596
@@ -11585,10 +11657,10 @@
         {
           "nome": "Confecção <4h",
           "resp": "Vivianne",
-          "meta": "≤4h corrido (Pipefy)",
-          "ok": 16,
+          "meta": "≤4h úteis",
+          "ok": 21,
           "tot": 26,
-          "pct": 61.5
+          "pct": 80.8
         },
         {
           "nome": "Finalização <16h",
@@ -11642,7 +11714,7 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Confecção <4h: 61.5%."
+          "txt": "Vivianne lidera Confecção <4h: 80.8%."
         },
         {
           "tipo": "neg",
@@ -11659,8 +11731,8 @@
       "titulo": "Inadimplência",
       "kpis": [
         {
-          "v": "83.4%",
-          "l": "Vivianne Cobrança <24h",
+          "v": "87.9%",
+          "l": "Vivianne Cobrança <8h úteis",
           "cls": "ok"
         },
         {
@@ -11685,12 +11757,12 @@
           "titulo": "Indicadores · Inadimplência",
           "full": true,
           "labels": [
-            "Vivianne Cobrança <24h (247/296)",
+            "Vivianne Cobrança <8h úteis (261/297)",
             "Vivianne CredPago ≤15d (13/17)",
             "Vivianne Negativação 7-9d (1/17)"
           ],
           "data": [
-            83.4,
+            87.9,
             76.5,
             5.9
           ],
@@ -11707,7 +11779,7 @@
             "Vivianne"
           ],
           "data": [
-            9.716
+            9.732
           ],
           "colors": [
             "#000"
@@ -11716,12 +11788,12 @@
       ],
       "indicadores": [
         {
-          "nome": "Cobrança <24h",
+          "nome": "Cobrança <8h úteis",
           "resp": "Vivianne",
-          "meta": "≤24h corrido",
-          "ok": 247,
-          "tot": 296,
-          "pct": 83.4
+          "meta": "≤8h úteis",
+          "ok": 261,
+          "tot": 297,
+          "pct": 87.9
         },
         {
           "nome": "CredPago ≤15d",
@@ -11743,7 +11815,7 @@
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Cobrança <24h: 83.4%."
+          "txt": "Vivianne lidera Cobrança <8h úteis: 87.9%."
         },
         {
           "tipo": "neg",
@@ -11760,12 +11832,12 @@
       "titulo": "Vistorias e Contestações (Marinho)",
       "kpis": [
         {
-          "v": "61",
+          "v": "62",
           "l": "vistorias no período",
           "cls": ""
         },
         {
-          "v": "62.3%",
+          "v": "62.9%",
           "l": "Laudo <48h",
           "cls": "ok"
         },
@@ -11786,12 +11858,12 @@
           "titulo": "Indicadores · Vistorias",
           "full": true,
           "labels": [
-            "Marinho Laudos entregues ≤48h  (38/61)",
+            "Marinho Laudos entregues ≤48h  (39/62)",
             "Marinho Vistorias dentro do te (34/45)",
             "Marinho Contestações respondid (1/7)"
           ],
           "data": [
-            62.3,
+            62.9,
             75.6,
             14.3
           ],
@@ -11808,7 +11880,7 @@
             "Marinho"
           ],
           "data": [
-            4.23
+            4.24
           ],
           "colors": [
             "#000"
@@ -11820,9 +11892,9 @@
           "nome": "Laudos entregues ≤48h após vistoria",
           "resp": "Marinho",
           "meta": "≤48h corrido",
-          "ok": 38,
-          "tot": 61,
-          "pct": 62.3
+          "ok": 39,
+          "tot": 62,
+          "pct": 62.9
         },
         {
           "nome": "Vistorias dentro do tempo padrão",
@@ -11835,7 +11907,7 @@
         {
           "nome": "Contestações respondidas <24h",
           "resp": "Marinho",
-          "meta": "≤24h corrido",
+          "meta": "≤24h úteis",
           "ok": 1,
           "tot": 7,
           "pct": 14.3
@@ -11852,7 +11924,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 113 cards no período."
+          "txt": "Volume de 114 cards no período."
         }
       ]
     },
@@ -11861,22 +11933,22 @@
       "titulo": "BackOffice",
       "kpis": [
         {
-          "v": "45.5%",
+          "v": "54.5%",
           "l": "Natália Pendência <24h",
-          "cls": "bad"
+          "cls": "ok"
         },
         {
-          "v": "11.1%",
+          "v": "22.2%",
           "l": "Gardênia Pendência <24h",
           "cls": "bad"
         },
         {
-          "v": "73.6%",
+          "v": "82.9%",
           "l": "Vivianne Concluído <24h",
           "cls": "ok"
         },
         {
-          "v": "33.9%",
+          "v": "32.8%",
           "l": "Vivianne Troca Titularidade <5d",
           "cls": "bad"
         }
@@ -11887,16 +11959,16 @@
           "titulo": "Indicadores · BackOffice",
           "full": true,
           "labels": [
-            "Vivianne Concluído <24h (128/174)",
-            "Vivianne Troca Titularidade <5d (20/59)",
-            "Natália Pendência <24h (5/11)",
-            "Gardênia Pendência <24h (2/18)"
+            "Vivianne Concluído <24h (145/175)",
+            "Vivianne Troca Titularidade <5d (19/58)",
+            "Natália Pendência <24h (6/11)",
+            "Gardênia Pendência <24h (4/18)"
           ],
           "data": [
-            73.6,
-            33.9,
-            45.5,
-            11.1
+            82.9,
+            32.8,
+            54.5,
+            22.2
           ],
           "metas": [
             100,
@@ -11914,9 +11986,9 @@
             "Gardênia"
           ],
           "data": [
-            5.373,
-            4.545,
-            1.111
+            5.781,
+            5.455,
+            2.222
           ],
           "colors": [
             "#000",
@@ -11929,44 +12001,44 @@
         {
           "nome": "Concluído <24h",
           "resp": "Vivianne",
-          "meta": "≤24h corrido",
-          "ok": 128,
-          "tot": 174,
-          "pct": 73.6
+          "meta": "≤24h úteis",
+          "ok": 145,
+          "tot": 175,
+          "pct": 82.9
         },
         {
           "nome": "Troca Titularidade <5d",
           "resp": "Vivianne",
           "meta": "≤5d úteis",
-          "ok": 20,
-          "tot": 59,
-          "pct": 33.9
+          "ok": 19,
+          "tot": 58,
+          "pct": 32.8
         },
         {
           "nome": "Pendência <24h",
           "resp": "Natália",
-          "meta": "≤24h corrido",
-          "ok": 5,
+          "meta": "≤24h úteis",
+          "ok": 6,
           "tot": 11,
-          "pct": 45.5
+          "pct": 54.5
         },
         {
           "nome": "Pendência <24h",
           "resp": "Gardênia",
-          "meta": "≤24h corrido",
-          "ok": 2,
+          "meta": "≤24h úteis",
+          "ok": 4,
           "tot": 18,
-          "pct": 11.1
+          "pct": 22.2
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Concluído <24h: 73.6%."
+          "txt": "Vivianne lidera Concluído <24h: 82.9%."
         },
         {
           "tipo": "neg",
-          "txt": "Gardênia Pendência <24h: 11.1% — gargalo do processo."
+          "txt": "Gardênia Pendência <24h: 22.2% — gargalo do processo."
         },
         {
           "tipo": "neu",
