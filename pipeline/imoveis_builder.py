@@ -123,7 +123,7 @@ def caio_inicio(df_comercial: pd.DataFrame, ref: pd.Timestamp) -> dict:
     df = filtrar_por_assignee(df, "Profissional responsável", "Caio")
     col_avt_in = "Primeira vez que entrou na fase Avaliação Técnica"
     sub = df.dropna(subset=[col_avt_in]).copy()
-    horas = (sub[col_avt_in] - sub["Criado em"]).dt.total_seconds() / 3600
+    horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_avt_in]), axis=1)
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
@@ -154,7 +154,7 @@ def caio_anuncio(df_comercial: pd.DataFrame, ref: pd.Timestamp) -> dict:
     sub = df[mask].copy()
     lib2 = liberacao[mask]
     pub2 = sub[col_pub]
-    horas = (pub2 - lib2).dt.total_seconds() / 3600
+    horas = pd.Series([horas_uteis(i, f) for i, f in zip(lib2, pub2)], index=pub2.index)
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
@@ -397,9 +397,19 @@ def _gen_indicador_uteis_fase(df: pd.DataFrame, fase: str, meta_h: float, titulo
 
 def _gen_indicador_tempo_col(df: pd.DataFrame, col_tempo_dias: str, meta_h: float,
                               titulo: str, cols_endereco: bool = False) -> dict:
-    """Helper genérico: usa coluna 'Tempo total na fase X (dias)' × 24 → horas."""
+    """Helper genérico para 'Tempo total na fase X (dias)'.
+
+    HORAS ÚTEIS desde 12/08/2026 (decisão da gestora): antes era × 24 (corrido).
+    A fase é derivada do próprio nome da coluna, então o denominador continua
+    exatamente o mesmo do calculate.py — só a medida do tempo muda (Armadilha 1).
+    """
+    fase = col_tempo_dias[len("Tempo total na fase "):-len(" (dias)")]
     sub = df.dropna(subset=[col_tempo_dias]).copy()
-    horas = sub[col_tempo_dias].astype(float) * 24
+    horas = sub.apply(lambda r: horas_uteis_fase(
+        r.get(f"Primeira vez que entrou na fase {fase}"),
+        r.get(f"Última vez que entrou na fase {fase}"),
+        r.get(f"Última vez que saiu da fase {fase}"),
+        r.get(col_tempo_dias)), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         end_col = _endereco_from_row(r) if cols_endereco else r["Título"]
@@ -442,7 +452,7 @@ def vivi_nido(df_cont_loc: pd.DataFrame, ref: pd.Timestamp) -> dict:
         "Primeira vez que entrou na fase Fechamento NIDO",
         "Primeira vez que entrou na fase Concluído",
         24, "Vivianne — Cont. Locação: NIDO→Concluído <24h ({ok}/{tot})",
-        modo="corrido",
+        modo="uteis",   # horas úteis desde 12/08/2026
     )
 
 
@@ -516,14 +526,14 @@ def vivi_cob(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_cob = "Primeira vez que entrou na fase Cobrança (inicial)"
     sub = df.dropna(subset=[col_cob]).copy()
-    horas = (sub[col_cob] - sub["Criado em"]).dt.total_seconds() / 3600
+    horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_cob]), axis=1)
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
+        rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= _meta_tol(8) else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"Vivianne — Inadim.: Cobrança <24h ({ok}/{len(sub)})",
+        "titulo": f"Vivianne — Inadim.: Cobrança <8h úteis ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Endereço", "Tempo", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
@@ -578,8 +588,7 @@ def vivi_bo_concl(df_bo: pd.DataFrame, ref: pd.Timestamp) -> dict:
     col_concl = "Primeira vez que entrou na fase Concluído"
     sem_troca = df[df[col_troca].isna()].copy()
     sub = sem_troca.dropna(subset=[col_concl]).copy()
-    horas = (sub[col_concl] - sub["Criado em"]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
+    horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_concl]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
@@ -746,8 +755,11 @@ def assessora_resc_adm_concl(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.
         if pd.isna(ini) or pd.isna(fim):
             rows.append([_im_label(r), r["Título"], "em andamento", "✗"])
         else:
-            d = dias_corridos(ini, fim)
-            rows.append([_im_label(r), r["Título"], f"{d:.1f}d", "✓" if d <= 10 else "✗"])
+            # dias_corridos() zera negativos; aqui negativo = passagem-fantasma
+            # (card arrastado no fechamento) e conta ✗ — ver calculate.py.
+            d = (pd.Timestamp(fim) - pd.Timestamp(ini)).total_seconds() / 86400
+            rotulo = f"{d:.1f}d" if d >= 0 else f"{d:.1f}d (arrasto)"
+            rows.append([_im_label(r), r["Título"], rotulo, "✓" if 0 <= d <= 10 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
         "titulo": f"{_label_pessoa(assessora)} — Resc. ADM: Conclusão ≤10 dias ({ok}/{len(sub)})",
@@ -782,62 +794,86 @@ def assessora_resc_adm_dist(df_resc_adm: pd.DataFrame, assessora: str, ref: pd.T
     }
 
 
-def _inicio_rescisao_loc(df: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
-    """Aplica regra refinada 11ª Ed para início de Boleto prop/final.
-    Retorna (inicio_prop, inicio_final) como séries indexadas por df.
+def _inicio_rescisao_loc(df: pd.DataFrame,
+                        distratos: dict | None = None) -> tuple[pd.Series, pd.Series]:
+    """Início de Boleto prop/final — espelha calculate.calc_assessora_rescisao_locacao.
+    Prioridade (13ª Ed): data_distrato do Imobiliar → campo Pipefy →
+    fase CHAVES RECEBIDAS → fallback por indicador.
     """
     chaves_campo = df["Data do recebimento das chaves:"]
     chaves_fase = df.get("Primeira vez que entrou na fase CHAVES RECEBIDAS",
                           pd.Series(pd.NaT, index=df.index))
     sai_vist = df["Última vez que saiu da fase Vistoria recebida"]
     sai_agend = df["Última vez que saiu da fase Agendamento de vistoria"]
-    chaves_efetivas = chaves_campo.where(chaves_campo.notna(), chaves_fase)
+
+    distratos = distratos or {}
+    def _distrato(r):
+        im = extrair_im(r.get("Imóvel")) or extrair_im(r.get("Título"))
+        return distratos.get(im, pd.NaT) if im is not None else pd.NaT
+    chaves_imob = (df.apply(_distrato, axis=1) if len(df)
+                   else pd.Series(pd.NaT, index=df.index))
+    chaves_imob = pd.to_datetime(chaves_imob, errors="coerce", utc=True)
+
+    chaves_efetivas = chaves_imob.where(chaves_imob.notna(), chaves_campo)
+    chaves_efetivas = chaves_efetivas.where(chaves_efetivas.notna(), chaves_fase)
     inicio_prop = chaves_efetivas.where(chaves_efetivas.notna(), sai_vist)
     inicio_final = chaves_efetivas.where(chaves_efetivas.notna(), sai_agend)
     return inicio_prop, inicio_final
 
 
-def assessora_rl_prop(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """Rescisão Loc. · Boleto prop <24h CORRIDO. Nova regra de início (11ª Ed)."""
+def assessora_rl_prop(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timestamp,
+                      distratos: dict | None = None) -> dict:
+    """Rescisão Loc. · Boleto prop ≤48h CORRIDO a partir da entrega das chaves.
+    48h = "até o fim do dia seguinte", porque data_distrato não tem hora (13ª Ed).
+    Negativo (levantamento antes da entrega) sai do denominador → linha 'revisar'.
+    """
     df = excluir_rascunhos(df_resc_loc)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    inicio_prop, _ = _inicio_rescisao_loc(df)
+    inicio_prop, _ = _inicio_rescisao_loc(df, distratos)
     col_lev_prop = "Primeira vez que entrou na fase Levant. Taxas Proporcionais"
     mask = inicio_prop.notna() & df[col_lev_prop].notna()
     sub = df[mask].copy()
     horas = (df.loc[mask, col_lev_prop] - inicio_prop[mask]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
-    rows = []
+    rows, tot = [], 0
     for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
+        if h < 0:
+            rows.append([_im_label(r), r["Título"], f"{h:.1f}h", "revisar"])
+        else:
+            tot += 1
+            rows.append([_im_label(r), r["Título"], _fmt_horas(h),
+                         "✓" if h <= 48 else "✗"])   # 48h já é a folga; sem tolerância
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"{_label_pessoa(assessora)} — Resc. Loc.: Boleto prop <24h ({ok}/{len(sub)})",
+        "titulo": f"{_label_pessoa(assessora)} — Resc. Loc.: Boleto prop <48h ({ok}/{tot})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
 
 
-def assessora_rl_final(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+def assessora_rl_final(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timestamp,
+                       distratos: dict | None = None) -> dict:
     """Rescisão Loc. · Boleto final <15d CORRIDO. Nova regra de início (11ª Ed)."""
     df = excluir_rascunhos(df_resc_loc)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    _, inicio_final = _inicio_rescisao_loc(df)
+    _, inicio_final = _inicio_rescisao_loc(df, distratos)
     col_env_bol = "Primeira vez que entrou na fase Envio do boleto final"
     mask = inicio_final.notna() & df[col_env_bol].notna()
     sub = df[mask].copy()
     dias = (df.loc[mask, col_env_bol] - inicio_final[mask]).dt.total_seconds() / 86400
-    dias = dias.clip(lower=0)
-    rows = []
+    rows, tot = [], 0
     for (_, r), d in zip(sub.iterrows(), dias):
-        rows.append([_im_label(r), r["Título"], _fmt_dias(d), "✓" if d <= 15 else "✗"])
+        if d < 0:
+            rows.append([_im_label(r), r["Título"], f"{d:.1f}d", "revisar"])
+        else:
+            tot += 1
+            rows.append([_im_label(r), r["Título"], _fmt_dias(d), "✓" if d <= 15 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"{_label_pessoa(assessora)} — Resc. Loc.: Boleto final <15d ({ok}/{len(sub)})",
+        "titulo": f"{_label_pessoa(assessora)} — Resc. Loc.: Boleto final <15d ({ok}/{tot})",
         "cols": ["Imóvel", "Título", "Dias", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
@@ -939,7 +975,9 @@ def assessora_bo(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict
     col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
     # Usa duration cumulativo (espelha calc_assessora_backoffice — evita inflação por reabertura).
     sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
-    horas = sub[col_dur].astype(float) * 24
+    horas = sub.apply(lambda r: horas_uteis_fase(
+        r.get(col_in), r.get("Última vez que entrou na fase 🚩 Pendência Assessor"),
+        r.get(col_out), r.get(col_dur)), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
@@ -1041,7 +1079,7 @@ def mar_cont(df_cont: pd.DataFrame, ref: pd.Timestamp) -> dict:
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_concl = "Primeira vez que entrou na fase Concluído"
     sub = df.dropna(subset=[col_concl]).copy()
-    horas = (sub[col_concl] - sub["Criado em"]).dt.total_seconds() / 3600
+    horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_concl]), axis=1)
     horas = horas.clip(lower=0)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
@@ -1110,8 +1148,10 @@ def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict
         f"{prefix}_resc_adm_ali":   assessora_resc_adm_ali(dfs["rescisao_adm"], pid, ref),
         f"{prefix}_resc_adm_concl": assessora_resc_adm_concl(dfs["rescisao_adm"], pid, ref),
         f"{prefix}_resc_adm_dist":  assessora_resc_adm_dist(dfs["rescisao_adm"], pid, ref),
-        f"{prefix}_rl_prop":       assessora_rl_prop(dfs["rescisao_loc"], pid, ref),
-        f"{prefix}_rl_final":      assessora_rl_final(dfs["rescisao_loc"], pid, ref),
+        f"{prefix}_rl_prop":       assessora_rl_prop(dfs["rescisao_loc"], pid, ref,
+                                                  dfs.get("distratos")),
+        f"{prefix}_rl_final":      assessora_rl_final(dfs["rescisao_loc"], pid, ref,
+                                                  dfs.get("distratos")),
         f"{prefix}_rep_orc":       assessora_rep_orc(dfs["reparos"], pid, ref),
         f"{prefix}_rep_pos":       assessora_rep_pos(dfs["reparos"], pid, ref),
         f"{prefix}_ren_cont":      assessora_ren_cont(dfs["renovacao"], pid, ref),

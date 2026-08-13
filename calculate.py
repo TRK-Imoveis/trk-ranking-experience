@@ -426,7 +426,7 @@ def calc_caio_comercial_locacao(df_comercial: pd.DataFrame, bonus_n: int = 0,
     """
     Caio · Comercial Locação · 3 indicadores · peso 10 · bônus aplicado aqui.
 
-    Indicador 1: Início <24h (peso 2.5) — Criado em → Primeira vez Avaliação Técnica, corrido
+    Indicador 1: Início <24h ÚTEIS (peso 2.5) — Criado em → Primeira vez Avaliação Técnica
     Indicador 2: Anúncio <72h (peso 2.5) — Última saída Aval.Téc OU Cadastro/NIDO → Publicação
     Indicador 3: Coluna correta (peso 5) — fase atual vs intervalo desocupação
 
@@ -437,15 +437,19 @@ def calc_caio_comercial_locacao(df_comercial: pd.DataFrame, bonus_n: int = 0,
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     df = filtrar_por_assignee(df, "Profissional responsável", "Caio")
 
-    # ─── Indicador 1: Início <24h corrido (Criado → Avaliação Técnica) ───
+    # ─── Indicador 1: Início <24h ÚTEIS (Criado → Avaliação Técnica) ───
     col_avt_in = "Primeira vez que entrou na fase Avaliação Técnica"
     df1 = df.dropna(subset=[col_avt_in])  # denominator = cards que entraram em Aval.Téc
-    delta_h = (df1[col_avt_in] - df1["Criado em"]).dt.total_seconds() / 3600
-    delta_h = delta_h.clip(lower=0)       # negativos = 0 (✓)
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    delta_h = pd.Series([horas_uteis(i, f) for i, f in
+                         zip(df1["Criado em"], df1[col_avt_in])], index=df1.index)
     ind1 = score_indicador(int((delta_h <= _meta_tol(24)).sum()), len(df1), 2.5)
     ind1["nome"] = "Comercial — Início processo <24h"
 
-    # ─── Indicador 2: Anúncio <72h corrido (saída Aval.Téc OU NIDO → Publicação) ───
+    # ─── Indicador 2: Anúncio <72h ÚTEIS (saída Aval.Téc OU NIDO → Publicação) ───
     col_avt_out = "Última vez que saiu da fase Avaliação Técnica"
     col_nido_out = "Última vez que saiu da fase Cadastro / Reativação no NIDO"
     col_pub = "Data publicação Anúncio"
@@ -456,9 +460,8 @@ def calc_caio_comercial_locacao(df_comercial: pd.DataFrame, bonus_n: int = 0,
     df2 = df[mask_den].copy()
     lib2 = liberacao[mask_den]
     pub2 = df2[col_pub]
-    # Numerador: (publicação - liberação) ≤ 72h corrido. Se liberação ou publicação ausente → falha.
-    delta_h2 = (pub2 - lib2).dt.total_seconds() / 3600
-    delta_h2 = delta_h2.clip(lower=0)
+    # Numerador: (publicação - liberação) ≤ 72h ÚTEIS. Se liberação ou publicação ausente → falha.
+    delta_h2 = pd.Series([horas_uteis(i, f) for i, f in zip(lib2, pub2)], index=df2.index)
     ok2 = int((delta_h2 <= _meta_tol(72)).sum())
     ind2 = score_indicador(ok2, len(df2), 2.5)
     ind2["nome"] = "Comercial — Anúncio publicado <72h"
@@ -780,7 +783,7 @@ def calc_vivianne_contrato_adm(df_cont_adm: pd.DataFrame,
 
 def calc_vivianne_rescisao_adm(df_resc_adm: pd.DataFrame,
                                ref: Optional[datetime] = None) -> dict:
-    """Vivianne · Rescisão ADM · Encerramento <4h corrido (peso 10)."""
+    """Vivianne · Rescisão ADM · Encerramento ≤4h ÚTEIS na fase (peso 10)."""
     # Usa duration cumulativo (Pipefy phases_history.duration). lastTimeOut-firstTimeIn
     # inflaria o tempo quando o card sai e volta para Encerramento (pendência financeira etc.).
     df = excluir_rascunhos(df_resc_adm)
@@ -788,8 +791,14 @@ def calc_vivianne_rescisao_adm(df_resc_adm: pd.DataFrame,
     col_in = "Primeira vez que entrou na fase Encerramento"
     col_out = "Última vez que saiu da fase Encerramento"
     col_dur = "Tempo total na fase Encerramento (dias)"
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    col_lastin = "Última vez que entrou na fase Encerramento"
     sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
-    horas = sub[col_dur].astype(float) * 24
+    horas = sub.apply(lambda r: horas_uteis_fase(
+        r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)), axis=1)
     ok = int((horas <= _meta_tol(4)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Rescisão ADM — Encerramento <4h"
@@ -800,26 +809,33 @@ def calc_vivianne_contrato_locacao(df_cont_loc: pd.DataFrame,
                                    ref: Optional[datetime] = None) -> dict:
     """
     Vivianne · Cont. Locação · 2 indicadores · peso 10.
-    3a: NIDO→Concluído <24h corrido (peso 5)
-    3b: Confecção <2h corrido (Pipefy: Tempo total na fase × 24h) (peso 5)
+    3a: NIDO→Concluído <24h ÚTEIS (peso 5)
+    3b: Confecção <2h ÚTEIS dentro da fase (peso 5)
     """
     df = excluir_rascunhos(df_cont_loc)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
 
-    # 3a: NIDO→Concluído <24h corrido
+    # 3a: NIDO→Concluído <24h ÚTEIS
     col_nido = "Primeira vez que entrou na fase Fechamento NIDO"
     col_concl = "Primeira vez que entrou na fase Concluído"
     sub_a = df.dropna(subset=[col_nido, col_concl]).copy()
-    horas_a = (sub_a[col_concl] - sub_a[col_nido]).dt.total_seconds() / 3600
-    horas_a = horas_a.clip(lower=0)
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    horas_a = sub_a.apply(lambda r: horas_uteis(r[col_nido], r[col_concl]), axis=1)
     ok_a = int((horas_a <= _meta_tol(24)).sum())
     ind_a = score_indicador(ok_a, len(sub_a), 5)
     ind_a["nome"] = "Cont. Locação — NIDO→Concluído <24h"
 
-    # 3b: Confecção <2h CORRIDO via Tempo total na fase × 24
-    col_tempo_conf = "Tempo total na fase Confecção do contrato de locação (dias)"
+    # 3b: Confecção <2h em horas ÚTEIS dentro da fase (era corrido até 12/08/2026)
+    F_CL = "Confecção do contrato de locação"
+    col_tempo_conf = f"Tempo total na fase {F_CL} (dias)"
     sub_b = df.dropna(subset=[col_tempo_conf]).copy()
-    horas_b = sub_b[col_tempo_conf].astype(float) * 24
+    horas_b = sub_b.apply(lambda r: horas_uteis_fase(
+        r.get(f"Primeira vez que entrou na fase {F_CL}"),
+        r.get(f"Última vez que entrou na fase {F_CL}"),
+        r.get(f"Última vez que saiu da fase {F_CL}"), r.get(col_tempo_conf)), axis=1)
     ok_b = int((horas_b <= _meta_tol(2)).sum())
     ind_b = score_indicador(ok_b, len(sub_b), 5)
     ind_b["nome"] = "Cont. Locação — Confecção <2h"
@@ -832,8 +848,8 @@ def calc_vivianne_rescisao_locacao(df_resc_loc: pd.DataFrame,
                                    ref: Optional[datetime] = None) -> dict:
     """
     Vivianne · Rescisão Loc. · 2 indicadores BackOffice · peso 10.
-    4a: Levant. Taxas Proporcionais <2h corrido (Pipefy col tempo × 24) (peso 5)
-    4b: Levantamento de taxas <2h corrido (Pipefy col tempo × 24) (peso 5)
+    4a: Levant. Taxas Proporcionais ≤2h ÚTEIS dentro da fase (peso 5)
+    4b: Levantamento de taxas ≤2h ÚTEIS dentro da fase (peso 5)
     """
     df = excluir_rascunhos(df_resc_loc)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
@@ -841,14 +857,26 @@ def calc_vivianne_rescisao_locacao(df_resc_loc: pd.DataFrame,
     col_prop = "Tempo total na fase Levant. Taxas Proporcionais (dias)"
     col_final = "Tempo total na fase Levantamento de taxas (dias)"
 
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    F_P = "Levant. Taxas Proporcionais"
     sub_a = df.dropna(subset=[col_prop]).copy()
-    horas_a = sub_a[col_prop].astype(float) * 24
+    horas_a = sub_a.apply(lambda r: horas_uteis_fase(
+        r.get(f"Primeira vez que entrou na fase {F_P}"),
+        r.get(f"Última vez que entrou na fase {F_P}"),
+        r.get(f"Última vez que saiu da fase {F_P}"), r.get(col_prop)), axis=1)
     ok_a = int((horas_a <= _meta_tol(2)).sum())
     ind_a = score_indicador(ok_a, len(sub_a), 5)
     ind_a["nome"] = "Rescisão Loc. — Levant. Taxas Prop <2h"
 
+    F_F = "Levantamento de taxas"
     sub_b = df.dropna(subset=[col_final]).copy()
-    horas_b = sub_b[col_final].astype(float) * 24
+    horas_b = sub_b.apply(lambda r: horas_uteis_fase(
+        r.get(f"Primeira vez que entrou na fase {F_F}"),
+        r.get(f"Última vez que entrou na fase {F_F}"),
+        r.get(f"Última vez que saiu da fase {F_F}"), r.get(col_final)), axis=1)
     ok_b = int((horas_b <= _meta_tol(2)).sum())
     ind_b = score_indicador(ok_b, len(sub_b), 5)
     ind_b["nome"] = "Rescisão Loc. — Levant. Taxas Final <2h"
@@ -868,8 +896,16 @@ def calc_vivianne_renovacao(df_renov: pd.DataFrame,
     df = aplicar_cutoff(df, "Criado em", ref=ref)
 
     col_tempo_conf = "Tempo total na fase Confecção do contrato (dias)"
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    F_C = "Confecção do contrato"
     sub_5 = df.dropna(subset=[col_tempo_conf]).copy()
-    horas_5 = sub_5[col_tempo_conf].astype(float) * 24
+    horas_5 = sub_5.apply(lambda r: horas_uteis_fase(
+        r.get(f"Primeira vez que entrou na fase {F_C}"),
+        r.get(f"Última vez que entrou na fase {F_C}"),
+        r.get(f"Última vez que saiu da fase {F_C}"), r.get(col_tempo_conf)), axis=1)
     ok_5 = int((horas_5 <= _meta_tol(4)).sum())
     ind_5 = score_indicador(ok_5, len(sub_5), 5)
     ind_5["nome"] = "Renovação — Confecção <4h"
@@ -890,7 +926,7 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
                                 ref: Optional[datetime] = None) -> dict:
     """
     Vivianne · Inadimplência · 3 indicadores Pipefy + bônus.
-    7: Cobrança <24h corrido (Criado em → entrada Cobrança inicial) (peso 2)
+    7: Cobrança ≤8h ÚTEIS (Criado em → entrada Cobrança inicial) (peso 2)
     8: CredPago ≤15d corrido (Vencimento 1º Boleto: → entrada CredPago: Acionar) (peso 1)
     9: Negativação 7-9d corrido (Vencimento 1º Boleto: → entrada Negativação) (peso 1)
 
@@ -899,14 +935,20 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     df = excluir_rascunhos(df_inad)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
 
-    # 7: Cobrança <24h corrido
+    # 7: Cobrança ≤8h ÚTEIS
     col_cob = "Primeira vez que entrou na fase Cobrança (inicial)"  # nome no manual / fields_map (com parênteses)
     sub_7 = df.dropna(subset=[col_cob]).copy()
-    horas_7 = (sub_7[col_cob] - sub_7["Criado em"]).dt.total_seconds() / 3600
-    horas_7 = horas_7.clip(lower=0)
-    ok_7 = int((horas_7 <= _meta_tol(24)).sum())
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    # ⚠️ META REAPERTADA junto com a conversão: em horas úteis, 24h aprovaria
+    # 96,6% dos cards e o indicador deixaria de discriminar. 8h úteis = "no
+    # mesmo dia útil", que preserva a urgência original sem exigir madrugada.
+    horas_7 = sub_7.apply(lambda r: horas_uteis(r["Criado em"], r[col_cob]), axis=1)
+    ok_7 = int((horas_7 <= _meta_tol(8)).sum())
     ind_7 = score_indicador(ok_7, len(sub_7), 2)
-    ind_7["nome"] = "Inadimplência — Cobrança <24h"
+    ind_7["nome"] = "Inadimplência — Cobrança <8h úteis"
 
     # 8: CredPago ≤15d corrido a partir de Vencimento 1º Boleto:
     col_venc = "Vencimento 1º Boleto:"
@@ -935,7 +977,7 @@ def calc_vivianne_backoffice(df_bo: pd.DataFrame,
     """
     Vivianne · BackOffice · 2 indicadores · peso 10.
     Separar cards por 'Primeira vez fase ↪️ Troca de Titularidade':
-    - SEM troca → Indicador 10: Concluído <24h corrido (peso 5)
+    - SEM troca → Indicador 10: Concluído <24h ÚTEIS (peso 5)
     - COM troca → Indicador 11: Troca <5d úteis = 50h úteis (peso 5)
     """
     df = excluir_rascunhos(df_bo)
@@ -947,10 +989,13 @@ def calc_vivianne_backoffice(df_bo: pd.DataFrame,
     com_troca = df[df[col_troca].notna()].copy()
     sem_troca = df[df[col_troca].isna()].copy()
 
-    # 10: SEM troca, Concluído <24h corrido
+    # 10: SEM troca, Concluído <24h ÚTEIS
     sub_10 = sem_troca.dropna(subset=[col_concl]).copy()
-    horas_10 = (sub_10[col_concl] - sub_10["Criado em"]).dt.total_seconds() / 3600
-    horas_10 = horas_10.clip(lower=0)
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    horas_10 = sub_10.apply(lambda r: horas_uteis(r["Criado em"], r[col_concl]), axis=1)
     ok_10 = int((horas_10 <= _meta_tol(24)).sum())
     ind_10 = score_indicador(ok_10, len(sub_10), 5)
     ind_10["nome"] = "BackOffice — Concluído <24h"
@@ -1042,6 +1087,11 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
     return {"nota": nota_processo([ind], bonus_n=bonus_n), "indicadores": [ind]}
 
 
+# Cards com ciclo NEGATIVO na Conclusão da Rescisão ADM (passagem-fantasma).
+# Contam ✗ e ficam aqui para conferência manual da gestora.
+_RESC_ADM_FANTASMA: list = []
+
+
 def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
                                 ref: Optional[datetime] = None) -> dict:
     """
@@ -1057,7 +1107,7 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
 
     Indicador 1 — Alinhamento com o proprietário ≤24h (peso 4)
       Medida: SOMA do tempo dentro da fase ("Tempo total na fase ... (dias)" × 24).
-      Meta 24h corridas + 30 min de tolerância. Denominador: tempo na fase > 0.
+      Meta 24h ÚTEIS + 30 min de tolerância. Denominador: tempo na fase > 0.
 
     Indicador 2 — Conclusão da rescisão ≤10 dias (peso 6)
       PRIMEIRA saída da Caixa de entrada → PRIMEIRA saída do Repasse final.
@@ -1084,7 +1134,12 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
     # ── Indicador 1: Alinhamento ≤24h (tempo DENTRO da fase, imune a reabertura)
     col_ali_dur = f"Tempo total na fase {F_ALI} (dias)"
     if col_ali_dur in df.columns:
-        horas_ali = pd.to_numeric(df[col_ali_dur], errors="coerce") * 24
+        # horas ÚTEIS dentro da fase (decisão da gestora, 12/08/2026)
+        horas_ali = df.apply(lambda r: horas_uteis_fase(
+            r.get(f"Primeira vez que entrou na fase {F_ALI}"),
+            r.get(f"Última vez que entrou na fase {F_ALI}"),
+            r.get(f"Última vez que saiu da fase {F_ALI}"),
+            r.get(col_ali_dur)), axis=1)
     else:  # fase ainda não registrada em fields_map.json
         horas_ali = pd.Series(dtype="float64", index=df.index)
     sub_1 = df[horas_ali.notna() & (horas_ali > 0)]
@@ -1108,8 +1163,19 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
                                   r.get(f"Tempo total na fase {F_REP} (dias)"))
         if pd.isna(inicio) or pd.isna(fim):
             continue  # ainda na fase Repasse (ou sem saída da Caixa) → ✗
-        if dias_corridos(inicio, fim) <= 10:
+        # ⚠️ NÃO usar dias_corridos() aqui: ele zera negativos, e negativo neste
+        # indicador NÃO é erro de digitação — é a passagem-fantasma. O card foi
+        # arrastado pelas fases no fechamento e registrou entrada no Repasse
+        # ANTES de sair da Caixa de entrada. Exemplo: IM1353, que ficou parado
+        # na Caixa de 02/12/2025 a 14/05/2026 (5 meses e meio) e era premiado
+        # com ✓ pela regra "negativo → 0". Decisão da gestora em 13/08/2026:
+        # ciclo negativo conta ✗ (mesmo tratamento dado ao IM1827).
+        dias = (pd.Timestamp(fim) - pd.Timestamp(inicio)).total_seconds() / 86400
+        if 0 <= dias <= 10:
             ok_2 += 1
+        elif dias < 0:
+            _RESC_ADM_FANTASMA.append(
+                (assessora, str(r.get("Título") or r.get("Titulo") or ""), round(dias, 2)))
     ind_2 = score_indicador(ok_2, len(sub_2), 6)
     ind_2["nome"] = "Rescisão ADM — Conclusão ≤10 dias"
 
@@ -1125,29 +1191,47 @@ def calc_assessora_rescisao_adm(df_resc_adm: pd.DataFrame, assessora: str,
     return {"nota": nota, "indicadores": [ind_1, ind_2, ind_bonus], "bonus_n": bonus_n}
 
 
+# Cards com levantamento registrado ANTES da entrega das chaves.
+# Saem do denominador e ficam aqui para conferência manual.
+_RESC_LOC_NEGATIVOS: list = []
+
+
 def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
-                                    ref: Optional[datetime] = None) -> dict:
+                                    ref: Optional[datetime] = None,
+                                    distratos: Optional[dict] = None) -> dict:
     """
     Assessora · Rescisão Loc. · 2 indicadores · peso 5.
 
-    REGRA DE INÍCIO (refinada na 11ª Ed — decisão da gestora 14/05/2026):
-        Ordem de prioridade para identificar quando a assessora assumiu o caso:
-          1ª) "Data do recebimento das chaves:" (campo COM dois-pontos, fase CHAVES RECEBIDAS)
-          2ª) "Primeira vez que entrou na fase CHAVES RECEBIDAS" (firstTimeIn)
-          3ª) Fallback antigo:
-              - Boleto prop : "Última vez que saiu da fase Vistoria recebida"
-              - Boleto final: "Última vez que saiu da fase Agendamento de vistoria"
+    REGRA DE INÍCIO — REDESENHADA NA 13ª ED (decisão da gestora 13/08/2026)
+    ----------------------------------------------------------------------
+    A contagem começa quando as chaves são ENTREGUES. Ordem de prioridade:
 
-        Justificativa: o locatário pode receber a vistoria com pendências e levar
-        dias/semanas para reparar antes de entregar as chaves. Esse intervalo NÃO
-        é responsabilidade da assessora — a contagem começa quando as chaves são
-        efetivamente entregues.
+      1ª) `data_distrato` do Imobiliar (tabela imobiliar_contratos_loc, cruzada
+          pelo IM) — o campo "Encerramento". É a data que alimenta o cálculo do
+          boleto final, então a equipe tem incentivo real de preenchê-la certo.
+          ⚠️ NÃO usar o campo "Chaves" (`dataentrega`) do Imobiliar: aquele é
+          quando a assessora SENTOU para registrar. Se recebe hoje e cadastra
+          amanhã, traz amanhã — e o indicador viraria circular.
+      2ª) `Data do recebimento das chaves:` (campo digitado no Pipefy)
+      3ª) `Primeira vez que entrou na fase CHAVES RECEBIDAS`
+      4ª) Fallback antigo, específico por indicador:
+            Boleto prop  → `Última vez que saiu da fase Vistoria recebida`
+            Boleto final → `Última vez que saiu da fase Agendamento de vistoria`
 
-    Indicadores:
-      4: Boleto prop <24h corrido (peso 2)
-          Fim: Primeira vez que entrou na fase Levant. Taxas Proporcionais
-      5: Boleto final <15d corrido (peso 3)
-          Fim: Primeira vez que entrou na fase Envio do boleto final
+    POR QUE 48h E NÃO 24h NO BOLETO PROP
+    ------------------------------------
+    `data_distrato` é um DATE — não tem hora. A meta continua sendo "responder
+    em 24h", mas medida a partir da meia-noite da data de entrega ela vira
+    "até o fim do dia seguinte" = 48h. Recebeu na sexta, tem até segunda? Não:
+    sexta + 48h cai no domingo, então precisa sair até domingo — ou seja, na
+    prática precisa passar na sexta ou no sábado. É exatamente o que a gestora
+    pediu em 13/08/2026.
+
+    NEGATIVOS
+    ---------
+    Levantamento registrado ANTES da entrega das chaves não é atraso nem
+    acerto: é inconsistência de cadastro. Sai do denominador e vai para
+    `_RESC_LOC_NEGATIVOS` para conferência manual (IM344 e IM1742 hoje).
 
     Filtro: 'Assessor (lista)' contém nome (validado contra baseline 10ª).
     """
@@ -1162,31 +1246,48 @@ def calc_assessora_rescisao_locacao(df_resc_loc: pd.DataFrame, assessora: str,
     sai_vist = df["Última vez que saiu da fase Vistoria recebida"]
     sai_agend = df["Última vez que saiu da fase Agendamento de vistoria"]
 
-    # 1ª prioridade: campo Data do recebimento das chaves: (com dois-pontos)
-    # 2ª prioridade: firstTimeIn da fase CHAVES RECEBIDAS
-    # 3ª prioridade: fallback específico por indicador (Vistoria recebida / Agendamento)
-    chaves_efetivas = chaves_campo.where(chaves_campo.notna(), chaves_fase)
+    # 1ª prioridade: data_distrato do Imobiliar (meia-noite de Brasília, em UTC)
+    distratos = distratos or {}
+    def _distrato(r) -> pd.Timestamp:
+        im = extrair_im(r.get("Imóvel")) or extrair_im(r.get("Título"))
+        return distratos.get(im, pd.NaT) if im is not None else pd.NaT
+    chaves_imob = (df.apply(_distrato, axis=1) if len(df)
+                   else pd.Series(pd.NaT, index=df.index))
+    chaves_imob = pd.to_datetime(chaves_imob, errors="coerce", utc=True)
+
+    chaves_efetivas = chaves_imob.where(chaves_imob.notna(), chaves_campo)
+    chaves_efetivas = chaves_efetivas.where(chaves_efetivas.notna(), chaves_fase)
     inicio_prop = chaves_efetivas.where(chaves_efetivas.notna(), sai_vist)
     inicio_final = chaves_efetivas.where(chaves_efetivas.notna(), sai_agend)
     col_lev_prop = "Primeira vez que entrou na fase Levant. Taxas Proporcionais"
     col_env_bol = "Primeira vez que entrou na fase Envio do boleto final"
 
-    # 4: Boleto prop <24h
+    def _registrar_negativos(df_sub, delta, unidade):
+        for idx in delta[delta < 0].index:
+            _RESC_LOC_NEGATIVOS.append((assessora, unidade,
+                                        str(df_sub.at[idx, "Título"]),
+                                        round(float(delta[idx]), 2)))
+
+    # 4: Boleto prop ≤48h (= "até o dia seguinte à entrega das chaves")
     mask_4 = inicio_prop.notna() & df[col_lev_prop].notna()
     sub_4 = df[mask_4].copy()
     horas_4 = (df.loc[mask_4, col_lev_prop] - inicio_prop[mask_4]).dt.total_seconds() / 3600
-    horas_4 = horas_4.clip(lower=0)
-    ok_4 = int((horas_4 <= _meta_tol(24)).sum())
-    ind_4 = score_indicador(ok_4, len(sub_4), 2)
-    ind_4["nome"] = "Rescisão Loc. — Boleto prop <24h"
+    _registrar_negativos(sub_4, horas_4, "Boleto prop (h)")
+    val_4 = horas_4[horas_4 >= 0]           # negativo sai do denominador
+    # 48h SEM tolerância: os 48h já SÃO a folga (meta de 24h medida a partir
+    # da meia-noite da data de entrega). Somar margem seria contar duas vezes.
+    ok_4 = int((val_4 <= 48).sum())
+    ind_4 = score_indicador(ok_4, len(val_4), 2)
+    ind_4["nome"] = "Rescisão Loc. — Boleto prop <48h"
 
     # 5: Boleto final <15d
     mask_5 = inicio_final.notna() & df[col_env_bol].notna()
     sub_5 = df[mask_5].copy()
     dias_5 = (df.loc[mask_5, col_env_bol] - inicio_final[mask_5]).dt.total_seconds() / 86400
-    dias_5 = dias_5.clip(lower=0)
-    ok_5 = int((dias_5 <= 15).sum())
-    ind_5 = score_indicador(ok_5, len(sub_5), 3)
+    _registrar_negativos(sub_5, dias_5, "Boleto final (d)")
+    val_5 = dias_5[dias_5 >= 0]
+    ok_5 = int((val_5 <= 15).sum())
+    ind_5 = score_indicador(ok_5, len(val_5), 3)
     ind_5["nome"] = "Rescisão Loc. — Boleto final <15d"
 
     indicadores = [ind_4, ind_5]
@@ -1261,7 +1362,7 @@ def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
     """
     Assessora · BackOffice · 1 indicador · peso 10.
     Filtro: 'Responsável' contém nome (NÃO 'Criador').
-    10: Pendência Assessor <24h corrido (entrada/saída fase 🚩 Pendência Assessor).
+    10: Pendência Assessor ≤24h ÚTEIS dentro da fase 🚩 Pendência Assessor.
     """
     df = excluir_rascunhos(df_bo)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
@@ -1275,8 +1376,14 @@ def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
     col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
     # Usa duration cumulativo (Pipefy phases_history.duration). lastTimeOut-firstTimeIn
     # inflaria o tempo quando o card sai e volta para a fase (reaberturas).
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    col_lastin = "Última vez que entrou na fase 🚩 Pendência Assessor"
     sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
-    horas = sub[col_dur].astype(float) * 24
+    horas = sub.apply(lambda r: horas_uteis_fase(
+        r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)), axis=1)
     ok = int((horas <= _meta_tol(24)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "BackOffice — Pendência <24h"
@@ -1511,7 +1618,7 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
 def calc_marinho_contestacoes(df_cont: pd.DataFrame, ref: Optional[datetime] = None) -> dict:
     """
     Marinho · Contestações · 1 indicador · peso 10 · PROCESSO SEPARADO.
-    Respondida <24h corrido: Criado em → Primeira vez fase Concluído.
+    Respondida ≤24h ÚTEIS: Criado em → Primeira vez fase Concluído.
     Denominador: cards que chegaram a Concluído.
     """
     df = excluir_rascunhos(df_cont)
@@ -1519,8 +1626,11 @@ def calc_marinho_contestacoes(df_cont: pd.DataFrame, ref: Optional[datetime] = N
 
     col_concl = "Primeira vez que entrou na fase Concluído"
     sub = df.dropna(subset=[col_concl]).copy()
-    horas = (sub[col_concl] - sub["Criado em"]).dt.total_seconds() / 3600
-    horas = horas.clip(lower=0)
+    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
+    # corridas empurravam gente a trabalhar fora do expediente por medo do
+    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
+    # de manhã é medido igual a quem entrega quinta à tarde.
+    horas = sub.apply(lambda r: horas_uteis(r["Criado em"], r[col_concl]), axis=1)
     ok = int((horas <= _meta_tol(24)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Contestações respondidas <24h"
