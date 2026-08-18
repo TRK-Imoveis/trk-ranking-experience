@@ -78,19 +78,53 @@ SHORT = {
 # Carregamento de DataFrames
 # ────────────────────────────────────────────────────────────────────
 
-def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True) -> dict[str, pd.DataFrame]:
-    """Retorna dict com todos os DFs (Pipefy + Octadesk + Imobiliar)."""
+def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
+                        fonte: str = "api") -> dict[str, pd.DataFrame]:
+    """Retorna dict com todos os DFs (Pipefy + Octadesk + Imobiliar).
+
+    fonte="api"   → extract_pipefy (produção)
+    fonte="banco" → extract_dw (dw_trk, painel-sombra de ?fonte=banco)
+
+    O `extract_dw` devolve o MESMO contrato de colunas do `extract_pipefy`, então
+    nada em calculate.py/imoveis_builder.py muda. É por isso que o painel-sombra
+    NÃO é um projeto duplicado: mesma regra, mesmo código, só o extrator troca.
+    Duplicar o projeto significaria manter duas cópias do calculate.py — e na
+    primeira regra alterada em só um lado, a comparação viraria ruído.
+    """
     pipes = [
         "comercial_locacao", "cont_locacao", "cont_adm", "rescisao_adm", "rescisao_loc",
         "reparos", "renovacao", "inadimplencia", "backoffice", "dirf_darf",
         "vistorias", "contestacoes",
     ]
-    dfs = {k: extract_pipe(k, use_cache=use_cache, verbose=verbose) for k in pipes}
+    if fonte == "banco":
+        from pipeline.extract_dw import extract_pipe as _extract  # import tardio: só quem usa precisa do psycopg2
+        if verbose:
+            print("\n[fonte] dw_trk (painel-sombra) — extract_dw")
+    else:
+        _extract = extract_pipe
+    dfs = {k: _extract(k, use_cache=use_cache, verbose=verbose) for k in pipes}
 
     if verbose:
         print("\n[octadesk] carregando arquivos locais…")
     oct_ = extract_octadesk(verbose=verbose)
     dfs.update(oct_)  # adiciona conversas, tickets, aval_tickets
+
+    # PAINEL-SOMBRA: WhatsApp do banco (18/08/2026).
+    # Só as CONVERSAS migram por enquanto. Os TICKETS continuam no XLSX nas duas
+    # fontes porque duas das três exclusões obrigatórias não são reproduzíveis
+    # no dw_trk hoje: `categoria_assunto` chega 100% nula (mata a exclusão
+    # "Cancelado / Spam") e o assunto "Tarefa" não está em `summary`. Sem elas o
+    # denominador infla ~40% e a nota cai por falta de dado, não por desempenho.
+    # Ver claude/OCTADESK_no_dw_18-08-2026.md.
+    if fonte == "banco":
+        try:
+            from pipeline.extract_octadesk_dw import extract_conversas_dw
+            if verbose:
+                print("[octadesk] conversas: trocando XLSX pelo dw_trk…")
+            dfs["conversas"] = extract_conversas_dw(verbose=verbose)
+        except Exception as exc:
+            print(f"[octadesk] conversas do banco indisponíveis ({exc.__class__.__name__}) "
+                  f"— painel-sombra segue com o XLSX nesse indicador")
 
     if verbose:
         print("\n[imobiliar] carregando CSVs locais…")
@@ -331,6 +365,12 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
         "_meta": {
             "geradoEm": datetime.utcnow().isoformat() + "Z",
             "ref": ref.isoformat(),
+            # De onde vieram os dados do Pipefy nesta rodada + quando o ETL
+            # carregou o banco pela última vez. O painel-sombra (?fonte=banco)
+            # mostra essa hora na tela: sem ela não dá para distinguir
+            # "o banco calculou diferente" de "o banco está com dado de quinta".
+            "fonte": dfs.get("_fonte", "api"),
+            "etl_ultima_carga": dfs.get("_etl_ultima_carga"),
             "octadesk_disponivel": bool(len(dfs.get("conversas", pd.DataFrame()))) or
                                     bool(len(dfs.get("tickets", pd.DataFrame()))),
             "imobiliar_disponivel": bool(len(dfs.get("imobiliar", {}).get("boletos", pd.DataFrame()))),
@@ -510,12 +550,32 @@ def _contar_bonus_assessora(dfs: dict, assessora: str, ref: Optional[pd.Timestam
 def main(argv: list[str]) -> None:
     use_cache = "--no-cache" not in argv
     validate = "--validate" in argv
+    # PAINEL-SOMBRA (18/08/2026, pedido da gestora)
+    # --fonte banco → lê do dw_trk e grava docs/dados/banco.json, SEM tocar no
+    # atual.json. O painel abre em ?fonte=banco e carrega esse arquivo. Serve
+    # para rodar as duas fontes em paralelo até a migração fechar.
+    fonte = "api"
+    if "--fonte" in argv:
+        fonte = str(argv[argv.index("--fonte") + 1]).strip().lower()
+        if fonte not in ("api", "banco"):
+            raise SystemExit(f"--fonte aceita 'api' ou 'banco', recebi {fonte!r}")
+    saida = OUT_JSON if fonte == "api" else OUT_DIR / "banco.json"
     ref = pd.Timestamp.utcnow()
     if "--ref" in argv:
         ref = pd.Timestamp(argv[argv.index("--ref") + 1], tz="UTC")
 
-    print(f"[run] use_cache={use_cache}  validate={validate}  ref={ref.isoformat()}")
-    dfs = carregar_dataframes(use_cache=use_cache, verbose=True)
+    print(f"[run] use_cache={use_cache}  validate={validate}  fonte={fonte}  "
+          f"ref={ref.isoformat()}")
+    dfs = carregar_dataframes(use_cache=use_cache, verbose=True, fonte=fonte)
+    dfs["_fonte"] = fonte
+    if fonte == "banco":
+        try:
+            from pipeline.extract_dw import ultima_carga_etl
+            dfs["_etl_ultima_carga"] = ultima_carga_etl()
+            print(f"[fonte] última carga do ETL: {dfs['_etl_ultima_carga']}")
+        except Exception as exc:
+            dfs["_etl_ultima_carga"] = None
+            print(f"[fonte] hora da última carga do ETL indisponível ({exc.__class__.__name__})")
 
     if validate:
         from pipeline.validate import validar
@@ -560,9 +620,40 @@ def main(argv: list[str]) -> None:
     dfs["_bonus_viv_cobrados"] = int(len(bonus_viv["antes"]) + len(bonus_viv["depois"]))
     atual = build_atual(dfs, ref=ref, bonus_n_vivianne=bonus_viv["N"])
 
+    # TRAVA DE FONTE DEGRADADA (18/08/2026)
+    # ─────────────────────────────────────────────────────────────────
+    # carregar_distratos() e carregar_repasses() retornam {} em silêncio quando
+    # o banco Imobiliar não responde (.env ausente, psycopg2 não instalado,
+    # banco fora do ar). O cálculo então CAI NO FALLBACK e as notas mudam sem
+    # que ninguém tenha mexido em regra:
+    #   • sem data_distrato  → Rescisão Loc. (Natália e Gardênia) troca a data
+    #                          de início pelo campo do Pipefy
+    #   • sem data_repasse   → "Recebido antes do repasse" (Vivianne) cai na
+    #                          data ESTIMADA, que erra em 67,5% dos casos
+    # Aconteceu em 18/08/2026 numa rodada pelo bridge Linux (sem psycopg2):
+    # Natália 5,93→6,01, Gardênia 5,42→5,51, Vivianne 6,91→6,88 — mudanças que
+    # pareciam efeito de um ajuste nas vistorias e não eram.
+    # Rodada degradada NÃO grava atual.json. Use --permitir-degradado só para
+    # inspeção, ciente de que o resultado não pode ser publicado.
+    degradado = []
+    if not dfs.get("distratos"):
+        degradado.append("data_distrato (Imobiliar) → Rescisão Loc. cai no campo do Pipefy")
+    if not dfs.get("repasses"):
+        degradado.append("data_retirada_repasse (Imobiliar) → Vivianne cai no repasse ESTIMADO")
+    if degradado and "--permitir-degradado" not in argv:
+        print("\n" + "=" * 70)
+        print("❌ RODADA ABORTADA — fonte de dados indisponível")
+        for d in degradado:
+            print(f"   • {d}")
+        print("\n   atual.json NÃO foi gravado (o anterior continua intacto).")
+        print("   As notas desta rodada NÃO seriam comparáveis com a edição publicada.")
+        print("   Rode pelo Windows, onde o banco Imobiliar responde.")
+        print("=" * 70 + "\n")
+        raise SystemExit(2)
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_JSON.write_text(json.dumps(atual, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
-    print(f"\n[run] gravado: {OUT_JSON.relative_to(ROOT)}")
+    saida.write_text(json.dumps(atual, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+    print(f"\n[run] gravado: {saida.relative_to(ROOT)}")
     print(f"[run] pessoas (pos, id, nota):")
     for p in atual["PESSOAS"]:
         print(f"       {p['pos']}. {p['id']:9} nota={p['nota']}  inds={p['inds']}  "

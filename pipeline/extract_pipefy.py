@@ -30,10 +30,13 @@ from __future__ import annotations
 import json
 import sys
 import time
+import zoneinfo
 from pathlib import Path
 from typing import Any, Iterable
 
 import pandas as pd
+
+TZ_BSB = zoneinfo.ZoneInfo("America/Sao_Paulo")
 
 # Windows: força UTF-8 no stdout para suportar acentos e símbolos nos prints.
 if hasattr(sys.stdout, "reconfigure"):
@@ -155,7 +158,39 @@ def _parse_dt(v: Any) -> Any:
     return pd.to_datetime(v, errors="coerce", utc=True)
 
 
-def _extract_field_value(cf: dict, field_type: str) -> Any:
+# ARMADILHA DO FUSO NOS CAMPOS DATETIME PREENCHIDOS À MÃO (18/08/2026)
+# ────────────────────────────────────────────────────────────────────
+# Campos `datetime` que a pessoa digita no formulário voltam da API com o
+# sufixo "+00:00" SEM ter sido convertidos. O Marinho digita 10:30 e a API
+# devolve '2026-04-25T10:30:00+00:00' — 10:30 é hora de BRASÍLIA, não UTC.
+# Lendo como UTC, o parser desconta 3h e a vistoria das 08:00–10:45 passa a
+# ser lida como 05:00–07:45, fora da janela de horas úteis: 0h medidas.
+# Prova (18/08/2026, 92 vistorias): lendo como está, os inícios ficam entre
+# 08:00 e 17:45, com picos redondos em 08:30/09:00/11:00/11:30. Lendo como UTC
+# de verdade, 14 vistorias começariam entre 05h e 06h da manhã.
+#
+# ⚠️ NÃO vale para todo campo de data:
+#   • createdAt e o histórico de fases são UTC de verdade (gerados pelo sistema).
+#   • `due_date` (ex.: "Data de vencimento") JÁ vem convertido — 00:00 de
+#     Brasília chega como 03:00Z. Corrigir esses seria criar o erro inverso.
+# Por isso a correção é OPT-IN, campo por campo: "fuso": "local" no
+# fields_map.json. Só registre quando confirmar a assinatura dos horários.
+# `Data publicação Anúncio` (Caio) é do mesmo tipo e tem assinatura MISTURADA
+# (28 registros em 03:00Z, que parecem convertidos) — auditar separado antes
+# de marcar.
+def _parse_dt_local(v: Any) -> Any:
+    """Lê um datetime que veio marcado como UTC mas contém hora de Brasília."""
+    if v is None or v == "":
+        return pd.NaT
+    ts = pd.to_datetime(v, errors="coerce")
+    if ts is pd.NaT or pd.isna(ts):
+        return pd.NaT
+    if ts.tzinfo is not None:
+        ts = ts.tz_localize(None)          # descarta o "+00:00" mentiroso
+    return ts.tz_localize(TZ_BSB).tz_convert("UTC")
+
+
+def _extract_field_value(cf: dict, field_type: str, fuso: str = "") -> Any:
     """
     Extrai o valor "natural" de um CardField conforme o type registrado no fields_map.
 
@@ -169,10 +204,13 @@ def _extract_field_value(cf: dict, field_type: str) -> Any:
     if cf is None:
         return None
     t = (field_type or "").lower()
+    # fuso="local" -> campo digitado à mão que volta marcado como UTC sem
+    # conversão (ver _parse_dt_local). Opt-in pelo fields_map.json.
+    _dt = _parse_dt_local if (fuso or "").lower() == "local" else _parse_dt
     if t in ("datetime", "due_date"):
-        return _parse_dt(cf.get("datetime_value"))
+        return _dt(cf.get("datetime_value"))
     if t == "date":
-        return _parse_dt(cf.get("date_value") or cf.get("datetime_value"))
+        return _dt(cf.get("date_value") or cf.get("datetime_value"))
     if t == "assignee_select":
         avs = cf.get("assignee_values") or []
         return [a.get("name") for a in avs if a.get("name")]
@@ -233,7 +271,7 @@ def _card_to_row(card: dict, cfg: dict) -> dict:
         cf = (por_id.get(info.get("id"))
               or por_interno.get(str(info.get("internal_id")))
               or por_nome.get(info.get("label") or label))
-        row[label] = _extract_field_value(cf, info.get("type", ""))
+        row[label] = _extract_field_value(cf, info.get("type", ""), info.get("fuso", ""))
 
     # Derivações por fase
     ph_by_id = {(h.get("phase") or {}).get("id"): h for h in (card.get("phases_history") or [])}

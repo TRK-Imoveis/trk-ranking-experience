@@ -154,7 +154,7 @@ def _titulos_de_cards(ids: list[str]) -> dict[str, str]:
     return {str(r["card_id"]): r["title"] for _, r in d.iterrows()}
 
 
-def _data_campo(linha: pd.Series, tipo: str = "") -> Any:
+def _data_campo(linha: pd.Series, tipo: str = "", fuso: str = "") -> Any:
     """
     Data de um campo date/datetime/due_date. O tratamento DEPENDE DO TIPO.
 
@@ -179,11 +179,26 @@ def _data_campo(linha: pd.Series, tipo: str = "") -> Any:
     até 24h. Enquanto o ETL não persistir o datetime completo, esse indicador
     não migra.
     """
+    local = (fuso or "").lower() == "local"
     raw = linha.get("value_text")
     if not _vazio(raw):
         txt = str(raw).strip()
         if not _RE_SO_DATA.match(txt):
-            # value_text com hora é a fonte mais fiel que existe no banco
+            # value_text com hora é a fonte mais fiel que existe no banco.
+            # fuso="local" (18/08/2026): campo `datetime` digitado à mão. O banco
+            # herda do Pipefy o mesmo "+00:00" MENTIROSO da API — o valor é hora
+            # de Brasília com sufixo UTC. Confirmado no dw_trk:
+            #   'vistoria iniciada em' = '2025-03-19T11:45:09+00:00'
+            # Ler como UTC desconta 3h e apaga a vistoria da janela de horas
+            # úteis (ver claude/FUSO_campos_manuais_18-08-2026.md). Tem que
+            # descartar o sufixo e localizar em São Paulo, igual ao
+            # extract_pipefy._parse_dt_local — senão a migração leva o bug junto.
+            if local:
+                ts = pd.to_datetime(txt, errors="coerce")
+                if not pd.isna(ts):
+                    if ts.tzinfo is not None:
+                        ts = ts.tz_localize(None)
+                    return ts.tz_localize(TZ_BR).tz_convert("UTC")
             ts = pd.to_datetime(txt, errors="coerce", utc=True)
             if not pd.isna(ts):
                 return ts
@@ -269,10 +284,10 @@ def _traduzir(label: str, raw: Any) -> Any:
     return ", ".join(saida) if saida else None
 
 
-def _valor_campo(linha: pd.Series, tipo: str, label: str) -> Any:
+def _valor_campo(linha: pd.Series, tipo: str, label: str, fuso: str = "") -> Any:
     t = (tipo or "").lower()
     if t in ("datetime", "due_date", "date"):
-        return _data_campo(linha, t)
+        return _data_campo(linha, t, fuso)
     if t == "assignee_select":
         # A API devolve None quando o campo não existe no card e lista quando
         # existe. Aqui só chegamos com linha existente → lista (pode ser vazia).
@@ -361,8 +376,36 @@ def extract_pipe(pipe_key: str, *, use_cache: bool = True, verbose: bool = True)
     # ── 2) campos custom (igualdade exata no field_label — Armadilha 7)
     #    Consulta pelo LABEL, devolve com o nome da CHAVE.
     if campos:
-        labels = sorted({c for chave, info in campos.items()
-                         for c in _candidatos_label(chave, info)})
+        # RESOLUÇÃO DE RÓTULO CONTRA O BANCO (18/08/2026)
+        # ─────────────────────────────────────────────────────────────
+        # `_candidatos_label` cobria espaço sobrando, mas NÃO diferença de
+        # CAIXA. O fields_map diz 'Criar Card de Vistoria Técnica' e o banco
+        # tem 'Criar card de vistoria técnica' — o `= ANY(...)` não casava e o
+        # campo vinha vazio, zerando o BÔNUS de vistoria de entrada da Natália
+        # e da Gardênia. Mesmo caso de 'Termo de Distrato assinado ' (espaço no
+        # fim) vs 'Termo de Distrato assinado'.
+        # Solução: ler os rótulos REAIS do pipe (indexado por pipe_id, ~15ms) e
+        # casar por normalização. Continua sem aplicar função na coluna
+        # filtrada — a regra de performance do dw_trk vale (nada de ILIKE).
+        reais = _query(
+            "SELECT DISTINCT field_label FROM pipefy_campos_custom WHERE pipe_id = %s",
+            (pipe_id,),
+        )
+        por_norm: dict[str, list[str]] = {}
+        for lbl in reais["field_label"].dropna():
+            por_norm.setdefault(_norm_label(lbl), []).append(str(lbl))
+        labels = set()
+        for chave, info in campos.items():
+            achou = False
+            for c in _candidatos_label(chave, info):
+                for real in por_norm.get(_norm_label(c), []):
+                    labels.add(real)
+                    achou = True
+            if not achou:
+                _avisar(f"campo {chave!r} (label {info.get('label', chave)!r}) "
+                        f"não existe com nenhuma grafia no pipe {pipe_id} — "
+                        f"indicador que dependa dele vai zerar")
+        labels = sorted(labels)
         cc = _query(
             """
             SELECT card_id, field_label, value_text, value_numeric, value_date
@@ -375,6 +418,7 @@ def extract_pipe(pipe_key: str, *, use_cache: bool = True, verbose: bool = True)
         for chave, info in campos.items():
             label = info.get("label", chave)
             tipo = info.get("type", "")
+            fuso = info.get("fuso", "")   # "local" = datetime manual (ver _data_campo)
             alvos = {_norm_label(c) for c in _candidatos_label(chave, info)}
             sub = cc[cc["_lbl"].isin(alvos)]
             if sub.empty:
@@ -405,7 +449,7 @@ def extract_pipe(pipe_key: str, *, use_cache: bool = True, verbose: bool = True)
                         json.dumps(nomes, ensure_ascii=False) if nomes else None)
             else:
                 valores = {
-                    str(r["card_id"]): _valor_campo(r, tipo, label)
+                    str(r["card_id"]): _valor_campo(r, tipo, label, fuso)
                     for _, r in sub.iterrows()
                 }
             df[chave] = df.index.map(lambda cid: valores.get(cid))
@@ -495,3 +539,22 @@ if __name__ == "__main__":
     print("\nColunas:")
     for c in d.columns:
         print("  ", c)
+
+
+def ultima_carga_etl() -> str | None:
+    """Hora da última carga do ETL do Pipefy (maior `_etl_loaded_at` em
+    `pipefy_cards`), em ISO. Usada pelo painel-sombra para exibir na tela o
+    quão fresco está o banco.
+
+    Existe porque o modo de falha do banco NÃO é número errado — é número
+    velho sem aviso. Medido em 18/08/2026: o ETL fez uma carga completa naquele
+    dia e antes disso ficou praticamente parado por duas semanas (1 card em
+    13/08, 2 em 08/08). Um painel lendo o banco naquela janela mostraria a data
+    de hoje com dados de duas semanas atrás e nenhum erro na tela.
+    """
+    try:
+        df = _query("SELECT MAX(_etl_loaded_at) AS ultima FROM pipefy_cards")
+        v = df.iloc[0]["ultima"]
+        return None if v is None else pd.Timestamp(v).isoformat()
+    except Exception:
+        return None

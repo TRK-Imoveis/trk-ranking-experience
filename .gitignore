@@ -1,24 +1,29 @@
 # Credenciais — NUNCA commitar
-.env
-.env.local
-.env.*.local
-
-# Cache do Python
-__pycache__/
-*.pyc
-*.pyo
-
-# Editores
-.vscode/
-.idea/
-
-# Dados temporários e sensíveis (clientes/financeiro)
-dados/raw/
-dados/cache/
-dados/csv/
-dados/octadesk/
-*.log
-
-# Sistema operacional
-Thumbs.db
+# .env* pega variantes como '.env .txt' (com espaço), que existia aqui em
+# 18/08/2026 com DB_PASSWORD dentro e NÃO era pega por '.env'. Um
+# `git add trk-bd-sandbox/` teria mandado a senha do banco pro GitHub.
+.env*
+# Credenciais — NUNCA commitar
+.env
+.env.local
+.env.*.local
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editores
+.vscode/
+.idea/
+
+# Dados temporários e sensíveis (clientes/financeiro)
+dados/raw/
+dados/cache/
+dados/csv/
+dados/octadesk/
+*.log
+
+# Sistema operacional
+Thumbs.db
 .DS_Store

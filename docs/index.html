@@ -1207,22 +1207,54 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
 // ─────────────────────────────────────────────────────────────────────
 (async () => {
   let PESSOAS, IMOVEIS, PROC_RICH, BASELINE_9;
+  // PAINEL-SOMBRA (18/08/2026) — ?fonte=banco carrega dados/banco.json, gerado
+  // por `python pipeline/run.py --fonte banco` a partir do dw_trk. Mesma regra,
+  // mesmo HTML, mesmo CSS: só o arquivo de dados muda. A URL sem parâmetro
+  // continua idêntica, byte por byte.
+  const FONTE = new URLSearchParams(location.search).get('fonte') === 'banco'
+                ? 'banco' : 'api';
+  const ARQ = FONTE === 'banco' ? './dados/banco.json' : './dados/atual.json';
   try {
-    const resp = await fetch('./dados/atual.json', { cache: 'no-store' });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status + ' ao buscar atual.json');
+    const resp = await fetch(ARQ, { cache: 'no-store' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status + ' ao buscar ' + ARQ);
     const dados = await resp.json();
     PESSOAS    = dados.PESSOAS;
     IMOVEIS    = dados.IMOVEIS;
     PROC_RICH  = dados.PROC_RICH;
     BASELINE_9 = dados.BASELINE_9;
     if (!Array.isArray(PESSOAS) || !PESSOAS.length) {
-      throw new Error('atual.json sem PESSOAS — pipeline não rodou ou dados vazios');
+      throw new Error(ARQ + ' sem PESSOAS — pipeline não rodou ou dados vazios');
+    }
+    // Hora da última carga do ETL, só no painel-sombra. Não é enfeite: o modo
+    // de falha do banco é dado VELHO sem aviso, não número errado. Sem esta
+    // linha não dá para distinguir "o banco calculou diferente" de "o banco
+    // está com dado de quinta-feira".
+    if (FONTE === 'banco') {
+      const iso = (dados._meta || {}).etl_ultima_carga;
+      const q = (d) => d < 10 ? '0' + d : '' + d;
+      let txt = 'fonte: banco dw_trk';
+      if (iso) {
+        const d = new Date(iso);
+        txt += ' · ETL de ' + q(d.getDate()) + '/' + q(d.getMonth() + 1)
+             + ' ' + q(d.getHours()) + ':' + q(d.getMinutes());
+        const horas = (Date.now() - d.getTime()) / 36e5;
+        if (horas > 24) txt += ' · ' + Math.floor(horas / 24) + 'd atrás';
+      } else {
+        txt += ' · hora do ETL indisponível';
+      }
+      document.title = '[BANCO] ' + document.title;
+      const el = document.createElement('div');
+      el.textContent = txt;
+      el.style.cssText = 'font:300 10px/1.6 Work Sans,sans-serif;letter-spacing:.08em;'
+        + 'text-transform:uppercase;color:#9B1D20;text-align:center;padding:6px 0;'
+        + 'border-bottom:1px solid #E8E2D5';
+      document.body.insertBefore(el, document.body.firstChild);
     }
   } catch (err) {
     document.body.innerHTML =
       '<div style="padding:48px;font-family:Work Sans,sans-serif;max-width:720px;margin:60px auto;color:#333">'
       + '<h1 style="font-weight:300;margin-bottom:16px">Erro ao carregar dados</h1>'
-      + '<p style="margin-bottom:16px">Verifique se <code>docs/dados/atual.json</code> existe e está acessível.</p>'
+      + '<p style="margin-bottom:16px">Verifique se <code>docs/' + ARQ.replace('./','dados/') + '</code> existe e está acessível.</p>'
       + '<p style="margin-bottom:16px">Para regenerar, rode no terminal:</p>'
       + '<pre style="background:#f4f1ea;padding:16px;border-radius:4px;overflow:auto">python pipeline/run.py</pre>'
       + '<pre style="margin-top:16px;color:#9B1D20">' + err.message + '</pre>'

@@ -423,13 +423,15 @@
         "id": "data_e_hora_do_in_cio_da_vistoria",
         "internal_id": "427700463",
         "label": "vistoria iniciada em ",
-        "type": "datetime"
+        "type": "datetime",
+        "fuso": "local"
       },
       "Vistoria finalizada em": {
         "id": "vistoria_finalizada_em",
         "internal_id": "427700527",
         "label": "Vistoria finalizada em",
-        "type": "datetime"
+        "type": "datetime",
+        "fuso": "local"
       },
       "Tipo de vistoria": {
         "id": "tipo_de_vistoria_1",

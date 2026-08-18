@@ -219,7 +219,7 @@ def _to_bsb_naive(dt) -> Optional[pd.Timestamp]:
     return ts.tz_convert(TZ_BSB).tz_localize(None)
 
 
-def horas_uteis(inicio, fim) -> float:
+def horas_uteis(inicio, fim, *, sabado: bool = False) -> float:
     """
     Horas úteis (08:00–18:00, seg-sex) entre inicio e fim, em horário de Brasília.
 
@@ -229,6 +229,12 @@ def horas_uteis(inicio, fim) -> float:
     - Sábado e domingo: 0 horas.
     - Fora de 08-18: descontado.
     - 1 dia útil = 10 horas úteis.
+
+    sabado=True inclui o SÁBADO na janela. Existe para a Eficiência das
+    vistorias do Marinho, que trabalha no sábado: sem isso a vistoria de
+    sábado vale 0h úteis e ganha ✓ de graça (era o caso do IM80 em 25/04/2026,
+    1,5h reais de trabalho). Decisão da gestora, 18/08/2026. NÃO usar em
+    indicador de prazo administrativo — lá o sábado é folga de verdade.
     """
     a = _to_bsb_naive(inicio)
     b = _to_bsb_naive(fim)
@@ -238,11 +244,12 @@ def horas_uteis(inicio, fim) -> float:
         return 0.0
 
     BS, BE = 8, 18  # 8h–18h
+    ultimo_dia = 5 if sabado else 4  # 5=sábado quando sabado=True
     total_seconds = 0.0
     dia = a.normalize()  # 00:00 do dia de início
     fim_dia = b.normalize()
     while dia <= fim_dia:
-        if dia.weekday() < 5:  # 0=seg ... 4=sex
+        if dia.weekday() <= ultimo_dia:  # 0=seg ... 4=sex (5=sáb se sabado=True)
             day_start = dia.replace(hour=BS)
             day_end = dia.replace(hour=BE)
             window_start = max(a, day_start)
@@ -1661,6 +1668,10 @@ LOOKUP_EFIC = {
 # Override persistente IM -> balde (casos confirmados manualmente).
 OVERRIDE_IM_BALDE = {"1817": "Casa Lago"}  # COND RESIDENCIAL SANTA MÔNICA
 
+# Duração corrida mínima para a vistoria ser considerada medível (3 minutos).
+# Abaixo disso é erro de preenchimento, não vistoria expressa.
+MIN_DURACAO_VISTORIA_H = 0.05
+
 
 def _primeiro_tipo_vistoria(v):
     """'Saída, Conferência' -> 'Saída'. Limpa e pega o 1º rótulo do multi-select."""
@@ -1708,7 +1719,21 @@ def avaliar_eficiencia_vistoria(row):
         return None
     balde = classificar_balde_vistoria(
         row.get("Endereço do imóvel:"), row.get("IM"), row.get("Área útil M²"))
-    h = horas_uteis(ini, fim)
+
+    # TIMESTAMP INVÁLIDO -> revisão manual, FORA do ok e do tot (18/08/2026).
+    # Hora de fim anterior à de início (digitação trocada) ou as duas iguais
+    # (campo preenchido em duplicidade) davam duração 0 e, pela regra
+    # "negativo -> 0h = ✓", entravam como vistoria dentro do padrão. A regra do
+    # negativo é legítima para ciclo de FASE, onde o Pipefy inverte sozinho na
+    # passagem-fantasma; aqui ela premiava o erro de digitação.
+    # Casos encontrados: IM120 (4 segundos), IM123 (14:50 -> 04:20),
+    # IM1483 (15:00 -> 08:00).
+    if horas_corridas(ini, fim) <= MIN_DURACAO_VISTORIA_H:
+        return {"direcao": direcao, "balde": "TIMESTAMP INVÁLIDO", "horas": 0.0,
+                "teto": None, "ok": None, "outlier": True}
+
+    # sabado=True: o Marinho vistoria no sábado (decisão da gestora, 18/08/2026).
+    h = horas_uteis(ini, fim, sabado=True)
     if balde == "REVISAR" or balde not in LOOKUP_EFIC:
         return {"direcao": direcao, "balde": "REVISAR", "horas": h,
                 "teto": None, "ok": None, "outlier": True}
@@ -1791,6 +1816,7 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
         v = avaliar_eficiencia_vistoria(r)
         if v is not None:
             v["im"] = r.get("IM"); v["end"] = r.get("Endereço do imóvel:")
+            v["titulo"] = r.get("Título"); v["url"] = r.get("URL")
             verdicts.append(v)
     scoraveis = [v for v in verdicts if v["ok"] is not None]
     ok_e = sum(1 for v in scoraveis if v["ok"])
@@ -1818,10 +1844,17 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
         print("\n⚠️  MARINHO — VISTORIAS PARA REVISÃO MANUAL "
               "(outliers > 2x teto ou não classificadas):")
         for v in sorted(revisar, key=lambda x: (x["horas"] is None, -(x["horas"] or 0))):
-            motivo = "não classificada (fora do cálculo)" if v["ok"] is None else "outlier — conta ✗"
+            if v["balde"] == "TIMESTAMP INVÁLIDO":
+                motivo = "hora de início/fim errada — CORRIGIR no Pipefy (fora do cálculo)"
+            elif v["ok"] is None:
+                motivo = "não classificada (fora do cálculo)"
+            else:
+                motivo = "outlier — conta ✗"
             h = "—" if v["horas"] is None else f"{v['horas']:.1f}h"
             print(f"   IM{v.get('im')}  {v['direcao']}  {v['balde']}  {h}  "
                   f"teto={v['teto']}  → {motivo}  | {str(v.get('end'))[:55]}")
+            if v["balde"] == "TIMESTAMP INVÁLIDO":
+                print(f"        {v.get('url')}")
         print("   (avalie caso a caso antes de finalizar o painel)\n")
 
     # PONTO EXTRA — vídeo de drone (decisão da gestora, 14/08/2026).

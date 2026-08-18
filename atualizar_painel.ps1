@@ -103,10 +103,28 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "   ✓ docs/dados/atual.json gerado" -ForegroundColor Green
 
+# PAINEL-SOMBRA (18/08/2026) — mesma regra, fonte dw_trk, arquivo separado.
+# Roda com o cache que a rodada de produção acabou de encher, então não custa os
+# 2-3 min de novo. NUNCA toca no atual.json. Se falhar (banco fora do ar, ETL
+# parado), o painel de produção segue normalmente — por isso não há exit 1 aqui.
+Write-Host ""
+Write-Host "[2b/5] Gerando painel-sombra a partir do banco dw_trk..." -ForegroundColor Yellow
+$logBanco = Join-Path $env:TEMP "trk_pipeline_banco.log"
+python pipeline/run.py --fonte banco *> $logBanco
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "   ⚠️  Painel-sombra NÃO gerado (produção não foi afetada)." -ForegroundColor Yellow
+    Get-Content $logBanco -Tail 8 | ForEach-Object { Write-Host "     $_" -ForegroundColor Gray }
+} else {
+    Write-Host "   ✓ docs/dados/banco.json gerado" -ForegroundColor Green
+    Select-String -Path $logBanco -Pattern "última carga do ETL" |
+        ForEach-Object { Write-Host "     $($_.Line.Trim())" -ForegroundColor Gray }
+}
+
 # [3/5] git add
 Write-Host ""
 Write-Host "[3/5] Adicionando arquivos..." -ForegroundColor Yellow
 git add docs/dados/atual.json docs/index.html 2>$null
+if (Test-Path "docs/dados/banco.json") { git add docs/dados/banco.json 2>$null }
 $staged = @(git diff --cached --name-only)
 if ($staged.Count -eq 0) {
     Write-Host "   ⚠️  Nenhuma mudança detectada. Painel já está atualizado." -ForegroundColor Yellow
@@ -116,6 +134,7 @@ if ($staged.Count -eq 0) {
     } catch {}
     Write-Host ""
     Write-Host "🌐 Painel: https://trk-imoveis.github.io/trk-ranking-experience/" -ForegroundColor Cyan
+Write-Host "🔬 Banco:  https://trk-imoveis.github.io/trk-ranking-experience/?fonte=banco" -ForegroundColor DarkCyan
     Write-Host ""
     exit 0
 }
@@ -151,5 +170,6 @@ Show-Ranking $postData $preData
 
 Write-Host ""
 Write-Host "🌐 Painel: https://trk-imoveis.github.io/trk-ranking-experience/" -ForegroundColor Cyan
+Write-Host "🔬 Banco:  https://trk-imoveis.github.io/trk-ranking-experience/?fonte=banco" -ForegroundColor DarkCyan
 Write-Host "   (atualiza em ~1 minuto)" -ForegroundColor Gray
 Write-Host ""
