@@ -217,10 +217,22 @@ def _card_to_row(card: dict, cfg: dict) -> dict:
         "Responsáveis": [a.get("name") for a in (card.get("assignees") or []) if a.get("name")],
     }
 
-    # Campos mapeados — lookup por field.id
-    fields_by_id = {(f.get("field") or {}).get("id"): f for f in (card.get("fields") or []) if f.get("field")}
+    # Campos mapeados — lookup por field.id, com fallback por internal_id e por NOME.
+    # O slug do Pipefy NÃO é derivável do label (troca acento por "_", acrescenta
+    # "_1" em duplicados e às vezes guarda o nome ANTIGO do campo: "vistoria
+    # iniciada em" tem slug "data_e_hora_do_in_cio_da_vistoria"). Sem os fallbacks,
+    # registrar um campo novo no fields_map.json exige adivinhar o slug — e quando
+    # a adivinhação erra a coluna simplesmente não aparece, em silêncio.
+    # Foi o que aconteceu com "O contrato será renovado?" em 14/08/2026: a regra
+    # de exclusão da Renovação rodou sem nunca encontrar o campo.
+    campos = [f for f in (card.get("fields") or []) if f.get("field")]
+    por_id = {(f["field"] or {}).get("id"): f for f in campos}
+    por_interno = {str((f["field"] or {}).get("internal_id")): f for f in campos}
+    por_nome = {f.get("name"): f for f in campos}
     for label, info in (cfg.get("fields") or {}).items():
-        cf = fields_by_id.get(info["id"])
+        cf = (por_id.get(info.get("id"))
+              or por_interno.get(str(info.get("internal_id")))
+              or por_nome.get(info.get("label") or label))
         row[label] = _extract_field_value(cf, info.get("type", ""))
 
     # Derivações por fase

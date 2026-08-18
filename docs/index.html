@@ -1202,7 +1202,7 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
     if(el) el.textContent=rot;
   }catch(e){}
 })();
-// Substitui as 4 declarações const estáticas da 10ª Ed (PESSOAS, BASELINE_9,
+// Substitui as 4 declarações const estáticas antigas (PESSOAS, BASELINE_9,
 // IMOVEIS, PROC_RICH). O resto do código do painel fica encapsulado neste IIFE.
 // ─────────────────────────────────────────────────────────────────────
 (async () => {
@@ -1294,7 +1294,10 @@ function renderRow(p){
     let v=p.scores[proc];
     if(p.id==='marinho' && proc==='Vistorias') v = p.nota; // Marinho: coluna Vistorias mostra nota final (Vistorias + Contestações)
     const cls=scClass(v);
-    const bonusMark = (p.bonus_proc===proc && p.bonus>0) ? ' <span class="bonus-star" title="Bônus ★ incorporado nesta nota">★</span>' : '';
+    // ★ em CADA processo que tem bônus. Antes usava p.bonus_proc (um só), então
+    // quem tem bônus em dois processos só via a estrela num deles.
+    const nBonusProc = (p.bonus_por_proc && p.bonus_por_proc[proc]) || 0;
+    const bonusMark = nBonusProc>0 ? ` <span class="bonus-star" title="Bônus ★ incorporado nesta nota (+${nBonusProc})">★</span>` : '';
     if(cls==='none'){
       td.innerHTML=`<span class="sc-val none">—</span>`;
     } else {
@@ -1319,7 +1322,8 @@ function renderRow(p){
   const asterisk = '';
   const tierPips = tier.key==='excelencia'?3:(tier.key==='alta'?2:1);
   const pipsHTML = Array(tierPips).fill('◆').join('');
-  // Calcular delta vs 10ª edição (variável BASELINE_9 mantém o nome legado)
+  // Delta vs última edição FECHADA (12ª, 18/06/2026).
+  // A chave BASELINE_9 mantém o nome legado — o valor vem do atual.json.
   const baseline = BASELINE_9[p.id];
   let deltaHTML = '';
   if (baseline !== undefined) {
@@ -1327,7 +1331,7 @@ function renderRow(p){
     const arrow = delta > 0.05 ? '↑' : (delta < -0.05 ? '↓' : '=');
     const sign = delta >= 0 ? '+' : '';
     const cls = delta > 0.05 ? 'up' : (delta < -0.05 ? 'down' : 'flat');
-    deltaHTML = `<div class="nota-delta ${cls}" title="vs 10ª Edição (${baseline.toFixed(2).replace('.',',')}) · ⚠ ver relatório edição">${arrow} ${sign}${delta.toFixed(2).replace('.',',')}</div>`;
+    deltaHTML = `<div class="nota-delta ${cls}" title="vs 12ª Edição (${baseline.toFixed(2).replace('.',',')}) · ⚠ régua mudou em 13/08/2026">${arrow} ${sign}${delta.toFixed(2).replace('.',',')}</div>`;
   }
   tdT.innerHTML=`
     <div class="nota-wrap">
@@ -1389,12 +1393,16 @@ function populateResumo(){
 
   // Bônus recebidos
   PESSOAS.filter(p => p.bonus > 0).forEach(p => {
+    const porProc = p.bonus_por_proc || (p.bonus_proc ? {[p.bonus_proc]: p.bonus} : {});
+    const detalhe = Object.entries(porProc)
+      .sort((a,b) => b[1]-a[1])
+      .map(([proc,n]) => `${n} em ${proc}`).join(' · ');
     dest.innerHTML += `<div class="resumo-item">
       <div class="resumo-item-head">
         <span class="resumo-item-name">★ ${p.nome}</span>
         <span class="resumo-item-value up">+${p.bonus}</span>
       </div>
-      <div class="resumo-item-desc">${p.bonus} ${p.bonus>1?'bônus incorporados':'bônus incorporado'} na nota (${p.bonus_proc})</div>
+      <div class="resumo-item-desc">${p.bonus} ${p.bonus>1?'bônus incorporados':'bônus incorporado'} na nota — ${detalhe}</div>
     </div>`;
   });
 
@@ -1542,26 +1550,39 @@ function openDrawer(id){
     html += `</div>`;
   }
 
-  // Bonus
+  // Bonus — um bloco por PROCESSO (a pessoa pode ter mais de um).
   if(p.bonus>0){
+    // chave: `${id}|${processo}` — Natália/Gardênia têm bônus em dois processos
+    // com significados diferentes, então o rótulo não pode ser só por pessoa.
     const bonusLabels = {
-      caio:     'Bônus — imóvel alugado antes de ser anunciado',
-      natalia:  'Bônus — vistoria de entrada realizada',
-      gardenia: 'Bônus — vistoria de entrada realizada'
+      'caio|Com. Locação':     'Bônus — imóvel alugado antes de ser anunciado',
+      'natalia|Cont. ADM':     'Bônus — vistoria de entrada realizada',
+      'gardenia|Cont. ADM':    'Bônus — vistoria de entrada realizada',
+      'natalia|Renovação':     'Bônus — assinado no prazo com card sem prazo',
+      'gardenia|Renovação':    'Bônus — assinado no prazo com card sem prazo',
+      'marinho|Vistorias':     'Bônus — vistoria com vídeo de drone'
     };
+    const plural = (n,sing,plur) => n>1 ? plur : sing;
     const bonusDescs = {
-      caio:     p.bonus + ' imóvel' + (p.bonus>1?'s':'') + ' alugado' + (p.bonus>1?'s':'') + ' antes de serem anunciado' + (p.bonus>1?'s':''),
-      natalia:  p.bonus + ' vistoria' + (p.bonus>1?'s':'') + ' de entrada criadas no período',
-      gardenia: p.bonus + ' vistoria' + (p.bonus>1?'s':'') + ' de entrada criadas no período',
-      vivianne: p.bonus + ' boleto' + (p.bonus>1?'s':'') + ' em atraso recebido' + (p.bonus>1?'s':'') + ' antes do repasse ao proprietário'
+      'caio|Com. Locação':  n => n + ' imóvel' + plural(n,'','is') + ' alugado' + plural(n,'','s') + ' antes de ser' + plural(n,'','em') + ' anunciado' + plural(n,'','s'),
+      'natalia|Cont. ADM':  n => n + ' vistoria' + plural(n,'','s') + ' de entrada criada' + plural(n,'','s') + ' no período',
+      'gardenia|Cont. ADM': n => n + ' vistoria' + plural(n,'','s') + ' de entrada criada' + plural(n,'','s') + ' no período',
+      'natalia|Renovação':  n => n + ' renovação' + plural(n,'','ões') + ' assinada' + plural(n,'','s') + ' antes do vencimento mesmo com o card aberto sem prazo',
+      'gardenia|Renovação': n => n + ' renovação' + plural(n,'','ões') + ' assinada' + plural(n,'','s') + ' antes do vencimento mesmo com o card aberto sem prazo',
+      'marinho|Vistorias':  n => n + ' vistoria' + plural(n,'','s') + ' com vídeo de drone'
     };
-    html+=`<div class="drawer-bonus">
-      <div class="bonus-num">+${p.bonus}</div>
+    const porProc = p.bonus_por_proc || (p.bonus_proc ? {[p.bonus_proc]: p.bonus} : {});
+    Object.entries(porProc).sort((a,b) => b[1]-a[1]).forEach(([proc,n]) => {
+      if(!n) return;
+      const k = `${p.id}|${proc}`;
+      html+=`<div class="drawer-bonus">
+      <div class="bonus-num">+${n}</div>
       <div class="bonus-txt">
-        <div class="bonus-label">${bonusLabels[p.id] || 'Bônus'}</div>
-        <div class="bonus-desc">${bonusDescs[p.id] || ''}</div>
+        <div class="bonus-label">${bonusLabels[k] || ('Bônus — ' + proc)}</div>
+        <div class="bonus-desc">${bonusDescs[k] ? bonusDescs[k](n) : ''}</div>
       </div>
     </div>`;
+    });
   }
 
   // Indicadores
@@ -1602,10 +1623,13 @@ function openDrawer(id){
     'Reparos — Pós-venda ≤7d': 'nat_rep_pos',
     'Renovação — Contato >60d': 'nat_ren_cont',
     'Renovação — Assinado antes vencimento': 'nat_ren_ass',
+    'Renovação — Assinado com card sem prazo ★': 'nat_ren_salvos',
     'BackOffice — Pendência <24h': 'nat_bo',
     'DIRF/DARF — Concluído antes 29/05': 'nat_dirf',
     'Laudos entregues ≤48h após vistoria': 'mar_laudo',
     'Vistorias dentro do tempo padrão': 'mar_eficiencia',
+    'Vistorias com 360º': 'mar_360',
+    'Vistorias — Vídeo de drone ★': 'mar_drone',
     'Contestações respondidas <24h': 'mar_cont',
     'Tickets — SLA <4h úteis': 'caio_tickets',
     'Tickets — Avaliações positivas': 'caio_tickets',

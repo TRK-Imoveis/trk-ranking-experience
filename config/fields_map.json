@@ -284,6 +284,12 @@
         "internal_id": "346910945",
         "label": "Data de vencimento",
         "type": "due_date"
+      },
+      "O contrato será renovado?": {
+        "id": "o_contrato_ser_renovado",
+        "internal_id": null,
+        "label": "O contrato será renovado?",
+        "type": "radio_vertical"
       }
     },
     "phases": {
@@ -436,6 +442,18 @@
         "internal_id": "344921897",
         "label": "Endereço do imóvel:",
         "type": "text"
+      },
+      "Vistoria com 360º ?": {
+        "id": "vistoria_com_360",
+        "internal_id": "433009309",
+        "label": "Vistoria com 360º ?",
+        "type": "radio_horizontal"
+      },
+      "Vistoria com Vídeo de DRONE": {
+        "id": "vistoria_com_v_deo_de_drone",
+        "internal_id": "433009310",
+        "label": "Vistoria com Vídeo de DRONE",
+        "type": "radio_horizontal"
       }
     },
     "phases": {

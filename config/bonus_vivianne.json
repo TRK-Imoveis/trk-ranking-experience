@@ -1,17 +1,17 @@
 {
   "edicao_12": {
-    "N": 66,
-    "denominador_R1": 159,
-    "taxa": 0.4151,
+    "N": 30,
+    "denominador_R1": 86,
+    "taxa": 0.3488,
     "regra_aplicada": "R1 (multa ≤15%) + R2 (card.criado ≤ data_pag) + R3 (data_pag ≤ data_repasse)",
-    "data_calculo": "2026-06-18",
-    "antes_count": 66,
-    "sem_card_count": 60,
-    "reativos_count": 10,
-    "depois_count": 23,
-    "excluidos_rescisao_count": 5,
+    "data_calculo": "2026-08-18",
+    "antes_count": 30,
+    "sem_card_count": 35,
+    "reativos_count": 4,
+    "depois_count": 17,
+    "excluidos_rescisao_count": 2,
     "excluidos_valor0_count": 0,
-    "multiplos_count": 7,
-    "_aviso_drift_vs_baseline": "Drift de +5 vs 11ª (N=61). Regra estrita R1+R2+R3 mantida desde a 11ª (confirmada pela gestora em 14/05/2026): bônus só conta se Vivianne abriu card ANTES ou NO MESMO DIA do pagamento (cobrança proativa), com multa ≤15% (exclui rescisões) e pagamento ≤ data de repasse. Variação vs 11ª é drift natural da janela rolando."
+    "multiplos_count": 4,
+    "_aviso_drift_vs_baseline": "Drift de -31 vs 11ª (N=61). Regra estrita R1+R2+R3 mantida desde a 11ª (confirmada pela gestora em 14/05/2026): bônus só conta se Vivianne abriu card ANTES ou NO MESMO DIA do pagamento (cobrança proativa), com multa ≤15% (exclui rescisões) e pagamento ≤ data de repasse. Variação vs 11ª é drift natural da janela rolando."
   }
 }

@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 from calculate import (
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
+    RENOV_ANTECEDENCIA_MIN, _renov_nao_renova,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
     horas_uteis, horas_uteis_fase, horas_corridas, dias_corridos,
     primeira_saida_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
@@ -893,6 +894,34 @@ def assessora_rl_final(df_resc_loc: pd.DataFrame, assessora: str, ref: pd.Timest
     }
 
 
+def assessora_ren_salvos(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """Renovação · BÔNUS — card aberto sem prazo mas assinado antes do vencimento."""
+    df = excluir_rascunhos(df_renov)
+    df = aplicar_cutoff(df, "Criado em", ref=ref)
+    nomes = _nome_assessora_alt(assessora)
+    df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
+    df = df.dropna(subset=["Data de vencimento"]).copy()
+    ant = (df["Data de vencimento"] - df["Criado em"]).dt.total_seconds() / 86400
+    df = df[ant < RENOV_ANTECEDENCIA_MIN]
+    df = df[~_renov_nao_renova(df)]
+    col_ass = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
+    sub = df.dropna(subset=[col_ass]).copy()
+    rows = []
+    for _, r in sub.iterrows():
+        venc = pd.to_datetime(r["Data de vencimento"], errors="coerce", utc=True)
+        ass = pd.to_datetime(r[col_ass], errors="coerce", utc=True)
+        if pd.isna(venc) or pd.isna(ass) or ass >= venc:
+            continue
+        dias_card = (venc - pd.to_datetime(r["Criado em"], errors="coerce", utc=True)).days
+        rows.append([_im_label(r), _endereco_from_row(r),
+                     f"card com {dias_card}d", _fmt_dias((venc - ass).total_seconds()/86400), "★"])
+    return {
+        "titulo": f"{_label_pessoa(assessora)} — Renov.: assinado no prazo com card sem prazo ★ ({len(rows)})",
+        "cols": ["Imóvel", "Endereço", "Prazo do card", "Folga na assinatura", "Bônus"],
+        "rows": rows,
+    }
+
+
 def assessora_rep_orc(df_rep: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
     """Reparos · Orçamento <4h ÚTEIS. Filtro 'Selecionar o assessor'."""
     df = excluir_rascunhos(df_rep)
@@ -934,16 +963,28 @@ def assessora_rep_pos(df_rep: pd.DataFrame, assessora: str, ref: pd.Timestamp) -
     }
 
 
-def assessora_ren_cont(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """Renovação · Contato >60d antes do vencimento."""
+def _renov_viavel(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp):
+    """Cards da assessora com chance real de bater a meta — espelha calculate.py.
+    Card criado a menos de RENOV_ANTECEDENCIA_MIN dias do vencimento sai do
+    denominador (decisão da gestora, 14/08/2026): a meta já nasce inatingível.
+    """
     df = excluir_rascunhos(df_renov)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    col_contato_out = "Última vez que saiu da fase Contato com proprietário"
+    df = df.dropna(subset=["Data de vencimento"]).copy()
+    ant = (df["Data de vencimento"] - df["Criado em"]).dt.total_seconds() / 86400
+    df = df[ant >= RENOV_ANTECEDENCIA_MIN].copy()
+    return df[~_renov_nao_renova(df)].copy()   # contrato que não renova sai
+
+
+def assessora_ren_cont(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """Renovação · Contato >60d antes do vencimento.
+    Mede pela ENTRADA na fase (a saída depende do proprietário responder)."""
     col_venc = "Data de vencimento"
-    sub = df.dropna(subset=[col_contato_out, col_venc]).copy()
-    dias = (sub[col_venc] - sub[col_contato_out]).dt.total_seconds() / 86400
+    col_contato_in = "Primeira vez que entrou na fase Contato com proprietário"
+    sub = _renov_viavel(df_renov, assessora, ref).dropna(subset=[col_contato_in]).copy()
+    dias = (sub[col_venc] - sub[col_contato_in]).dt.total_seconds() / 86400
     rows = []
     for (_, r), d in zip(sub.iterrows(), dias):
         rows.append([_im_label(r), _endereco_from_row(r),
@@ -958,14 +999,12 @@ def assessora_ren_cont(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp
 
 def assessora_ren_ass(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
     """Renovação · Assinado antes do vencimento. Diff = data_venc - data_assinatura."""
-    df = excluir_rascunhos(df_renov)
-    df = aplicar_cutoff(df, "Criado em", ref=ref)
-    nomes = _nome_assessora_alt(assessora)
-    df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
     col_assinado = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
     col_venc = "Data de vencimento"
-    sub = df.dropna(subset=[col_assinado, col_venc]).copy()
-    diff = (sub[col_venc] - sub[col_assinado]).dt.total_seconds() / 86400
+    sub = _renov_viavel(df_renov, assessora, ref).dropna(subset=[col_assinado]).copy()
+    diff = (pd.to_datetime(sub[col_venc], errors="coerce", utc=True)
+            - pd.to_datetime(sub[col_assinado], errors="coerce", utc=True)
+            ).dt.total_seconds() / 86400
     rows = []
     for (_, r), d in zip(sub.iterrows(), diff):
         rows.append([_im_label(r), _endereco_from_row(r),
@@ -1087,6 +1126,35 @@ def mar_eficiencia(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
     }
 
 
+def _mar_flag(df_vist, ref, coluna, titulo, chave_col, so_sim=False):
+    """Drilldown dos campos SIM/NÃO das vistorias (360º e vídeo de drone)."""
+    df = excluir_rascunhos(df_vist)
+    df = aplicar_cutoff(df, "Criado em", ref=ref)
+    val = df.get(coluna, pd.Series(dtype=object)).astype(str).str.strip().str.upper()
+    sub = df[val == "SIM"] if so_sim else df[val.isin(["SIM", "NÃO", "NAO"])]
+    rows = []
+    for _, r in sub.iterrows():
+        v = str(r.get(coluna, "")).strip().upper()
+        rows.append([_im_label(r), str(r.get("Endereço do imóvel:", ""))[:60],
+                     "Sim" if v == "SIM" else "Não",
+                     "★" if so_sim else ("✓" if v == "SIM" else "✗")])
+    ok = sum(1 for r in rows if r[3] in ("✓", "★"))
+    tot = len(sub)
+    return {"titulo": f"{titulo} ({ok}{'' if so_sim else '/' + str(tot)})",
+            "cols": ["Imóvel", "Endereço", chave_col, "Status"],
+            "rows": _ord_pior_primeiro(rows, idx_valor=2)}
+
+
+def mar_360(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
+    return _mar_flag(df_vist, ref, "Vistoria com 360º ?",
+                     "Marinho — Vistorias com 360º", "360º")
+
+
+def mar_drone(df_vist: pd.DataFrame, ref: pd.Timestamp) -> dict:
+    return _mar_flag(df_vist, ref, "Vistoria com Vídeo de DRONE",
+                     "Marinho — Vistorias com vídeo de drone ★", "Drone", so_sim=True)
+
+
 def mar_cont(df_cont: pd.DataFrame, ref: pd.Timestamp) -> dict:
     """Marinho · Contestações respondidas <24h CORRIDO."""
     df = excluir_rascunhos(df_cont)
@@ -1170,6 +1238,7 @@ def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict
         f"{prefix}_rep_pos":       assessora_rep_pos(dfs["reparos"], pid, ref),
         f"{prefix}_ren_cont":      assessora_ren_cont(dfs["renovacao"], pid, ref),
         f"{prefix}_ren_ass":       assessora_ren_ass(dfs["renovacao"], pid, ref),
+        f"{prefix}_ren_salvos":    assessora_ren_salvos(dfs["renovacao"], pid, ref),
         f"{prefix}_bo":            assessora_bo(dfs["backoffice"], pid, ref),
         f"{prefix}_dirf":          assessora_dirf(dfs["dirf_darf"], pid, ref),
     }
@@ -1209,6 +1278,8 @@ def gerar_imoveis(dfs: dict, ref: pd.Timestamp) -> dict:
         # Marinho (3 chaves)
         "mar_laudo":         mar_laudo(dfs["vistorias"], ref),
         "mar_eficiencia":    mar_eficiencia(dfs["vistorias"], ref),
+        "mar_360":           mar_360(dfs["vistorias"], ref),
+        "mar_drone":         mar_drone(dfs["vistorias"], ref),
         "mar_cont":          mar_cont(dfs["contestacoes"], ref),
         # Octadesk (6 chaves) + Vivianne Tickets (1) = 7
         "caio_wa":           _wa_drilldown(df_conv, "caio", "Caio"),

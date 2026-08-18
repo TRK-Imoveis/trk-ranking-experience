@@ -146,6 +146,7 @@ META_MAP = {
     # Vistorias (Marinho — nomes sem prefixo "Vistorias —")
     "Laudos entregues":            "≤48h corrido",
     "Vistorias dentro":            "≤ teto do balde +15%",
+    "Vistorias com 360º":          "toda vistoria com 360º",
     "Contestações respondidas":    "≤24h úteis",
     # BackOffice
     "BackOffice — Pendência":      "≤24h úteis",

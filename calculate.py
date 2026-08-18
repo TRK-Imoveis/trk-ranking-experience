@@ -1069,16 +1069,21 @@ def calc_vivianne_backoffice(df_bo: pd.DataFrame,
 
 def calc_vivianne_ticket(df_tickets: pd.DataFrame) -> dict:
     """
-    Vivianne · Ticket · 1 indicador · peso 4.
+    Vivianne · Ticket · 1 indicador · peso 10.
     Filtro: Responsável contém "Vivianne Fontes" ou "VIVIANNE FONTES"
-    Indicador: SLA ≤4h úteis (peso 4).
+    Indicador: SLA ≤4h úteis (peso 10).
     Avaliações EXCLUÍDAS (manual: 0 registros — não entra no cálculo).
+
+    ⚠️ Peso 10 e não 4 (13/08/2026): como é o ÚNICO indicador do processo, a nota
+    é idêntica nos dois casos (a fórmula normaliza pela soma dos pesos). Mas era
+    o último processo do ranking que não somava 10, e peso baixo é justamente o
+    que amplifica distorção se um bônus for criado aqui no futuro.
     """
     if df_tickets is None or len(df_tickets) == 0:
         return {"nota": None, "indicadores": []}
     nome = NOMES_AGENTE["vivianne"]["ticket"]
     df_t = _tickets_filtrados(df_tickets, nome)
-    ind1 = _ticket_sla_ind(df_t, peso=4)
+    ind1 = _ticket_sla_ind(df_t, peso=10)
     return {"nota": nota_processo([ind1]), "indicadores": [ind1]}
 
 
@@ -1391,35 +1396,163 @@ def calc_assessora_reparos(df_rep: pd.DataFrame, assessora: str,
     return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 
 
+# Campo que decide se o contrato renova. São DOIS no Pipefy e eles se
+# contradizem: no IM1592 o select diz "Sim" e o radio diz "Não" (a gestora
+# confirmou que não houve renovação). O select guarda a intenção do início e
+# não é atualizado quando a renovação cai depois.
+# Decisão da gestora em 14/08/2026: vale o RADIO.
+RENOV_CAMPO_RENOVA = "O contrato será renovado?"      # radio_vertical — oficial
+RENOV_CAMPO_RENOVA_LEGADO = "Contrato será renovado?"  # select — não usar
+
+
+def _renov_nao_renova(df: pd.DataFrame) -> pd.Series:
+    """True nos cards marcados explicitamente como NÃO renovados.
+    Campo vazio NÃO é tratado como "não renova" — só o "Não" explícito conta.
+    """
+    col = df.get(RENOV_CAMPO_RENOVA)
+    if col is None:
+        return pd.Series(False, index=df.index)
+    return col.astype(str).str.strip().str.lower().isin(["não", "nao"])
+
+
+# Antecedência mínima da renovação: meta de contato E critério de viabilidade
+# do card. Card criado a menos disso do vencimento sai do denominador da
+# assessora (decisão da gestora, 14/08/2026) e conta no indicador de abertura.
+RENOV_ANTECEDENCIA_MIN = 60
+
+
 def calc_assessora_renovacao(df_renov: pd.DataFrame, assessora: str,
                              ref: Optional[datetime] = None) -> dict:
     """
     Assessora · Renovação · 2 indicadores · peso 10.
     Filtro: 'Assessor (lista)' contém nome.
-    8: Contato >60d antes vencimento (Data venc - última saída Contato com proprietário) (peso 4).
+    8: Contato >60d antes vencimento — ENTRADA na fase Contato com proprietário (peso 4).
     9: Assinado antes vencimento (Primeira vez Contrato assinado/Finalizar < Data venc) (peso 6).
+
+    ⚠️ DUAS CORREÇÕES DE 14/08/2026 (contestação da Gardênia, validada no banco)
+    ---------------------------------------------------------------------------
+    (1) ENTRADA na fase, não a última SAÍDA.
+        Sair da fase depende do PROPRIETÁRIO responder, não da assessora agir.
+        Caso IM126: entrou 29/04, ela enviou 07/05, e o card ficou parado até
+        02/07 — 64 dias de espera contados contra ela. Medido pela saída dava
+        57 dias (✗); pela entrada dá 121 (✓). Mesmo padrão em IM131, IM74, IM1778.
+        ⚠️ Isso SUBSTITUI a instrução antiga do Project ("usar Última vez que SAIU").
+
+    (2) CARD ABERTO TARDE SAI DO DENOMINADOR.
+        Se o card nasce a menos de 60 dias do vencimento, a meta "contatar mais de
+        60 dias antes" é matematicamente inatingível no instante da criação.
+        Não é desempenho da assessora — quem abre os cards é outro setor.
+        Casos reais: IM73/IM107/IM32 criados 5 dias DEPOIS do vencimento;
+        IM395 com 1 dia; IM168 com 8; IM115 com 9.
+        Medido em 14/08: 19 dos 34 cards (56%) estavam nessa situação.
+        O contrapeso é o indicador de ABERTURA (ver calc_renovacao_abertura),
+        para o gargalo aparecer no painel em vez de sumir.
     """
     df = excluir_rascunhos(df_renov)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
     df = df[df["Assessor (lista)"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
 
-    col_contato_out = "Última vez que saiu da fase Contato com proprietário"
     col_venc = "Data de vencimento"
-    sub_8 = df.dropna(subset=[col_contato_out, col_venc]).copy()
-    dias_8 = (sub_8[col_venc] - sub_8[col_contato_out]).dt.total_seconds() / 86400
-    ok_8 = int((dias_8 > 60).sum())
+    col_contato_in = "Primeira vez que entrou na fase Contato com proprietário"
+    col_assinado = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
+
+    # Correção (2): fora do denominador os cards que já nasceram sem chance.
+    df = df.dropna(subset=[col_venc]).copy()
+    antecedencia = (df[col_venc] - df["Criado em"]).dt.total_seconds() / 86400
+    df_viavel = df[antecedencia >= RENOV_ANTECEDENCIA_MIN].copy()
+
+    # Correção (3), 14/08/2026: contrato que NÃO vai renovar sai do denominador.
+    # Não há renovação a contatar nem a assinar. Usa o campo RADIO (o select
+    # legado guarda a intenção inicial e não é atualizado — ver IM1592).
+    df_viavel = df_viavel[~_renov_nao_renova(df_viavel)].copy()
+
+    # 8: Contato >60d — correção (1): pela ENTRADA na fase
+    sub_8 = df_viavel.dropna(subset=[col_contato_in]).copy()
+    dias_8 = (sub_8[col_venc] - sub_8[col_contato_in]).dt.total_seconds() / 86400
+    ok_8 = int((dias_8 > RENOV_ANTECEDENCIA_MIN).sum())
     ind_8 = score_indicador(ok_8, len(sub_8), 4)
     ind_8["nome"] = "Renovação — Contato >60d"
 
-    col_assinado = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
-    sub_9 = df.dropna(subset=[col_assinado, col_venc]).copy()
-    ok_9 = int((sub_9[col_assinado] < sub_9[col_venc]).sum())
+    # 9: Assinado antes do vencimento (mesmo denominador viável)
+    # to_datetime(utc=True) nos dois lados: quando o recorte fica vazio, uma das
+    # colunas pode vir tz-naive e a comparação estoura (pandas não compara
+    # naive com aware). Aconteceu no teste com denominador zerado.
+    sub_9 = df_viavel.dropna(subset=[col_assinado]).copy()
+    _ass = pd.to_datetime(sub_9[col_assinado], errors="coerce", utc=True)
+    _ven = pd.to_datetime(sub_9[col_venc], errors="coerce", utc=True)
+    ok_9 = int((_ass < _ven).sum())
     ind_9 = score_indicador(ok_9, len(sub_9), 6)
     ind_9["nome"] = "Renovação — Assinado antes vencimento"
 
+    # ── BÔNUS DE RECUPERAÇÃO (14/08/2026) ──────────────────────────────
+    # Card que nasceu SEM PRAZO (menos de 60 dias do vencimento) mas que a
+    # assessora conseguiu levar à assinatura ANTES do vencimento.
+    #
+    # Ao tirar os cards abertos tarde do denominador, a exclusão levava junto os
+    # que ela SALVOU. Caso real: 1617/2 (SAUS Q6 BL K Sala 601) — card criado em
+    # 29/07 para vencimento 31/08 (33 dias) e assinado em 10/08, com 21 dias de
+    # folga. Mérito que a regra apagava.
+    #
+    # ⚠️ Por que bônus e não denominador: recolocar esses cards no indicador
+    # traria de volta também os que ninguém salvou. Medido em 14/08, o
+    # denominador "correto" (excluir só card criado após o vencimento) daria
+    # Natália 4/8 e Gardênia 4/7 — as duas cairiam. O bônus premia o salvamento
+    # sem cobrar o que nasceu inviável.
+    fora_do_prazo = df[antecedencia < RENOV_ANTECEDENCIA_MIN]
+    fora_do_prazo = fora_do_prazo[~_renov_nao_renova(fora_do_prazo)]
+    salvos = fora_do_prazo.dropna(subset=[col_assinado])
+    if len(salvos):
+        _a = pd.to_datetime(salvos[col_assinado], errors="coerce", utc=True)
+        _v = pd.to_datetime(salvos[col_venc], errors="coerce", utc=True)
+        bonus_recup = int((_a < _v).sum())
+    else:
+        bonus_recup = 0
+
     indicadores = [ind_8, ind_9]
-    return {"nota": nota_processo(indicadores), "indicadores": indicadores}
+    return {"nota": nota_processo(indicadores, bonus_n=bonus_recup),
+            "indicadores": indicadores, "bonus_n": bonus_recup}
+
+
+def calc_renovacao_abertura(df_renov: pd.DataFrame,
+                            ref: Optional[datetime] = None) -> dict:
+    """
+    Renovação · ABERTURA DO CARD — indicador de quem abre o processo (14/08/2026).
+
+    Mede: cards de renovação criados com MAIS de 60 dias de antecedência do
+    vencimento do contrato.
+
+    ⚠️ NÃO ENTRA NO RANKING (decisão da gestora, 14/08/2026): quem abre os cards
+    de renovação é a própria gestora, que não é avaliada. É DIAGNÓSTICO — sai no
+    console do `run.py` para ela acompanhar a própria rotina de abertura.
+
+    Medido em 14/08/2026: 57 de 76 cards com +60d. A abertura é em LOTE e alguns
+    lotes saem tarde: 03/06 abriu 4 cards, os 4 com contrato já vencido;
+    26/03 abriu 11, sendo 5 com menos de 60 dias (o pior com 6).
+    """
+    df = excluir_rascunhos(df_renov)
+    df = aplicar_cutoff(df, "Criado em", ref=ref)
+    col_venc = "Data de vencimento"
+    sub = df.dropna(subset=[col_venc]).copy()
+    antecedencia = (sub[col_venc] - sub["Criado em"]).dt.total_seconds() / 86400
+    ok = int((antecedencia >= RENOV_ANTECEDENCIA_MIN).sum())
+    ind = score_indicador(ok, len(sub), 10)
+    ind["nome"] = "Renovação — Card aberto com +60d"
+
+    # Divergência entre os dois campos de "vai renovar?" — enquanto os dois
+    # existirem no Pipefy, qualquer regra lê o campo errado em algum card.
+    def _norm(c):
+        v = df.get(c)
+        return (v.astype(str).str.strip().str.lower() if v is not None
+                else pd.Series(dtype=object, index=df.index))
+    radio, select = _norm(RENOV_CAMPO_RENOVA), _norm(RENOV_CAMPO_RENOVA_LEGADO)
+    ambos = radio.isin(["sim", "não", "nao"]) & select.isin(["sim", "não", "nao"])
+    divergem = int((ambos & (radio != select)).sum())
+
+    return {"nota": nota_processo([ind]), "indicadores": [ind],
+            "atrasados": int(len(sub) - ok),
+            "nao_renovam": int(_renov_nao_renova(df).sum()),
+            "campos_divergentes": divergem}
 
 
 def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
@@ -1648,7 +1781,7 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
             return False  # parado em produção -> atraso ✗
         return horas_corridas(r[col_vfim], saida) <= META_LAUDO_CORRIDO
     ok_l = int(sub_l.apply(_laudo_ok, axis=1).sum()) if len(sub_l) else 0
-    ind_l = score_indicador(ok_l, len(sub_l), 4)
+    ind_l = score_indicador(ok_l, len(sub_l), 3)
     ind_l["nome"] = "Laudos entregues ≤48h após vistoria"
     indicadores.append(ind_l)
 
@@ -1661,9 +1794,23 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
             verdicts.append(v)
     scoraveis = [v for v in verdicts if v["ok"] is not None]
     ok_e = sum(1 for v in scoraveis if v["ok"])
-    ind_e = score_indicador(ok_e, len(scoraveis), 6)
+    ind_e = score_indicador(ok_e, len(scoraveis), 5)
     ind_e["nome"] = "Vistorias dentro do tempo padrão"
     indicadores.append(ind_e)
+
+    # 360º peso 2 — esperado em TODA vistoria (decisão da gestora, 14/08/2026).
+    # Denominador = cards com o campo preenchido (SIM ou NÃO). O campo virou
+    # OBRIGATÓRIO no Pipefy, então quem não preencher não entra — e a partir da
+    # obrigatoriedade isso equivale a "todas as vistorias".
+    # ⚠️ Enquanto houver cards antigos sem o campo, o denominador fica pequeno
+    # (13 de 91 em 14/08) e a nota oscila muito. Reavaliar quando encorpar.
+    col_360 = "Vistoria com 360º ?"
+    v360 = df.get(col_360, pd.Series(dtype=object)).astype(str).str.strip().str.upper()
+    sub_360 = df[v360.isin(["SIM", "NÃO", "NAO"])]
+    ok_360 = int((v360.reindex(sub_360.index) == "SIM").sum())
+    ind_360 = score_indicador(ok_360, len(sub_360), 2)
+    ind_360["nome"] = "Vistorias com 360º"
+    indicadores.append(ind_360)
 
     # ALERTA de revisão manual (outliers + não classificados) na rodada.
     revisar = [v for v in verdicts if v["outlier"] or v["ok"] is None]
@@ -1677,7 +1824,15 @@ def calc_marinho_vistorias(df_vist: pd.DataFrame, ref: Optional[datetime] = None
                   f"teto={v['teto']}  → {motivo}  | {str(v.get('end'))[:55]}")
         print("   (avalie caso a caso antes de finalizar o painel)\n")
 
-    return {"nota": nota_processo(indicadores), "indicadores": indicadores}
+    # PONTO EXTRA — vídeo de drone (decisão da gestora, 14/08/2026).
+    # É entrega além do combinado, não obrigação: entra como bônus de CONTAGEM
+    # (+0,25 por vídeo, teto +1,5), igual aos bônus do Caio e das assessoras.
+    col_drone = "Vistoria com Vídeo de DRONE"
+    drone = df.get(col_drone, pd.Series(dtype=object)).astype(str).str.strip().str.upper()
+    bonus_drone = int((drone == "SIM").sum())
+
+    return {"nota": nota_processo(indicadores, bonus_n=bonus_drone),
+            "indicadores": indicadores, "bonus_n": bonus_drone}
 
 
 def calc_marinho_contestacoes(df_cont: pd.DataFrame, ref: Optional[datetime] = None) -> dict:

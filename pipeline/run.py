@@ -213,7 +213,10 @@ def calc_assessora(pid: str, dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict
     detalhes = (cadm["indicadores"] + radm["indicadores"] + rloc["indicadores"] + rep["indicadores"]
                 + ren["indicadores"] + bo["indicadores"] + dirf["indicadores"]
                 + wa["indicadores"] + tkt["indicadores"])
-    return _montar_pessoa(pid, scores, detalhes, bonus_n, "Cont. ADM")
+    return _montar_pessoa(pid, scores, detalhes, {
+        "Cont. ADM": bonus_n,                       # vistoria de entrada realizada
+        "Renovação": ren.get("bonus_n", 0),         # assinado no prazo com card sem prazo
+    })
 
 
 def calc_marinho(dfs: dict, ref: pd.Timestamp) -> dict:
@@ -223,13 +226,31 @@ def calc_marinho(dfs: dict, ref: pd.Timestamp) -> dict:
     nota = nota_final({"v": vist["nota"], "c": cont["nota"]})
     scores = {"Vistorias": nota}   # painel mostra 1 coluna só
     detalhes = vist["indicadores"] + cont["indicadores"]
-    p = _montar_pessoa("marinho", scores, detalhes, bonus_n=0, bonus_proc=None)
+    p = _montar_pessoa("marinho", scores, detalhes,
+                       bonus_n=vist.get("bonus_n", 0), bonus_proc="Vistorias")
     p["nota"] = nota
     return p
 
 
-def _montar_pessoa(pid: str, scores: dict, detalhes: list, bonus_n: int,
-                   bonus_proc: Optional[str]) -> dict:
+def _montar_pessoa(pid: str, scores: dict, detalhes: list, bonus_n,
+                   bonus_proc: Optional[str] = None) -> dict:
+    """bonus_n aceita int (um processo só, via bonus_proc) OU dict
+    {processo: N} quando a pessoa tem bônus em mais de um processo.
+
+    ⚠️ 14/08/2026: Natália e Gardênia passaram a ter DOIS bônus — vistoria de
+    entrada no Cont. ADM e recuperação na Renovação. Antes o painel guardava um
+    número e um nome de processo, então o ★ só aparecia numa coluna e o Resumo
+    Executivo somava errado. `bonus_por_proc` é a fonte de verdade; `bonus` e
+    `bonus_proc` continuam preenchidos (total e processo de maior N) só para o
+    JS legado não quebrar.
+    """
+    if isinstance(bonus_n, dict):
+        bonus_por_proc = {k: int(v) for k, v in bonus_n.items() if v}
+    else:
+        bonus_por_proc = {bonus_proc: int(bonus_n)} if (bonus_proc and bonus_n) else {}
+    bonus_total = sum(bonus_por_proc.values())
+    proc_principal = (max(bonus_por_proc, key=bonus_por_proc.get)
+                      if bonus_por_proc else None)
     nome, cargo = NOMES[pid]
     nota = nota_final(scores)
     # Enriquece cada item de detalhes[] com o campo 'meta' (single source of truth:
@@ -245,7 +266,8 @@ def _montar_pessoa(pid: str, scores: dict, detalhes: list, bonus_n: int,
     scores_full = {c: scores.get(c) for c in cols_padrao}
     return {
         "id": pid, "nome": nome, "cargo": cargo,
-        "nota": nota, "bonus": bonus_n, "bonus_proc": bonus_proc,
+        "nota": nota, "bonus": bonus_total, "bonus_proc": proc_principal,
+        "bonus_por_proc": bonus_por_proc,
         "inds": len(detalhes),
         "pts": round(sum((d.get("peso") or 0) for d in detalhes), 1),
         "scores": scores_full,
@@ -290,6 +312,20 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
 
     if verbose:
         _listar_revisoes()
+        try:
+            from calculate import calc_renovacao_abertura
+            ab = calc_renovacao_abertura(dfs["renovacao"], ref=ref)
+            i = ab["indicadores"][0]
+            print(f"\n[diagnóstico] Renovação — cards abertos com +60d do vencimento: "
+                  f"{i['ok']}/{i['tot']} ({i['pct']}%) · {ab['atrasados']} abertos tarde")
+            print("   (não entra no ranking — quem abre é a gestora, que não é avaliada)")
+            print(f"[diagnóstico] Renovação — marcados 'não renova' (fora do denominador): "
+                  f"{ab['nao_renovam']}")
+            if ab["campos_divergentes"]:
+                print(f"   ⚠ {ab['campos_divergentes']} card(s) com os DOIS campos de "
+                      f"'vai renovar?' preenchidos e DISCORDANDO — vale aposentar o select")
+        except Exception as exc:
+            print(f"[diagnóstico] abertura de renovação indisponível: {exc}")
 
     return {
         "_meta": {
@@ -302,13 +338,20 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
         "PESSOAS": pessoas,
         "IMOVEIS": gerar_imoveis(dfs, ref),
         "PROC_RICH": gerar_proc_rich(pessoas),
-        # Baseline da edição IMEDIATAMENTE anterior (11ª Ed, ref para deltas no painel).
-        # Variável mantém o nome "BASELINE_9" por compat com HTML/JS legado (key lida em
-        # ~10 pontos de docs/index.html); renomear para "BASELINE_EDICAO_ANTERIOR" continua
-        # pendência cosmética no CHECKLIST. Valores: notas finais oficiais da 11ª Ed
-        # (relatorio_edicao_11.md · tabela NOTAS FINAIS, fechamento 14/05/2026).
-        "BASELINE_9": {"caio": 5.34, "vivianne": 5.01, "marinho": 3.91,
-                       "natalia": 4.02, "gardenia": 4.10},
+        # Baseline dos deltas = ÚLTIMA EDIÇÃO FECHADA. Atualizar a cada fechamento.
+        # 13/08/2026: estava com as notas da 10ª Ed (caio 5,34 · vivianne 5,01 ·
+        # marinho 3,91 · natalia 4,02 · gardenia 4,10) — as setinhas do painel
+        # comparavam contra a edição errada há duas edições.
+        # Agora: 12ª Edição, fechada em 18/06/2026.
+        #
+        # ⚠️ A régua mudou em 13/08/2026 (horas úteis, datas do banco, redesenho do
+        # bônus). O delta contra a 12ª mistura mudança de desempenho com mudança de
+        # critério. A partir do fechamento da 13ª isso se resolve sozinho.
+        #
+        # A chave mantém o nome "BASELINE_9" por compatibilidade com o JS do
+        # docs/index.html (lida em ~10 pontos). Renomear continua pendência cosmética.
+        "BASELINE_9": {"vivianne": 6.25, "natalia": 4.92, "gardenia": 4.64,
+                       "caio": 4.62, "marinho": 3.90},
     }
 
 
