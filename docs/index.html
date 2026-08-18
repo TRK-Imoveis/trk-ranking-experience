@@ -1254,9 +1254,14 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
     document.body.innerHTML =
       '<div style="padding:48px;font-family:Work Sans,sans-serif;max-width:720px;margin:60px auto;color:#333">'
       + '<h1 style="font-weight:300;margin-bottom:16px">Erro ao carregar dados</h1>'
-      + '<p style="margin-bottom:16px">Verifique se <code>docs/' + ARQ.replace('./','dados/') + '</code> existe e está acessível.</p>'
+      + (FONTE === 'banco'
+         ? '<p style="margin-bottom:16px">O <b>painel-sombra</b> (fonte: banco dw_trk) ainda não foi gerado.</p>'
+           + '<p style="margin-bottom:16px">Ele nasce quando o <code>atualizar_painel.ps1</code> rodar o passo [2b/5]. '
+           + 'Enquanto isso, o painel normal (sem <code>?fonte=banco</code> na URL) funciona normalmente.</p>'
+         : '<p style="margin-bottom:16px">Verifique se <code>docs/dados/atual.json</code> existe e está acessível.</p>')
       + '<p style="margin-bottom:16px">Para regenerar, rode no terminal:</p>'
-      + '<pre style="background:#f4f1ea;padding:16px;border-radius:4px;overflow:auto">python pipeline/run.py</pre>'
+      + '<pre style="background:#f4f1ea;padding:16px;border-radius:4px;overflow:auto">'
+        + (FONTE === 'banco' ? '.\\atualizar_painel.ps1' : 'python pipeline/run.py') + '</pre>'
       + '<pre style="margin-top:16px;color:#9B1D20">' + err.message + '</pre>'
       + '</div>';
     return;
