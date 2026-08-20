@@ -94,10 +94,21 @@ def extract_conversas_dw(*, dias: int = 180, verbose: bool = True) -> pd.DataFra
     fim = pd.to_datetime(df["agent_first_message_date"], errors="coerce", utc=True)
     espera = fim - ini
 
-    # Espera negativa = primeira mensagem do agente ANTES da atribuição (o agente
-    # já estava na conversa). Não é "respondeu em tempo negativo" nem atraso:
-    # é registro fora de ordem. Sai do denominador — a lição de 18/08 é que
-    # negativo virando ✓ premia dado quebrado (ver FUSO_campos_manuais).
+    # ESPERA NEGATIVA — DECISÃO DA GESTORA, 20/08/2026: fica NEUTRO.
+    # A primeira mensagem do agente veio ANTES da atribuição: ele pegou uma
+    # conversa que ainda não era dele, atendeu, e só depois o sistema registrou
+    # a atribuição (transferência ou atribuição manual tardia).
+    # Medido nos 180 dias: Gardênia 29 casos (1h57 antes, em média), Caio 16
+    # (2h07), Natália 14 (1h04) — não é corrida de milissegundos, é fluxo real.
+    # Nesses casos NÃO EXISTE "espera após a atribuição" para medir: o relógio
+    # começou depois de a pessoa já estar atendendo.
+    #   • fora do denominador (EM VIGOR) → não conta a favor nem contra
+    #   • contar ✓ → trataria como resposta instantânea; +1pp para a Gardênia
+    #   • contar ✗ → puniria quem atendeu antes da hora; descartado
+    # A gestora escolheu o neutro: é o único que não inventa um número.
+    # ⚠️ Não confundir com os timestamps invertidos das vistorias, que são ERRO
+    # de digitação (ver FUSO_campos_manuais_18-08-2026.md). Aqui o dado está
+    # certo — o que não existe é a medida.
     negativos = int((espera < pd.Timedelta(0)).sum())
     espera = espera.mask(espera < pd.Timedelta(0))
     if verbose and negativos:

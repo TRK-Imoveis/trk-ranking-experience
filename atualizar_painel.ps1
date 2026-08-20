@@ -102,6 +102,8 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 Write-Host "   ✓ docs/dados/atual.json gerado" -ForegroundColor Green
+Select-String -Path $logFile -Pattern "octadesk-dw|CAIU DE VOLTA|falha de rede" |
+    ForEach-Object { Write-Host "     $($_.Line.Trim())" -ForegroundColor Gray }
 
 # PAINEL-SOMBRA (18/08/2026) — mesma regra, fonte dw_trk, arquivo separado.
 # Roda com o cache que a rodada de produção acabou de encher, então não custa os
@@ -116,7 +118,11 @@ if ($LASTEXITCODE -ne 0) {
     Get-Content $logBanco -Tail 8 | ForEach-Object { Write-Host "     $_" -ForegroundColor Gray }
 } else {
     Write-Host "   ✓ docs/dados/banco.json gerado" -ForegroundColor Green
-    Select-String -Path $logBanco -Pattern "última carga do ETL" |
+    # Linhas que dizem QUAL fonte cada bloco usou de verdade. Sem isso, um
+    # fallback silencioso (banco fora do ar → volta pro CSV/XLSX) passa batido
+    # e a gente compara duas rodadas idênticas achando que são fontes
+    # diferentes. Foi o que aconteceu em 20/08 com a Inadimplência.
+    Select-String -Path $logBanco -Pattern "última carga do ETL|imobiliar-dw|octadesk-dw|CAIU DE VOLTA|indisponív" |
         ForEach-Object { Write-Host "     $($_.Line.Trim())" -ForegroundColor Gray }
 }
 

@@ -3,6 +3,8 @@
   "marinho_produtividade_ativa": false,
   "marinho_eficiencia_ativa": true,
   "_notas": {
-    "marinho_produtividade_ativa": "Quando false, o indicador Produtividade m²/h do Marinho (peso 6) é desativado e o Laudo (normalmente peso 4) consolida o peso total = 10. Bate com baselines.json da 10ª Edição (que registra explicitamente esse indicador como ausente)."
-  }
+    "marinho_produtividade_ativa": "Quando false, o indicador Produtividade m²/h do Marinho (peso 6) é desativado e o Laudo (normalmente peso 4) consolida o peso total = 10. Bate com baselines.json da 10ª Edição (que registra explicitamente esse indicador como ausente).",
+    "whatsapp_do_banco": "20/08/2026 — o WhatsApp passa a ser lido de octadesk_chats (dw_trk) em vez do XLSX 'Total de conversas-*.xlsx', NAS DUAS FONTES (produção e painel-sombra). Validado <1% de diferença em 18/08: Natália 1699/2011 vs 1698/2005, Gardênia 1789/2205 vs 1806/2231, Caio 1220/2270 vs 1231/2260. ETL do Octadesk roda a cada 6h — o mais confiável das três fontes. Ganho: some o export manual desse arquivo. Se o banco falhar, o pipeline cai de volta no XLSX sozinho e avisa. Para reverter: basta pôr false aqui. ⚠️ Os TICKETS continuam no XLSX sempre — a API do Octadesk não expõe o assunto (ver OCTADESK_no_dw_18-08-2026.md)."
+  },
+  "whatsapp_do_banco": true
 }

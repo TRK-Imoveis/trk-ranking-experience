@@ -116,20 +116,44 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
     # "Cancelado / Spam") e o assunto "Tarefa" não está em `summary`. Sem elas o
     # denominador infla ~40% e a nota cai por falta de dado, não por desempenho.
     # Ver claude/OCTADESK_no_dw_18-08-2026.md.
-    if fonte == "banco":
+    # WHATSAPP MIGRADO (20/08/2026) — vale para as DUAS fontes, não só o sombra.
+    # Controlado por config/feature_flags.json::whatsapp_do_banco.
+    # Se o banco falhar, cai de volta no XLSX e AVISA — nunca publica em silêncio
+    # com fonte diferente da esperada.
+    from calculate import FEATURE_FLAGS
+    if FEATURE_FLAGS.get("whatsapp_do_banco", False) or fonte == "banco":
         try:
             from pipeline.extract_octadesk_dw import extract_conversas_dw
             if verbose:
-                print("[octadesk] conversas: trocando XLSX pelo dw_trk…")
+                print("[octadesk] conversas: lendo do dw_trk (XLSX não é mais usado aqui)…")
             dfs["conversas"] = extract_conversas_dw(verbose=verbose)
         except Exception as exc:
-            print(f"[octadesk] conversas do banco indisponíveis ({exc.__class__.__name__}) "
-                  f"— painel-sombra segue com o XLSX nesse indicador")
+            print(f"⚠️  [octadesk] CAIU DE VOLTA no XLSX — os 6 indicadores de WhatsApp "
+                  f"desta rodada vieram do arquivo, não do banco. "
+                  f"{exc.__class__.__name__}: {exc}")
+            import traceback; traceback.print_exc()
 
     if verbose:
         print("\n[imobiliar] carregando CSVs locais…")
     imob = extract_imobiliar(verbose=verbose)
     dfs["imobiliar"] = imob   # guarda os 3 sub-DFs sob "imobiliar"
+
+    # INADIMPLÊNCIA DO BANCO — só no painel-sombra (20/08/2026).
+    # Substitui os 3 CSVs por imobiliar_boletos_encargo_adm + doc_capa.
+    # NÃO vai para produção ainda: a regra R1 (multa >15% = rescisão) dá
+    # resultado diferente nas duas fontes, e o espelho existe para mostrar
+    # essa divergência na tela antes de a gestora decidir qual vale.
+    # Ver claude/INADIMPLENCIA_migracao_e_regra_R1_18-08-2026.md
+    if fonte == "banco":
+        try:
+            from pipeline.extract_imobiliar_dw import extract_imobiliar_dw
+            if verbose:
+                print("[imobiliar] trocando os CSVs pelo dw_trk (painel-sombra)…")
+            dfs["imobiliar"] = extract_imobiliar_dw(verbose=verbose)
+        except Exception as exc:
+            print(f"⚠️  [imobiliar] CAIU DE VOLTA nos CSVs na Inadimplência — "
+                  f"{exc.__class__.__name__}: {exc}")
+            import traceback; traceback.print_exc()
     # data_distrato = entrega efetiva das chaves (Rescisão Loc., 13ª Ed)
     dfs["distratos"] = carregar_distratos(verbose=verbose)
     # data real do repasse ao proprietário ("Pagto Prop") p/ a regra R3 do bônus

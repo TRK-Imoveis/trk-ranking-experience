@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-20T21:14:49.717504Z",
-    "ref": "2026-08-20T21:14:15.902161+00:00",
+    "geradoEm": "2026-08-20T21:36:41.852268Z",
+    "ref": "2026-08-20T21:36:08.683124+00:00",
     "fonte": "banco",
     "etl_ultima_carga": "2026-08-20T10:00:52.112965",
     "octadesk_disponivel": true,
@@ -12,7 +12,7 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 6.94,
+      "nota": 7.06,
       "bonus": 0,
       "bonus_proc": null,
       "bonus_por_proc": {},
@@ -26,7 +26,7 @@
         "Rescisão Loc.": 8.765,
         "Reparos": null,
         "Renovação": 7.187,
-        "Inadimplência": 6.024,
+        "Inadimplência": 6.996,
         "Vistorias": null,
         "BackOffice": 5.84,
         "DIRF/DARF": null,
@@ -134,20 +134,20 @@
           "meta": "entre 7 e 9d corrido"
         },
         {
-          "ok": 47,
-          "tot": 86,
-          "pct": 54.7,
+          "ok": 55,
+          "tot": 87,
+          "pct": 63.2,
           "peso": 2.5,
-          "score": 1.366,
+          "score": 1.58,
           "nome": "Inadimplência — Cobrança dos boletos em atraso",
           "meta": "abrir cobrança no atraso"
         },
         {
-          "ok": 30,
-          "tot": 47,
-          "pct": 63.8,
+          "ok": 49,
+          "tot": 55,
+          "pct": 89.1,
           "peso": 3,
-          "score": 1.915,
+          "score": 2.673,
           "nome": "Inadimplência — Recebido antes do repasse",
           "meta": "receber antes do repasse"
         },
@@ -181,9 +181,9 @@
       ],
       "pontosFort": [
         "RescLoc: 90.0%",
+        "Inad: 89.1%",
         "Cont.Loc: 88.6%",
-        "Inad: 88.1%",
-        "Renov: 87.5%"
+        "Inad: 88.1%"
       ],
       "pontosAten": [
         "Inad: 6.2%",
@@ -7287,7 +7287,7 @@
       ]
     },
     "vivi_cobertura": {
-      "titulo": "Vivianne — Inadim.: Cobrança dos boletos em atraso (47/86)",
+      "titulo": "Vivianne — Inadim.: Cobrança dos boletos em atraso (55/87)",
       "cols": [
         "Categoria",
         "Quantidade",
@@ -7296,23 +7296,23 @@
       "rows": [
         [
           "✓ Cobrança proativa aberta (card antes ou no dia do pagamento)",
-          "47",
+          "55",
           "✓"
         ],
         [
           "✗ Sem card no mês esperado — passou batido",
-          "35",
+          "25",
           "✗"
         ],
         [
           "✗ Cobrança reativa (card criado depois do pagamento)",
-          "4",
+          "7",
           "✗"
         ]
       ]
     },
     "vivi_bonus_inadim": {
-      "titulo": "Vivianne — Inadim.: Recebido antes do repasse (30/47)",
+      "titulo": "Vivianne — Inadim.: Recebido antes do repasse (49/55)",
       "cols": [
         "Categoria",
         "Quantidade",
@@ -7321,12 +7321,12 @@
       "rows": [
         [
           "✓ Pago até a data do repasse ao proprietário",
-          "30",
+          "49",
           "✓"
         ],
         [
           "✗ Pago depois do repasse — entrou no mês seguinte",
-          "17",
+          "6",
           "✗"
         ]
       ]
@@ -11885,12 +11885,12 @@
       "titulo": "Inadimplência",
       "kpis": [
         {
-          "v": "63.8%",
+          "v": "89.1%",
           "l": "Vivianne Recebido antes do",
           "cls": "ok"
         },
         {
-          "v": "54.7%",
+          "v": "63.2%",
           "l": "Vivianne Cobrança dos boletos",
           "cls": "ok"
         },
@@ -11914,15 +11914,15 @@
             "Vivianne Cobrança <8h úteis (266/302)",
             "Vivianne CredPago ≤15d (13/18)",
             "Vivianne Negativação 7-9d (1/16)",
-            "Vivianne Cobrança dos boletos e (47/86)",
-            "Vivianne Recebido antes do repa (30/47)"
+            "Vivianne Cobrança dos boletos e (55/87)",
+            "Vivianne Recebido antes do repa (49/55)"
           ],
           "data": [
             88.1,
             72.2,
             6.2,
-            54.7,
-            63.8
+            63.2,
+            89.1
           ],
           "metas": [
             100,
@@ -11939,7 +11939,7 @@
             "Vivianne"
           ],
           "data": [
-            6.024
+            6.996
           ],
           "colors": [
             "#000"
@@ -11975,23 +11975,23 @@
           "nome": "Cobrança dos boletos em atraso",
           "resp": "Vivianne",
           "meta": "abrir cobrança no atraso",
-          "ok": 47,
-          "tot": 86,
-          "pct": 54.7
+          "ok": 55,
+          "tot": 87,
+          "pct": 63.2
         },
         {
           "nome": "Recebido antes do repasse",
           "resp": "Vivianne",
           "meta": "receber antes do repasse",
-          "ok": 30,
-          "tot": 47,
-          "pct": 63.8
+          "ok": 49,
+          "tot": 55,
+          "pct": 89.1
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Cobrança <8h úteis: 88.1%."
+          "txt": "Vivianne lidera Recebido antes do repasse: 89.1%."
         },
         {
           "tipo": "neg",
@@ -11999,7 +11999,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 469 cards no período."
+          "txt": "Volume de 478 cards no período."
         }
       ]
     },
