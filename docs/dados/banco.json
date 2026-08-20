@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-20T17:17:24.137682Z",
-    "ref": "2026-08-20T17:16:46.753414+00:00",
+    "geradoEm": "2026-08-20T20:50:54.899933Z",
+    "ref": "2026-08-20T20:50:21.359003+00:00",
     "fonte": "banco",
     "etl_ultima_carga": "2026-08-20T10:00:52.112965",
     "octadesk_disponivel": true,
@@ -405,7 +405,7 @@
         "Vistorias": null,
         "BackOffice": 2.105,
         "DIRF/DARF": 5.0,
-        "WhatsApp": 8.672,
+        "WhatsApp": 8.674,
         "Ticket": 6.222
       },
       "detalhes": [
@@ -519,10 +519,10 @@
         },
         {
           "ok": 1794,
-          "tot": 2222,
-          "pct": 80.7,
+          "tot": 2221,
+          "pct": 80.8,
           "peso": 6,
-          "score": 4.844,
+          "score": 4.846,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -558,7 +558,7 @@
         "Renov: 100.0%",
         "WA: 95.7%",
         "Renov: 92.3%",
-        "WA: 80.7%"
+        "WA: 80.8%"
       ],
       "pontosAten": [
         "Cont.ADM: 11.1%",
@@ -671,7 +671,7 @@
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 7.14,
+        "WhatsApp": 7.147,
         "Ticket": 5.721
       },
       "detalhes": [
@@ -740,10 +740,10 @@
         },
         {
           "ok": 1201,
-          "tot": 2227,
-          "pct": 53.9,
+          "tot": 2222,
+          "pct": 54.1,
           "peso": 6,
-          "score": 3.236,
+          "score": 3.243,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -779,7 +779,7 @@
         "WA: 97.6%",
         "Tkts: 81.8%",
         "Comercial: 61.5%",
-        "WA: 53.9%"
+        "WA: 54.1%"
       ],
       "pontosAten": [
         "Cont.Loc: 14.3%",
@@ -1809,7 +1809,7 @@
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "34d → 30 Dias desocupado",
+          "35d → 30 Dias desocupado",
           "✗"
         ]
       ]
@@ -8182,8 +8182,8 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1201/2227",
-          "53.9%"
+          "1201/2222",
+          "54.1%"
         ],
         [
           "Avaliações positivas",
@@ -8262,8 +8262,8 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1794/2222",
-          "80.7%"
+          "1794/2221",
+          "80.8%"
         ],
         [
           "Avaliações positivas",
@@ -12474,7 +12474,7 @@
       "titulo": "WhatsApp (Octadesk)",
       "kpis": [
         {
-          "v": "53.9%",
+          "v": "54.1%",
           "l": "Caio Resposta ≤5min",
           "cls": "ok"
         },
@@ -12484,7 +12484,7 @@
           "cls": "ok"
         },
         {
-          "v": "80.7%",
+          "v": "80.8%",
           "l": "Gardênia Resposta ≤5min",
           "cls": "ok"
         },
@@ -12502,17 +12502,17 @@
           "labels": [
             "Natália Resposta ≤5min (1677/1986)",
             "Natália Avaliações positivas (256/260)",
-            "Gardênia Resposta ≤5min (1794/2222)",
+            "Gardênia Resposta ≤5min (1794/2221)",
             "Gardênia Avaliações positivas (289/302)",
-            "Caio Resposta ≤5min (1201/2227)",
+            "Caio Resposta ≤5min (1201/2222)",
             "Caio Avaliações positivas (162/166)"
           ],
           "data": [
             84.4,
             98.5,
-            80.7,
+            80.8,
             95.7,
-            53.9,
+            54.1,
             97.6
           ],
           "metas": [
@@ -12534,8 +12534,8 @@
           ],
           "data": [
             9.004,
-            8.672,
-            7.14
+            8.674,
+            7.147
           ],
           "colors": [
             "#000",
@@ -12566,8 +12566,8 @@
           "resp": "Gardênia",
           "meta": "≤5min",
           "ok": 1794,
-          "tot": 2222,
-          "pct": 80.7
+          "tot": 2221,
+          "pct": 80.8
         },
         {
           "nome": "Avaliações positivas",
@@ -12582,8 +12582,8 @@
           "resp": "Caio",
           "meta": "≤5min",
           "ok": 1201,
-          "tot": 2227,
-          "pct": 53.9
+          "tot": 2222,
+          "pct": 54.1
         },
         {
           "nome": "Avaliações positivas",
@@ -12601,11 +12601,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio Resposta ≤5min: 53.9% — gargalo do processo."
+          "txt": "Caio Resposta ≤5min: 54.1% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 7163 cards no período."
+          "txt": "Volume de 7157 cards no período."
         }
       ]
     }
