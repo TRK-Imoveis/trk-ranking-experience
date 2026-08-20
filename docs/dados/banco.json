@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-20T15:04:42.425430Z",
-    "ref": "2026-08-20T15:04:12.084779+00:00",
+    "geradoEm": "2026-08-20T17:17:24.137682Z",
+    "ref": "2026-08-20T17:16:46.753414+00:00",
     "fonte": "banco",
     "etl_ultima_carga": "2026-08-20T10:00:52.112965",
     "octadesk_disponivel": true,
@@ -218,7 +218,7 @@
         "Vistorias": null,
         "BackOffice": 5.0,
         "DIRF/DARF": 6.452,
-        "WhatsApp": 9.013,
+        "WhatsApp": 9.004,
         "Ticket": 7.966
       },
       "detalhes": [
@@ -331,11 +331,11 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1673,
-          "tot": 1978,
-          "pct": 84.6,
+          "ok": 1677,
+          "tot": 1986,
+          "pct": 84.4,
           "peso": 6,
-          "score": 5.075,
+          "score": 5.066,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -371,7 +371,7 @@
         "Renov: 100.0%",
         "WA: 98.5%",
         "Tkts: 85.2%",
-        "WA: 84.6%"
+        "WA: 84.4%"
       ],
       "pontosAten": [
         "Cont.ADM: 0.0%",
@@ -405,7 +405,7 @@
         "Vistorias": null,
         "BackOffice": 2.105,
         "DIRF/DARF": 5.0,
-        "WhatsApp": 8.671,
+        "WhatsApp": 8.672,
         "Ticket": 6.222
       },
       "detalhes": [
@@ -518,8 +518,8 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1786,
-          "tot": 2212,
+          "ok": 1794,
+          "tot": 2222,
           "pct": 80.7,
           "peso": 6,
           "score": 4.844,
@@ -527,11 +527,11 @@
           "meta": "≤5min"
         },
         {
-          "ok": 287,
-          "tot": 300,
+          "ok": 289,
+          "tot": 302,
           "pct": 95.7,
           "peso": 4,
-          "score": 3.827,
+          "score": 3.828,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
@@ -671,7 +671,7 @@
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 7.143,
+        "WhatsApp": 7.14,
         "Ticket": 5.721
       },
       "detalhes": [
@@ -739,20 +739,20 @@
           "meta": ">90d antes do venc"
         },
         {
-          "ok": 1200,
-          "tot": 2222,
-          "pct": 54.0,
+          "ok": 1201,
+          "tot": 2227,
+          "pct": 53.9,
           "peso": 6,
-          "score": 3.24,
+          "score": 3.236,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 161,
-          "tot": 165,
+          "ok": 162,
+          "tot": 166,
           "pct": 97.6,
           "peso": 4,
-          "score": 3.903,
+          "score": 3.904,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
@@ -779,7 +779,7 @@
         "WA: 97.6%",
         "Tkts: 81.8%",
         "Comercial: 61.5%",
-        "WA: 54.0%"
+        "WA: 53.9%"
       ],
       "pontosAten": [
         "Cont.Loc: 14.3%",
@@ -1663,87 +1663,87 @@
           "✓"
         ],
         [
+          "IM1769",
+          "IM1769 - CLN 201 BLOCO C SALA 217",
+          "164d → 90 Dias desocupado",
+          "✓"
+        ],
+        [
+          "IM1799",
+          "IM1799 - CLN 201 BLOCO C SALA 207",
+          "164d → 90 Dias desocupado",
+          "✓"
+        ],
+        [
+          "IM1800",
+          "IM1800 - CLN 201 BLOCO C SALA 208",
+          "164d → 90 Dias desocupado",
+          "✓"
+        ],
+        [
+          "IM1806",
+          "IM1806 - CLN 201 BLOCO C SALA 214",
+          "164d → 90 Dias desocupado",
+          "✓"
+        ],
+        [
           "IM1807",
           "IM1807 - CLN 201 BLOCO C SALA 218",
           "164d → 90 Dias desocupado",
           "✓"
         ],
         [
-          "IM1769",
-          "IM1769 - CLN 201 BLOCO C SALA 217",
-          "163d → 90 Dias desocupado",
-          "✓"
-        ],
-        [
-          "IM1799",
-          "IM1799 - CLN 201 BLOCO C SALA 207",
-          "163d → 90 Dias desocupado",
-          "✓"
-        ],
-        [
-          "IM1800",
-          "IM1800 - CLN 201 BLOCO C SALA 208",
-          "163d → 90 Dias desocupado",
-          "✓"
-        ],
-        [
-          "IM1806",
-          "IM1806 - CLN 201 BLOCO C SALA 214",
-          "163d → 90 Dias desocupado",
-          "✓"
-        ],
-        [
           "IM1808",
           "IM1808 - CLN 201 BLOCO C SALA 219",
-          "163d → 90 Dias desocupado",
+          "164d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1797",
           "IM1797 - CLN 201 BLOCO C SALA 205",
-          "161d → 90 Dias desocupado",
+          "162d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1790",
           "IM1790 - CLN 201 BLOCO C SALA 109",
-          "160d → 90 Dias desocupado",
+          "161d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1786",
           "IM1786 - CLN 201 BLOCO C SALA 101",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1791",
           "IM1791 - CLN 201 BLOCO C SALA 110",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1792",
           "IM1792 - CLN 201 BLOCO C SALA 112",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1794",
           "IM1794 - CLN 201 BLOCO C SALA 202",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1796",
           "IM1796 - CLN 201 BLOCO C SALA 204",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
           "IM1803",
           "IM1803 - CLN 201 BLOCO C SALA 211",
-          "159d → 90 Dias desocupado",
+          "160d → 90 Dias desocupado",
           "✓"
         ],
         [
@@ -8182,12 +8182,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1200/2222",
-          "54.0%"
+          "1201/2227",
+          "53.9%"
         ],
         [
           "Avaliações positivas",
-          "161/165",
+          "162/166",
           "97.6%"
         ]
       ]
@@ -8222,8 +8222,8 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1673/1978",
-          "84.6%"
+          "1677/1986",
+          "84.4%"
         ],
         [
           "Avaliações positivas",
@@ -8262,12 +8262,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1786/2212",
+          "1794/2222",
           "80.7%"
         ],
         [
           "Avaliações positivas",
-          "287/300",
+          "289/302",
           "95.7%"
         ]
       ]
@@ -12474,12 +12474,12 @@
       "titulo": "WhatsApp (Octadesk)",
       "kpis": [
         {
-          "v": "54.0%",
+          "v": "53.9%",
           "l": "Caio Resposta ≤5min",
           "cls": "ok"
         },
         {
-          "v": "84.6%",
+          "v": "84.4%",
           "l": "Natália Resposta ≤5min",
           "cls": "ok"
         },
@@ -12500,19 +12500,19 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Natália Resposta ≤5min (1673/1978)",
+            "Natália Resposta ≤5min (1677/1986)",
             "Natália Avaliações positivas (256/260)",
-            "Gardênia Resposta ≤5min (1786/2212)",
-            "Gardênia Avaliações positivas (287/300)",
-            "Caio Resposta ≤5min (1200/2222)",
-            "Caio Avaliações positivas (161/165)"
+            "Gardênia Resposta ≤5min (1794/2222)",
+            "Gardênia Avaliações positivas (289/302)",
+            "Caio Resposta ≤5min (1201/2227)",
+            "Caio Avaliações positivas (162/166)"
           ],
           "data": [
-            84.6,
+            84.4,
             98.5,
             80.7,
             95.7,
-            54.0,
+            53.9,
             97.6
           ],
           "metas": [
@@ -12533,9 +12533,9 @@
             "Caio"
           ],
           "data": [
-            9.013,
-            8.671,
-            7.143
+            9.004,
+            8.672,
+            7.14
           ],
           "colors": [
             "#000",
@@ -12549,9 +12549,9 @@
           "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
-          "ok": 1673,
-          "tot": 1978,
-          "pct": 84.6
+          "ok": 1677,
+          "tot": 1986,
+          "pct": 84.4
         },
         {
           "nome": "Avaliações positivas",
@@ -12565,32 +12565,32 @@
           "nome": "Resposta ≤5min",
           "resp": "Gardênia",
           "meta": "≤5min",
-          "ok": 1786,
-          "tot": 2212,
+          "ok": 1794,
+          "tot": 2222,
           "pct": 80.7
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Gardênia",
           "meta": "% positivas",
-          "ok": 287,
-          "tot": 300,
+          "ok": 289,
+          "tot": 302,
           "pct": 95.7
         },
         {
           "nome": "Resposta ≤5min",
           "resp": "Caio",
           "meta": "≤5min",
-          "ok": 1200,
-          "tot": 2222,
-          "pct": 54.0
+          "ok": 1201,
+          "tot": 2227,
+          "pct": 53.9
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Caio",
           "meta": "% positivas",
-          "ok": 161,
-          "tot": 165,
+          "ok": 162,
+          "tot": 166,
           "pct": 97.6
         }
       ],
@@ -12601,11 +12601,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio Resposta ≤5min: 54.0% — gargalo do processo."
+          "txt": "Caio Resposta ≤5min: 53.9% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 7137 cards no período."
+          "txt": "Volume de 7163 cards no período."
         }
       ]
     }

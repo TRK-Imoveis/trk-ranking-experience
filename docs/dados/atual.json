@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-20T15:04:10.503709Z",
-    "ref": "2026-08-20T14:44:04.235903+00:00",
+    "geradoEm": "2026-08-20T17:16:43.910446Z",
+    "ref": "2026-08-20T16:54:47.352080+00:00",
     "fonte": "api",
     "etl_ultima_carga": null,
     "octadesk_disponivel": true,
@@ -23,7 +23,7 @@
         "Rescisão ADM": 7.778,
         "Com. Locação": null,
         "Cont. Locação": 7.038,
-        "Rescisão Loc.": 8.802,
+        "Rescisão Loc.": 8.765,
         "Reparos": null,
         "Renovação": 7.187,
         "Inadimplência": 6.024,
@@ -71,20 +71,20 @@
           "meta": "≤2h úteis"
         },
         {
-          "ok": 28,
-          "tot": 31,
-          "pct": 90.3,
+          "ok": 27,
+          "tot": 30,
+          "pct": 90.0,
           "peso": 5,
-          "score": 4.516,
+          "score": 4.5,
           "nome": "Rescisão Loc. — Levant. Taxas Prop <2h",
           "meta": "≤2h úteis"
         },
         {
-          "ok": 30,
-          "tot": 35,
-          "pct": 85.7,
+          "ok": 29,
+          "tot": 34,
+          "pct": 85.3,
           "peso": 5,
-          "score": 4.286,
+          "score": 4.265,
           "nome": "Rescisão Loc. — Levant. Taxas Final <2h",
           "meta": "≤2h úteis"
         },
@@ -180,7 +180,7 @@
         }
       ],
       "pontosFort": [
-        "RescLoc: 90.3%",
+        "RescLoc: 90.0%",
         "Cont.Loc: 88.6%",
         "Inad: 88.1%",
         "Renov: 87.5%"
@@ -386,19 +386,19 @@
       "nome": "Gardênia",
       "cargo": "Assessora",
       "nota": 5.48,
-      "bonus": 3,
+      "bonus": 4,
       "bonus_proc": "Cont. ADM",
       "bonus_por_proc": {
-        "Cont. ADM": 3
+        "Cont. ADM": 4
       },
       "inds": 16,
       "pts": 90,
       "scores": {
-        "Cont. ADM": 1.861,
+        "Cont. ADM": 2.111,
         "Rescisão ADM": 4.357,
         "Com. Locação": null,
         "Cont. Locação": null,
-        "Rescisão Loc.": 7.0,
+        "Rescisão Loc.": 6.764,
         "Reparos": 4.403,
         "Renovação": 9.692,
         "Inadimplência": null,
@@ -446,20 +446,20 @@
           "meta": "assinado ao concluir"
         },
         {
-          "ok": 10,
-          "tot": 16,
-          "pct": 62.5,
+          "ok": 9,
+          "tot": 15,
+          "pct": 60.0,
           "peso": 4,
-          "score": 2.5,
+          "score": 2.4,
           "nome": "Rescisão Loc. — Boleto prop <48h",
           "meta": "≤48h da entrega das chaves"
         },
         {
-          "ok": 9,
-          "tot": 12,
-          "pct": 75.0,
+          "ok": 8,
+          "tot": 11,
+          "pct": 72.7,
           "peso": 6,
-          "score": 4.5,
+          "score": 4.364,
           "nome": "Rescisão Loc. — Boleto final <15d",
           "meta": "≤15d corrido"
         },
@@ -1749,7 +1749,7 @@
         [
           "IM120",
           "IM120 - SCLN 211 BL D SALA 111",
-          "114d → 90 Dias desocupado",
+          "115d → 90 Dias desocupado",
           "✗"
         ],
         [
@@ -3150,7 +3150,7 @@
       ]
     },
     "vivi_lev_prop": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (28/31)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Prop <2h (27/30)",
       "cols": [
         "Imóvel",
         "Título",
@@ -3198,12 +3198,6 @@
           "IM682",
           "IM682 - SCLRN 703 BLOCO G LOJA 9",
           "1.2h",
-          "✓"
-        ],
-        [
-          "IM388",
-          "IM388 - SCLN 412 BL D LT E 08 SALA 111",
-          "1.1h",
           "✓"
         ],
         [
@@ -3347,7 +3341,7 @@
       ]
     },
     "vivi_lev_final": {
-      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (30/35)",
+      "titulo": "Vivianne — Resc. Loc.: Levant. Taxas Final <2h (29/34)",
       "cols": [
         "Imóvel",
         "Título",
@@ -3550,12 +3544,6 @@
         [
           "IM1828",
           "IM1828- SGAS 616 CONJUNTO A LOJAS 14,15,16 LINEA VITTA",
-          "0.0h",
-          "✓"
-        ],
-        [
-          "IM388",
-          "IM388 - SCLN 412 BL D LT E 08 SALA 111",
           "0.0h",
           "✓"
         ],
@@ -9765,7 +9753,7 @@
       ]
     },
     "gar_cadm_bonus": {
-      "titulo": "Gardênia — Cont. ADM: Vistoria de entrada ★ (3)",
+      "titulo": "Gardênia — Cont. ADM: Vistoria de entrada ★ (4)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9773,6 +9761,12 @@
         "Bônus"
       ],
       "rows": [
+        [
+          "IM1857",
+          "IM1857 - Shis Qi 19 Conjunto 5 Casa 3",
+          "vistoria criada",
+          "★"
+        ],
         [
           "IM1837",
           "IM1837 - SHIS QL 8, Conjunto 4, Casa 2",
@@ -9917,7 +9911,7 @@
       ]
     },
     "gar_rl_prop": {
-      "titulo": "Gardênia — Resc. Loc.: Boleto prop <48h (10/16)",
+      "titulo": "Gardênia — Resc. Loc.: Boleto prop <48h (9/15)",
       "cols": [
         "Imóvel",
         "Título",
@@ -9960,12 +9954,6 @@
           "IM1592- CNC 02 LOTE 10 LOJA 02, LOJA TERREA E SUBSOLO",
           "81.6h",
           "✗"
-        ],
-        [
-          "IM388",
-          "IM388 - SCLN 412 BL D LT E 08 SALA 111",
-          "41.0h",
-          "✓"
         ],
         [
           "IM388",
@@ -10030,7 +10018,7 @@
       ]
     },
     "gar_rl_final": {
-      "titulo": "Gardênia — Resc. Loc.: Boleto final <15d (9/12)",
+      "titulo": "Gardênia — Resc. Loc.: Boleto final <15d (8/11)",
       "cols": [
         "Imóvel",
         "Título",
@@ -10078,12 +10066,6 @@
           "IM357",
           "IM357 - CLN 412 BL D LOJA 08 e 09",
           "5.5d",
-          "✓"
-        ],
-        [
-          "IM388",
-          "IM388 - SCLN 412 BL D LT E 08 SALA 111",
-          "2.5d",
           "✓"
         ],
         [
@@ -11087,7 +11069,7 @@
           "cls": "ok"
         },
         {
-          "v": "★ 9",
+          "v": "★ 10",
           "l": "Vistorias entrada",
           "cls": ""
         }
@@ -11121,14 +11103,14 @@
           "titulo": "Notas",
           "labels": [
             "Vivianne",
-            "Caio",
             "Gardênia",
+            "Caio",
             "Natália"
           ],
           "data": [
             8.148,
+            2.111,
             2.0,
-            1.861,
             1.25
           ],
           "colors": [
@@ -11184,7 +11166,7 @@
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 9 vistorias de entrada criadas."
+          "txt": "★ Bônus: 10 vistorias de entrada criadas."
         }
       ]
     },
@@ -11560,12 +11542,12 @@
       "titulo": "Rescisão de Locação",
       "kpis": [
         {
-          "v": "85.7%",
+          "v": "85.3%",
           "l": "Vivianne Levant. Taxas Final",
           "cls": "ok"
         },
         {
-          "v": "90.3%",
+          "v": "90.0%",
           "l": "Vivianne Levant. Taxas Prop",
           "cls": "ok"
         },
@@ -11575,7 +11557,7 @@
           "cls": "ok"
         },
         {
-          "v": "75.0%",
+          "v": "72.7%",
           "l": "Gardênia Boleto final <15d",
           "cls": "ok"
         }
@@ -11586,20 +11568,20 @@
           "titulo": "Indicadores · Rescisão Loc.",
           "full": true,
           "labels": [
-            "Vivianne Levant. Taxas Prop <2h (28/31)",
-            "Vivianne Levant. Taxas Final <2 (30/35)",
+            "Vivianne Levant. Taxas Prop <2h (27/30)",
+            "Vivianne Levant. Taxas Final <2 (29/34)",
             "Natália Boleto prop <48h (10/13)",
             "Natália Boleto final <15d (8/16)",
-            "Gardênia Boleto prop <48h (10/16)",
-            "Gardênia Boleto final <15d (9/12)"
+            "Gardênia Boleto prop <48h (9/15)",
+            "Gardênia Boleto final <15d (8/11)"
           ],
           "data": [
-            90.3,
-            85.7,
+            90.0,
+            85.3,
             76.9,
             50.0,
-            62.5,
-            75.0
+            60.0,
+            72.7
           ],
           "metas": [
             100,
@@ -11619,8 +11601,8 @@
             "Natália"
           ],
           "data": [
-            8.802,
-            7.0,
+            8.765,
+            6.764,
             6.077
           ],
           "colors": [
@@ -11635,17 +11617,17 @@
           "nome": "Levant. Taxas Prop <2h",
           "resp": "Vivianne",
           "meta": "≤2h úteis",
-          "ok": 28,
-          "tot": 31,
-          "pct": 90.3
+          "ok": 27,
+          "tot": 30,
+          "pct": 90.0
         },
         {
           "nome": "Levant. Taxas Final <2h",
           "resp": "Vivianne",
           "meta": "≤2h úteis",
-          "ok": 30,
-          "tot": 35,
-          "pct": 85.7
+          "ok": 29,
+          "tot": 34,
+          "pct": 85.3
         },
         {
           "nome": "Boleto prop <48h",
@@ -11667,23 +11649,23 @@
           "nome": "Boleto prop <48h",
           "resp": "Gardênia",
           "meta": "≤48h da entrega das chaves",
-          "ok": 10,
-          "tot": 16,
-          "pct": 62.5
+          "ok": 9,
+          "tot": 15,
+          "pct": 60.0
         },
         {
           "nome": "Boleto final <15d",
           "resp": "Gardênia",
           "meta": "≤15d corrido",
-          "ok": 9,
-          "tot": 12,
-          "pct": 75.0
+          "ok": 8,
+          "tot": 11,
+          "pct": 72.7
         }
       ],
       "insights": [
         {
           "tipo": "pos",
-          "txt": "Vivianne lidera Levant. Taxas Prop <2h: 90.3%."
+          "txt": "Vivianne lidera Levant. Taxas Prop <2h: 90.0%."
         },
         {
           "tipo": "neg",
@@ -11691,7 +11673,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 123 cards no período."
+          "txt": "Volume de 119 cards no período."
         }
       ]
     },
