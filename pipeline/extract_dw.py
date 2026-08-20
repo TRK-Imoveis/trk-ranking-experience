@@ -436,14 +436,33 @@ def extract_pipe(pipe_key: str, *, use_cache: bool = True, verbose: bool = True)
             # TÍTULO em JSON. Resolvemos via pipefy_cards para o `Imóvel ` voltar
             # a conter "IM890 | ..." — de onde calculate.py extrai o IM por regex.
             if tipo == "connector":
-                alvo_ids = sorted({
-                    p.strip() for v in sub["value_text"].dropna()
-                    for p in str(v).split(",") if p.strip()
-                })
+                # O banco guarda conector como JSON: '["1259274229"]' — e VAZIO
+                # como '[]'. A versão anterior fazia split(",") na string crua:
+                # '[]' virava a lista ['[]'], que era serializada como '["[]"]'
+                # e passava no teste de "campo preenchido". Resultado em
+                # 18/08/2026: a Gardênia ganhou um bônus de vistoria de entrada
+                # que não existia (IM1845, conector vazio) — 3 viraram 4 e a
+                # nota subiu de 5,44 para 5,47.
+                # Efeito colateral do mesmo bug: os ids nunca eram resolvidos
+                # em títulos, porque '["1259274229"]' (com colchetes e aspas)
+                # nunca casava na tabela de títulos.
+                def _ids_conector(v):
+                    txt = "" if v is None else str(v).strip()
+                    if not txt or txt in ("[]", "null", "None"):
+                        return []
+                    if txt.startswith("["):
+                        try:
+                            return [str(x).strip() for x in json.loads(txt) if str(x).strip()]
+                        except (ValueError, TypeError):
+                            pass
+                    return [p.strip() for p in txt.split(",") if p.strip()]
+
+                alvo_ids = sorted({i for v in sub["value_text"].dropna()
+                                     for i in _ids_conector(v)})
                 titulos = _titulos_de_cards(alvo_ids)
                 valores = {}
                 for _, r in sub.iterrows():
-                    ids = [p.strip() for p in str(r.get("value_text") or "").split(",") if p.strip()]
+                    ids = _ids_conector(r.get("value_text"))
                     nomes = [titulos.get(i, i) for i in ids]
                     valores[str(r["card_id"])] = (
                         json.dumps(nomes, ensure_ascii=False) if nomes else None)

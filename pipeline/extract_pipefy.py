@@ -267,10 +267,41 @@ def _card_to_row(card: dict, cfg: dict) -> dict:
     por_id = {(f["field"] or {}).get("id"): f for f in campos}
     por_interno = {str((f["field"] or {}).get("internal_id")): f for f in campos}
     por_nome = {f.get("name"): f for f in campos}
+    # CAMPOS DUPLICADOS NO FORMULÁRIO (20/08/2026)
+    # ────────────────────────────────────────────────────────────────
+    # O Cont. ADM tem DOIS campos para a mesma coisa, criados em momentos
+    # diferentes e com nomes que só diferem na caixa:
+    #   'Criar card de vistoria técnica'  slug ..._t_cninca  → 15 cards
+    #   'Criar Card de vistoria Técnica'  slug ..._t_cnica   →  1 card (IM1857)
+    # O fields_map aponta para o primeiro (o "n" a mais é o slug REAL que o
+    # Pipefy gerou, não erro nosso). Resultado: o card que usa o campo novo
+    # ficava invisível e a Gardênia perdia um bônus de vistoria de entrada.
+    # Aqui juntamos por nome normalizado e ficamos com o 1º valor não-vazio.
+    # ⚠️ O conserto de verdade é consolidar os dois campos NO PIPEFY — enquanto
+    # existirem os dois, cada card novo pode cair em qualquer um deles.
+    por_nome_norm: dict[str, list] = {}
+    for f in campos:
+        chave = " ".join(str(f.get("name") or "").split()).casefold()
+        por_nome_norm.setdefault(chave, []).append(f)
+
+    def _por_nome_norm(nome):
+        cands = por_nome_norm.get(" ".join(str(nome or "").split()).casefold(), [])
+        for f in cands:
+            v = f.get("value")
+            if v not in (None, "", "[]", "null"):
+                return f
+        return cands[0] if cands else None
+
     for label, info in (cfg.get("fields") or {}).items():
         cf = (por_id.get(info.get("id"))
               or por_interno.get(str(info.get("internal_id")))
               or por_nome.get(info.get("label") or label))
+        # Se o achado por id/nome exato está VAZIO, ainda pode haver um gêmeo
+        # com o mesmo nome normalizado e valor preenchido.
+        if cf is None or cf.get("value") in (None, "", "[]", "null"):
+            alt = _por_nome_norm(info.get("label") or label)
+            if alt is not None and alt.get("value") not in (None, "", "[]", "null"):
+                cf = alt
         row[label] = _extract_field_value(cf, info.get("type", ""), info.get("fuso", ""))
 
     # Derivações por fase
