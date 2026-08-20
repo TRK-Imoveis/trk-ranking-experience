@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-20T21:36:06.450805Z",
-    "ref": "2026-08-20T21:17:56.222828+00:00",
+    "geradoEm": "2026-08-20T22:01:14.127245Z",
+    "ref": "2026-08-20T21:45:05.381053+00:00",
     "fonte": "api",
     "etl_ultima_carga": null,
     "octadesk_disponivel": true,
@@ -331,20 +331,20 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1677,
-          "tot": 1986,
+          "ok": 1680,
+          "tot": 1990,
           "pct": 84.4,
           "peso": 6,
-          "score": 5.066,
+          "score": 5.065,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 256,
-          "tot": 260,
+          "ok": 257,
+          "tot": 261,
           "pct": 98.5,
           "peso": 4,
-          "score": 3.938,
+          "score": 3.939,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
@@ -405,7 +405,7 @@
         "Vistorias": null,
         "BackOffice": 2.105,
         "DIRF/DARF": 5.0,
-        "WhatsApp": 8.674,
+        "WhatsApp": 8.675,
         "Ticket": 6.222
       },
       "detalhes": [
@@ -518,8 +518,8 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1794,
-          "tot": 2221,
+          "ok": 1801,
+          "tot": 2230,
           "pct": 80.8,
           "peso": 6,
           "score": 4.846,
@@ -527,11 +527,11 @@
           "meta": "≤5min"
         },
         {
-          "ok": 289,
-          "tot": 302,
+          "ok": 291,
+          "tot": 304,
           "pct": 95.7,
           "peso": 4,
-          "score": 3.828,
+          "score": 3.829,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
@@ -671,7 +671,7 @@
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 7.147,
+        "WhatsApp": 7.146,
         "Ticket": 5.721
       },
       "detalhes": [
@@ -739,20 +739,20 @@
           "meta": ">90d antes do venc"
         },
         {
-          "ok": 1201,
-          "tot": 2222,
-          "pct": 54.1,
+          "ok": 1202,
+          "tot": 2225,
+          "pct": 54.0,
           "peso": 6,
-          "score": 3.243,
+          "score": 3.241,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 162,
-          "tot": 166,
+          "ok": 164,
+          "tot": 168,
           "pct": 97.6,
           "peso": 4,
-          "score": 3.904,
+          "score": 3.905,
           "nome": "WhatsApp — Avaliações positivas",
           "meta": "% positivas"
         },
@@ -779,7 +779,7 @@
         "WA: 97.6%",
         "Tkts: 81.8%",
         "Comercial: 61.5%",
-        "WA: 54.1%"
+        "WA: 54.0%"
       ],
       "pontosAten": [
         "Cont.Loc: 14.3%",
@@ -8242,12 +8242,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1201/2222",
-          "54.1%"
+          "1202/2225",
+          "54.0%"
         ],
         [
           "Avaliações positivas",
-          "162/166",
+          "164/168",
           "97.6%"
         ]
       ]
@@ -8282,12 +8282,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1677/1986",
+          "1680/1990",
           "84.4%"
         ],
         [
           "Avaliações positivas",
-          "256/260",
+          "257/261",
           "98.5%"
         ]
       ]
@@ -8322,12 +8322,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1794/2221",
+          "1801/2230",
           "80.8%"
         ],
         [
           "Avaliações positivas",
-          "289/302",
+          "291/304",
           "95.7%"
         ]
       ]
@@ -12570,7 +12570,7 @@
       "titulo": "WhatsApp (Octadesk)",
       "kpis": [
         {
-          "v": "54.1%",
+          "v": "54.0%",
           "l": "Caio Resposta ≤5min",
           "cls": "ok"
         },
@@ -12596,19 +12596,19 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Natália Resposta ≤5min (1677/1986)",
-            "Natália Avaliações positivas (256/260)",
-            "Gardênia Resposta ≤5min (1794/2221)",
-            "Gardênia Avaliações positivas (289/302)",
-            "Caio Resposta ≤5min (1201/2222)",
-            "Caio Avaliações positivas (162/166)"
+            "Natália Resposta ≤5min (1680/1990)",
+            "Natália Avaliações positivas (257/261)",
+            "Gardênia Resposta ≤5min (1801/2230)",
+            "Gardênia Avaliações positivas (291/304)",
+            "Caio Resposta ≤5min (1202/2225)",
+            "Caio Avaliações positivas (164/168)"
           ],
           "data": [
             84.4,
             98.5,
             80.8,
             95.7,
-            54.1,
+            54.0,
             97.6
           ],
           "metas": [
@@ -12630,8 +12630,8 @@
           ],
           "data": [
             9.004,
-            8.674,
-            7.147
+            8.675,
+            7.146
           ],
           "colors": [
             "#000",
@@ -12645,48 +12645,48 @@
           "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
-          "ok": 1677,
-          "tot": 1986,
+          "ok": 1680,
+          "tot": 1990,
           "pct": 84.4
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Natália",
           "meta": "% positivas",
-          "ok": 256,
-          "tot": 260,
+          "ok": 257,
+          "tot": 261,
           "pct": 98.5
         },
         {
           "nome": "Resposta ≤5min",
           "resp": "Gardênia",
           "meta": "≤5min",
-          "ok": 1794,
-          "tot": 2221,
+          "ok": 1801,
+          "tot": 2230,
           "pct": 80.8
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Gardênia",
           "meta": "% positivas",
-          "ok": 289,
-          "tot": 302,
+          "ok": 291,
+          "tot": 304,
           "pct": 95.7
         },
         {
           "nome": "Resposta ≤5min",
           "resp": "Caio",
           "meta": "≤5min",
-          "ok": 1201,
-          "tot": 2222,
-          "pct": 54.1
+          "ok": 1202,
+          "tot": 2225,
+          "pct": 54.0
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Caio",
           "meta": "% positivas",
-          "ok": 162,
-          "tot": 166,
+          "ok": 164,
+          "tot": 168,
           "pct": 97.6
         }
       ],
@@ -12697,11 +12697,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio Resposta ≤5min: 54.1% — gargalo do processo."
+          "txt": "Caio Resposta ≤5min: 54.0% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 7157 cards no período."
+          "txt": "Volume de 7178 cards no período."
         }
       ]
     }
