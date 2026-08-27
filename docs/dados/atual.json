@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-08-27T18:09:48.821528Z",
-    "ref": "2026-08-27T17:47:16.311072+00:00",
+    "geradoEm": "2026-08-27T19:46:57.914545Z",
+    "ref": "2026-08-27T19:24:29.620703+00:00",
     "fonte": "api",
     "etl_ultima_carga": null,
     "octadesk_disponivel": true,
@@ -26,9 +26,9 @@
         "Rescisão Loc.": 8.894,
         "Reparos": null,
         "Renovação": 7.942,
-        "Inadimplência": 6.23,
+        "Inadimplência": 6.216,
         "Vistorias": null,
-        "BackOffice": 6.06,
+        "BackOffice": 6.108,
         "DIRF/DARF": null,
         "WhatsApp": null,
         "Ticket": 5.099
@@ -135,10 +135,10 @@
         },
         {
           "ok": 89,
-          "tot": 130,
-          "pct": 68.5,
+          "tot": 131,
+          "pct": 67.9,
           "peso": 2.5,
-          "score": 1.712,
+          "score": 1.698,
           "nome": "Inadimplência — Cobrança dos boletos em atraso",
           "meta": "abrir cobrança no atraso"
         },
@@ -161,11 +161,11 @@
           "meta": "≤24h úteis"
         },
         {
-          "ok": 24,
-          "tot": 64,
-          "pct": 37.5,
+          "ok": 25,
+          "tot": 65,
+          "pct": 38.5,
           "peso": 5,
-          "score": 1.875,
+          "score": 1.923,
           "nome": "BackOffice — Troca Titularidade <5d",
           "meta": "≤5d úteis"
         },
@@ -187,7 +187,7 @@
       ],
       "pontosAten": [
         "Inad: 5.6%",
-        "BO: 37.5%",
+        "BO: 38.5%",
         "Tkts: 51.0%",
         "Cont.Loc: 52.2%"
       ],
@@ -651,7 +651,7 @@
       "id": "caio",
       "nome": "Caio Rodrigues Lima",
       "cargo": "Comercial",
-      "nota": 4.29,
+      "nota": 4.31,
       "bonus": 4,
       "bonus_proc": "Com. Locação",
       "bonus_por_proc": {
@@ -666,12 +666,12 @@
         "Cont. Locação": 2.397,
         "Rescisão Loc.": null,
         "Reparos": null,
-        "Renovação": 2.766,
+        "Renovação": 2.917,
         "Inadimplência": null,
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 7.098,
+        "WhatsApp": 7.099,
         "Ticket": 5.512
       },
       "detalhes": [
@@ -730,20 +730,20 @@
           "meta": "≤7d corrido"
         },
         {
-          "ok": 13,
-          "tot": 47,
-          "pct": 27.7,
+          "ok": 14,
+          "tot": 48,
+          "pct": 29.2,
           "peso": 10,
-          "score": 2.766,
+          "score": 2.917,
           "nome": "Renovação — Avaliação >90d",
           "meta": ">90d antes do venc"
         },
         {
           "ok": 1196,
-          "tot": 2217,
-          "pct": 53.9,
+          "tot": 2216,
+          "pct": 54.0,
           "peso": 6,
-          "score": 3.237,
+          "score": 3.238,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -779,12 +779,12 @@
         "WA: 96.5%",
         "Tkts: 78.9%",
         "Comercial: 57.7%",
-        "WA: 53.9%"
+        "WA: 54.0%"
       ],
       "pontosAten": [
         "Cont.Loc: 11.1%",
         "Cont.ADM: 19.0%",
-        "Renov: 27.7%",
+        "Renov: 29.2%",
         "Comercial: 37.8%"
       ],
       "pos": 5
@@ -2291,7 +2291,7 @@
       ]
     },
     "caio_renov": {
-      "titulo": "Caio — Renovação: Avaliação >90d (13/47)",
+      "titulo": "Caio — Renovação: Avaliação >90d (14/48)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -2299,6 +2299,12 @@
         "Status"
       ],
       "rows": [
+        [
+          "IM57",
+          "IM57 - Q SCLN QUADRA 211 BLOCO D [ SS 4, 8, 10, 66, 68, 74, 76],2",
+          "1541d",
+          "✓"
+        ],
         [
           "IM86",
           "IM86/4- CLN 211 BLOCO D SALA 213 E 214",
@@ -7102,7 +7108,7 @@
       ]
     },
     "vivi_bo_troca": {
-      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (24/64)",
+      "titulo": "Vivianne — BackOffice: Troca Titularidade <5d (25/65)",
       "cols": [
         "Imóvel",
         "Título",
@@ -7447,6 +7453,12 @@
           "✓"
         ],
         [
+          "IM1856",
+          "IM1856 - VK5507 -  SMPW 15 Conjunto 3 Lt 5 casa E",
+          "5.0h",
+          "✓"
+        ],
+        [
           "IM#1370305143",
           "1586",
           "3.3h",
@@ -7497,7 +7509,7 @@
       ]
     },
     "vivi_cobertura": {
-      "titulo": "Vivianne — Inadim.: Cobrança dos boletos em atraso (89/130)",
+      "titulo": "Vivianne — Inadim.: Cobrança dos boletos em atraso (89/131)",
       "cols": [
         "Categoria",
         "Quantidade",
@@ -7511,7 +7523,7 @@
         ],
         [
           "✗ Sem card no mês esperado — passou batido",
-          "25",
+          "26",
           "✗"
         ],
         [
@@ -8404,8 +8416,8 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1196/2217",
-          "53.9%"
+          "1196/2216",
+          "54.0%"
         ],
         [
           "Avaliações positivas",
@@ -11264,7 +11276,7 @@
         [
           "IM#1297409332",
           "1678.0",
-          "—",
+          "27/08/2026",
           "✗"
         ],
         [
@@ -12037,7 +12049,7 @@
       "titulo": "Renovação de Contratos",
       "kpis": [
         {
-          "v": "27.7%",
+          "v": "29.2%",
           "l": "Caio Avaliação >90d",
           "cls": "bad"
         },
@@ -12069,7 +12081,7 @@
             "Natália Assinado antes vencime (3/3)",
             "Gardênia Contato >60d (12/14)",
             "Gardênia Assinado antes vencime (5/5)",
-            "Caio Avaliação >90d (13/47)"
+            "Caio Avaliação >90d (14/48)"
           ],
           "data": [
             88.0,
@@ -12078,7 +12090,7 @@
             100.0,
             85.7,
             100.0,
-            27.7
+            29.2
           ],
           "metas": [
             100,
@@ -12103,7 +12115,7 @@
             9.429,
             8.25,
             7.942,
-            2.766
+            2.917
           ],
           "colors": [
             "#000",
@@ -12166,9 +12178,9 @@
           "nome": "Avaliação >90d",
           "resp": "Caio",
           "meta": ">90d antes do venc",
-          "ok": 13,
-          "tot": 47,
-          "pct": 27.7
+          "ok": 14,
+          "tot": 48,
+          "pct": 29.2
         }
       ],
       "insights": [
@@ -12178,11 +12190,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio Avaliação >90d: 27.7% — gargalo do processo."
+          "txt": "Caio Avaliação >90d: 29.2% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 126 cards no período."
+          "txt": "Volume de 127 cards no período."
         }
       ]
     },
@@ -12196,7 +12208,7 @@
           "cls": "ok"
         },
         {
-          "v": "68.5%",
+          "v": "67.9%",
           "l": "Vivianne Cobrança dos boletos",
           "cls": "ok"
         },
@@ -12220,14 +12232,14 @@
             "Vivianne Cobrança <8h úteis (267/303)",
             "Vivianne CredPago ≤15d (14/21)",
             "Vivianne Negativação 7-9d (1/18)",
-            "Vivianne Cobrança dos boletos e (89/130)",
+            "Vivianne Cobrança dos boletos e (89/131)",
             "Vivianne Recebido antes do repa (55/89)"
           ],
           "data": [
             88.1,
             66.7,
             5.6,
-            68.5,
+            67.9,
             61.8
           ],
           "metas": [
@@ -12245,7 +12257,7 @@
             "Vivianne"
           ],
           "data": [
-            6.23
+            6.216
           ],
           "colors": [
             "#000"
@@ -12282,8 +12294,8 @@
           "resp": "Vivianne",
           "meta": "abrir cobrança no atraso",
           "ok": 89,
-          "tot": 130,
-          "pct": 68.5
+          "tot": 131,
+          "pct": 67.9
         },
         {
           "nome": "Recebido antes do repasse",
@@ -12305,7 +12317,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 561 cards no período."
+          "txt": "Volume de 562 cards no período."
         }
       ]
     },
@@ -12430,7 +12442,7 @@
           "cls": "ok"
         },
         {
-          "v": "37.5%",
+          "v": "38.5%",
           "l": "Vivianne Troca Titularidade <5d",
           "cls": "bad"
         }
@@ -12442,13 +12454,13 @@
           "full": true,
           "labels": [
             "Vivianne Concluído <24h (149/178)",
-            "Vivianne Troca Titularidade <5d (24/64)",
+            "Vivianne Troca Titularidade <5d (25/65)",
             "Natália Pendência <24h (6/11)",
             "Gardênia Pendência <24h (4/19)"
           ],
           "data": [
             83.7,
-            37.5,
+            38.5,
             54.5,
             21.1
           ],
@@ -12468,7 +12480,7 @@
             "Gardênia"
           ],
           "data": [
-            6.06,
+            6.108,
             5.455,
             2.105
           ],
@@ -12492,9 +12504,9 @@
           "nome": "Troca Titularidade <5d",
           "resp": "Vivianne",
           "meta": "≤5d úteis",
-          "ok": 24,
-          "tot": 64,
-          "pct": 37.5
+          "ok": 25,
+          "tot": 65,
+          "pct": 38.5
         },
         {
           "nome": "Pendência <24h",
@@ -12524,7 +12536,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 272 cards no período."
+          "txt": "Volume de 273 cards no período."
         }
       ]
     },
@@ -12780,7 +12792,7 @@
       "titulo": "WhatsApp (Octadesk)",
       "kpis": [
         {
-          "v": "53.9%",
+          "v": "54.0%",
           "l": "Caio Resposta ≤5min",
           "cls": "ok"
         },
@@ -12810,7 +12822,7 @@
             "Natália Avaliações positivas (265/269)",
             "Gardênia Resposta ≤5min (1786/2213)",
             "Gardênia Avaliações positivas (299/311)",
-            "Caio Resposta ≤5min (1196/2217)",
+            "Caio Resposta ≤5min (1196/2216)",
             "Caio Avaliações positivas (167/173)"
           ],
           "data": [
@@ -12818,7 +12830,7 @@
             98.5,
             80.7,
             96.1,
-            53.9,
+            54.0,
             96.5
           ],
           "metas": [
@@ -12841,7 +12853,7 @@
           "data": [
             9.009,
             8.688,
-            7.098
+            7.099
           ],
           "colors": [
             "#000",
@@ -12888,8 +12900,8 @@
           "resp": "Caio",
           "meta": "≤5min",
           "ok": 1196,
-          "tot": 2217,
-          "pct": 53.9
+          "tot": 2216,
+          "pct": 54.0
         },
         {
           "nome": "Avaliações positivas",
@@ -12907,11 +12919,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio Resposta ≤5min: 53.9% — gargalo do processo."
+          "txt": "Caio Resposta ≤5min: 54.0% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 7146 cards no período."
+          "txt": "Volume de 7145 cards no período."
         }
       ]
     }
