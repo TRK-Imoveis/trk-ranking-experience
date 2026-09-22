@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-09-22T20:05:55.896274Z",
-    "ref": "2026-09-22T19:33:20.046656+00:00",
+    "geradoEm": "2026-09-22T21:01:09.434452Z",
+    "ref": "2026-09-22T20:39:32.393244+00:00",
     "fonte": "api",
     "etl_ultima_carga": null,
     "octadesk_disponivel": true,
@@ -484,7 +484,7 @@
         "Vistorias": null,
         "BackOffice": 2.381,
         "DIRF/DARF": 5.0,
-        "WhatsApp": 8.683,
+        "WhatsApp": 8.682,
         "Ticket": 7.241
       },
       "detalhes": [
@@ -597,11 +597,11 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1708,
-          "tot": 2118,
+          "ok": 1707,
+          "tot": 2117,
           "pct": 80.6,
           "peso": 6,
-          "score": 4.839,
+          "score": 4.838,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -646,182 +646,6 @@
         "RescADM: 42.9%"
       ],
       "pos": 4
-    },
-    {
-      "id": "tauise",
-      "nome": "Tauise Oliveira",
-      "cargo": "Assessora",
-      "nota": 3.92,
-      "bonus": 0,
-      "bonus_proc": null,
-      "bonus_por_proc": {},
-      "inds": 15,
-      "pts": 80,
-      "scores": {
-        "Cont. ADM": null,
-        "Rescisão ADM": 4.286,
-        "Com. Locação": null,
-        "Cont. Locação": null,
-        "Rescisão Loc.": 0.0,
-        "Reparos": 6.667,
-        "Renovação": null,
-        "Inadimplência": null,
-        "Vistorias": null,
-        "BackOffice": null,
-        "DIRF/DARF": null,
-        "WhatsApp": 8.247,
-        "Ticket": 0.4
-      },
-      "detalhes": [
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 10,
-          "score": null,
-          "nome": "Cont. ADM — Conferência ≤2h",
-          "meta": "≤2h úteis"
-        },
-        {
-          "ok": 1,
-          "tot": 1,
-          "pct": 100.0,
-          "peso": 3,
-          "score": 3.0,
-          "nome": "Rescisão ADM — Alinhamento ≤24h",
-          "meta": "≤24h úteis"
-        },
-        {
-          "ok": 0,
-          "tot": 1,
-          "pct": 0.0,
-          "peso": 4,
-          "score": 0.0,
-          "nome": "Rescisão ADM — Conclusão ≤10 dias",
-          "meta": "≤10d corrido"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 3,
-          "score": null,
-          "nome": "Rescisão ADM — Distrato assinado",
-          "meta": "assinado ao concluir"
-        },
-        {
-          "ok": 0,
-          "tot": 1,
-          "pct": 0.0,
-          "peso": 4,
-          "score": 0.0,
-          "nome": "Rescisão Loc. — Boleto prop <48h",
-          "meta": "≤48h da entrega das chaves"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 6,
-          "score": null,
-          "nome": "Rescisão Loc. — Boleto final <15d",
-          "meta": "≤15d corrido"
-        },
-        {
-          "ok": 2,
-          "tot": 3,
-          "pct": 66.7,
-          "peso": 4,
-          "score": 2.667,
-          "nome": "Reparos — Orçamento <4h",
-          "meta": "≤4h úteis"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 6,
-          "score": null,
-          "nome": "Reparos — Pós-venda ≤7d",
-          "meta": "≤7d corrido"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 4,
-          "score": null,
-          "nome": "Renovação — Contato >60d",
-          "meta": ">60d antes do venc"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 6,
-          "score": null,
-          "nome": "Renovação — Assinado antes vencimento",
-          "meta": "antes do venc"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 10,
-          "score": null,
-          "nome": "BackOffice — Pendência <24h",
-          "meta": "≤24h úteis"
-        },
-        {
-          "ok": 159,
-          "tot": 215,
-          "pct": 74.0,
-          "peso": 6,
-          "score": 4.437,
-          "nome": "WhatsApp — Resposta ≤5min",
-          "meta": "≤5min"
-        },
-        {
-          "ok": 20,
-          "tot": 21,
-          "pct": 95.2,
-          "peso": 4,
-          "score": 3.81,
-          "nome": "WhatsApp — Avaliações positivas",
-          "meta": "% positivas"
-        },
-        {
-          "ok": 1,
-          "tot": 25,
-          "pct": 4.0,
-          "peso": 5,
-          "score": 0.2,
-          "nome": "Tickets — SLA <4h úteis",
-          "meta": "≤4h úteis"
-        },
-        {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
-          "peso": 5,
-          "score": null,
-          "nome": "Tickets — Avaliações positivas",
-          "meta": "% positivas"
-        }
-      ],
-      "pontosFort": [
-        "RescADM: 100.0%",
-        "WA: 95.2%",
-        "WA: 74.0%",
-        "Reparos: 66.7%"
-      ],
-      "pontosAten": [
-        "RescADM: 0.0%",
-        "RescLoc: 0.0%",
-        "Tkts: 4.0%",
-        "Reparos: 66.7%"
-      ],
-      "pos": 5
     },
     {
       "id": "caio",
@@ -962,6 +786,182 @@
         "Cont.Loc: 14.3%",
         "Comercial: 18.9%",
         "Cont.ADM: 25.0%"
+      ],
+      "pos": 5
+    },
+    {
+      "id": "tauise",
+      "nome": "Tauise Oliveira",
+      "cargo": "Assessora",
+      "nota": 3.59,
+      "bonus": 0,
+      "bonus_proc": null,
+      "bonus_por_proc": {},
+      "inds": 15,
+      "pts": 80,
+      "scores": {
+        "Cont. ADM": null,
+        "Rescisão ADM": 4.286,
+        "Com. Locação": null,
+        "Cont. Locação": null,
+        "Rescisão Loc.": 0.0,
+        "Reparos": 5.0,
+        "Renovação": null,
+        "Inadimplência": null,
+        "Vistorias": null,
+        "BackOffice": null,
+        "DIRF/DARF": null,
+        "WhatsApp": 8.247,
+        "Ticket": 0.4
+      },
+      "detalhes": [
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 10,
+          "score": null,
+          "nome": "Cont. ADM — Conferência ≤2h",
+          "meta": "≤2h úteis"
+        },
+        {
+          "ok": 1,
+          "tot": 1,
+          "pct": 100.0,
+          "peso": 3,
+          "score": 3.0,
+          "nome": "Rescisão ADM — Alinhamento ≤24h",
+          "meta": "≤24h úteis"
+        },
+        {
+          "ok": 0,
+          "tot": 1,
+          "pct": 0.0,
+          "peso": 4,
+          "score": 0.0,
+          "nome": "Rescisão ADM — Conclusão ≤10 dias",
+          "meta": "≤10d corrido"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 3,
+          "score": null,
+          "nome": "Rescisão ADM — Distrato assinado",
+          "meta": "assinado ao concluir"
+        },
+        {
+          "ok": 0,
+          "tot": 1,
+          "pct": 0.0,
+          "peso": 4,
+          "score": 0.0,
+          "nome": "Rescisão Loc. — Boleto prop <48h",
+          "meta": "≤48h da entrega das chaves"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 6,
+          "score": null,
+          "nome": "Rescisão Loc. — Boleto final <15d",
+          "meta": "≤15d corrido"
+        },
+        {
+          "ok": 2,
+          "tot": 4,
+          "pct": 50.0,
+          "peso": 4,
+          "score": 2.0,
+          "nome": "Reparos — Orçamento <4h",
+          "meta": "≤4h úteis"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 6,
+          "score": null,
+          "nome": "Reparos — Pós-venda ≤7d",
+          "meta": "≤7d corrido"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 4,
+          "score": null,
+          "nome": "Renovação — Contato >60d",
+          "meta": ">60d antes do venc"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 6,
+          "score": null,
+          "nome": "Renovação — Assinado antes vencimento",
+          "meta": "antes do venc"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 10,
+          "score": null,
+          "nome": "BackOffice — Pendência <24h",
+          "meta": "≤24h úteis"
+        },
+        {
+          "ok": 159,
+          "tot": 215,
+          "pct": 74.0,
+          "peso": 6,
+          "score": 4.437,
+          "nome": "WhatsApp — Resposta ≤5min",
+          "meta": "≤5min"
+        },
+        {
+          "ok": 20,
+          "tot": 21,
+          "pct": 95.2,
+          "peso": 4,
+          "score": 3.81,
+          "nome": "WhatsApp — Avaliações positivas",
+          "meta": "% positivas"
+        },
+        {
+          "ok": 1,
+          "tot": 25,
+          "pct": 4.0,
+          "peso": 5,
+          "score": 0.2,
+          "nome": "Tickets — SLA <4h úteis",
+          "meta": "≤4h úteis"
+        },
+        {
+          "ok": 0,
+          "tot": 0,
+          "pct": null,
+          "peso": 5,
+          "score": null,
+          "nome": "Tickets — Avaliações positivas",
+          "meta": "% positivas"
+        }
+      ],
+      "pontosFort": [
+        "RescADM: 100.0%",
+        "WA: 95.2%",
+        "WA: 74.0%",
+        "Reparos: 50.0%"
+      ],
+      "pontosAten": [
+        "RescADM: 0.0%",
+        "RescLoc: 0.0%",
+        "Tkts: 4.0%",
+        "Reparos: 50.0%"
       ],
       "pos": 6
     }
@@ -1571,7 +1571,7 @@
         [
           "IM687",
           "IM687 - RUA 19 LT 16 APTO 405",
-          "67d → 60 Dias desocupado",
+          "68d → 60 Dias desocupado",
           "✗"
         ],
         [
@@ -8192,7 +8192,7 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1708/2118",
+          "1707/2117",
           "80.6%"
         ],
         [
@@ -10935,7 +10935,7 @@
       "rows": []
     },
     "tau_rep_orc": {
-      "titulo": "Tauise — Reparos: Orçamento <4h (2/3)",
+      "titulo": "Tauise — Reparos: Orçamento <4h (2/4)",
       "cols": [
         "Imóvel",
         "Título",
@@ -10947,6 +10947,12 @@
           "IM923",
           "IM923 - SHIS QL 12 CONJ 08 CASA 09",
           "8.4h",
+          "✗"
+        ],
+        [
+          "IM824",
+          "IM824 - SQS 302, Bloco C, Apto 604",
+          "5.4h",
           "✗"
         ],
         [
@@ -11055,15 +11061,15 @@
             "Vivianne Confecção <2h (23/26)",
             "Natália Conferência ≤2h (1/12)",
             "Gardênia Conferência ≤2h (6/12)",
-            "Tauise Conferência ≤2h (0/0)",
-            "Caio Criação→NIDO <7d (6/24)"
+            "Caio Criação→NIDO <7d (6/24)",
+            "Tauise Conferência ≤2h (0/0)"
           ],
           "data": [
             88.5,
             8.3,
             50.0,
-            0,
-            25.0
+            25.0,
+            0
           ],
           "metas": [
             100,
@@ -11122,20 +11128,20 @@
           "pct": 50.0
         },
         {
-          "nome": "Conferência ≤2h",
-          "resp": "Tauise",
-          "meta": "≤2h úteis",
-          "ok": 0,
-          "tot": 0,
-          "pct": null
-        },
-        {
           "nome": "Criação→NIDO <7d",
           "resp": "Caio",
           "meta": "≤7d corrido",
           "ok": 6,
           "tot": 24,
           "pct": 25.0
+        },
+        {
+          "nome": "Conferência ≤2h",
+          "resp": "Tauise",
+          "meta": "≤2h úteis",
+          "ok": 0,
+          "tot": 0,
+          "pct": null
         }
       ],
       "insights": [
@@ -11756,7 +11762,7 @@
             "Natália Pós-venda ≤7d (9/32)",
             "Gardênia Orçamento <4h (47/61)",
             "Gardênia Pós-venda ≤7d (9/45)",
-            "Tauise Orçamento <4h (2/3)",
+            "Tauise Orçamento <4h (2/4)",
             "Tauise Pós-venda ≤7d (0/0)"
           ],
           "data": [
@@ -11764,7 +11770,7 @@
             28.1,
             77.0,
             20.0,
-            66.7,
+            50.0,
             0
           ],
           "metas": [
@@ -11780,13 +11786,13 @@
           "tipo": "bar-v",
           "titulo": "Notas",
           "labels": [
-            "Tauise",
             "Natália",
+            "Tauise",
             "Gardênia"
           ],
           "data": [
-            6.667,
             5.528,
+            5.0,
             4.282
           ],
           "colors": [
@@ -11834,8 +11840,8 @@
           "resp": "Tauise",
           "meta": "≤4h úteis",
           "ok": 2,
-          "tot": 3,
-          "pct": 66.7
+          "tot": 4,
+          "pct": 50.0
         },
         {
           "nome": "Pós-venda ≤7d",
@@ -11857,7 +11863,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 166 cards no período."
+          "txt": "Volume de 167 cards no período."
         }
       ]
     },
@@ -11898,9 +11904,9 @@
             "Natália Assinado antes vencime (2/2)",
             "Gardênia Contato >60d (9/12)",
             "Gardênia Assinado antes vencime (3/5)",
+            "Caio Avaliação >90d (11/37)",
             "Tauise Contato >60d (0/0)",
-            "Tauise Assinado antes vencime (0/0)",
-            "Caio Avaliação >90d (11/37)"
+            "Tauise Assinado antes vencime (0/0)"
           ],
           "data": [
             91.7,
@@ -11909,9 +11915,9 @@
             100.0,
             75.0,
             60.0,
+            29.7,
             0,
-            0,
-            29.7
+            0
           ],
           "metas": [
             100,
@@ -11998,6 +12004,14 @@
           "pct": 60.0
         },
         {
+          "nome": "Avaliação >90d",
+          "resp": "Caio",
+          "meta": ">90d antes do venc",
+          "ok": 11,
+          "tot": 37,
+          "pct": 29.7
+        },
+        {
           "nome": "Contato >60d",
           "resp": "Tauise",
           "meta": ">60d antes do venc",
@@ -12012,14 +12026,6 @@
           "ok": 0,
           "tot": 0,
           "pct": null
-        },
-        {
-          "nome": "Avaliação >90d",
-          "resp": "Caio",
-          "meta": ">90d antes do venc",
-          "ok": 11,
-          "tot": 37,
-          "pct": 29.7
         }
       ],
       "insights": [
@@ -12519,10 +12525,10 @@
             "Natália Avaliações positivas (14/18)",
             "Gardênia SLA <4h úteis (146/247)",
             "Gardênia Avaliações positivas (6/7)",
-            "Tauise SLA <4h úteis (1/25)",
-            "Tauise Avaliações positivas (0/0)",
             "Caio SLA <4h úteis (934/2581)",
-            "Caio Avaliações positivas (13/15)"
+            "Caio Avaliações positivas (13/15)",
+            "Tauise SLA <4h úteis (1/25)",
+            "Tauise Avaliações positivas (0/0)"
           ],
           "data": [
             67.4,
@@ -12530,10 +12536,10 @@
             77.8,
             59.1,
             85.7,
-            4.0,
-            0,
             36.2,
-            86.7
+            86.7,
+            4.0,
+            0
           ],
           "metas": [
             100,
@@ -12616,22 +12622,6 @@
         },
         {
           "nome": "SLA <4h úteis",
-          "resp": "Tauise",
-          "meta": "≤4h úteis",
-          "ok": 1,
-          "tot": 25,
-          "pct": 4.0
-        },
-        {
-          "nome": "Avaliações positivas",
-          "resp": "Tauise",
-          "meta": "% positivas",
-          "ok": 0,
-          "tot": 0,
-          "pct": null
-        },
-        {
-          "nome": "SLA <4h úteis",
           "resp": "Caio",
           "meta": "≤4h úteis",
           "ok": 934,
@@ -12645,6 +12635,22 @@
           "ok": 13,
           "tot": 15,
           "pct": 86.7
+        },
+        {
+          "nome": "SLA <4h úteis",
+          "resp": "Tauise",
+          "meta": "≤4h úteis",
+          "ok": 1,
+          "tot": 25,
+          "pct": 4.0
+        },
+        {
+          "nome": "Avaliações positivas",
+          "resp": "Tauise",
+          "meta": "% positivas",
+          "ok": 0,
+          "tot": 0,
+          "pct": null
         }
       ],
       "insights": [
@@ -12695,22 +12701,22 @@
           "labels": [
             "Natália Resposta ≤5min (1402/1664)",
             "Natália Avaliações positivas (249/252)",
-            "Gardênia Resposta ≤5min (1708/2118)",
+            "Gardênia Resposta ≤5min (1707/2117)",
             "Gardênia Avaliações positivas (320/333)",
-            "Tauise Resposta ≤5min (159/215)",
-            "Tauise Avaliações positivas (20/21)",
             "Caio Resposta ≤5min (1161/2188)",
-            "Caio Avaliações positivas (172/177)"
+            "Caio Avaliações positivas (172/177)",
+            "Tauise Resposta ≤5min (159/215)",
+            "Tauise Avaliações positivas (20/21)"
           ],
           "data": [
             84.3,
             98.8,
             80.6,
             96.1,
-            74.0,
-            95.2,
             53.1,
-            97.2
+            97.2,
+            74.0,
+            95.2
           ],
           "metas": [
             100,
@@ -12734,7 +12740,7 @@
           ],
           "data": [
             9.007,
-            8.683,
+            8.682,
             8.247,
             7.071
           ],
@@ -12767,8 +12773,8 @@
           "nome": "Resposta ≤5min",
           "resp": "Gardênia",
           "meta": "≤5min",
-          "ok": 1708,
-          "tot": 2118,
+          "ok": 1707,
+          "tot": 2117,
           "pct": 80.6
         },
         {
@@ -12778,22 +12784,6 @@
           "ok": 320,
           "tot": 333,
           "pct": 96.1
-        },
-        {
-          "nome": "Resposta ≤5min",
-          "resp": "Tauise",
-          "meta": "≤5min",
-          "ok": 159,
-          "tot": 215,
-          "pct": 74.0
-        },
-        {
-          "nome": "Avaliações positivas",
-          "resp": "Tauise",
-          "meta": "% positivas",
-          "ok": 20,
-          "tot": 21,
-          "pct": 95.2
         },
         {
           "nome": "Resposta ≤5min",
@@ -12810,6 +12800,22 @@
           "ok": 172,
           "tot": 177,
           "pct": 97.2
+        },
+        {
+          "nome": "Resposta ≤5min",
+          "resp": "Tauise",
+          "meta": "≤5min",
+          "ok": 159,
+          "tot": 215,
+          "pct": 74.0
+        },
+        {
+          "nome": "Avaliações positivas",
+          "resp": "Tauise",
+          "meta": "% positivas",
+          "ok": 20,
+          "tot": 21,
+          "pct": 95.2
         }
       ],
       "insights": [
@@ -12823,7 +12829,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 6968 cards no período."
+          "txt": "Volume de 6967 cards no período."
         }
       ]
     }
