@@ -44,7 +44,7 @@ from calculate import (
     calc_assessora_reparos, calc_assessora_renovacao, calc_assessora_backoffice, calc_assessora_dirf_darf,
     calc_assessora_whatsapp, calc_assessora_ticket,
     calc_marinho_vistorias, calc_marinho_contestacoes,
-    nota_final,
+    nota_final, recortar_por_pessoa,
 )
 from pipeline.extract_pipefy import extract_pipe
 from pipeline.extract_octadesk import extract_octadesk
@@ -62,6 +62,7 @@ NOMES = {
     "marinho":  ("Albérico Marinho",     "Vistoriador"),
     "natalia":  ("Natália Teixeira",     "Assessora"),
     "gardenia": ("Gardênia",             "Assessora"),
+    "tauise":   ("Tauise Oliveira",      "Assessora"),   # entrou no lugar da Natália (corte 01/09/2026)
 }
 
 # Encurtadores para pontosFort/Aten
@@ -252,15 +253,28 @@ def _listar_revisoes() -> None:
             print(f"   {quem:9} {unidade:16} {titulo[:44]:44} {v:>9.1f}")
 
 
+def _ou_null(fn, df, *args, **kwargs) -> dict:
+    """Pipe VAZIO (acontece com a Tauise depois do recorte por data — ex.: DIRF/DARF,
+    ano-base 2025) → indicador null, sem entrar na função. Com df vazio o pandas
+    transforma `df[serie.apply(...)]` em seleção de colunas e some com as colunas
+    (KeyError na 1ª rodada da Tauise, 22/09/2026)."""
+    if df is None or len(df) == 0:
+        return {"nota": None, "indicadores": []}
+    return fn(df, *args, **kwargs)
+
+
 def calc_assessora(pid: str, dfs: dict, bonus_n: int, ref: pd.Timestamp) -> dict:
-    cadm = calc_assessora_contrato_adm(dfs["cont_adm"], pid, bonus_n=bonus_n, ref=ref)
-    radm = calc_assessora_rescisao_adm(dfs["rescisao_adm"], pid, ref=ref)
-    rloc = calc_assessora_rescisao_locacao(dfs["rescisao_loc"], pid, ref=ref,
-                                           distratos=dfs.get("distratos"))
-    rep  = calc_assessora_reparos(dfs["reparos"], pid, ref=ref)
-    ren  = calc_assessora_renovacao(dfs["renovacao"], pid, ref=ref)
-    bo   = calc_assessora_backoffice(dfs["backoffice"], pid, ref=ref)
-    dirf = calc_assessora_dirf_darf(dfs["dirf_darf"], pid, ref=ref)
+    # Transição Natália → Tauise: cada uma vê só os cards do seu lado do corte
+    # (calculate.DATA_CORTE_TAUISE). Para as demais devolve dfs sem mudança.
+    dfs = recortar_por_pessoa(dfs, pid)
+    cadm = _ou_null(calc_assessora_contrato_adm, dfs["cont_adm"], pid, bonus_n=bonus_n, ref=ref)
+    radm = _ou_null(calc_assessora_rescisao_adm, dfs["rescisao_adm"], pid, ref=ref)
+    rloc = _ou_null(calc_assessora_rescisao_locacao, dfs["rescisao_loc"], pid, ref=ref,
+                    distratos=dfs.get("distratos"))
+    rep  = _ou_null(calc_assessora_reparos, dfs["reparos"], pid, ref=ref)
+    ren  = _ou_null(calc_assessora_renovacao, dfs["renovacao"], pid, ref=ref)
+    bo   = _ou_null(calc_assessora_backoffice, dfs["backoffice"], pid, ref=ref)
+    dirf = _ou_null(calc_assessora_dirf_darf, dfs["dirf_darf"], pid, ref=ref)
     wa   = _safe(calc_assessora_whatsapp, dfs["conversas"], pid)
     tkt  = _safe(calc_assessora_ticket, dfs["tickets"], dfs["aval_tickets"], pid)
     scores = {
@@ -348,10 +362,12 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
     bonus_caio = _contar_bonus_caio(dfs, ref=ref)
     bonus_natalia = _contar_bonus_assessora(dfs, "natalia", ref=ref)
     bonus_gardenia = _contar_bonus_assessora(dfs, "gardenia", ref=ref)
+    bonus_tauise = _contar_bonus_assessora(dfs, "tauise", ref=ref)
 
     if verbose:
         print(f"\n[bonus] caio_imovel_alugado={bonus_caio}  vivianne_boletos={bonus_n_vivianne}  "
-              f"natalia_vistoria={bonus_natalia}  gardenia_vistoria={bonus_gardenia}")
+              f"natalia_vistoria={bonus_natalia}  gardenia_vistoria={bonus_gardenia}  "
+              f"tauise_vistoria={bonus_tauise}")
 
     import calculate as _C   # listas de revisão manual acumulam por chamada
     _C._RESC_ADM_FANTASMA.clear()
@@ -362,6 +378,7 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
         calc_vivianne(dfs, bonus_n_vivianne, ref),
         calc_assessora("natalia", dfs, bonus_natalia, ref),
         calc_assessora("gardenia", dfs, bonus_gardenia, ref),
+        calc_assessora("tauise", dfs, bonus_tauise, ref),
         calc_marinho(dfs, ref),
     ]
     pessoas.sort(key=lambda p: (p["nota"] or 0), reverse=True)
@@ -528,7 +545,7 @@ def _contar_bonus_assessora(dfs: dict, assessora: str, ref: Optional[pd.Timestam
     from calculate import (excluir_rascunhos, aplicar_cutoff, _nome_assessora_alt,
                             _contem_qualquer, _as_list)
 
-    df = dfs.get("cont_adm", pd.DataFrame())
+    df = recortar_por_pessoa(dfs, assessora).get("cont_adm", pd.DataFrame())
     if len(df) == 0:
         return 0
     df = excluir_rascunhos(df)

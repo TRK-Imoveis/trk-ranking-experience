@@ -1,0 +1,18 @@
+{
+  "_leia": "Ajustes caso a caso validados pela gestora. Chave = id do card no Pipefy (o número depois de #cards/ na URL). O IM vem junto só para leitura. Vale para a nota (calculate.py) e para o drilldown (imoveis_builder.py).",
+  "cont_adm_conferencia": {
+    "reatribuir": {
+      "1353932366": {"im": "IM1848", "para": "natalia", "motivo": "Conferido pela Natália (gestora, 22/09/2026)"},
+      "1352784932": {"im": "IM1849", "para": "natalia", "motivo": "Conferido pela Natália (gestora, 22/09/2026)"},
+      "1347631626": {"im": "IM1845", "para": "natalia", "motivo": "Contrato da Natália — card sem Assessor (lista) caía na Gardênia (gestora, 22/09/2026)"}
+    },
+    "excluir": {
+      "1393584642": {"im": "IM1854", "motivo": "Gardênia de férias (gestora, 22/09/2026)"},
+      "1318576420": {"im": "IM1837", "motivo": "Conferência ainda era do Caio (gestora, 22/09/2026)"}
+    },
+    "horas": {
+      "1349294540": {"im": "IM1846", "horas": 1.03, "motivo": "Entrou 12/05 10:01, conferido 11:03 — card ficou na fase depois de conferido (gestora, 22/09/2026)"},
+      "1427162150": {"im": "IM1857", "horas": 0.35, "motivo": "Entrou 10/08 10:48, conferido 11:09 — passagem anterior das 08:31 foi envio antecipado (gestora, 22/09/2026)"}
+    }
+  }
+}

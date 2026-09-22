@@ -72,6 +72,10 @@ def main() -> None:
     # ----- 1 semana útil completa -----
     # Mon 08:00 -> Mon (próximo) 08:00 = 5 dias úteis × 10h = 50h
     cases.append(("semana inteira", horas_uteis(t(2026, 5, 11, 8), t(2026, 5, 18, 8)), 50.0))
+    # Feriados (22/09/2026): IM1608 — sex 04/09 17:17 → ter 08/09 08:35, seg 07/09 feriado
+    cases.append(("feriado 07/09", horas_uteis(t(2026, 9, 4, 17, 17), t(2026, 9, 8, 8, 35)), 1.3))
+    cases.append(("feriado c/ sabado=True conta", horas_uteis(t(2026, 9, 7, 8), t(2026, 9, 7, 10), sabado=True), 2.0))
+    cases.append(("sexta santa 03/04", horas_uteis(t(2026, 4, 3, 8), t(2026, 4, 3, 18)), 0.0))
 
     # ===== horas_uteis_fase (robusto a reabertura) =====
     H = 1 / 24.0  # 1h corrido em dias

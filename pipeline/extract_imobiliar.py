@@ -350,6 +350,10 @@ def carregar_distratos(*, verbose: bool = True) -> dict[int, pd.Timestamp]:
             "SELECT codigo_imovel, max(data_distrato) AS data_distrato "
             "FROM imobiliar_contratos_loc "
             "WHERE data_distrato IS NOT NULL AND codigo_imovel IS NOT NULL "
+            # 01/01/1980 e 01/01/1900 são "data vazia" do Imobiliar (638 linhas,
+            # 318 imóveis). Viravam entrega de chaves de 46 anos atrás:
+            # IM1767 com 408.953h no Boleto prop (22/09/2026).
+            "AND data_distrato >= '2000-01-01' "
             "GROUP BY codigo_imovel"
         )
     except Exception as exc:  # banco fora do ar, .env ausente, etc.
@@ -445,6 +449,7 @@ def calcular_bonus_inadimplencia(
     repasses_reais: Optional[dict] = None,
     cutoff_dias: int = 180,
     verbose: bool = True,
+    match_tolerante: Optional[bool] = None,
 ) -> dict:
     """
     Calcula N do bônus Vivianne · Inadimplência (manual v4 §4.2 + regras 11ª Ed).
@@ -467,6 +472,20 @@ def calcular_bonus_inadimplencia(
     Match boleto ↔ card:
       IM do boleto == IM no Título do card (tolera sufixo /N)
       Vencimento_1º_Boleto do card no MÊS SEGUINTE ao mes_ref do boleto
+
+    MATCH TOLERANTE (25/08/2026 — flag `inadimplencia_match_tolerante`):
+      O match estrito perdia cobranças reais (13ª Ed: 47/86 no painel vs
+      59-64/87 no dw_trk). Três vazamentos, confirmados boleto a boleto:
+        (a) título sem IM → fallback pelo campo custom "IM";
+        (b) competência deslocada (venc real fora do mês_ref+1, ex. IM1841
+            comp. 05 venc 29/07) → procurar também no mês vizinho, escolhendo
+            o venc mais próximo do pagamento;
+        (c) card sem "Vencimento 1º Boleto:" preenchido → casar por criação
+            (mesmo IM, criado até 45d antes do pagamento).
+      Simulação 25/08 (CSVs da rodada): cobrados 50→61 de 86; antes 33→37;
+      Inadimplência 6,10→6,26 (+0,04 na nota final da Vivianne).
+      Fallback (c) sem repasse real não estima R3 → conta como cobrado,
+      nunca como "antes" (conservador). Desligar: flag = false.
 
     Returns: {N, denominador_R1, antes, excluidos_*, _aviso_*}
     """
@@ -533,26 +552,56 @@ def calcular_bonus_inadimplencia(
 
     denominador_r1 = len(b_enc)  # denominador após R1 + janela (antes de R2/R3)
 
+    # Flag do match tolerante (default True; desligável em config/feature_flags.json)
+    if match_tolerante is None:
+        try:
+            import json as _json
+            with open(ROOT / "config" / "feature_flags.json", encoding="utf-8") as _f:
+                match_tolerante = bool(_json.load(_f).get("inadimplencia_match_tolerante", True))
+        except Exception:
+            match_tolerante = True
+
     # 5. Index dos cards do pipe Inadimplência por (IM, ano-mes do Venc 1º Boleto)
     cards_no_venc: list[dict] = []
     cards_idx: dict[tuple[int, int, int], list[pd.Series]] = {}
+    cards_por_im: dict[int, list] = {}
     if df_inadimplencia is not None and len(df_inadimplencia) > 0:
         c = df_inadimplencia.copy()
         c["im_titulo"] = c["Título"].apply(_parse_im_titulo)
+
+        # (a) fallback pelo campo custom "IM" quando o título não traz o número
+        def _im_campo(v):
+            try:
+                s = str(v).strip()
+                if not s or s.lower() in ("nan", "none", "null", "[]"):
+                    return None
+                return int(float(s))
+            except (ValueError, TypeError):
+                return None
+        if "IM" in c.columns:
+            c["im_final"] = c["im_titulo"].where(c["im_titulo"].notna(),
+                                                 c["IM"].apply(_im_campo))
+        else:
+            c["im_final"] = c["im_titulo"]
+
         c["venc"] = pd.to_datetime(c["Vencimento 1º Boleto:"], errors="coerce", utc=True)
         c["criado_em"] = pd.to_datetime(c["Criado em"], errors="coerce", utc=True)
-        sem_venc_cards = c[c["venc"].isna() & c["im_titulo"].notna()]
+        sem_venc_cards = c[c["venc"].isna() & c["im_final"].notna()]
         for _, row in sem_venc_cards.iterrows():
             cards_no_venc.append({"id": row["id"], "titulo": row["Título"],
-                                   "im": int(row["im_titulo"])})
-        c_ok = c.dropna(subset=["venc", "im_titulo"]).copy()
-        c_ok["im_titulo"] = c_ok["im_titulo"].astype(int)
+                                   "im": int(row["im_final"])})
+        c_ok = c.dropna(subset=["venc", "im_final"]).copy()
+        c_ok["im_final"] = c_ok["im_final"].astype(int)
         for _, row in c_ok.iterrows():
-            key = (int(row["im_titulo"]), row["venc"].year, row["venc"].month)
+            key = (int(row["im_final"]), row["venc"].year, row["venc"].month)
             cards_idx.setdefault(key, []).append(row)
+        # pool por IM (inclui cards SEM venc) — usado pelos fallbacks (b) e (c)
+        for _, row in c[c["im_final"].notna()].iterrows():
+            cards_por_im.setdefault(int(row["im_final"]), []).append(row)
 
-    # 6. Aplicar R2 + R3 + match card por mes_ref+1
+    # 6. Aplicar R2 + R3 + match card por mes_ref+1 (+ fallbacks tolerantes)
     antes_rows, depois_rows, sem_card_rows, reativa_rows, multiplos_rows = [], [], [], [], []
+    fallback_rows = []
     for r in b_enc.itertuples(index=False):
         ms = _mes_seguinte(r.mes_ref)
         if ms is None:
@@ -561,18 +610,48 @@ def calcular_bonus_inadimplencia(
                                    "motivo": "mes_ref inválido"})
             continue
         mes_t, ano_t = ms
+        data_pag = pd.to_datetime(r.data_pag, utc=True)
+        via_match = "mes_ref+1"
         candidatos = cards_idx.get((int(r.cd_imovel), ano_t, mes_t), [])
+
+        if not candidatos and match_tolerante:
+            # (b) competência deslocada — venc no mês vizinho, o mais próximo do pagamento
+            viz = []
+            for dm in (-1, 1):
+                m2, a2 = mes_t + dm, ano_t
+                if m2 == 0:
+                    m2, a2 = 12, ano_t - 1
+                elif m2 == 13:
+                    m2, a2 = 1, ano_t + 1
+                viz += cards_idx.get((int(r.cd_imovel), a2, m2), [])
+            if viz and pd.notna(data_pag):
+                candidatos = [min(viz, key=lambda x: abs((x["venc"] - data_pag).days))]
+                via_match = "mes_vizinho"
+
+        if not candidatos and match_tolerante and pd.notna(data_pag):
+            # (c) card sem venc casável — criado até 45d antes do pagamento
+            pool = [x for x in cards_por_im.get(int(r.cd_imovel), [])
+                    if pd.notna(x["criado_em"])
+                    and (data_pag - pd.Timedelta(days=45)) <= x["criado_em"]
+                    and x["criado_em"].date() <= data_pag.date()]
+            if pool:
+                candidatos = [max(pool, key=lambda x: x["criado_em"])]
+                via_match = "criado_em"
+
         if not candidatos:
             sem_card_rows.append({"cd": r.cd_imovel, "mes_ref": r.mes_ref, "data_pag": r.data_pag,
                                    "valor": r.valor, "multa": r.multa_adm,
                                    "motivo": "nenhum card no mês_ref+1"})
             continue
+        if via_match != "mes_ref+1":
+            fallback_rows.append({"cd": r.cd_imovel, "mes_ref": r.mes_ref,
+                                   "data_pag": r.data_pag, "via": via_match,
+                                   "card_titulo": candidatos[0]["Título"]})
         if len(candidatos) > 1:
             multiplos_rows.append({"cd": r.cd_imovel, "mes_alvo": f"{mes_t:02d}/{ano_t}",
                                     "qtd": len(candidatos),
                                     "titulos": [c2["Título"] for c2 in candidatos]})
-        card = sorted(candidatos, key=lambda x: x["venc"], reverse=True)[0]
-        data_pag = pd.to_datetime(r.data_pag, utc=True)
+        card = sorted(candidatos, key=lambda x: (pd.notna(x["venc"]), x["venc"]), reverse=True)[0]
         criado_em = card["criado_em"]
 
         # R2 — card criado antes ou no mesmo dia do pagamento (compara só DATA, não datetime)
@@ -590,11 +669,16 @@ def calcular_bonus_inadimplencia(
         data_rep = (repasses_reais or {}).get((int(r.cd_imovel), str(r.mes_ref).strip()))
         repasse_real = data_rep is not None
         if not repasse_real:
-            data_rep = _data_repasse_from_card(card["venc"], int(r.dia_pag))
+            if pd.isna(card["venc"]):
+                # match por criação (card sem Venc 1º Boleto) e sem repasse real:
+                # não há como estimar R3 → conta como cobrado, nunca como "antes".
+                data_rep = None
+            else:
+                data_rep = _data_repasse_from_card(card["venc"], int(r.dia_pag))
         # Compara DATA, não instante — "Pagto Prop" é um dia no Imobiliar e o
         # pagamento também. Pagar NO dia do repasse conta como antes.
         # (mesmo critério já usado na R2 acima)
-        if pd.notna(data_pag) and data_pag.date() <= pd.Timestamp(data_rep).date():
+        if data_rep is not None and pd.notna(data_pag) and data_pag.date() <= pd.Timestamp(data_rep).date():
             antes_rows.append({"cd_imovel": r.cd_imovel, "data_pag": data_pag,
                                 "mes_ref": r.mes_ref, "venc_card": card["venc"],
                                 "data_repasse": data_rep, "dia_pag": r.dia_pag,
@@ -620,6 +704,8 @@ def calcular_bonus_inadimplencia(
         print(f"[bonus_vivianne] excluídos por card reativo (criado depois do pagamento): {len(reativa_rows)}")
         print(f"[bonus_vivianne] excluídos por pagamento após repasse: {len(depois_rows)}")
         print(f"[bonus_vivianne] múltiplos cards no mesmo mês (escolhido o mais recente): {len(multiplos_rows)}")
+        print(f"[bonus_vivianne] match tolerante: {'ATIVO' if match_tolerante else 'DESLIGADO'} — "
+              f"{len(fallback_rows)} boletos casados por fallback (mês vizinho / campo IM / criação)")
         print(f"[bonus_vivianne] taxa de exibição: {taxa:.1f}%")
         if cutoff_dias:
             print(f"[bonus_vivianne] fora da janela de {cutoff_dias}d (descartados): {fora_janela}")
@@ -640,6 +726,7 @@ def calcular_bonus_inadimplencia(
         "sem_card": pd.DataFrame(sem_card_rows),
         "reativos": pd.DataFrame(reativa_rows),
         "multiplos": pd.DataFrame(multiplos_rows),
+        "fallback": pd.DataFrame(fallback_rows),
         "excluidos_rescisao": excluidos_r1_rescisao,
         "excluidos_valor0": excluidos_r1_valor0,
         "cards_sem_venc": cards_no_venc,

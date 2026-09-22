@@ -10,6 +10,7 @@ $DisplayNames = @{
     "vivianne" = "Vivianne"
     "natalia"  = "Natália"
     "gardenia" = "Gardênia"
+    "tauise"   = "Tauise"
     "marinho"  = "Marinho"
 }
 

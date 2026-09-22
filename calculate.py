@@ -55,6 +55,20 @@ DIRF_DARF_CUTOFF = datetime(2026, 5, 29)  # prorrogação oficial 2026
 DIRF_DARF_ANO_BASE = 2025
 
 # ─────────────────────────────────────────────────────────────────────
+# TRANSIÇÃO NATÁLIA → TAUISE (decisão da gestora, 15/09/2026)
+# Tauise entrou no lugar da Natália. Natália fica no ranking até fechar os
+# cards dela. A divisão é pela DATA DE CRIAÇÃO do card contra o corte:
+#   criado antes de 01/09/2026 → Natália · criado a partir de 01/09 → Tauise
+# Card criado antes do corte com Assessor = Tauise fica FORA das duas
+# (não é da Natália pelo nome, não é da Tauise pela data).
+# Vale para os 7 pipes de assessora + WhatsApp + Tickets. Gardênia não muda.
+# ─────────────────────────────────────────────────────────────────────
+DATA_CORTE_TAUISE = pd.Timestamp("2026-09-01", tz="America/Sao_Paulo")
+CORTE_POR_PESSOA = {"tauise": "depois", "natalia": "antes"}
+PIPES_ASSESSORA = ("cont_adm", "rescisao_adm", "rescisao_loc", "reparos",
+                   "renovacao", "backoffice", "dirf_darf")
+
+# ─────────────────────────────────────────────────────────────────────
 # MARGEM DE TOLERÂNCIA EM INDICADORES DE HORAS
 # (correção pós-fechamento 11ª Ed — aprovada pela gestora em 27/05/2026)
 #
@@ -90,7 +104,47 @@ NOMES_AGENTE = {
     "natalia":   {"whatsapp": "Natália Teixeira", "ticket": "Natália Teixeira"},
     "gardenia":  {"whatsapp": "Gardênia",         "ticket": "Gardênia"},
     "vivianne":  {"whatsapp": None,               "ticket": ["Vivianne Fontes", "VIVIANNE FONTES"]},  # WhatsApp EXCLUÍDO
+    # Tauise aparece com DOIS nomes no Octadesk (verificado no dw_trk em 22/09/2026):
+    # chats "Tauise Oliveira Santos" (até 03/09) e "Tauise Oliveira" (depois);
+    # tickets "Tauise" (maioria) e "Tauise Oliveira Santos". Mesma pessoa.
+    "tauise":    {"whatsapp": ["Tauise Oliveira", "Tauise Oliveira Santos"],
+                  "ticket":   ["Tauise", "Tauise Oliveira Santos"]},
 }
+
+
+def recortar_por_pessoa(dfs: dict, pid: str) -> dict:
+    """
+    Aplica o corte da transição Natália → Tauise (DATA_CORTE_TAUISE) nos dfs.
+
+    Devolve um dict NOVO com os pipes de assessora, conversas e tickets filtrados
+    pela data de criação: Tauise fica só com o que foi criado a partir do corte,
+    Natália só com o que foi criado antes. Para qualquer outro pid devolve `dfs`
+    inalterado. Usar em calculate (nota) E em imoveis_builder (drilldown) —
+    uma única fonte de verdade (Armadilha 1).
+    """
+    lado = CORTE_POR_PESSOA.get(pid)
+    if lado is None:
+        return dfs
+
+    def _corta(df: pd.DataFrame, coluna: str) -> pd.DataFrame:
+        if df is None or len(df) == 0 or coluna not in df.columns:
+            return df
+        col = pd.to_datetime(df[coluna], errors="coerce", utc=True)
+        mask = (col >= DATA_CORTE_TAUISE) if lado == "depois" else (col < DATA_CORTE_TAUISE)
+        return df[mask].copy()
+
+    out = dict(dfs)
+    for pipe in PIPES_ASSESSORA:
+        if pipe in out:
+            out[pipe] = _corta(out[pipe], "Criado em")
+    # Octadesk: conversas pelo "Criado em" (vem do dw), tickets pela "Data de entrada".
+    # Avaliações de ticket não têm data no XLSX — o filtro por nome já separa
+    # as duas (a Tauise só avalia depois de 24/08).
+    if "conversas" in out:
+        out["conversas"] = _corta(out["conversas"], COL_WA_CRIADO)
+    if "tickets" in out:
+        out["tickets"] = _corta(out["tickets"], COL_TKT_IN)
+    return out
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -219,6 +273,46 @@ def _to_bsb_naive(dt) -> Optional[pd.Timestamp]:
     return ts.tz_convert(TZ_BSB).tz_localize(None)
 
 
+# ─────────────────────────────────────────────────────────────────────
+# FERIADOS — dia inteiro fora da janela de horas úteis (decisão da gestora, 22/09/2026)
+# Nacionais + DF. Carnaval e Corpus Christi (ponto facultativo) CONTINUAM dia útil.
+# Motivo: IM1608 (Cont. ADM) — conferência de sex 04/09 17:17 a ter 08/09 08:35
+# contava a segunda 07/09 (Independência) como 10h úteis: 11,3h em vez de 1,3h.
+# ─────────────────────────────────────────────────────────────────────
+
+def _pascoa(ano: int):
+    """Domingo de Páscoa (algoritmo de Meeus/Jones/Butcher)."""
+    from datetime import date
+    a = ano % 19; b, c = divmod(ano, 100); d, e = divmod(b, 4)
+    f = (b + 8) // 25; g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = divmod(c, 4)
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    mes, dia = divmod(h + l - 7 * m + 114, 31)
+    return date(ano, mes, dia + 1)
+
+
+def _feriados_ano(ano: int) -> set:
+    from datetime import date
+    fixos = [(1, 1),    # Confraternização Universal
+             (4, 21),   # Tiradentes + aniversário de Brasília
+             (5, 1),    # Dia do Trabalho
+             (9, 7),    # Independência
+             (10, 12),  # Nossa Senhora Aparecida
+             (11, 2),   # Finados
+             (11, 15),  # Proclamação da República
+             (11, 20),  # Consciência Negra (nacional desde 2024)
+             (11, 30),  # Dia do Evangélico (DF)
+             (12, 25)]  # Natal
+    out = {date(ano, m, d) for m, d in fixos}
+    out.add(_pascoa(ano) - timedelta(days=2))  # Sexta-feira Santa
+    return out
+
+
+FERIADOS = set().union(*(_feriados_ano(a) for a in range(2024, 2031)))
+
+
 def horas_uteis(inicio, fim, *, sabado: bool = False) -> float:
     """
     Horas úteis (08:00–18:00, seg-sex) entre inicio e fim, em horário de Brasília.
@@ -226,7 +320,7 @@ def horas_uteis(inicio, fim, *, sabado: bool = False) -> float:
     Regras (manual §3.3):
     - NaT/None em qualquer lado → NaN.
     - fim <= inicio (negativo ou zero) → 0.0 (= cumprido ✓).
-    - Sábado e domingo: 0 horas.
+    - Sábado, domingo e FERIADOS (nacionais + DF): 0 horas.
     - Fora de 08-18: descontado.
     - 1 dia útil = 10 horas úteis.
 
@@ -249,7 +343,9 @@ def horas_uteis(inicio, fim, *, sabado: bool = False) -> float:
     dia = a.normalize()  # 00:00 do dia de início
     fim_dia = b.normalize()
     while dia <= fim_dia:
-        if dia.weekday() <= ultimo_dia:  # 0=seg ... 4=sex (5=sáb se sabado=True)
+        # Feriado (FERIADOS) fica fora — exceto com sabado=True (Eficiência do
+        # Marinho): lá a vistoria feita no feriado é trabalho real e valeria 0h.
+        if dia.weekday() <= ultimo_dia and (sabado or dia.date() not in FERIADOS):
             day_start = dia.replace(hour=BS)
             day_end = dia.replace(hour=BE)
             window_start = max(a, day_start)
@@ -641,6 +737,7 @@ TKT_AVAL_POS = {"Bom", "Bom com comentário"}
 TKT_AVAL_EXC = {"Não respondeu", "Não enviado"}
 
 COL_WA_RESP   = "Responsável da conversa"
+COL_WA_CRIADO = "Criado em"   # só no frame vindo do dw_trk (extract_octadesk_dw)
 COL_WA_TEMPO  = "Tempo de espera após atribuição"
 COL_WA_SAT    = "Pesquisa de satisfação"
 
@@ -945,9 +1042,21 @@ def calc_vivianne_renovacao(df_renov: pd.DataFrame,
     ind_5["nome"] = "Renovação — Confecção <4h"
 
     col_fin_in = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
+    # 25/08/2026 (decisão da gestora): o relógio da Vivianne fecha na ENTRADA em
+    # Conferência Final — o tempo da conferência é das ASSESSORAS, e a conclusão
+    # administrativa não pode contar contra ela. Caso concreto: em 21/08, 6
+    # renovações foram concluídas EM LOTE (14h22–15h06) semanas depois de
+    # assinadas, e o indicador caiu de 9/16 para 9/22 medindo até Processo
+    # concluído. Fallback para Processo concluído quando a coluna/valor faltar
+    # (export antigo ou card que pulou a Conferência).
+    col_conf_in = "Primeira vez que entrou na fase Conferência Final"
     col_proc_concl = "Primeira vez que entrou na fase Processo concluído"
-    sub_6 = df.dropna(subset=[col_fin_in, col_proc_concl]).copy()
-    horas_6 = sub_6.apply(lambda r: horas_uteis(r[col_fin_in], r[col_proc_concl]), axis=1)
+    if col_conf_in in df.columns:
+        df = df.assign(_fim_finalizacao=df[col_conf_in].fillna(df[col_proc_concl]))
+    else:
+        df = df.assign(_fim_finalizacao=df[col_proc_concl])
+    sub_6 = df.dropna(subset=[col_fin_in, "_fim_finalizacao"]).copy()
+    horas_6 = sub_6.apply(lambda r: horas_uteis(r[col_fin_in], r["_fim_finalizacao"]), axis=1)
     ok_6 = int((horas_6 <= _meta_tol(16)).sum())
     ind_6 = score_indicador(ok_6, len(sub_6), 5)
     ind_6["nome"] = "Renovação — Finalização <16h"
@@ -1100,7 +1209,7 @@ def calc_vivianne_ticket(df_tickets: pd.DataFrame) -> dict:
 
 def _nome_assessora(assessora: str) -> str:
     """Converte chave interna → nome usado para filtro de assignee/select."""
-    return {"natalia": "Natália", "gardenia": "Gardênia"}.get(assessora, assessora)
+    return {"natalia": "Natália", "gardenia": "Gardênia", "tauise": "Tauise"}.get(assessora, assessora)
 
 
 def _nome_assessora_alt(assessora: str) -> list[str]:
@@ -1109,6 +1218,8 @@ def _nome_assessora_alt(assessora: str) -> list[str]:
         return ["Natália", "Natalia"]
     if assessora == "gardenia":
         return ["Gardênia", "Gardenia"]
+    if assessora == "tauise":
+        return ["Tauise"]
     return [assessora]
 
 
@@ -1117,6 +1228,58 @@ def _contem_qualquer(valor, nomes: list[str]) -> bool:
         if contem_assignee(valor, n):
             return True
     return False
+
+
+# ─────────────────────────────────────────────────────────────────────
+# AJUSTES MANUAIS DA GESTORA — config/ajustes_manuais.json (22/09/2026)
+# Correções caso a caso que o dado do Pipefy não enxerga (quem de fato conferiu,
+# férias, hora real da conferência). Chave = id do card (Armadilha 2: IM repete).
+# Usado na nota E no drilldown (Armadilha 1).
+# ─────────────────────────────────────────────────────────────────────
+
+_AJUSTES_CACHE: Optional[dict] = None
+
+
+def carregar_ajustes() -> dict:
+    global _AJUSTES_CACHE
+    if _AJUSTES_CACHE is None:
+        arq = CONFIG_DIR / "ajustes_manuais.json"
+        try:
+            _AJUSTES_CACHE = json.loads(arq.read_text(encoding="utf-8")) if arq.exists() else {}
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"[ajustes] config/ajustes_manuais.json ilegível ({exc}) — ignorado")
+            _AJUSTES_CACHE = {}
+    return _AJUSTES_CACHE
+
+
+def card_id_da_url(url) -> Optional[str]:
+    if url is None or (isinstance(url, float) and pd.isna(url)):
+        return None
+    m = re.search(r"cards/(\d+)", str(url))
+    return m.group(1) if m else None
+
+
+def selecionar_conferencia_adm(df: pd.DataFrame, assessora: str,
+                               mask_base: pd.Series) -> tuple[pd.DataFrame, dict]:
+    """
+    Aplica os ajustes da Conferência do Cont. ADM sobre a máscara da assessora.
+    Devolve (df_da_assessora, {card_id: horas_confirmadas}).
+      reatribuir → sai de quem está no Assessor (lista) e entra para `para`
+      excluir    → fora do cálculo de todo mundo
+      horas      → tempo real da conferência confirmado pela gestora
+    """
+    aj = carregar_ajustes().get("cont_adm_conferencia", {})
+    reatr = aj.get("reatribuir", {}) or {}
+    excl = aj.get("excluir", {}) or {}
+    horas = {k: float(v["horas"]) for k, v in (aj.get("horas", {}) or {}).items()}
+    if "URL" not in df.columns or not (reatr or excl or horas):
+        return df[mask_base].copy(), {}
+    ids = df["URL"].apply(card_id_da_url)
+    meus = ids.isin([k for k, v in reatr.items() if v.get("para") == assessora])
+    de_outra = ids.isin([k for k, v in reatr.items() if v.get("para") != assessora])
+    fora = ids.isin(list(excl.keys()))
+    mask = ((mask_base & ~de_outra) | meus) & ~fora
+    return df[mask].copy(), horas
 
 
 def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus_n: int = 0,
@@ -1136,7 +1299,7 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
         sem_assessor = df["Assessor (lista)"].apply(lambda v: not _as_list(v))
         concluido = df["Primeira vez que entrou na fase Concluído"].notna()
         mask = mask | (sem_assessor & concluido)
-    df_assess = df[mask].copy()
+    df_assess, horas_conf = selecionar_conferencia_adm(df, assessora, mask)
 
     col_in = "Primeira vez que entrou na fase Conferência do contrato"
     col_lastin = "Última vez que entrou na fase Conferência do contrato"
@@ -1148,6 +1311,9 @@ def calc_assessora_contrato_adm(df_cont_adm: pd.DataFrame, assessora: str, bonus
         lambda r: horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)),
         axis=1,
     )
+    if horas_conf and len(sub):  # hora real confirmada pela gestora
+        ids = sub["URL"].apply(card_id_da_url)
+        horas = horas.where(~ids.isin(list(horas_conf)), ids.map(horas_conf))
     ok = int((horas <= _meta_tol(2)).sum())
     ind = score_indicador(ok, len(sub), 10)
     ind["nome"] = "Cont. ADM — Conferência ≤2h"

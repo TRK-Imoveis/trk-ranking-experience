@@ -69,7 +69,7 @@ PREFIXOS_PROC = {
 
 NOMES_RESP = {
     "caio": "Caio", "vivianne": "Vivianne", "marinho": "Marinho",
-    "natalia": "Natália", "gardenia": "Gardênia",
+    "natalia": "Natália", "gardenia": "Gardênia", "tauise": "Tauise",
 }
 
 CORES_BARV = ["#000", "#555", "#888", "#C8C4BC", "#E0DCD0"]
@@ -84,19 +84,20 @@ CORES_BARV = ["#000", "#555", "#888", "#C8C4BC", "#E0DCD0"]
 #   "BONUS"                 → ★ N total do bonus_proc
 #   "volume"                → tot do maior indicador (label "X cards no período")
 ORDEM_KPIS_POR_PROCESSO = {
-    "Cont. ADM":      ["natalia", "gardenia", "vivianne", "BONUS"],
-    "Rescisão ADM":   ["natalia", "gardenia", "vivianne"],
+    # Tauise entra depois da Gardênia: o teto é 4 KPIs, quem sobrar cai.
+    "Cont. ADM":      ["natalia", "gardenia", "tauise", "vivianne", "BONUS"],
+    "Rescisão ADM":   ["natalia", "gardenia", "tauise", "vivianne"],
     "Com. Locação":   ["caio_3indicadores", "BONUS"],
     "Cont. Locação":  ["caio", "vivianne_indicadores"],
     "Rescisão Loc.":  ["vivianne_indicadores", "assessoras"],
-    "Reparos":        ["natalia", "gardenia"],
-    "Renovação":      ["caio", "natalia", "gardenia", "vivianne_indicadores"],
+    "Reparos":        ["natalia", "gardenia", "tauise"],
+    "Renovação":      ["caio", "natalia", "gardenia", "tauise", "vivianne_indicadores"],
     "Inadimplência":  ["vivianne_indicadores", "BONUS"],
     "Vistorias":      ["volume", "marinho_indicadores"],
-    "BackOffice":     ["natalia", "gardenia", "vivianne_indicadores"],
-    "DIRF/DARF":      ["natalia", "gardenia"],
-    "Ticket":         ["caio", "natalia", "vivianne", "gardenia"],
-    "WhatsApp":       ["caio", "natalia", "gardenia"],
+    "BackOffice":     ["natalia", "gardenia", "tauise", "vivianne_indicadores"],
+    "DIRF/DARF":      ["natalia", "gardenia", "tauise"],
+    "Ticket":         ["caio", "natalia", "vivianne", "gardenia", "tauise"],
+    "WhatsApp":       ["caio", "natalia", "gardenia", "tauise"],
 }
 
 
@@ -287,7 +288,7 @@ def _build_kpis(proc: str, indicadores: list[dict], pessoas: list) -> list[dict]
                     label = "vistorias no período" if proc == "Vistorias" else f"Total {_short_nome(top['nome'])[:18]}"
                     kpis.append({"v": str(top["tot"]), "l": label, "cls": ""})
         elif slot == "assessoras":
-            for pid in ("natalia", "gardenia"):
+            for pid in ("natalia", "gardenia", "tauise"):
                 if len(kpis) >= 4:
                     break
                 inds = _inds_da_pessoa(pid, indicadores)

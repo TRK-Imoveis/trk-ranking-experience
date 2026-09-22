@@ -28,6 +28,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 
 from calculate import (
+    selecionar_conferencia_adm, card_id_da_url,
     excluir_rascunhos, aplicar_cutoff, filtrar_por_assignee, extrair_im, NOMES_AGENTE,
     RENOV_ANTECEDENCIA_MIN, _renov_nao_renova,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
@@ -370,7 +371,8 @@ def _gen_indicador_horas(df: pd.DataFrame, col_in: str, col_out: str,
     }
 
 
-def _gen_indicador_uteis_fase(df: pd.DataFrame, fase: str, meta_h: float, titulo: str) -> dict:
+def _gen_indicador_uteis_fase(df: pd.DataFrame, fase: str, meta_h: float, titulo: str,
+                              horas_conf: dict | None = None) -> dict:
     """
     Drilldown de indicador em horas ÚTEIS dentro de UMA fase, robusto a reabertura.
     Espelha calc_*_contrato_adm: usa calculate.horas_uteis_fase (mesma fonte de
@@ -385,6 +387,9 @@ def _gen_indicador_uteis_fase(df: pd.DataFrame, fase: str, meta_h: float, titulo
         lambda r: horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)),
         axis=1,
     )
+    if horas_conf and len(sub):  # hora real confirmada pela gestora (ajustes_manuais.json)
+        ids = sub["URL"].apply(card_id_da_url)
+        horas = horas.where(~ids.isin(list(horas_conf)), ids.map(horas_conf))
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(meta_h) else "✗"])
@@ -507,9 +512,17 @@ def vivi_ren_final(df_renov: pd.DataFrame, ref: pd.Timestamp) -> dict:
     df = excluir_rascunhos(df_renov)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_in = "Primeira vez que entrou na fase Contrato assinado / Finalizar"
+    # 25/08/2026: fim = ENTRADA em Conferência Final (tempo da conferência é das
+    # assessoras). Fallback: Processo concluído. MESMA regra do calculate.py
+    # (Armadilha 1 — manter os dois arquivos em sincronia).
+    col_conf = "Primeira vez que entrou na fase Conferência Final"
     col_out = "Primeira vez que entrou na fase Processo concluído"
-    sub = df.dropna(subset=[col_in, col_out]).copy()
-    horas = sub.apply(lambda r: horas_uteis(r[col_in], r[col_out]), axis=1)
+    if col_conf in df.columns:
+        df = df.assign(_fim_finalizacao=df[col_conf].fillna(df[col_out]))
+    else:
+        df = df.assign(_fim_finalizacao=df[col_out])
+    sub = df.dropna(subset=[col_in, "_fim_finalizacao"]).copy()
+    horas = sub.apply(lambda r: horas_uteis(r[col_in], r["_fim_finalizacao"]), axis=1)
     rows = []
     for (_, r), h in zip(sub.iterrows(), horas):
         rows.append([_im_label(r), _endereco_from_row(r), _fmt_horas(h), "✓" if h <= _meta_tol(16) else "✗"])
@@ -674,7 +687,7 @@ def _vist_preenchida(v) -> bool:
 
 
 def _label_pessoa(assessora: str) -> str:
-    return "Natália" if assessora == "natalia" else "Gardênia"
+    return {"natalia": "Natália", "gardenia": "Gardênia", "tauise": "Tauise"}.get(assessora, assessora)
 
 
 def assessora_cadm(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
@@ -687,11 +700,12 @@ def assessora_cadm(df_cont_adm: pd.DataFrame, assessora: str, ref: pd.Timestamp)
         sem_assessor = df["Assessor (lista)"].apply(lambda v: not _as_list(v))
         concluido = df["Primeira vez que entrou na fase Concluído"].notna()
         mask = mask | (sem_assessor & concluido)
-    df_assess = df[mask].copy()
+    df_assess, horas_conf = selecionar_conferencia_adm(df, assessora, mask)
     # Robusto a reabertura (12ª Ed): mesma fonte de verdade da pontuação.
     return _gen_indicador_uteis_fase(
         df_assess, "Conferência do contrato",
         2, f"{_label_pessoa(assessora)} — Cont. ADM: Conferência ≤2h ({{ok}}/{{tot}})",
+        horas_conf=horas_conf,
     )
 
 
@@ -1222,25 +1236,34 @@ def caio_wa(df_conversas: pd.DataFrame) -> dict:
 # Entry point — registry parcial (5 chaves de teste)
 # ────────────────────────────────────────────────────────────────────
 
+def _ou_vazio(fn, df, pid: str, *args) -> dict:
+    """Pipe VAZIO depois do recorte por data (Tauise) → drilldown vazio, sem entrar
+    na função. Espelha run._ou_null — mesma regra na nota e no drilldown."""
+    if df is None or len(df) == 0:
+        return {"titulo": f"{_label_pessoa(pid)} — sem cards no período (0/0)",
+                "cols": [], "rows": []}
+    return fn(df, pid, *args)
+
+
 def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict:
-    """Gera 12 chaves para uma assessora ('nat' ou 'gar') aplicando o pid correspondente."""
+    """Gera 14 chaves para uma assessora ('nat', 'gar' ou 'tau') aplicando o pid correspondente."""
     return {
-        f"{prefix}_cadm":          assessora_cadm(dfs["cont_adm"], pid, ref),
-        f"{prefix}_cadm_bonus":    assessora_cadm_bonus(dfs["cont_adm"], pid, ref),
-        f"{prefix}_resc_adm_ali":   assessora_resc_adm_ali(dfs["rescisao_adm"], pid, ref),
-        f"{prefix}_resc_adm_concl": assessora_resc_adm_concl(dfs["rescisao_adm"], pid, ref),
-        f"{prefix}_resc_adm_dist":  assessora_resc_adm_dist(dfs["rescisao_adm"], pid, ref),
-        f"{prefix}_rl_prop":       assessora_rl_prop(dfs["rescisao_loc"], pid, ref,
-                                                  dfs.get("distratos")),
-        f"{prefix}_rl_final":      assessora_rl_final(dfs["rescisao_loc"], pid, ref,
-                                                  dfs.get("distratos")),
-        f"{prefix}_rep_orc":       assessora_rep_orc(dfs["reparos"], pid, ref),
-        f"{prefix}_rep_pos":       assessora_rep_pos(dfs["reparos"], pid, ref),
-        f"{prefix}_ren_cont":      assessora_ren_cont(dfs["renovacao"], pid, ref),
-        f"{prefix}_ren_ass":       assessora_ren_ass(dfs["renovacao"], pid, ref),
-        f"{prefix}_ren_salvos":    assessora_ren_salvos(dfs["renovacao"], pid, ref),
-        f"{prefix}_bo":            assessora_bo(dfs["backoffice"], pid, ref),
-        f"{prefix}_dirf":          assessora_dirf(dfs["dirf_darf"], pid, ref),
+        f"{prefix}_cadm":          _ou_vazio(assessora_cadm, dfs["cont_adm"], pid, ref),
+        f"{prefix}_cadm_bonus":    _ou_vazio(assessora_cadm_bonus, dfs["cont_adm"], pid, ref),
+        f"{prefix}_resc_adm_ali":   _ou_vazio(assessora_resc_adm_ali, dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_resc_adm_concl": _ou_vazio(assessora_resc_adm_concl, dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_resc_adm_dist":  _ou_vazio(assessora_resc_adm_dist, dfs["rescisao_adm"], pid, ref),
+        f"{prefix}_rl_prop":       _ou_vazio(assessora_rl_prop, dfs["rescisao_loc"], pid, ref,
+                                             dfs.get("distratos")),
+        f"{prefix}_rl_final":      _ou_vazio(assessora_rl_final, dfs["rescisao_loc"], pid, ref,
+                                             dfs.get("distratos")),
+        f"{prefix}_rep_orc":       _ou_vazio(assessora_rep_orc, dfs["reparos"], pid, ref),
+        f"{prefix}_rep_pos":       _ou_vazio(assessora_rep_pos, dfs["reparos"], pid, ref),
+        f"{prefix}_ren_cont":      _ou_vazio(assessora_ren_cont, dfs["renovacao"], pid, ref),
+        f"{prefix}_ren_ass":       _ou_vazio(assessora_ren_ass, dfs["renovacao"], pid, ref),
+        f"{prefix}_ren_salvos":    _ou_vazio(assessora_ren_salvos, dfs["renovacao"], pid, ref),
+        f"{prefix}_bo":            _ou_vazio(assessora_bo, dfs["backoffice"], pid, ref),
+        f"{prefix}_dirf":          _ou_vazio(assessora_dirf, dfs["dirf_darf"], pid, ref),
     }
 
 
@@ -1249,6 +1272,10 @@ def gerar_imoveis(dfs: dict, ref: pd.Timestamp) -> dict:
     df_conv = dfs.get("conversas", pd.DataFrame())
     df_tkt = dfs.get("tickets", pd.DataFrame())
     df_aval = dfs.get("aval_tickets", pd.DataFrame())
+    # Transição Natália → Tauise: cada uma só enxerga o seu lado do corte.
+    from calculate import recortar_por_pessoa
+    _dfs_nat = recortar_por_pessoa(dfs, "natalia")
+    _dfs_tau = recortar_por_pessoa(dfs, "tauise")
     out = {
         # Caio (8 chaves)
         "caio_inicio":       caio_inicio(dfs["comercial_locacao"], ref),
@@ -1285,16 +1312,21 @@ def gerar_imoveis(dfs: dict, ref: pd.Timestamp) -> dict:
         "caio_wa":           _wa_drilldown(df_conv, "caio", "Caio"),
         "caio_tickets":      _tkt_drilldown(df_tkt, df_aval, "caio", "Caio",
                                             com_aval=True, peso_sla=4, peso_aval=3),
-        "nat_wa":            _wa_drilldown(df_conv, "natalia", "Natália"),
-        "nat_tickets":       _tkt_drilldown(df_tkt, df_aval, "natalia", "Natália",
+        "nat_wa":            _wa_drilldown(_dfs_nat.get("conversas", df_conv), "natalia", "Natália"),
+        "nat_tickets":       _tkt_drilldown(_dfs_nat.get("tickets", df_tkt), df_aval, "natalia", "Natália",
                                             com_aval=True, peso_sla=3, peso_aval=3),
         "gar_wa":            _wa_drilldown(df_conv, "gardenia", "Gardênia"),
         "gar_tickets":       _tkt_drilldown(df_tkt, df_aval, "gardenia", "Gardênia",
                                             com_aval=True, peso_sla=3, peso_aval=3),
+        "tau_wa":            _wa_drilldown(_dfs_tau.get("conversas", df_conv), "tauise", "Tauise"),
+        "tau_tickets":       _tkt_drilldown(_dfs_tau.get("tickets", df_tkt), df_aval, "tauise", "Tauise",
+                                            com_aval=True, peso_sla=3, peso_aval=3),
         "vivi_tickets":      _tkt_drilldown(df_tkt, df_aval, "vivianne", "Vivianne",
                                             com_aval=False, peso_sla=4),
     }
-    # Assessoras (24 chaves: 12 Natália + 12 Gardênia)
-    out.update(_assessora_keys("nat", "natalia", dfs, ref))
+    # Assessoras (3 × 14 chaves). Natália e Tauise recebem os dfs já recortados
+    # pelo corte da transição — mesmo recorte que a nota (Armadilha 1).
+    out.update(_assessora_keys("nat", "natalia", _dfs_nat, ref))
     out.update(_assessora_keys("gar", "gardenia", dfs, ref))
+    out.update(_assessora_keys("tau", "tauise", _dfs_tau, ref))
     return out

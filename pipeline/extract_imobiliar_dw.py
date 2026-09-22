@@ -87,22 +87,97 @@ def _mes_ref(v) -> object:
 def extract_imobiliar_dw(*, verbose: bool = True) -> dict[str, pd.DataFrame]:
     from db_connection import query as _query  # type: ignore
 
+    # ENCARGO VEM DE DOIS LUGARES (28/08/2026)
+    # ─────────────────────────────────────────────────────────────────
+    # Quando o inquilino atrasa e faz ACORDO, o Imobiliar não grava a multa no
+    # documento — grava em `acordo`. Por isso `valor_multa_adm` vem 0,00 nesses
+    # casos, no dw_trk E no banco de origem. Medido em 27/08: com só o documento
+    # dava 91 boletos com encargo contra 132 do relatório; somando o acordo,
+    # 128. Ver claude/INADIMPLENCIA_migracao_e_regra_R1_18-08-2026.md.
+    #
+    # ⚠️ O acordo está preso ao documento tipo 'N' (o original, que fica SEM
+    # pagamento) e a data de pagamento está no tipo 'E' (o reemitido). São
+    # documentos diferentes da mesma competência — por isso a ponte é por
+    # (imóvel, competência), nunca por id_documento.
+    # A base NÃO pode ser `imobiliar_boletos_encargo_adm`: aquela tabela só tem
+    # boletos cujo encargo está NO DOCUMENTO. Os 40 casos de acordo não estão lá
+    # (o documento deles tem multa 0). A base é o `doc_capa` inteiro, filtrado
+    # por pagamento, com a multa vindo de onde existir.
     b = _query(
         """
-        SELECT b.codigo_imovel, b.competencia, b.data_pagamento,
-               b.valor_multa_adm, b.valor_juros_adm, b.dia_pagamento_proprietario,
-               c.valor_documento
-        FROM imobiliar_boletos_encargo_adm b
-        LEFT JOIN imobiliar_doc_capa c ON c.id_documento = b.id_documento
+        WITH base AS (
+            SELECT g.codigo_imovel, c.competencia,
+                   MAX(c.data_pagamento)                       AS data_pagamento,
+                   MAX(COALESCE(c.valor_multa_adm, 0))         AS multa_doc,
+                   MAX(COALESCE(c.valor_juros_adm, 0))         AS juros_doc,
+                   MAX(c.valor_documento) FILTER (WHERE c.data_pagamento IS NOT NULL)
+                                                               AS valor_documento
+            FROM imobiliar_doc_capa c
+            JOIN imobiliar_grupo_pag g
+              ON g.codigo_grupo = c.codigo_grupo
+             AND g.sequencia_grupo = c.sequencia_grupo_titular
+            WHERE c.data_pagamento IS NOT NULL AND c.cancelado IS NOT TRUE
+            GROUP BY g.codigo_imovel, c.competencia
+        ),
+        acordo_comp AS (
+            SELECT g.codigo_imovel, c.competencia,
+                   SUM(a.valor_multa)              AS multa_acordo,
+                   COUNT(DISTINCT a.id_acordo)     AS n_acordos
+            FROM imobiliar_doc_capa c
+            JOIN imobiliar_grupo_pag g
+              ON g.codigo_grupo = c.codigo_grupo
+             AND g.sequencia_grupo = c.sequencia_grupo_titular
+            JOIN imobiliar_docs_acordados da ON da.id_documento = c.id_documento
+            JOIN imobiliar_acordos a ON a.id_acordo = da.id_acordo
+            WHERE COALESCE(a.valor_multa, 0) > 0
+            GROUP BY g.codigo_imovel, c.competencia
+        ),
+        dia_prop AS (
+            SELECT codigo_imovel, MAX(dia_pagamento_proprietario) AS dia_pag
+            FROM imobiliar_boletos_encargo_adm
+            WHERE dia_pagamento_proprietario IS NOT NULL
+            GROUP BY codigo_imovel
+        )
+        SELECT b.codigo_imovel, b.competencia, b.data_pagamento, b.valor_documento,
+               b.multa_doc, b.juros_doc,
+               COALESCE(ac.multa_acordo, 0) AS multa_acordo,
+               COALESCE(ac.n_acordos, 0)    AS n_acordos,
+               d.dia_pag AS dia_pagamento_proprietario
+        FROM base b
+        LEFT JOIN acordo_comp ac
+          ON ac.codigo_imovel = b.codigo_imovel AND ac.competencia = b.competencia
+        LEFT JOIN dia_prop d ON d.codigo_imovel = b.codigo_imovel
         """
     )
+
+    # Multa: a do DOCUMENTO manda; se vier 0, usa a do ACORDO.
+    # Nunca somar as duas — são a mesma cobrança registrada em lugares
+    # diferentes conforme o inquilino tenha feito acordo ou não.
+    multa_doc = pd.to_numeric(b["multa_doc"], errors="coerce").fillna(0.0)
+    multa_aco = pd.to_numeric(b["multa_acordo"], errors="coerce").fillna(0.0)
+    multa = multa_doc.where(multa_doc > 0, multa_aco)
+
+    if verbose:
+        n_doc = int((multa_doc > 0).sum())
+        n_aco = int(((multa_doc == 0) & (multa_aco > 0)).sum())
+        ambos = int(((multa_doc > 0) & (multa_aco > 0)).sum())
+        multi = int((pd.to_numeric(b["n_acordos"], errors="coerce") > 1).sum())
+        print(f"  [imobiliar-dw] encargo pelo documento: {n_doc} · pelo acordo: {n_aco} "
+              f"· total {n_doc + n_aco}")
+        if ambos:
+            print(f"  ⚠️  [imobiliar-dw] {ambos} boleto(s) com multa nos DOIS lugares — "
+                  f"prevaleceu a do documento. Conferir se não é a mesma cobrança.")
+        if multi:
+            print(f"  ⚠️  [imobiliar-dw] {multi} competência(s) com MAIS DE UM acordo — "
+                  f"multa somada. Conferir se não duplica.")
+
     boletos = pd.DataFrame({
         "cd_imovel": b["codigo_imovel"].map(_cd),
         "mes_ref":   b["competencia"].map(_mes_ref),
         "data_pag":  pd.to_datetime(b["data_pagamento"], errors="coerce"),
         "valor":     pd.to_numeric(b["valor_documento"], errors="coerce"),
-        "multa_adm": pd.to_numeric(b["valor_multa_adm"], errors="coerce").fillna(0.0),
-        "juros_adm": pd.to_numeric(b["valor_juros_adm"], errors="coerce").fillna(0.0),
+        "multa_adm": multa,
+        "juros_adm": pd.to_numeric(b["juros_doc"], errors="coerce").fillna(0.0),
     })
     sem_valor = int(boletos["valor"].isna().sum())
     if verbose:

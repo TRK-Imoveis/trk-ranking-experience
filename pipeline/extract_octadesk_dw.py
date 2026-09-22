@@ -53,6 +53,7 @@ if str(_SANDBOX) not in sys.path:
 COL_RESP = "Responsável da conversa"
 COL_TEMPO = "Tempo de espera após atribuição"
 COL_SAT = "Pesquisa de satisfação"
+COL_CRIADO = "Criado em"   # data da conversa — usada no corte Natália → Tauise
 
 # survey_response do banco → rótulo do XLSX. `not_sent`/`not_answered` são
 # justamente os dois que a regra manda EXCLUIR do denominador (WA_EXC).
@@ -120,6 +121,7 @@ def extract_conversas_dw(*, dias: int = 180, verbose: bool = True) -> pd.DataFra
         COL_TEMPO: espera.map(_hms),
         COL_SAT: df["survey_response"].map(
             lambda v: TRADUCAO_PESQUISA.get(str(v).strip().lower(), v)),
+        COL_CRIADO: pd.to_datetime(df["created_at"], errors="coerce", utc=True),
     })
     if verbose:
         validos = out[COL_TEMPO].notna().sum()
