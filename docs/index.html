@@ -1215,7 +1215,9 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
                 ? 'banco' : 'api';
   const ARQ = FONTE === 'banco' ? './dados/banco.json' : './dados/atual.json';
   try {
-    const resp = await fetch(ARQ, { cache: 'no-store' });
+    // ?v=<timestamp> fura o cache da CDN do GitHub Pages (max-age 600s): sem isso,
+    // o painel podia mostrar o atual.json anterior por 10-30 min depois do push.
+    const resp = await fetch(ARQ + '?v=' + Date.now(), { cache: 'no-store' });
     if (!resp.ok) throw new Error('HTTP ' + resp.status + ' ao buscar ' + ARQ);
     const dados = await resp.json();
     PESSOAS    = dados.PESSOAS;
