@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-09-23T11:46:00.969528Z",
-    "ref": "2026-09-23T11:44:57.523251+00:00",
+    "geradoEm": "2026-09-23T12:48:36.728704Z",
+    "ref": "2026-09-23T12:47:49.867253+00:00",
     "fonte": "banco",
     "etl_ultima_carga": "2026-09-22T22:01:18.425857",
     "octadesk_disponivel": true,
@@ -410,8 +410,8 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1400,
-          "tot": 1662,
+          "ok": 1399,
+          "tot": 1661,
           "pct": 84.2,
           "peso": 6,
           "score": 5.054,
@@ -484,7 +484,7 @@
         "Vistorias": null,
         "BackOffice": 2.381,
         "DIRF/DARF": 5.0,
-        "WhatsApp": 8.688,
+        "WhatsApp": 8.692,
         "Ticket": 7.241
       },
       "detalhes": [
@@ -597,17 +597,17 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1718,
-          "tot": 2128,
-          "pct": 80.7,
+          "ok": 1717,
+          "tot": 2125,
+          "pct": 80.8,
           "peso": 6,
-          "score": 4.844,
+          "score": 4.848,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
         {
-          "ok": 321,
-          "tot": 334,
+          "ok": 320,
+          "tot": 333,
           "pct": 96.1,
           "peso": 4,
           "score": 3.844,
@@ -637,7 +637,7 @@
         "WA: 96.1%",
         "Tkts: 85.7%",
         "RescADM: 83.3%",
-        "WA: 80.7%"
+        "WA: 80.8%"
       ],
       "pontosAten": [
         "Reparos: 20.0%",
@@ -8152,7 +8152,7 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1400/1662",
+          "1399/1661",
           "84.2%"
         ],
         [
@@ -8192,12 +8192,12 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1718/2128",
-          "80.7%"
+          "1717/2125",
+          "80.8%"
         ],
         [
           "Avaliações positivas",
-          "321/334",
+          "320/333",
           "96.1%"
         ]
       ]
@@ -12683,7 +12683,7 @@
           "cls": "ok"
         },
         {
-          "v": "80.7%",
+          "v": "80.8%",
           "l": "Gardênia Resposta ≤5min",
           "cls": "ok"
         },
@@ -12699,10 +12699,10 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Natália Resposta ≤5min (1400/1662)",
+            "Natália Resposta ≤5min (1399/1661)",
             "Natália Avaliações positivas (248/251)",
-            "Gardênia Resposta ≤5min (1718/2128)",
-            "Gardênia Avaliações positivas (321/334)",
+            "Gardênia Resposta ≤5min (1717/2125)",
+            "Gardênia Avaliações positivas (320/333)",
             "Caio Resposta ≤5min (1164/2193)",
             "Caio Avaliações positivas (172/177)",
             "Tauise Resposta ≤5min (165/222)",
@@ -12711,7 +12711,7 @@
           "data": [
             84.2,
             98.8,
-            80.7,
+            80.8,
             96.1,
             53.1,
             97.2,
@@ -12740,7 +12740,7 @@
           ],
           "data": [
             9.006,
-            8.688,
+            8.692,
             8.269,
             7.072
           ],
@@ -12757,8 +12757,8 @@
           "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
-          "ok": 1400,
-          "tot": 1662,
+          "ok": 1399,
+          "tot": 1661,
           "pct": 84.2
         },
         {
@@ -12773,16 +12773,16 @@
           "nome": "Resposta ≤5min",
           "resp": "Gardênia",
           "meta": "≤5min",
-          "ok": 1718,
-          "tot": 2128,
-          "pct": 80.7
+          "ok": 1717,
+          "tot": 2125,
+          "pct": 80.8
         },
         {
           "nome": "Avaliações positivas",
           "resp": "Gardênia",
           "meta": "% positivas",
-          "ok": 321,
-          "tot": 334,
+          "ok": 320,
+          "tot": 333,
           "pct": 96.1
         },
         {
@@ -12829,7 +12829,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 6988 cards no período."
+          "txt": "Volume de 6983 cards no período."
         }
       ]
     }
