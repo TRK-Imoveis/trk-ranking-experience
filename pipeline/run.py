@@ -46,7 +46,7 @@ from calculate import (
     calc_marinho_vistorias, calc_marinho_contestacoes,
     nota_final, recortar_por_pessoa,
 )
-from pipeline.extract_pipefy import extract_pipe
+from pipeline.extract_pipefy import extract_pipe, extract_pipes
 from pipeline.extract_octadesk import extract_octadesk
 from pipeline.extract_imobiliar import (extract_imobiliar, calcular_bonus_inadimplencia,
                                         carregar_distratos, carregar_repasses)
@@ -101,9 +101,10 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
         from pipeline.extract_dw import extract_pipe as _extract  # import tardio: só quem usa precisa do psycopg2
         if verbose:
             print("\n[fonte] dw_trk (painel-sombra) — extract_dw")
+        dfs = {k: _extract(k, use_cache=use_cache, verbose=verbose) for k in pipes}
     else:
-        _extract = extract_pipe
-    dfs = {k: _extract(k, use_cache=use_cache, verbose=verbose) for k in pipes}
+        # Paralelo ou em fila conforme feature_flags.json::pipefy_workers (23/09/2026)
+        dfs = extract_pipes(pipes, use_cache=use_cache, verbose=verbose)
 
     if verbose:
         print("\n[octadesk] carregando arquivos locais…")
@@ -134,22 +135,35 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
                   f"{exc.__class__.__name__}: {exc}")
             import traceback; traceback.print_exc()
 
+    # TICKETS DO BANCO (13/10/2026) — categoria e assunto vêm do histórico do
+    # ticket (octadesk_tickets_interacoes.properties_changes), então as 3 exclusões
+    # do manual continuam valendo. Controlado por feature_flags.json::tickets_do_banco.
+    # As avaliações de ticket seguem no XLSX (não existem no banco).
+    if FEATURE_FLAGS.get("tickets_do_banco", False) or fonte == "banco":
+        try:
+            from pipeline.extract_octadesk_dw import extract_tickets_dw
+            if verbose:
+                print("[octadesk] tickets: lendo do dw_trk…")
+            dfs["tickets"] = extract_tickets_dw(verbose=verbose)
+        except Exception as exc:
+            print(f"⚠️  [octadesk] CAIU DE VOLTA no XLSX — os indicadores de SLA de Tickets "
+                  f"desta rodada vieram do arquivo, não do banco. {exc.__class__.__name__}: {exc}")
+            import traceback; traceback.print_exc()
+
     if verbose:
         print("\n[imobiliar] carregando CSVs locais…")
     imob = extract_imobiliar(verbose=verbose)
     dfs["imobiliar"] = imob   # guarda os 3 sub-DFs sob "imobiliar"
 
-    # INADIMPLÊNCIA DO BANCO — só no painel-sombra (20/08/2026).
-    # Substitui os 3 CSVs por imobiliar_boletos_encargo_adm + doc_capa.
-    # NÃO vai para produção ainda: a regra R1 (multa >15% = rescisão) dá
-    # resultado diferente nas duas fontes, e o espelho existe para mostrar
-    # essa divergência na tela antes de a gestora decidir qual vale.
-    # Ver claude/INADIMPLENCIA_migracao_e_regra_R1_18-08-2026.md
-    if fonte == "banco":
+    # INADIMPLÊNCIA DO BANCO — produção desde 13/10/2026 (flag imobiliar_do_banco).
+    # Substitui os 3 CSVs (export manual, que ficava velho) por doc_capa + acordos
+    # do dw_trk. Conferido com o relatório de 27/08: 136 de 136 boletos iguais.
+    # Se o banco falhar, segue com os CSVs e avisa.
+    if FEATURE_FLAGS.get("imobiliar_do_banco", False) or fonte == "banco":
         try:
             from pipeline.extract_imobiliar_dw import extract_imobiliar_dw
             if verbose:
-                print("[imobiliar] trocando os CSVs pelo dw_trk (painel-sombra)…")
+                print("[imobiliar] lendo a Inadimplência do dw_trk…")
             dfs["imobiliar"] = extract_imobiliar_dw(verbose=verbose)
         except Exception as exc:
             print(f"⚠️  [imobiliar] CAIU DE VOLTA nos CSVs na Inadimplência — "

@@ -17,7 +17,7 @@ DE ONDE VEM CADA COISA
     data_pag    .data_pagamento
     multa_adm   .valor_multa_adm
     juros_adm   .valor_juros_adm
-    valor       imobiliar_doc_capa.valor_documento  (join por id_documento)
+    valor       imobiliar_doc_capa.valor_documento − multa do acordo
     dia_pag     .dia_pagamento_proprietario         ← ver nota abaixo
     endereco    imobiliar_imoveis
     nome        imobiliar_proprietarios_imoveis.nome_proprietario
@@ -37,15 +37,13 @@ DE ONDE VEM CADA COISA
    esse dia. Onde há mais de um dia_pag para o mesmo imóvel (troca de titular
    no meio do período), fica o do boleto mais recente — e o caso é avisado.
 
-⚠️ ESTE EXTRATOR NÃO RESOLVE A REGRA R1
-   R1 separa multa de atraso (≤15% do valor) de multa de rescisão (>15%).
-   Pelos números da CSV, 2 boletos passam de 15% (IM1783, competências 04 e 05,
-   logo após o distrato de 08/04/2026). Pelos números do BANCO, nenhum passa —
-   as duas fontes dividem `valor` e `multa` de forma diferente e a soma bate
-   (ver claude/INADIMPLENCIA_migracao_e_regra_R1_18-08-2026.md).
-   Isso é DE PROPÓSITO: o painel-sombra existe para mostrar essa divergência
-   na tela, boleto a boleto, em vez de a decisão ser tomada no escuro.
-   A nota da Inadimplência no espelho vai ficar diferente da de produção.
+⚠️ REGRA R1 (multa >15% = rescisão) — situação em 13/10/2026
+   Com a regra nova do acordo (ver comentário da consulta), banco e relatório
+   batem em 136 de 136 boletos (27/02 a 26/08). Na R1 sobra 1 diferença:
+   IM1783 04/2026 passa de 15% no relatório (17,5%) e não no banco (11,6%),
+   porque a "correção acordo encargos" (taxa 326) só existe nos itens do boleto.
+   Desde 13/10/2026 este extrator é a fonte de PRODUÇÃO da Inadimplência
+   (flag `imobiliar_do_banco`); os CSVs ficam só como reserva se o banco falhar.
 """
 from __future__ import annotations
 
@@ -87,89 +85,111 @@ def _mes_ref(v) -> object:
 def extract_imobiliar_dw(*, verbose: bool = True) -> dict[str, pd.DataFrame]:
     from db_connection import query as _query  # type: ignore
 
-    # ENCARGO VEM DE DOIS LUGARES (28/08/2026)
+    # ENCARGO VEM DE DOIS LUGARES (28/08/2026 · regra revista em 13/10/2026)
     # ─────────────────────────────────────────────────────────────────
-    # Quando o inquilino atrasa e faz ACORDO, o Imobiliar não grava a multa no
-    # documento — grava em `acordo`. Por isso `valor_multa_adm` vem 0,00 nesses
-    # casos, no dw_trk E no banco de origem. Medido em 27/08: com só o documento
-    # dava 91 boletos com encargo contra 132 do relatório; somando o acordo,
-    # 128. Ver claude/INADIMPLENCIA_migracao_e_regra_R1_18-08-2026.md.
+    # 1) No próprio boleto: valor_multa_adm / valor_juros_adm.
+    # 2) Num ACORDO: quando o inquilino atrasa e faz acordo, o Imobiliar põe a
+    #    multa no acordo e cobra num boleto reemitido (tipo 'E'). Esse boleto
+    #    pode ter OUTRA competência (ex.: IM382, acordo dos docs de 01/2026,
+    #    cobrado no boleto de 03/2026 pago em 01/04).
     #
-    # ⚠️ O acordo está preso ao documento tipo 'N' (o original, que fica SEM
-    # pagamento) e a data de pagamento está no tipo 'E' (o reemitido). São
-    # documentos diferentes da mesma competência — por isso a ponte é por
-    # (imóvel, competência), nunca por id_documento.
-    # A base NÃO pode ser `imobiliar_boletos_encargo_adm`: aquela tabela só tem
-    # boletos cujo encargo está NO DOCUMENTO. Os 40 casos de acordo não estão lá
-    # (o documento deles tem multa 0). A base é o `doc_capa` inteiro, filtrado
-    # por pagamento, com a multa vindo de onde existir.
+    # Ligação acordo → boleto pago: mesmo imóvel e vencimento do boleto = vencimento
+    # da parcela do acordo; se nenhum boleto vence nesse dia, o primeiro pago até
+    # 45 dias depois (acordo refeito). Acordo parcelado: multa dividida pelas parcelas.
+    # Parcelamentos antigos (parcela vencendo mais de 90 dias depois do acordo)
+    # NÃO contam: é dívida velha sendo paga, não cobrança do mês (IM876).
+    # A multa do boleto e a do acordo SOMAM (IM368 07/2026: 283,41 + 613,15).
+    # `valor` = valor do boleto sem a multa do acordo, como no relatório do Imobiliar.
+    #
+    # Unidade = boleto pago (não mais imóvel × competência): um imóvel pode pagar
+    # dois boletos da mesma competência (IM1758 05/2026, 01/07 e 08/07).
+    #
+    # Conferido em 13/10/2026 contra o "Relatório de Boletos Quitados" de 27/08
+    # (27/02 a 26/08): 136 de 136 boletos iguais; multa igual em 134. Nos outros 2
+    # (IM1783 04/2026 e IM408 08/2026) falta a "correção acordo encargos" (taxa 326),
+    # que só existe nos itens do boleto, e eles não vêm para o dw_trk.
     b = _query(
         """
-        WITH base AS (
-            SELECT g.codigo_imovel, c.competencia,
-                   MAX(c.data_pagamento)                       AS data_pagamento,
-                   MAX(COALESCE(c.valor_multa_adm, 0))         AS multa_doc,
-                   MAX(COALESCE(c.valor_juros_adm, 0))         AS juros_doc,
-                   MAX(c.valor_documento) FILTER (WHERE c.data_pagamento IS NOT NULL)
-                                                               AS valor_documento
+        WITH pago AS (
+            SELECT c.id_documento, g.codigo_imovel::int AS im, c.competencia,
+                   c.data_vencimento::date AS venc, c.data_pagamento::date AS dp,
+                   c.valor_documento AS v,
+                   COALESCE(c.valor_multa_adm, 0) AS m, COALESCE(c.valor_juros_adm, 0) AS j
             FROM imobiliar_doc_capa c
             JOIN imobiliar_grupo_pag g
-              ON g.codigo_grupo = c.codigo_grupo
-             AND g.sequencia_grupo = c.sequencia_grupo_titular
-            WHERE c.data_pagamento IS NOT NULL AND c.cancelado IS NOT TRUE
-            GROUP BY g.codigo_imovel, c.competencia
+              ON g.codigo_grupo = c.codigo_grupo AND g.sequencia_grupo = c.sequencia_grupo_titular
+            WHERE c.data_pagamento >= CURRENT_DATE - 400 AND c.cancelado IS NOT TRUE
         ),
-        acordo_comp AS (
-            SELECT g.codigo_imovel, c.competencia,
-                   SUM(a.valor_multa)              AS multa_acordo,
-                   COUNT(DISTINCT a.id_acordo)     AS n_acordos
-            FROM imobiliar_doc_capa c
+        aim AS (
+            SELECT DISTINCT da.id_acordo, g.codigo_imovel::int AS im
+            FROM imobiliar_docs_acordados da
+            JOIN imobiliar_doc_capa c ON c.id_documento = da.id_documento
             JOIN imobiliar_grupo_pag g
-              ON g.codigo_grupo = c.codigo_grupo
-             AND g.sequencia_grupo = c.sequencia_grupo_titular
-            JOIN imobiliar_docs_acordados da ON da.id_documento = c.id_documento
-            JOIN imobiliar_acordos a ON a.id_acordo = da.id_acordo
+              ON g.codigo_grupo = c.codigo_grupo AND g.sequencia_grupo = c.sequencia_grupo_titular
+        ),
+        parc AS (
+            SELECT id_acordo, venc, COUNT(*) OVER (PARTITION BY id_acordo) AS n
+            FROM (SELECT DISTINCT id_acordo, data_vencimento::date AS venc
+                  FROM imobiliar_acordos_parcelas) x
+        ),
+        ap AS (
+            SELECT aim.im, a.id_acordo, pa.venc, a.valor_multa / pa.n AS multa
+            FROM imobiliar_acordos a
+            JOIN parc pa USING (id_acordo)
+            JOIN aim USING (id_acordo)
             WHERE COALESCE(a.valor_multa, 0) > 0
-            GROUP BY g.codigo_imovel, c.competencia
+              AND pa.venc - a.data_geracao::date <= 90
         ),
-        dia_prop AS (
-            SELECT codigo_imovel, MAX(dia_pagamento_proprietario) AS dia_pag
+        casa AS (
+            SELECT DISTINCT ON (ap.im, ap.id_acordo, ap.venc) ap.multa, p.id_documento
+            FROM ap
+            JOIN pago p ON p.im = ap.im
+                       AND (p.venc = ap.venc OR p.dp BETWEEN ap.venc AND ap.venc + 45)
+            ORDER BY ap.im, ap.id_acordo, ap.venc, (p.venc = ap.venc) DESC, p.competencia, p.dp
+        ),
+        doc AS (
+            SELECT p.*, COALESCE(s.ma, 0) AS ma
+            FROM pago p
+            LEFT JOIN (SELECT id_documento, SUM(multa) AS ma FROM casa GROUP BY 1) s USING (id_documento)
+        ),
+        -- dia do repasse: o do boleto com encargo; se o imóvel não tem nenhum
+        -- (só acordo), o do contrato de locação mais recente. Sem esse reserva,
+        -- 26 imóveis com encargo caíam do cálculo em silêncio (medido 13/10/2026).
+        dia_bol AS (
+            SELECT codigo_imovel::int AS im, MAX(dia_pagamento_proprietario) AS dia_pag
             FROM imobiliar_boletos_encargo_adm
             WHERE dia_pagamento_proprietario IS NOT NULL
-            GROUP BY codigo_imovel
+            GROUP BY 1
+        ),
+        dia_con AS (
+            SELECT codigo_imovel::int AS im,
+                   (ARRAY_AGG(dia_pagamento_proprietario ORDER BY codigo_contrato DESC))[1] AS dia_pag
+            FROM imobiliar_contratos_loc
+            WHERE dia_pagamento_proprietario IS NOT NULL
+            GROUP BY 1
+        ),
+        dia_prop AS (
+            SELECT COALESCE(b.im, c.im) AS im, COALESCE(b.dia_pag, c.dia_pag) AS dia_pag
+            FROM dia_bol b FULL JOIN dia_con c ON c.im = b.im
         )
-        SELECT b.codigo_imovel, b.competencia, b.data_pagamento, b.valor_documento,
-               b.multa_doc, b.juros_doc,
-               COALESCE(ac.multa_acordo, 0) AS multa_acordo,
-               COALESCE(ac.n_acordos, 0)    AS n_acordos,
-               d.dia_pag AS dia_pagamento_proprietario
-        FROM base b
-        LEFT JOIN acordo_comp ac
-          ON ac.codigo_imovel = b.codigo_imovel AND ac.competencia = b.competencia
-        LEFT JOIN dia_prop d ON d.codigo_imovel = b.codigo_imovel
+        SELECT d.im AS codigo_imovel, d.competencia, d.dp AS data_pagamento,
+               d.v - d.ma AS valor_documento, d.m AS multa_doc, d.j AS juros_doc,
+               d.ma AS multa_acordo, dp.dia_pag AS dia_pagamento_proprietario
+        FROM doc d
+        LEFT JOIN dia_prop dp ON dp.im = d.im
         """
     )
 
-    # Multa: a do DOCUMENTO manda; se vier 0, usa a do ACORDO.
-    # Nunca somar as duas — são a mesma cobrança registrada em lugares
-    # diferentes conforme o inquilino tenha feito acordo ou não.
     multa_doc = pd.to_numeric(b["multa_doc"], errors="coerce").fillna(0.0)
     multa_aco = pd.to_numeric(b["multa_acordo"], errors="coerce").fillna(0.0)
-    multa = multa_doc.where(multa_doc > 0, multa_aco)
+    multa = multa_doc + multa_aco
 
     if verbose:
-        n_doc = int((multa_doc > 0).sum())
+        n_doc = int(((multa_doc > 0) & (multa_aco == 0)).sum())
         n_aco = int(((multa_doc == 0) & (multa_aco > 0)).sum())
         ambos = int(((multa_doc > 0) & (multa_aco > 0)).sum())
-        multi = int((pd.to_numeric(b["n_acordos"], errors="coerce") > 1).sum())
-        print(f"  [imobiliar-dw] encargo pelo documento: {n_doc} · pelo acordo: {n_aco} "
-              f"· total {n_doc + n_aco}")
-        if ambos:
-            print(f"  ⚠️  [imobiliar-dw] {ambos} boleto(s) com multa nos DOIS lugares — "
-                  f"prevaleceu a do documento. Conferir se não é a mesma cobrança.")
-        if multi:
-            print(f"  ⚠️  [imobiliar-dw] {multi} competência(s) com MAIS DE UM acordo — "
-                  f"multa somada. Conferir se não duplica.")
+        print(f"  [imobiliar-dw] encargo no boleto: {n_doc} · no acordo: {n_aco} "
+              f"· nos dois: {ambos}")
 
     boletos = pd.DataFrame({
         "cd_imovel": b["codigo_imovel"].map(_cd),

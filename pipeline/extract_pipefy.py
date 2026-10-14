@@ -61,7 +61,22 @@ RAW_DIR = ROOT / "dados" / "raw"
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 PAGE_SIZE = 50
-RATE_LIMIT_SLEEP = 2.1   # seg entre requests (≈ 28 req/min, com folga)
+
+# ── Velocidade da extração (23/09/2026) ─────────────────────────────
+# ~10.800 cards em 12 pipes = ~217 páginas de 50. Em fila, com 2,1 s de pausa
+# entre páginas, a rodada levava ~30 min. Os dois freios ficam em
+# config/feature_flags.json, para desligar sem tocar em código:
+#   pipefy_sleep    → pausa entre páginas, em segundos (era 2,1 fixo)
+#   pipefy_workers  → quantos pipes extraídos AO MESMO TEMPO (1 = em fila, como antes)
+# O retry em pipefy_auth.gql já trata HTTP 429: se o Pipefy reclamar, a rodada
+# fica mais lenta, não quebra. Se reclamar 3× seguidas, aborta sem publicar.
+_FLAGS_PATH = ROOT / "config" / "feature_flags.json"
+try:
+    _FLAGS = json.loads(_FLAGS_PATH.read_text(encoding="utf-8"))
+except Exception:  # sem arquivo → comportamento antigo
+    _FLAGS = {}
+RATE_LIMIT_SLEEP = float(_FLAGS.get("pipefy_sleep", 2.1))
+PIPEFY_WORKERS = max(1, int(_FLAGS.get("pipefy_workers", 1)))
 
 CARD_QUERY = """
 query($pipeId: ID!, $first: Int!, $after: String) {
@@ -351,9 +366,33 @@ def extract_pipe(pipe_key: str, *, use_cache: bool = True, verbose: bool = True)
     return df
 
 
+def extract_pipes(keys: Iterable[str], *, use_cache: bool = True, verbose: bool = True,
+                  workers: int | None = None) -> dict[str, pd.DataFrame]:
+    """Extrai vários pipes. Com workers > 1, extrai em paralelo (cada pipe é
+    independente: cursor próprio, cache próprio em dados/raw/<pipe_id>.json).
+    O resultado é o MESMO da extração em fila — só a ordem das chamadas muda.
+    A ordem do dict devolvido segue `keys`, não a ordem de término."""
+    keys = list(keys)
+    n = PIPEFY_WORKERS if workers is None else max(1, int(workers))
+    if n <= 1 or len(keys) <= 1:
+        return {k: extract_pipe(k, use_cache=use_cache, verbose=verbose) for k in keys}
+
+    from concurrent.futures import ThreadPoolExecutor
+    if verbose:
+        print(f"\n[extract] {len(keys)} pipes em paralelo — {n} por vez, "
+              f"pausa {RATE_LIMIT_SLEEP}s entre páginas (config/feature_flags.json)")
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=n) as ex:
+        futs = {k: ex.submit(extract_pipe, k, use_cache=use_cache, verbose=verbose) for k in keys}
+        out = {k: f.result() for k, f in futs.items()}   # .result() relança erro do worker
+    if verbose:
+        print(f"[extract] {len(keys)} pipes em {time.time() - t0:.0f}s")
+    return out
+
+
 def extract_all(*, use_cache: bool = True, verbose: bool = True) -> dict[str, pd.DataFrame]:
     """Extrai todos os 12 pipes do ranking. Retorna dict pipe_key → DataFrame."""
-    return {key: extract_pipe(key, use_cache=use_cache, verbose=verbose) for key in _load_fields_map()}
+    return extract_pipes(list(_load_fields_map()), use_cache=use_cache, verbose=verbose)
 
 
 # ────────────────────────────────────────────────────────────────────

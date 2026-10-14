@@ -127,3 +127,83 @@ def extract_conversas_dw(*, dias: int = 180, verbose: bool = True) -> pd.DataFra
         validos = out[COL_TEMPO].notna().sum()
         print(f"  [octadesk-dw] {validos} com tempo de espera válido")
     return out
+
+
+# ═════════════════════════════════════════════════════════════════════
+# TICKETS pelo `dw_trk` (13/10/2026)
+# ═════════════════════════════════════════════════════════════════════
+# Contrato do XLSX `Tickets totais-*.xlsx` que `calculate._tickets_filtrados`
+# e `_ticket_sla_ind` usam:
+#   'Número do ticket'                ← octadesk_tickets.number
+#   'Data de entrada'                 ← created_at (horário de Brasília, sem fuso, como no XLSX)
+#   'Data da primeira resposta'       ← 1ª interação de quem NÃO é o solicitante com texto
+#                                       ou com mudança de status (como o Octadesk calcula)
+#   'Responsável do ticket'           ← assigned_name
+#   'Status do ticket'                ← status_name
+#   'Categoria de assunto do ticket'  ← último topicGroupName no histórico do ticket
+#   'Assunto do ticket'               ← último topicName no histórico do ticket
+#
+# A coluna octadesk_tickets.categoria_assunto chega vazia, mas a categoria e o
+# assunto ESTÃO no banco: cada mudança fica em octadesk_tickets_interacoes.
+# properties_changes (topicGroupName / topicName). Assim as 3 exclusões do
+# manual (Cancelado/Spam, status Cancelado, assunto Tarefa) valem iguais ao XLSX.
+#
+# CONFERÊNCIA (13/10/2026, mesmo período do XLSX de 29/09 — 21/03 a 26/09):
+#   primeira resposta igual ao XLSX (±2 min) em 99,1% dos tickets válidos;
+#   categoria e assunto iguais em 97%.
+#   SLA <4h úteis   XLSX          banco
+#     Vivianne      302/446       290/432
+#     Natália       233/314       238/314
+#     Gardênia      148/257       151/258
+#     Tauise          9/41         12/41
+#     Caio          981/2672      946/2587
+# As AVALIAÇÕES de ticket não estão no banco: continuam no XLSX de avaliações.
+COL_TKT_NUM = "Número do ticket"
+COL_TKT_IN = "Data de entrada"
+COL_TKT_RESP_T = "Data da primeira resposta"
+COL_TKT_RESP = "Responsável do ticket"
+COL_TKT_STATUS = "Status do ticket"
+COL_TKT_CAT = "Categoria de assunto do ticket"
+COL_TKT_ASSUNTO = "Assunto do ticket"
+
+
+def extract_tickets_dw(*, dias: int = 180, verbose: bool = True) -> pd.DataFrame:
+    """Tickets do Octadesk pelo `dw_trk`, no contrato do XLSX."""
+    from db_connection import query as _query  # type: ignore
+
+    df = _query(
+        """
+        SELECT t.number,
+               (t.created_at AT TIME ZONE 'America/Sao_Paulo') AS entrada,
+               (SELECT min(i.created_at) AT TIME ZONE 'America/Sao_Paulo'
+                  FROM octadesk_tickets_interacoes i
+                 WHERE i.ticket_number = t.number
+                   AND COALESCE(i.author_email, '') <> COALESCE(t.requester_email, '')
+                   AND (NULLIF(btrim(regexp_replace(COALESCE(i.content, ''), '<[^>]+>', '', 'g')), '') IS NOT NULL
+                        OR i.properties_changes::text LIKE '%%"status"%%')) AS primeira_resposta,
+               t.assigned_name, t.status_name,
+               (SELECT i.properties_changes->>'topicGroupName' FROM octadesk_tickets_interacoes i
+                 WHERE i.ticket_number = t.number AND i.properties_changes::text LIKE '%%topicGroupName%%'
+                 ORDER BY i.created_at DESC LIMIT 1) AS categoria,
+               (SELECT i.properties_changes->>'topicName' FROM octadesk_tickets_interacoes i
+                 WHERE i.ticket_number = t.number AND i.properties_changes::text LIKE '%%"topicName"%%'
+                 ORDER BY i.created_at DESC LIMIT 1) AS assunto
+        FROM octadesk_tickets t
+        WHERE t.created_at >= now() - make_interval(days => %s)
+        """,
+        (dias,),
+    )
+    out = pd.DataFrame({
+        COL_TKT_NUM: df["number"],
+        COL_TKT_IN: pd.to_datetime(df["entrada"], errors="coerce"),
+        COL_TKT_RESP_T: pd.to_datetime(df["primeira_resposta"], errors="coerce"),
+        COL_TKT_RESP: df["assigned_name"],
+        COL_TKT_STATUS: df["status_name"],
+        COL_TKT_CAT: df["categoria"],
+        COL_TKT_ASSUNTO: df["assunto"],
+    })
+    if verbose:
+        print(f"  [octadesk-dw] octadesk_tickets: {len(out)} tickets nos últimos {dias}d · "
+              f"{int(out[COL_TKT_RESP_T].notna().sum())} com primeira resposta · "
+              f"{int(out[COL_TKT_CAT].notna().sum())} com categoria")
+    return out

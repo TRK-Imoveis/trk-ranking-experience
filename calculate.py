@@ -1728,38 +1728,71 @@ def calc_renovacao_abertura(df_renov: pd.DataFrame,
             "campos_divergentes": divergem}
 
 
-def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
-                              ref: Optional[datetime] = None) -> dict:
+BO_PEND_META_H = 24         # sem Troca de Titularidade — horas ÚTEIS
+BO_PEND_TROCA_META_H = 50   # com Troca de Titularidade — horas ÚTEIS (= 5d úteis)
+
+
+def bo_pendencia_cards(df_bo: pd.DataFrame, assessora: str,
+                       ref: Optional[datetime] = None):
     """
-    Assessora · BackOffice · 1 indicador · peso 10.
-    Filtro: 'Responsável' contém nome (NÃO 'Criador').
-    10: Pendência Assessor ≤24h ÚTEIS dentro da fase 🚩 Pendência Assessor.
+    Cards do BackOffice da assessora que passaram pela fase 🚩 Pendência Assessor,
+    separados em (sem_troca, com_troca), cada um com a coluna `_horas`.
+    Fonte ÚNICA da nota (calc_assessora_backoffice) e do drilldown
+    (imoveis_builder.assessora_bo_pend*) — mudar a regra aqui muda as duas.
+
+    Filtro por `Responsáveis` (card.assignees Card-level — bate com export XLSX),
+    NÃO pelo field-form `Responsável` (que tem só Vivianne na maioria dos cards).
+
+    Separação igual à da Vivianne: 'Primeira vez que entrou na fase ↪️ Troca de
+    Titularidade' preenchida = COM troca.
+    Os dois lados medem em horas ÚTEIS (08-18h, seg-sex; decisão da gestora,
+    12/08/2026) via horas_uteis_fase, que usa o duration cumulativo do Pipefy e
+    não infla quando o card sai e volta à fase (lastTimeOut-firstTimeIn inflaria
+    em reaberturas). Visita única: idêntico a saída − entrada.
     """
     df = excluir_rascunhos(df_bo)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     nomes = _nome_assessora_alt(assessora)
-    # Filtro por `Responsáveis` (card.assignees Card-level — bate com export XLSX),
-    # NÃO pelo field-form `Responsável` (que tem só Vivianne na maioria dos cards).
     df = df[df["Responsáveis"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
 
+    col_troca = "Primeira vez que entrou na fase ↪️ Troca de Titularidade"
     col_in = "Primeira vez que entrou na fase 🚩 Pendência Assessor"
+    col_lastin = "Última vez que entrou na fase 🚩 Pendência Assessor"
     col_out = "Última vez que saiu da fase 🚩 Pendência Assessor"
     col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
-    # Usa duration cumulativo (Pipefy phases_history.duration). lastTimeOut-firstTimeIn
-    # inflaria o tempo quando o card sai e volta para a fase (reaberturas).
-    # HORAS ÚTEIS (decisão da gestora, 12/08/2026): metas curtas em horas
-    # corridas empurravam gente a trabalhar fora do expediente por medo do
-    # ranking. Medida em horas úteis (08-18h, seg-sex), quem entrega segunda
-    # de manhã é medido igual a quem entrega quinta à tarde.
-    col_lastin = "Última vez que entrou na fase 🚩 Pendência Assessor"
-    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
-    horas = sub.apply(lambda r: horas_uteis_fase(
-        r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur)), axis=1)
-    ok = int((horas <= _meta_tol(24)).sum())
-    ind = score_indicador(ok, len(sub), 10)
-    ind["nome"] = "BackOffice — Pendência <24h"
 
-    return {"nota": nota_processo([ind]), "indicadores": [ind]}
+    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
+    com_troca = sub[col_troca].notna()
+    sem, com = sub[~com_troca].copy(), sub[com_troca].copy()
+    # list comprehension (não DataFrame.apply): df vazio devolveria DataFrame, não Series.
+    for d in (sem, com):
+        d["_horas"] = [horas_uteis_fase(r[col_in], r.get(col_lastin), r[col_out], r.get(col_dur))
+                       for _, r in d.iterrows()]
+    return sem, com
+
+
+def calc_assessora_backoffice(df_bo: pd.DataFrame, assessora: str,
+                              ref: Optional[datetime] = None) -> dict:
+    """
+    Assessora · BackOffice · 2 indicadores · peso 5 + 5.
+    Filtro: 'Responsáveis' contém nome. Separação por Troca de Titularidade
+    (mesma da Vivianne) — ver bo_pendencia_cards.
+    - SEM troca → Pendência <24h ÚTEIS (peso 5)
+    - COM troca → Pendência Troca de Titularidade <5d úteis = 50h úteis (peso 5)
+    Denominador zero → score None (score_indicador); nota_processo ignora.
+    """
+    sem, com = bo_pendencia_cards(df_bo, assessora, ref=ref)
+
+    ok_1 = int((sem["_horas"] <= _meta_tol(BO_PEND_META_H)).sum())
+    ind_1 = score_indicador(ok_1, len(sem), 5)
+    ind_1["nome"] = "BackOffice — Pendência <24h"
+
+    ok_2 = int((com["_horas"] <= BO_PEND_TROCA_META_H).sum())
+    ind_2 = score_indicador(ok_2, len(com), 5)
+    ind_2["nome"] = "BackOffice — Pendência Troca de Titularidade <5d úteis"
+
+    indicadores = [ind_1, ind_2]
+    return {"nota": nota_processo(indicadores), "indicadores": indicadores}
 
 
 def calc_assessora_dirf_darf(df_dirf: pd.DataFrame, assessora: str,

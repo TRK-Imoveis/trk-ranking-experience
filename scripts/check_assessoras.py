@@ -33,7 +33,8 @@ BASELINE = {
         ("Reparos — Pós-venda ≤7d",                          15,  51),
         ("Renovação — Contato >60d",                          3,  13),
         ("Renovação — Assinado antes vencimento",             1,   9),
-        ("BackOffice — Pendência <24h",                       0,   3),
+        ("BackOffice — Pendência <24h",                       3, 4),
+        ("BackOffice — Pendência Troca de Titularidade <5d úteis", 3, 6),
         ("DIRF/DARF — Concluído antes 29/05",                13,  31),
     ],
     "gardenia": [
@@ -46,7 +47,8 @@ BASELINE = {
         ("Reparos — Pós-venda ≤7d",                          15,  43),
         ("Renovação — Contato >60d",                          5,  15),
         ("Renovação — Assinado antes vencimento",             4,   9),
-        ("BackOffice — Pendência <24h",                       0,  11),
+        ("BackOffice — Pendência <24h",                       1, 8),
+        ("BackOffice — Pendência Troca de Titularidade <5d úteis", 7, 23),
         ("DIRF/DARF — Concluído antes 29/05",                 2,   6),
     ],
 }

@@ -150,6 +150,8 @@ META_MAP = {
     "Vistorias com 360º":          "toda vistoria com 360º",
     "Contestações respondidas":    "≤24h úteis",
     # BackOffice
+    # Mais específica ANTES: _meta_from_nome casa por prefixo, na ordem do dict.
+    "BackOffice — Pendência Troca": "≤5d úteis",
     "BackOffice — Pendência":      "≤24h úteis",
     "BackOffice — Concluído":      "≤24h úteis",
     "BackOffice — Troca":          "≤5d úteis",

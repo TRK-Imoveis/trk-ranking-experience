@@ -140,7 +140,8 @@
         { "nome": "Reparos — Pós-venda ≤7d",                            "ok": 15,   "tot": 51,   "pct": 29.4, "peso": 6 },
         { "nome": "Renovação — Contato >60d",                           "ok": 3,    "tot": 13,   "pct": 23.1, "peso": 4 },
         { "nome": "Renovação — Assinado antes vencimento",              "ok": 1,    "tot": 9,    "pct": 11.1, "peso": 6 },
-        { "nome": "BackOffice — Pendência <24h",                        "ok": 0,    "tot": 3,    "pct": 0.0,  "peso": 10 },
+        { "nome": "BackOffice — Pendência <24h",                        "ok": 3, "tot": 4, "pct": 75.0, "peso": 5 },
+        { "nome": "BackOffice — Pendência Troca de Titularidade <5d úteis", "ok": 2, "tot": 5, "pct": 40.0, "peso": 5 },
         { "nome": "DIRF/DARF — Concluído antes 29/05",                  "ok": 13,   "tot": 31,   "pct": 41.9, "peso": 10 }
       ]
     },
@@ -178,7 +179,8 @@
         { "nome": "Reparos — Pós-venda ≤7d",                            "ok": 15,   "tot": 43,   "pct": 34.9, "peso": 6 },
         { "nome": "Renovação — Contato >60d",                           "ok": 5,    "tot": 15,   "pct": 33.3, "peso": 4 },
         { "nome": "Renovação — Assinado antes vencimento",              "ok": 4,    "tot": 9,    "pct": 44.4, "peso": 6 },
-        { "nome": "BackOffice — Pendência <24h",                        "ok": 0,    "tot": 11,   "pct": 0.0,  "peso": 10 },
+        { "nome": "BackOffice — Pendência <24h",                        "ok": 0, "tot": 3, "pct": 0.0, "peso": 5 },
+        { "nome": "BackOffice — Pendência Troca de Titularidade <5d úteis", "ok": 7, "tot": 19, "pct": 36.8, "peso": 5 },
         { "nome": "DIRF/DARF — Concluído antes 29/05",                  "ok": 2,    "tot": 6,    "pct": 33.3, "peso": 10 }
       ]
     }

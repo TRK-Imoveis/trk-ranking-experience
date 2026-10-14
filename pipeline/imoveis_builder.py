@@ -37,6 +37,7 @@ from calculate import (
     avaliar_eficiencia_vistoria,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
+    bo_pendencia_cards, BO_PEND_META_H, BO_PEND_TROCA_META_H,
 )
 from datetime import datetime, timedelta
 
@@ -1031,29 +1032,30 @@ def assessora_ren_ass(df_renov: pd.DataFrame, assessora: str, ref: pd.Timestamp)
     }
 
 
-def assessora_bo(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
-    """BackOffice · Pendência Assessor <24h CORRIDO. Filtro 'Responsáveis' (Card-level)."""
-    df = excluir_rascunhos(df_bo)
-    df = aplicar_cutoff(df, "Criado em", ref=ref)
-    nomes = _nome_assessora_alt(assessora)
-    df = df[df["Responsáveis"].apply(lambda v: _contem_qualquer(v, nomes))].copy()
-    col_in = "Primeira vez que entrou na fase 🚩 Pendência Assessor"
-    col_out = "Última vez que saiu da fase 🚩 Pendência Assessor"
-    col_dur = "Tempo total na fase 🚩 Pendência Assessor (dias)"
-    # Usa duration cumulativo (espelha calc_assessora_backoffice — evita inflação por reabertura).
-    sub = df.dropna(subset=[col_in, col_out, col_dur]).copy()
-    horas = sub.apply(lambda r: horas_uteis_fase(
-        r.get(col_in), r.get("Última vez que entrou na fase 🚩 Pendência Assessor"),
-        r.get(col_out), r.get(col_dur)), axis=1)
-    rows = []
-    for (_, r), h in zip(sub.iterrows(), horas):
-        rows.append([_im_label(r), r["Título"], _fmt_horas(h), "✓" if h <= _meta_tol(24) else "✗"])
+def _assessora_bo_drill(sub: pd.DataFrame, assessora: str, meta_h: float, rotulo: str) -> dict:
+    """Linhas do drilldown de Pendência a partir de calculate.bo_pendencia_cards
+    (mesma fonte da nota — não recalcular horas aqui)."""
+    rows = [[_im_label(r), r["Título"], _fmt_horas(r["_horas"]),
+             "✓" if r["_horas"] <= meta_h else "✗"] for _, r in sub.iterrows()]
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"{_label_pessoa(assessora)} — BackOffice: Pendência <24h ({ok}/{len(sub)})",
+        "titulo": f"{_label_pessoa(assessora)} — BackOffice: {rotulo} ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Título", "Tempo", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
+
+
+def assessora_bo_pend(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """BackOffice · Pendência <24h ÚTEIS — cards SEM Troca de Titularidade."""
+    sem, _ = bo_pendencia_cards(df_bo, assessora, ref=ref)
+    return _assessora_bo_drill(sem, assessora, _meta_tol(BO_PEND_META_H), "Pendência <24h")
+
+
+def assessora_bo_pend_troca(df_bo: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
+    """BackOffice · Pendência Troca de Titularidade <5d ÚTEIS (=50h) — cards COM Troca."""
+    _, com = bo_pendencia_cards(df_bo, assessora, ref=ref)
+    return _assessora_bo_drill(com, assessora, BO_PEND_TROCA_META_H,
+                               "Pendência Troca de Titularidade <5d úteis")
 
 
 def assessora_dirf(df_dirf: pd.DataFrame, assessora: str, ref: pd.Timestamp) -> dict:
@@ -1246,7 +1248,7 @@ def _ou_vazio(fn, df, pid: str, *args) -> dict:
 
 
 def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict:
-    """Gera 14 chaves para uma assessora ('nat', 'gar' ou 'tau') aplicando o pid correspondente."""
+    """Gera 15 chaves para uma assessora ('nat', 'gar' ou 'tau') aplicando o pid correspondente."""
     return {
         f"{prefix}_cadm":          _ou_vazio(assessora_cadm, dfs["cont_adm"], pid, ref),
         f"{prefix}_cadm_bonus":    _ou_vazio(assessora_cadm_bonus, dfs["cont_adm"], pid, ref),
@@ -1262,7 +1264,8 @@ def _assessora_keys(prefix: str, pid: str, dfs: dict, ref: pd.Timestamp) -> dict
         f"{prefix}_ren_cont":      _ou_vazio(assessora_ren_cont, dfs["renovacao"], pid, ref),
         f"{prefix}_ren_ass":       _ou_vazio(assessora_ren_ass, dfs["renovacao"], pid, ref),
         f"{prefix}_ren_salvos":    _ou_vazio(assessora_ren_salvos, dfs["renovacao"], pid, ref),
-        f"{prefix}_bo":            _ou_vazio(assessora_bo, dfs["backoffice"], pid, ref),
+        f"{prefix}_bo_pend":       _ou_vazio(assessora_bo_pend, dfs["backoffice"], pid, ref),
+        f"{prefix}_bo_pend_troca": _ou_vazio(assessora_bo_pend_troca, dfs["backoffice"], pid, ref),
         f"{prefix}_dirf":          _ou_vazio(assessora_dirf, dfs["dirf_darf"], pid, ref),
     }
 
