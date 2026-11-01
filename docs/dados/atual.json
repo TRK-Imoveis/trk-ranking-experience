@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-11-01T15:21:29.839242Z",
-    "ref": "2026-11-01T15:21:01.390309+00:00",
+    "geradoEm": "2026-11-01T15:37:05.387200Z",
+    "ref": "2026-11-01T15:36:32.015576+00:00",
     "fonte": "api",
     "pipefy_fonte": "banco",
     "etl_ultima_carga": "2026-10-31T22:01:12.518839",
@@ -298,7 +298,7 @@
         "Vistorias": null,
         "BackOffice": 6.25,
         "DIRF/DARF": 6.452,
-        "WhatsApp": 8.979,
+        "WhatsApp": 8.976,
         "Ticket": 7.919
       },
       "detalhes": [
@@ -420,11 +420,11 @@
           "meta": "antes de 29/05/2026"
         },
         {
-          "ok": 1081,
-          "tot": 1288,
+          "ok": 1078,
+          "tot": 1285,
           "pct": 83.9,
           "peso": 6,
-          "score": 5.036,
+          "score": 5.033,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -690,7 +690,7 @@
         "Vistorias": null,
         "BackOffice": null,
         "DIRF/DARF": null,
-        "WhatsApp": 6.898,
+        "WhatsApp": 6.899,
         "Ticket": 5.366
       },
       "detalhes": [
@@ -759,10 +759,10 @@
         },
         {
           "ok": 1057,
-          "tot": 2094,
+          "tot": 2093,
           "pct": 50.5,
           "peso": 6,
-          "score": 3.029,
+          "score": 3.03,
           "nome": "WhatsApp — Resposta ≤5min",
           "meta": "≤5min"
         },
@@ -7456,7 +7456,7 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1057/2094",
+          "1057/2093",
           "50.5%"
         ],
         [
@@ -7496,7 +7496,7 @@
       "rows": [
         [
           "Resposta ≤5min",
-          "1081/1288",
+          "1078/1285",
           "83.9%"
         ],
         [
@@ -12118,11 +12118,11 @@
           "titulo": "Indicadores · WhatsApp",
           "full": true,
           "labels": [
-            "Natália Resposta ≤5min (1081/1288)",
+            "Natália Resposta ≤5min (1078/1285)",
             "Natália Avaliações positivas (209/212)",
             "Gardênia Resposta ≤5min (1456/1842)",
             "Gardênia Avaliações positivas (311/323)",
-            "Caio Resposta ≤5min (1057/2094)",
+            "Caio Resposta ≤5min (1057/2093)",
             "Caio Avaliações positivas (177/183)",
             "Tauise Resposta ≤5min (353/563)",
             "Tauise Avaliações positivas (57/58)"
@@ -12158,10 +12158,10 @@
             "Caio"
           ],
           "data": [
-            8.979,
+            8.976,
             8.594,
             7.693,
-            6.898
+            6.899
           ],
           "colors": [
             "#000",
@@ -12176,8 +12176,8 @@
           "nome": "Resposta ≤5min",
           "resp": "Natália",
           "meta": "≤5min",
-          "ok": 1081,
-          "tot": 1288,
+          "ok": 1078,
+          "tot": 1285,
           "pct": 83.9
         },
         {
@@ -12209,7 +12209,7 @@
           "resp": "Caio",
           "meta": "≤5min",
           "ok": 1057,
-          "tot": 2094,
+          "tot": 2093,
           "pct": 50.5
         },
         {
@@ -12248,7 +12248,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 6563 cards no período."
+          "txt": "Volume de 6559 cards no período."
         }
       ]
     }
