@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-11-01T15:37:05.387200Z",
-    "ref": "2026-11-01T15:36:32.015576+00:00",
+    "geradoEm": "2026-11-01T15:42:56.362934Z",
+    "ref": "2026-11-01T15:42:31.321921+00:00",
     "fonte": "api",
     "pipefy_fonte": "banco",
     "etl_ultima_carga": "2026-10-31T22:01:12.518839",
@@ -474,7 +474,7 @@
       "id": "gardenia",
       "nome": "Gardênia",
       "cargo": "Assessora",
-      "nota": 5.98,
+      "nota": 5.99,
       "bonus": 5,
       "bonus_proc": "Cont. ADM",
       "bonus_por_proc": {
@@ -495,7 +495,7 @@
         "BackOffice": 2.368,
         "DIRF/DARF": 5.0,
         "WhatsApp": 8.594,
-        "Ticket": 7.288
+        "Ticket": 7.301
       },
       "detalhes": [
         {
@@ -635,10 +635,10 @@
         },
         {
           "ok": 134,
-          "tot": 230,
-          "pct": 58.3,
+          "tot": 229,
+          "pct": 58.5,
           "peso": 5,
-          "score": 2.913,
+          "score": 2.926,
           "nome": "Tickets — SLA <4h úteis",
           "meta": "≤4h úteis"
         },
@@ -7556,8 +7556,8 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "134/230",
-          "58.3%"
+          "134/229",
+          "58.5%"
         ],
         [
           "Avaliações positivas",
@@ -11942,7 +11942,7 @@
             "Vivianne SLA <4h úteis (364/453)",
             "Natália SLA <4h úteis (187/232)",
             "Natália Avaliações positivas (14/18)",
-            "Gardênia SLA <4h úteis (134/230)",
+            "Gardênia SLA <4h úteis (134/229)",
             "Gardênia Avaliações positivas (7/8)",
             "Caio SLA <4h úteis (812/2459)",
             "Caio Avaliações positivas (11/13)",
@@ -11953,7 +11953,7 @@
             80.4,
             80.6,
             77.8,
-            58.3,
+            58.5,
             87.5,
             33.0,
             84.6,
@@ -11985,7 +11985,7 @@
           "data": [
             8.035,
             7.919,
-            7.288,
+            7.301,
             6.771,
             5.366
           ],
@@ -12028,8 +12028,8 @@
           "resp": "Gardênia",
           "meta": "≤4h úteis",
           "ok": 134,
-          "tot": 230,
-          "pct": 58.3
+          "tot": 229,
+          "pct": 58.5
         },
         {
           "nome": "Avaliações positivas",
@@ -12083,7 +12083,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 3510 cards no período."
+          "txt": "Volume de 3509 cards no período."
         }
       ]
     },
