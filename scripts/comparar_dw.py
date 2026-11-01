@@ -69,6 +69,17 @@ def auditar_colunas(pipe: str, verbose: bool = True) -> dict:
 
     # Valores, card a card, nas colunas comuns
     if "id" in a.columns and "id" in b.columns:
+        # Dedup por id ANTES de indexar (01/11/2026): o cache da API pode trazer o
+        # mesmo card em duas páginas quando o pipe se mexe durante a busca
+        # (Inadimplência). Com índice duplicado, `ja.loc[alvo] != jb.loc[alvo]`
+        # estoura "Can only compare identically-labeled Series" e derruba a rodada
+        # inteira — foi o que parou a comparação de 14/10 no 8º pipe.
+        dup_a = int(a["id"].astype(str).duplicated().sum())
+        dup_b = int(b["id"].astype(str).duplicated().sum())
+        if dup_a or dup_b:
+            print(f"  ℹ️  ids duplicados removidos (mantido o último): API {dup_a} · banco {dup_b}")
+        a = a[~a["id"].astype(str).duplicated(keep="last")]
+        b = b[~b["id"].astype(str).duplicated(keep="last")]
         ja = a.set_index(a["id"].astype(str))
         jb = b.set_index(b["id"].astype(str))
         comuns = sorted(set(ja.index) & set(jb.index))

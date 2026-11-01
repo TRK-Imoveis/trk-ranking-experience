@@ -97,14 +97,34 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
         "reparos", "renovacao", "inadimplencia", "backoffice", "dirf_darf",
         "vistorias", "contestacoes",
     ]
-    if fonte == "banco":
-        from pipeline.extract_dw import extract_pipe as _extract  # import tardio: só quem usa precisa do psycopg2
-        if verbose:
-            print("\n[fonte] dw_trk (painel-sombra) — extract_dw")
-        dfs = {k: _extract(k, use_cache=use_cache, verbose=verbose) for k in pipes}
-    else:
+    # PIPEFY DO BANCO (14/10/2026) — produção lê os 12 pipes do dw_trk.
+    # extract_dw devolve o MESMO contrato de colunas do extract_pipefy; o
+    # comparador scripts/comparar_dw.py deu 50/50 em 18/08 e foi reconferido
+    # em 14/10 antes de virar esta chave. Controlado por
+    # feature_flags.json::pipefy_do_banco. Se o banco falhar, cai na API do
+    # Pipefy e AVISA — nunca publica em silêncio com fonte diferente da esperada.
+    # No painel-sombra (--fonte banco) não há fallback: sem banco não há o que mostrar.
+    from calculate import FEATURE_FLAGS
+    dfs: dict = {}
+    pipefy_fonte = "api"
+    if FEATURE_FLAGS.get("pipefy_do_banco", False) or fonte == "banco":
+        try:
+            from pipeline.extract_dw import extract_pipe as _extract_dw  # import tardio: só quem usa precisa do psycopg2
+            if verbose:
+                print("\n[pipefy] lendo os 12 pipes do dw_trk (extract_dw)…")
+            dfs = {k: _extract_dw(k, use_cache=use_cache, verbose=verbose) for k in pipes}
+            pipefy_fonte = "banco"
+        except Exception as exc:
+            if fonte == "banco":
+                raise
+            print(f"⚠️  [pipefy] CAIU DE VOLTA na API — os indicadores do Pipefy desta rodada "
+                  f"vieram da API, não do banco. {exc.__class__.__name__}: {exc}")
+            import traceback; traceback.print_exc()
+            dfs = {}
+    if not dfs:
         # Paralelo ou em fila conforme feature_flags.json::pipefy_workers (23/09/2026)
         dfs = extract_pipes(pipes, use_cache=use_cache, verbose=verbose)
+    dfs["_pipefy_fonte"] = pipefy_fonte
 
     if verbose:
         print("\n[octadesk] carregando arquivos locais…")
@@ -122,7 +142,6 @@ def carregar_dataframes(*, use_cache: bool = True, verbose: bool = True,
     # Controlado por config/feature_flags.json::whatsapp_do_banco.
     # Se o banco falhar, cai de volta no XLSX e AVISA — nunca publica em silêncio
     # com fonte diferente da esperada.
-    from calculate import FEATURE_FLAGS
     if FEATURE_FLAGS.get("whatsapp_do_banco", False) or fonte == "banco":
         try:
             from pipeline.extract_octadesk_dw import extract_conversas_dw
@@ -425,6 +444,7 @@ def build_atual(dfs: dict, *, ref: pd.Timestamp, bonus_n_vivianne: int,
             # mostra essa hora na tela: sem ela não dá para distinguir
             # "o banco calculou diferente" de "o banco está com dado de quinta".
             "fonte": dfs.get("_fonte", "api"),
+            "pipefy_fonte": dfs.get("_pipefy_fonte", "api"),
             "etl_ultima_carga": dfs.get("_etl_ultima_carga"),
             "octadesk_disponivel": bool(len(dfs.get("conversas", pd.DataFrame()))) or
                                     bool(len(dfs.get("tickets", pd.DataFrame()))),
@@ -623,7 +643,7 @@ def main(argv: list[str]) -> None:
           f"ref={ref.isoformat()}")
     dfs = carregar_dataframes(use_cache=use_cache, verbose=True, fonte=fonte)
     dfs["_fonte"] = fonte
-    if fonte == "banco":
+    if dfs.get("_pipefy_fonte") == "banco":
         try:
             from pipeline.extract_dw import ultima_carga_etl
             dfs["_etl_ultima_carga"] = ultima_carga_etl()
@@ -695,6 +715,25 @@ def main(argv: list[str]) -> None:
         degradado.append("data_distrato (Imobiliar) → Rescisão Loc. cai no campo do Pipefy")
     if not dfs.get("repasses"):
         degradado.append("data_retirada_repasse (Imobiliar) → Vivianne cai no repasse ESTIMADO")
+    # TRAVA DE DADO VELHO (14/10/2026)
+    # Com o Pipefy vindo do banco, o modo de falha não é número errado — é
+    # número VELHO sem aviso (em ago/2026 o ETL ficou ~2 semanas parado e nada
+    # na tela denunciava). Não publica se a última carga do ETL do Pipefy tiver
+    # mais de feature_flags.json::etl_max_horas (padrão 36h) ou se a hora da
+    # carga não puder ser lida.
+    if dfs.get("_pipefy_fonte") == "banco":
+        from calculate import FEATURE_FLAGS
+        max_h = float(FEATURE_FLAGS.get("etl_max_horas", 36))
+        carga = dfs.get("_etl_ultima_carga")
+        if carga is None:
+            degradado.append("hora da última carga do ETL do Pipefy indisponível → não dá para saber se o banco está fresco")
+        else:
+            ts = pd.Timestamp(carga)
+            ts = ts.tz_localize("America/Sao_Paulo") if ts.tzinfo is None else ts
+            idade_h = (pd.Timestamp.now(tz="UTC") - ts).total_seconds() / 3600
+            if idade_h > max_h:
+                degradado.append(f"ETL do Pipefy parado há {idade_h:.1f}h (limite {max_h:g}h) → "
+                                 f"números do banco estariam velhos")
     if degradado and "--permitir-degradado" not in argv:
         print("\n" + "=" * 70)
         print("❌ RODADA ABORTADA — fonte de dados indisponível")
@@ -702,7 +741,7 @@ def main(argv: list[str]) -> None:
             print(f"   • {d}")
         print("\n   atual.json NÃO foi gravado (o anterior continua intacto).")
         print("   As notas desta rodada NÃO seriam comparáveis com a edição publicada.")
-        print("   Rode pelo Windows, onde o banco Imobiliar responde.")
+        print("   Rode pelo Windows (ou na VM), onde os bancos respondem.")
         print("=" * 70 + "\n")
         raise SystemExit(2)
 
