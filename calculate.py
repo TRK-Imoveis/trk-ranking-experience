@@ -64,6 +64,13 @@ DIRF_DARF_ANO_BASE = 2025
 # Vale para os 7 pipes de assessora + WhatsApp + Tickets. Gardênia não muda.
 # ─────────────────────────────────────────────────────────────────────
 DATA_CORTE_TAUISE = pd.Timestamp("2026-09-01", tz="America/Sao_Paulo")
+# Exceções ao corte: cards criados ANTES de 01/09 que a Tauise conduziu e que
+# contam para ela (decisão da gestora, 06/11/2026). Chave = pipe, valor = card_id.
+#   Renovação · IM11 (SQS 114 BL B APTO 202)  → 1406330356
+#   Renovação · IM686 (SCLS 414 BL C LOJA 35) → 1406330396
+EXCECOES_CORTE_TAUISE = {
+    "renovacao": {"1406330356", "1406330396"},
+}
 CORTE_POR_PESSOA = {"tauise": "depois", "natalia": "antes"}
 PIPES_ASSESSORA = ("cont_adm", "rescisao_adm", "rescisao_loc", "reparos",
                    "renovacao", "backoffice", "dirf_darf")
@@ -126,17 +133,22 @@ def recortar_por_pessoa(dfs: dict, pid: str) -> dict:
     if lado is None:
         return dfs
 
-    def _corta(df: pd.DataFrame, coluna: str) -> pd.DataFrame:
+    def _corta(df: pd.DataFrame, coluna: str, excecoes: frozenset = frozenset()) -> pd.DataFrame:
         if df is None or len(df) == 0 or coluna not in df.columns:
             return df
         col = pd.to_datetime(df[coluna], errors="coerce", utc=True)
         mask = (col >= DATA_CORTE_TAUISE) if lado == "depois" else (col < DATA_CORTE_TAUISE)
+        if excecoes and "id" in df.columns:
+            exc = df["id"].astype(str).isin(excecoes)
+            # Exceção vai para a Tauise e sai da Natália, qualquer que seja a data.
+            mask = (mask | exc) if lado == "depois" else (mask & ~exc)
         return df[mask].copy()
 
     out = dict(dfs)
     for pipe in PIPES_ASSESSORA:
         if pipe in out:
-            out[pipe] = _corta(out[pipe], "Criado em")
+            out[pipe] = _corta(out[pipe], "Criado em",
+                               frozenset(EXCECOES_CORTE_TAUISE.get(pipe, ())))
     # Octadesk: conversas pelo "Criado em" (vem do dw), tickets pela "Data de entrada".
     # Avaliações de ticket não têm data no XLSX — o filtro por nome já separa
     # as duas (a Tauise só avalia depois de 24/08).
