@@ -33,7 +33,7 @@ from calculate import (
     RENOV_ANTECEDENCIA_MIN, _renov_nao_renova,
     _whatsapp_indicadores, _tickets_filtrados, _ticket_sla_ind, _ticket_aval_ind,
     horas_uteis, horas_uteis_fase, horas_corridas, dias_corridos,
-    primeira_saida_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol,
+    primeira_saida_fase, CUTOFF_CONT_ADM_CAIO_FIXO, _meta_tol, dias_calendario,
     avaliar_eficiencia_vistoria,
     _expected_phase_desocupacao, _now_ref, _nome_assessora_alt, _contem_qualquer, _as_list,
     DIRF_DARF_ANO_BASE, DIRF_DARF_CUTOFF,
@@ -581,11 +581,12 @@ def vivi_neg(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
     col_venc = "Vencimento 1º Boleto:"
     col_neg = "Primeira vez que entrou na fase Negativação (No 8º dia de atraso)"
     sub = df.dropna(subset=[col_venc, col_neg]).copy()
-    dias = (sub[col_neg] - sub[col_venc]).dt.total_seconds() / 86400
+    # Dias de CALENDÁRIO (gestora, 06/11/2026) — mesma conta do calculate.py.
+    dias = [dias_calendario(v, n) for v, n in zip(sub[col_venc], sub[col_neg])]
     rows = []
     for (_, r), d in zip(sub.iterrows(), dias):
         rows.append([_im_label(r), _endereco_from_row(r),
-                     _fmt_dias(d, signed=True),
+                     f"{d}d",
                      "✓" if d <= 9 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {

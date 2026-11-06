@@ -273,6 +273,26 @@ def _to_bsb_naive(dt) -> Optional[pd.Timestamp]:
     return ts.tz_convert(TZ_BSB).tz_localize(None)
 
 
+def dias_calendario(venc, fim) -> Optional[int]:
+    """
+    Dias de CALENDÁRIO entre um campo de data e uma entrada de fase (decisão da
+    gestora, 06/11/2026 — Negativação). Ignora a hora: negativar no 9º dia à
+    tarde conta 9, não 9,6.
+
+    • venc: campo `date` do Pipefy → meia-noite UTC; o dia certo é o dia em UTC
+      (converter para Brasília jogaria para o dia anterior).
+    • fim: instante real da entrada na fase → dia em horário de Brasília.
+    Valores naive são tratados como já no dia correto.
+    """
+    if venc is None or fim is None or pd.isna(venc) or pd.isna(fim):
+        return None
+    v = pd.Timestamp(venc)
+    if v.tzinfo is not None:
+        v = v.tz_convert("UTC").tz_localize(None)
+    f = _to_bsb_naive(fim)
+    return int((f.normalize() - v.normalize()).days)
+
+
 # ─────────────────────────────────────────────────────────────────────
 # FERIADOS — dia inteiro fora da janela de horas úteis (decisão da gestora, 22/09/2026)
 # Nacionais + DF. Carnaval e Corpus Christi (ponto facultativo) CONTINUAM dia útil.
@@ -1129,7 +1149,9 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     #    Até 06/11 a regra era faixa 7-9d e o IM63 (6,8d) contava ✗.
     col_neg = "Primeira vez que entrou na fase Negativação (No 8º dia de atraso)"
     sub_9 = df.dropna(subset=[col_venc, col_neg]).copy()
-    dias_9 = (sub_9[col_neg] - sub_9[col_venc]).dt.total_seconds() / 86400
+    # Dias de CALENDÁRIO (gestora, 06/11/2026): no 9º dia à tarde ainda é 9º dia.
+    dias_9 = pd.Series([dias_calendario(v, n) for v, n in zip(sub_9[col_venc], sub_9[col_neg])],
+                       index=sub_9.index)
     ok_9 = int((dias_9 <= 9).sum())
     ind_9 = score_indicador(ok_9, len(sub_9), 1.25)
     ind_9["nome"] = "Inadimplência — Negativação ≤9d"
