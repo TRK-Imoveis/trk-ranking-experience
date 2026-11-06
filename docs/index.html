@@ -184,6 +184,16 @@ body{
   font-variant-numeric:tabular-nums;
 }
 
+.hero-period-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.hero-updated{
+  font-family:var(--font-title);
+  font-size:9px;font-weight:300;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--trk-gray-400);
+  font-variant-numeric:tabular-nums;
+}
+.hero-updated:empty{display:none}
+
 /* ── MAIN ── */
 .main{
   width:100%;padding:20px 40px 16px;
@@ -1008,7 +1018,10 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
       <div class="hero-sub">13ª Edição · Composição da nota por processo · 6 colaboradores avaliados</div>
     </div>
     <div class="hero-right">
-      <div class="hero-period-top" id="hero-period-top">180 dias</div>
+      <div class="hero-period-wrap">
+        <div class="hero-period-top" id="hero-period-top">180 dias</div>
+        <div class="hero-updated" id="hero-updated"></div>
+      </div>
       <div class="kpi-row">
         <div class="kpi"><div class="kpi-v">13</div><div class="kpi-l">processos</div></div>
         <div class="kpi-sep"></div>
@@ -1224,6 +1237,17 @@ tr[data-id].tier-evolucao   .av-wrap::before { background: #D0D0D0; } /* Bege <5
     IMOVEIS    = dados.IMOVEIS;
     PROC_RICH  = dados.PROC_RICH;
     BASELINE_9 = dados.BASELINE_9;
+    // Data da última atualização: _meta.geradoEm (UTC) exibido no horário de Brasília.
+    try {
+      const ger = (dados._meta || {}).geradoEm;
+      const elU = document.getElementById('hero-updated');
+      if (ger && elU) {
+        const iso = /Z|[+-]\d\d:?\d\d$/.test(ger) ? ger : ger + 'Z';
+        const f = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo',
+          day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        elU.textContent = 'Atualizado em ' + f.format(new Date(iso)).replace(',', ' ·');
+      }
+    } catch (e) {}
     if (!Array.isArray(PESSOAS) || !PESSOAS.length) {
       throw new Error(ARQ + ' sem PESSOAS — pipeline não rodou ou dados vazios');
     }
