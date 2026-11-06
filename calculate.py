@@ -1079,7 +1079,7 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
 
     7:  Cobrança ≤8h ÚTEIS — VELOCIDADE de abrir o card (peso 2)
     8:  CredPago ≤15d corrido (peso 1,25)
-    9:  Negativação 7-9d corrido (peso 1,25)
+    9:  Negativação ≤9d corrido (peso 1,25) — antecipar não penaliza (gestora, 06/11/2026)
     10: Cobrança dos boletos em atraso — COBERTURA (cobrados / bonus_tot) (peso 2,5)
     11: Recebido antes do repasse — RESULTADO (bonus_n / cobrados) (peso 3) ← maior
 
@@ -1124,13 +1124,15 @@ def calc_vivianne_inadimplencia(df_inad: pd.DataFrame, bonus_n: int = 0,
     ind_8 = score_indicador(ok_8, len(sub_8), 1.25)
     ind_8["nome"] = "Inadimplência — CredPago ≤15d"
 
-    # 9: Negativação 7-9d corrido a partir de Vencimento 1º Boleto:
+    # 9: Negativação ≤9d corrido a partir de Vencimento 1º Boleto:
+    #    Negativar antes do 7º dia NÃO é problema (decisão da gestora, 06/11/2026).
+    #    Até 06/11 a regra era faixa 7-9d e o IM63 (6,8d) contava ✗.
     col_neg = "Primeira vez que entrou na fase Negativação (No 8º dia de atraso)"
     sub_9 = df.dropna(subset=[col_venc, col_neg]).copy()
     dias_9 = (sub_9[col_neg] - sub_9[col_venc]).dt.total_seconds() / 86400
-    ok_9 = int(((dias_9 >= 7) & (dias_9 <= 9)).sum())
+    ok_9 = int((dias_9 <= 9).sum())
     ind_9 = score_indicador(ok_9, len(sub_9), 1.25)
-    ind_9["nome"] = "Inadimplência — Negativação 7-9d"
+    ind_9["nome"] = "Inadimplência — Negativação ≤9d"
 
     # 10: COBERTURA — dos boletos em atraso, em quantos ela abriu cobrança
     ind_10 = score_indicador(int(cobrados), int(bonus_tot), 2.5)

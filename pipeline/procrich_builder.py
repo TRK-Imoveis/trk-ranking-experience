@@ -141,7 +141,7 @@ META_MAP = {
     # Inadimplência
     "Inadimplência — Cobrança":    "≤8h úteis",
     "Inadimplência — CredPago":    "≤15d corrido",
-    "Inadimplência — Negativação": "entre 7 e 9d corrido",
+    "Inadimplência — Negativação": "até 9d corrido",
     "Inadimplência — Cobrança dos boletos em atraso": "abrir cobrança no atraso",
     "Inadimplência — Recebido antes do repasse": "receber antes do repasse",
     # Vistorias (Marinho — nomes sem prefixo "Vistorias —")

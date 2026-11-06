@@ -575,7 +575,7 @@ def vivi_cred(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
 
 
 def vivi_neg(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
-    """Vivianne · Inadimplência · Negativação 7-9d CORRIDO. ATENÇÃO: dupla condição (≥7 E ≤9)."""
+    """Vivianne · Inadimplência · Negativação ≤9d CORRIDO. Antecipar não penaliza (gestora, 06/11/2026)."""
     df = excluir_rascunhos(df_inad)
     df = aplicar_cutoff(df, "Criado em", ref=ref)
     col_venc = "Vencimento 1º Boleto:"
@@ -586,10 +586,10 @@ def vivi_neg(df_inad: pd.DataFrame, ref: pd.Timestamp) -> dict:
     for (_, r), d in zip(sub.iterrows(), dias):
         rows.append([_im_label(r), _endereco_from_row(r),
                      _fmt_dias(d, signed=True),
-                     "✓" if (7 <= d <= 9) else "✗"])
+                     "✓" if d <= 9 else "✗"])
     ok = sum(1 for r in rows if r[3] == "✓")
     return {
-        "titulo": f"Vivianne — Inadim.: Negativação 7-9d ({ok}/{len(sub)})",
+        "titulo": f"Vivianne — Inadim.: Negativação ≤9d ({ok}/{len(sub)})",
         "cols": ["Imóvel", "Endereço", "Dias", "Status"],
         "rows": _ord_pior_primeiro(rows, idx_valor=2),
     }
