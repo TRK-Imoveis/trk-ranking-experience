@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-11-06T12:01:25.142559Z",
-    "ref": "2026-11-06T12:00:53.805768+00:00",
+    "geradoEm": "2026-11-06T12:12:40.108774Z",
+    "ref": "2026-11-06T12:12:01.612447+00:00",
     "fonte": "banco",
     "pipefy_fonte": "banco",
     "etl_ultima_carga": "2026-11-06T10:01:17.987969",
@@ -13,7 +13,7 @@
       "id": "vivianne",
       "nome": "Vivianne Fontes",
       "cargo": "BackOffice · Inadimplência",
-      "nota": 8.09,
+      "nota": 8.13,
       "bonus": 0,
       "bonus_proc": null,
       "bonus_por_proc": {},
@@ -27,7 +27,7 @@
         "Rescisão Loc.": 9.25,
         "Reparos": null,
         "Renovação": 8.194,
-        "Inadimplência": 5.446,
+        "Inadimplência": 5.803,
         "Vistorias": null,
         "BackOffice": 7.249,
         "DIRF/DARF": null,
@@ -126,13 +126,13 @@
           "meta": "≤15d corrido"
         },
         {
-          "ok": 1,
+          "ok": 5,
           "tot": 14,
-          "pct": 7.1,
+          "pct": 35.7,
           "peso": 1.25,
-          "score": 0.089,
-          "nome": "Inadimplência — Negativação 7-9d",
-          "meta": "entre 7 e 9d corrido"
+          "score": 0.446,
+          "nome": "Inadimplência — Negativação ≤9d",
+          "meta": "até 9d corrido"
         },
         {
           "ok": 94,
@@ -187,7 +187,7 @@
         "RescLoc: 90.0%"
       ],
       "pontosAten": [
-        "Inad: 7.1%",
+        "Inad: 35.7%",
         "Inad: 43.8%",
         "Inad: 47.9%",
         "BO: 59.8%"
@@ -5028,7 +5028,7 @@
       ]
     },
     "vivi_neg": {
-      "titulo": "Vivianne — Inadim.: Negativação 7-9d (1/14)",
+      "titulo": "Vivianne — Inadim.: Negativação ≤9d (5/14)",
       "cols": [
         "Imóvel",
         "Endereço",
@@ -5039,86 +5039,86 @@
         [
           "IM#1416975310",
           "1783/1",
-          "26.5d",
+          "26d",
           "✗"
         ],
         [
           "IM1787",
           "FABIANA BORGES LUCAS",
-          "25.6d",
+          "25d",
           "✗"
         ],
         [
           "IM1837",
           "SHIS QL 08 CONJ 4 - CASA 02",
-          "20.5d",
+          "20d",
           "✗"
         ],
         [
           "IM344",
           "INSTITUTO DE CONTRACULTURA LTDA",
-          "14.5d",
+          "14d",
           "✗"
         ],
         [
           "IM1530",
           "CLS 302 A BLOCO B LOJA 1",
-          "12.6d",
+          "12d",
           "✗"
         ],
         [
           "IM1557",
           "SHIS QI Conj 16 Casa 08 – Lago Sul",
-          "11.8d",
+          "11d",
           "✗"
         ],
         [
           "IM1586",
           "CNC 02 Lote 10, 1º e 2º andar – Taguatinga Norte",
-          "11.8d",
+          "11d",
           "✗"
         ],
         [
           "IM558",
           "Nicolas Boer c/ Av. Marquês de São Vicente Bl. B Apto 171 – São Paulo",
-          "11.8d",
+          "11d",
           "✗"
         ],
         [
           "IM1758",
           "REGENTE ALVIM COMERCIO DE ALIMENTOS LTDA",
-          "10.6d",
+          "10d",
           "✗"
         ],
         [
           "IM1211",
           "ASI COMPANY TECNOLOGIA S/A",
-          "9.6d",
-          "✗"
+          "9d",
+          "✓"
         ],
         [
           "IM1758",
           "CLN QUADRA 201 BLOCO C,16 - LJ LJ16[18,20,44,48,111",
-          "9.6d",
-          "✗"
+          "9d",
+          "✓"
         ],
         [
           "IM22",
           "IM22/4",
-          "9.6d",
-          "✗"
+          "9d",
+          "✓"
         ],
         [
           "IM28",
           "SCLN 116 BLOCO F,5 - LJ [LOJA 5 E 75]",
-          "8.8d",
+          "8d",
           "✓"
         ],
         [
           "IM63",
           "IM63",
-          "6.8d",
-          "✗"
+          "6d",
+          "✓"
         ]
       ]
     },
@@ -11639,14 +11639,14 @@
           "labels": [
             "Vivianne Cobrança <8h úteis (213/240)",
             "Vivianne CredPago ≤15d (7/16)",
-            "Vivianne Negativação 7-9d (1/14)",
+            "Vivianne Negativação ≤9d (5/14)",
             "Vivianne Cobrança dos boletos e (94/147)",
             "Vivianne Recebido antes do repa (45/94)"
           ],
           "data": [
             88.8,
             43.8,
-            7.1,
+            35.7,
             63.9,
             47.9
           ],
@@ -11665,7 +11665,7 @@
             "Vivianne"
           ],
           "data": [
-            5.446
+            5.803
           ],
           "colors": [
             "#000"
@@ -11690,12 +11690,12 @@
           "pct": 43.8
         },
         {
-          "nome": "Negativação 7-9d",
+          "nome": "Negativação ≤9d",
           "resp": "Vivianne",
-          "meta": "entre 7 e 9d corrido",
-          "ok": 1,
+          "meta": "até 9d corrido",
+          "ok": 5,
           "tot": 14,
-          "pct": 7.1
+          "pct": 35.7
         },
         {
           "nome": "Cobrança dos boletos em atraso",
@@ -11721,7 +11721,7 @@
         },
         {
           "tipo": "neg",
-          "txt": "Vivianne Negativação 7-9d: 7.1% — gargalo do processo."
+          "txt": "Vivianne Negativação ≤9d: 35.7% — gargalo do processo."
         },
         {
           "tipo": "neu",
