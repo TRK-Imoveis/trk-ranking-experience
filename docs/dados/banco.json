@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-11-06T12:12:40.108774Z",
-    "ref": "2026-11-06T12:12:01.612447+00:00",
+    "geradoEm": "2026-11-06T12:52:33.664497Z",
+    "ref": "2026-11-06T12:52:04.187986+00:00",
     "fonte": "banco",
     "pipefy_fonte": "banco",
     "etl_ultima_carga": "2026-11-06T10:01:17.987969",
@@ -670,7 +670,7 @@
       "id": "tauise",
       "nome": "Tauise Oliveira",
       "cargo": "Assessora",
-      "nota": 3.46,
+      "nota": 3.65,
       "bonus": 0,
       "bonus_proc": null,
       "bonus_por_proc": {},
@@ -683,7 +683,7 @@
         "Cont. Locação": null,
         "Rescisão Loc.": 2.0,
         "Reparos": 5.526,
-        "Renovação": null,
+        "Renovação": 5.0,
         "Inadimplência": null,
         "Vistorias": null,
         "BackOffice": 0.0,
@@ -765,20 +765,20 @@
           "meta": "≤7d corrido"
         },
         {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
+          "ok": 1,
+          "tot": 2,
+          "pct": 50.0,
           "peso": 4,
-          "score": null,
+          "score": 2.0,
           "nome": "Renovação — Contato >60d",
           "meta": ">60d antes do venc"
         },
         {
-          "ok": 0,
-          "tot": 0,
-          "pct": null,
+          "ok": 1,
+          "tot": 2,
+          "pct": 50.0,
           "peso": 6,
-          "score": null,
+          "score": 3.0,
           "nome": "Renovação — Assinado antes vencimento",
           "meta": "antes do venc"
         },
@@ -855,18 +855,18 @@
       "id": "caio",
       "nome": "Caio Rodrigues Lima",
       "cargo": "Comercial",
-      "nota": 3.4,
-      "bonus": 1,
+      "nota": 3.57,
+      "bonus": 5,
       "bonus_proc": "Com. Locação",
       "bonus_por_proc": {
-        "Com. Locação": 1
+        "Com. Locação": 5
       },
       "inds": 11,
       "pts": 60.0,
       "scores": {
         "Cont. ADM": 2.857,
         "Rescisão ADM": null,
-        "Com. Locação": 1.281,
+        "Com. Locação": 2.281,
         "Cont. Locação": 2.898,
         "Rescisão Loc.": null,
         "Reparos": null,
@@ -1395,7 +1395,7 @@
       ]
     },
     "caio_bonus": {
-      "titulo": "Caio — Comercial: Imóvel alugado antes anunciado ★ (4 casos)",
+      "titulo": "Caio — Comercial: Imóvel alugado antes anunciado ★ (5 casos)",
       "cols": [
         "Imóvel",
         "Título",
@@ -1404,20 +1404,26 @@
       ],
       "rows": [
         [
-          "IM39",
-          "IM39 - SGAN 911 CONJ G BL E APTO 203",
+          "IM63",
+          "IM63 - Cln 306 bloco B apartamento 114",
           "alugado sem anúncio",
           "★"
         ],
         [
-          "IM123",
-          "IM123 - CLN 306 BL B APTO 112",
+          "IM128",
+          "IM128 - CLN 306 Bloco B AP 101",
           "alugado sem anúncio",
           "★"
         ],
         [
-          "IM135",
-          "IM135 - VK5396 - CLN 306 BLOCO B APARTAMENTO 115",
+          "IM1533",
+          "IM1533 - SHIS QI 28 CONJ 04 CASA 5",
+          "alugado sem anúncio",
+          "★"
+        ],
+        [
+          "IM1856",
+          "IM1856 - SMPW 15 CONJ 3 LT 5 CASA E",
           "alugado sem anúncio",
           "★"
         ],
@@ -10523,24 +10529,50 @@
       ]
     },
     "tau_ren_cont": {
-      "titulo": "Tauise — Renov.: Contato >60d (0/0)",
+      "titulo": "Tauise — Renov.: Contato >60d (1/2)",
       "cols": [
         "Imóvel",
         "Endereço",
         "Dias",
         "Status"
       ],
-      "rows": []
+      "rows": [
+        [
+          "IM686",
+          "SCLS  414 BL C LOJA 35",
+          "63.5d",
+          "✓"
+        ],
+        [
+          "IM11",
+          "SQS 114 BL B APTO 202",
+          "42.6d",
+          "✗"
+        ]
+      ]
     },
     "tau_ren_ass": {
-      "titulo": "Tauise — Renov.: Assinado antes venc (0/0)",
+      "titulo": "Tauise — Renov.: Assinado antes venc (1/2)",
       "cols": [
         "Imóvel",
         "Endereço",
         "Diff",
         "Status"
       ],
-      "rows": []
+      "rows": [
+        [
+          "IM686",
+          "SCLS  414 BL C LOJA 35",
+          "0.6d",
+          "✓"
+        ],
+        [
+          "IM11",
+          "SQS 114 BL B APTO 202",
+          "-3.5d",
+          "✗"
+        ]
+      ]
     },
     "tau_ren_salvos": {
       "titulo": "Tauise — Renov.: assinado no prazo com card sem prazo ★ (0)",
@@ -10929,7 +10961,7 @@
           "cls": "bad"
         },
         {
-          "v": "★ 1",
+          "v": "★ 5",
           "l": "Alugados sem anúncio",
           "cls": ""
         }
@@ -10962,7 +10994,7 @@
             "Caio"
           ],
           "data": [
-            1.281
+            2.281
           ],
           "colors": [
             "#000"
@@ -11006,7 +11038,7 @@
         },
         {
           "tipo": "pos",
-          "txt": "★ Bônus: 1 imóveis alugados antes de anunciados."
+          "txt": "★ Bônus: 5 imóveis alugados antes de anunciados."
         }
       ]
     },
@@ -11450,9 +11482,9 @@
           "cls": "ok"
         },
         {
-          "v": "—",
+          "v": "50.0%",
           "l": "Tauise Assinado antes vencime",
-          "cls": ""
+          "cls": "ok"
         }
       ],
       "charts": [
@@ -11467,8 +11499,8 @@
             "Natália Assinado antes vencime (1/1)",
             "Gardênia Contato >60d (11/16)",
             "Gardênia Assinado antes vencime (1/2)",
-            "Tauise Contato >60d (0/0)",
-            "Tauise Assinado antes vencime (0/0)",
+            "Tauise Contato >60d (1/2)",
+            "Tauise Assinado antes vencime (1/2)",
             "Caio Avaliação >90d (6/35)"
           ],
           "data": [
@@ -11478,8 +11510,8 @@
             100.0,
             68.8,
             50.0,
-            0,
-            0,
+            50.0,
+            50.0,
             17.1
           ],
           "metas": [
@@ -11501,19 +11533,22 @@
             "Vivianne",
             "Natália",
             "Gardênia",
+            "Tauise",
             "Caio"
           ],
           "data": [
             8.194,
             6.25,
             5.75,
+            5.0,
             1.714
           ],
           "colors": [
             "#000",
             "#555",
             "#888",
-            "#C8C4BC"
+            "#C8C4BC",
+            "#E0DCD0"
           ]
         }
       ],
@@ -11570,17 +11605,17 @@
           "nome": "Contato >60d",
           "resp": "Tauise",
           "meta": ">60d antes do venc",
-          "ok": 0,
-          "tot": 0,
-          "pct": null
+          "ok": 1,
+          "tot": 2,
+          "pct": 50.0
         },
         {
           "nome": "Assinado antes vencimento",
           "resp": "Tauise",
           "meta": "antes do venc",
-          "ok": 0,
-          "tot": 0,
-          "pct": null
+          "ok": 1,
+          "tot": 2,
+          "pct": 50.0
         },
         {
           "nome": "Avaliação >90d",
@@ -11602,7 +11637,7 @@
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 89 cards no período."
+          "txt": "Volume de 93 cards no período."
         }
       ]
     },
