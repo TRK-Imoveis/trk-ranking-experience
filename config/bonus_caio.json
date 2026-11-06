@@ -1,8 +1,17 @@
 {
   "_comment": "Lista de IMs validados manualmente para o bônus Caio (Imóvel alugado antes de anunciado). Critério: 1º Boleto preenchido E nenhum anúncio Caio na história (não só no recorte). Validação caso a caso pelo gestor.",
   "_fonte_10": "docs/index_v10_original.html · const IMOVEIS.caio_bonus (rows 1451-1455)",
-  "edicao_10": [39, 123, 135, 1567],
-  "edicao_11_continuacao": [39, 123, 135],
+  "edicao_10": [
+    39,
+    123,
+    135,
+    1567
+  ],
+  "edicao_11_continuacao": [
+    39,
+    123,
+    135
+  ],
   "edicao_11_pendente": [],
   "edicao_11_validados": [],
   "edicao_11_descartados": {
@@ -13,13 +22,36 @@
     "por_entrada_direta_em_ADM": [
       "4 IMs: contrato fechado direto via ADM, sem passar pelo Comercial (não-elegível)"
     ],
-    "lista_completa": [152, 292, 372, 373, 376, 406, 558, 640, 1782, 1801, 1802, 1826, 1831, 1836, 1841]
+    "lista_completa": [
+      152,
+      292,
+      372,
+      373,
+      376,
+      406,
+      558,
+      640,
+      1782,
+      1801,
+      1802,
+      1826,
+      1831,
+      1836,
+      1841
+    ]
   },
-  "edicao_12_continuacao": [39, 123, 135],
-  "edicao_12_validados": [],
+  "edicao_12_continuacao": [],
+  "edicao_12_validados": [
+    63,
+    128,
+    1533,
+    1856
+  ],
   "edicao_12_override_incluir": {
     "_motivo": "IM143 (CLN 211 Bloco D Sala 101): imóvel alugado ANTES de publicação real. A regra automática o exclui porque um card do Caio (criado 07/05/2026) tem 'Data publicação Anúncio'=08/05/2026 preenchido, mas a gestora confirmou (18/06/2026) que NÃO houve publicação real — o imóvel foi alugado quando estava em Agendamento de Fotos/Placas. Aluguel da edição: card de locação VK5464, 1º Boleto 16/06/2026 (dentro do recorte).",
-    "ims": [143]
+    "ims": [
+      143
+    ]
   },
   "edicao_12_descartados": {
     "_validacao": "Gestora validou os candidatos pendentes em 18/06/2026. Todos descartados.",
@@ -29,6 +61,45 @@
       "1843": "Sem card no Comercial — entrada direta em ADM (não-elegível).",
       "1848": "Sem card no Comercial — entrada direta em ADM (não-elegível)."
     },
-    "lista_completa": [152, 292, 372, 373, 376, 1586, 1782, 1801, 1802, 1826, 1831, 1836, 1841, 1843, 1848]
+    "lista_completa": [
+      152,
+      292,
+      372,
+      373,
+      376,
+      1586,
+      1782,
+      1801,
+      1802,
+      1826,
+      1831,
+      1836,
+      1841,
+      1843,
+      1848
+    ]
+  },
+  "edicao_12_continuacao_saiu_da_janela": {
+    "_motivo": "IM39 (1º Boleto 30/04), IM123 (17/04) e IM135 (09/04) saíram do recorte de 180d em nov/2026. Já não contavam no N (não são mais candidatos); estavam só no drilldown. Removidos para drilldown = pontuação.",
+    "ims": [
+      39,
+      123,
+      135
+    ]
+  },
+  "edicao_12_validacao_06_11_2026": {
+    "_validacao": "Gestora aprovou em 06/11/2026: IM128, IM1856, IM1533, IM63 — card do Caio no Comercial e nenhum anúncio em todo o histórico.",
+    "descartados": {
+      "1835": "Sem card no Comercial — entrada direta em ADM.",
+      "1837": "Sem card no Comercial — entrada direta em ADM.",
+      "1845": "Sem card no Comercial — entrada direta em ADM.",
+      "1846": "Sem card no Comercial — entrada direta em ADM.",
+      "1849": "Sem card no Comercial — entrada direta em ADM.",
+      "1854": "Sem card no Comercial — entrada direta em ADM.",
+      "1817": "Card do Comercial é da Natália e foi anunciado (13/05/2026).",
+      "1859": "Card do Comercial é da Vivianne e foi anunciado (10/06/2026).",
+      "1767": "Card do Comercial é da Vivianne, anunciado em 2022.",
+      "126": "Nenhum card do Caio no Comercial."
+    }
   }
 }
