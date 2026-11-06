@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "geradoEm": "2026-11-06T11:35:42.889092Z",
-    "ref": "2026-11-06T11:34:59.903600+00:00",
+    "geradoEm": "2026-11-06T12:01:25.142559Z",
+    "ref": "2026-11-06T12:00:53.805768+00:00",
     "fonte": "banco",
     "pipefy_fonte": "banco",
     "etl_ultima_carga": "2026-11-06T10:01:17.987969",
@@ -962,8 +962,8 @@
         },
         {
           "ok": 809,
-          "tot": 2486,
-          "pct": 32.5,
+          "tot": 2485,
+          "pct": 32.6,
           "peso": 6,
           "score": 1.953,
           "nome": "Tickets — SLA <4h úteis",
@@ -7722,8 +7722,8 @@
       "rows": [
         [
           "SLA <4h úteis",
-          "809/2486",
-          "32.5%"
+          "809/2485",
+          "32.6%"
         ],
         [
           "Avaliações positivas",
@@ -12093,7 +12093,7 @@
       "titulo": "Tickets (Octadesk)",
       "kpis": [
         {
-          "v": "32.5%",
+          "v": "32.6%",
           "l": "Caio SLA <4h úteis",
           "cls": "bad"
         },
@@ -12126,7 +12126,7 @@
             "Gardênia Avaliações positivas (4/4)",
             "Tauise SLA <4h úteis (39/106)",
             "Tauise Avaliações positivas (2/2)",
-            "Caio SLA <4h úteis (809/2486)",
+            "Caio SLA <4h úteis (809/2485)",
             "Caio Avaliações positivas (7/10)"
           ],
           "data": [
@@ -12137,7 +12137,7 @@
             100.0,
             36.8,
             100.0,
-            32.5,
+            32.6,
             70.0
           ],
           "metas": [
@@ -12240,8 +12240,8 @@
           "resp": "Caio",
           "meta": "≤4h úteis",
           "ok": 809,
-          "tot": 2486,
-          "pct": 32.5
+          "tot": 2485,
+          "pct": 32.6
         },
         {
           "nome": "Avaliações positivas",
@@ -12259,11 +12259,11 @@
         },
         {
           "tipo": "neg",
-          "txt": "Caio SLA <4h úteis: 32.5% — gargalo do processo."
+          "txt": "Caio SLA <4h úteis: 32.6% — gargalo do processo."
         },
         {
           "tipo": "neu",
-          "txt": "Volume de 3545 cards no período."
+          "txt": "Volume de 3544 cards no período."
         }
       ]
     },
